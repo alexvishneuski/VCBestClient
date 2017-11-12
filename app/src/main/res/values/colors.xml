@@ -4,7 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!-- TopBar and NavigationBar background color -->
-    <color name="colorBarBlue">#5181b8</color>
+    <!-- TopBar colors -->
+    <color name="colorBarBlueBackground">#5181b8</color>
     <color name="colorBarWhite">#fff</color>
+
+    <!-- NavigationBar colors -->
+    <color name="colorBarGreyBackground">#FFF0F2F5</color>
+
 </resources>
