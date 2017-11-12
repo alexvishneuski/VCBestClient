@@ -6,25 +6,27 @@
     android:orientation="vertical"
     tools:context="com.github.alexvishneuski.vklayouts.MainActivity">
 
+    <!--top bar-->
     <FrameLayout
         android:id="@+id/top_bar_frame_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/content_relative_layout" />
 
-    </FrameLayout>
-
+    <!--content-->
     <RelativeLayout
         android:id="@+id/content_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--top shadow-->
         <View
             android:id="@+id/top_shadow_view"
             android:layout_width="match_parent"
             android:layout_height="12dp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_topbar_shadow_dark" />
-
+            android:background="@drawable/bg_top_bar_shadow_dark" />
+        <!--content itself-->
         <FrameLayout
             android:id="@+id/content_frame_container"
             android:layout_width="match_parent"
@@ -42,27 +44,23 @@
                 android:text="There will be some content"
                 android:textSize="50sp" />
         </FrameLayout>
-        <!--
-              for support< 17 API required next:
-              android:layout_alignParentLeft="true"
-              -->
 
-
+        <!--bottom shadow-->
         <View
             android:id="@+id/bottom_shadow_view"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_navigationbar_shadow_dark" />
+            android:background="@drawable/bg_navigation_bar_shadow_dark" />
 
     </RelativeLayout>
 
-
+    <!--navigation bar-->
     <FrameLayout
+
         android:id="@+id/navigation_bar_frame_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content_relative_layout" />
 
 </RelativeLayout>

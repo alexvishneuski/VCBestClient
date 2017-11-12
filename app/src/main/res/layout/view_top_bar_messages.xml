@@ -7,7 +7,7 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#5181b8"
+        android:background="@color/colorBarBlue"
         >
         <!-- android:orientation="vertical"-->
 
@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
-            android:text="Сообщения" />
+            android:text="Сообщения"
+            />
 
     </FrameLayout>
 
