@@ -5,10 +5,12 @@
     <color name="colorAccent">#FF4081</color>
 
     <!-- TopBar colors -->
-    <color name="colorBarBlueBackground">#5181b8</color>
-    <color name="colorBarWhite">#fff</color>
+    <color name="colorTopBarBackgroundBlue">#5181b8</color>
+    <color name="colorTopBarWhite">#fff</color>
 
     <!-- NavigationBar colors -->
-    <color name="colorBarGreyBackground">#FFF0F2F5</color>
+    <color name="colorNavigationBarBackgroundLightGrey">#fafafa</color>
+    <color name="colorNavigationBarMembersPassiveGrey">#9e9e9e</color>
+    <color name="colorNavigationBarMembersActiveBlue">#5181b8</color>
 
 </resources>

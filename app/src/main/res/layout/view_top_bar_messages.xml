@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_panel_height"
-    android:background="@color/colorBarBlueBackground">
+    android:background="@color/colorTopBarBackgroundBlue">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:text="Сообщения"
-        android:textColor="@color/colorBarWhite"
+        android:textColor="@color/colorTopBarWhite"
         android:textScaleX="1"
         android:textSize="20sp"
         android:textStyle="bold"
