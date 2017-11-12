@@ -11,13 +11,19 @@
         android:id="@+id/top_bar_frame_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/content_relative_layout" />
+        android:layout_alignParentTop="true">
+
+        <include layout="@layout/view_top_bar_messages" />
+
+    </FrameLayout>
 
     <!--content-->
     <RelativeLayout
         android:id="@+id/content_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_bar_frame_container"
+        android:layout_above="@+id/navigation_bar_frame_container">
 
         <!--top shadow-->
         <View
@@ -61,6 +67,10 @@
         android:id="@+id/navigation_bar_frame_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content_relative_layout" />
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/view_navigation_bar" />
+
+    </FrameLayout>
 
 </RelativeLayout>
