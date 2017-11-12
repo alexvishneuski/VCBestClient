@@ -16,35 +16,43 @@
     <RelativeLayout
         android:id="@+id/content_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/top_shadow_view"
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:layout_alignTop="@id/content_frame_container"
+            android:layout_alignParentTop="true"
             android:background="@drawable/bg_top_bar_shadow_dark_png" />
 
         <FrameLayout
             android:id="@+id/content_frame_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
 
             <!-- TODO fill content-->
             <!-- for example-->
             <TextView
+
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="EEE"
+                android:text="There will be some content"
                 android:textSize="50sp" />
         </FrameLayout>
+        <!--
+              for support< 17 API required next:
+              android:layout_alignParentLeft="true"
+              -->
+
 
         <View
             android:id="@+id/bottom_shadow_view"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:layout_alignBottom="@id/content_frame_container"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/bg_navigation_bar_shadow_dark_png" />
 
     </RelativeLayout>
