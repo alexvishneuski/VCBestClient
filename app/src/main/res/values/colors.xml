@@ -16,8 +16,8 @@
     <!-- Messages colors -->
     <color name="colorMessagesBackgroundWhite">#fff</color>
 
-    <!-- For divider -->
-    <color name="superdark">#1D2225</color>
+    <!-- Divider color -->
+    <color name="colorMessageDividerGrey">#9e9e9e</color>
 
 
 </resources>
