@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.github.alexvishneuski.vklayouts.MainActivity">
 
-    <!--top bar-->
+    <!--Container for top bar Fragment-->
     <FrameLayout
         android:id="@+id/top_bar_frame_container"
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
         android:layout_above="@+id/navigation_bar_frame_container"
         android:layout_below="@+id/top_bar_frame_container">
 
-        <!--content itself-->
+        <!--content itself
+        TODO to resolve issue: 1. code in this activity 2. include out view or 3. fragment-->
         <FrameLayout
             android:id="@+id/content_frame_container"
             android:layout_width="match_parent"
@@ -56,7 +57,8 @@
 
     </RelativeLayout>
 
-    <!--navigation bar-->
+    <!--navigation bar
+    TODO to resolve issue: is it <include>-section or fragment -->
     <FrameLayout
 
         android:id="@+id/navigation_bar_frame_container"
