@@ -13,4 +13,11 @@
     <color name="colorNavigationBarMembersPassiveGrey">#9e9e9e</color>
     <color name="colorNavigationBarMembersActiveBlue">#5181b8</color>
 
+    <!-- Messages colors -->
+    <color name="colorMessagesBackgroundWhite">#fff</color>
+
+    <!-- For divider -->
+    <color name="superdark">#1D2225</color>
+
+
 </resources>

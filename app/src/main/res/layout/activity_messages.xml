@@ -22,18 +22,9 @@
         android:id="@+id/content_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/top_bar_frame_container"
         android:layout_above="@+id/navigation_bar_frame_container"
-        >
+        android:layout_below="@+id/top_bar_frame_container">
 
-
-        <!--top shadow-->
-        <View
-            android:id="@+id/top_shadow_view"
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/bg_top_bar_shadow_dark" />
         <!--content itself-->
         <FrameLayout
             android:id="@+id/content_frame_container"
@@ -44,14 +35,16 @@
 
             <!-- TODO fill content-->
             <!-- for example-->
-            <TextView
-
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="There will be some content"
-                android:textSize="50sp" />
+            <include layout="@layout/view_messages" />
         </FrameLayout>
+
+        <!--top shadow-->
+        <View
+            android:id="@+id/top_shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_top_bar_shadow_dark" />
 
         <!--bottom shadow-->
         <View
