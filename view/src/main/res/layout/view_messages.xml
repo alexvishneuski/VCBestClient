@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    android:divider="@drawable/divider"
+    android:showDividers="middle"
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/number1_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+        >
+
+        <ImageView
+            android:id="@+id/sender1_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender1_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender1_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage1_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender1_text_view"
+            android:layout_toRightOf="@+id/sender1_avatar_image_view"
+            android:text="Message contentqwfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            />
+
+
+        <TextView
+            android:id="@+id/messages1_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender1_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/number2_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender2_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender2_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender2_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage2_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender2_text_view"
+            android:layout_toRightOf="@+id/sender2_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages2_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender2_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/number3_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/messages_line_height"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/sender3_avatar_image_view"
+            android:layout_width="@dimen/messages_line_height"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/sender3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="User" />
+
+        <TextView
+            android:id="@+id/mesage3_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sender3_text_view"
+            android:layout_toRightOf="@+id/sender3_avatar_image_view"
+            android:text="Message content" />
+
+        <TextView
+            android:id="@+id/messages3_date_text_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sender3_text_view"
+            android:layout_alignParentRight="true"
+            android:text="dd MM" />
+    </RelativeLayout>
+
+</LinearLayout>
