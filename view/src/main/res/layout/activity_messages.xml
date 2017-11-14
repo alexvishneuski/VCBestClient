@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.github.alexvishneuski.vklayouts.MainActivity">
+    tools:context="com.github.alexvishneuski.vklayouts.com.github.alexvishneuski.vklbestclient.view.MainActivity">
 
     <!--Container for top bar Fragment-->
     <FrameLayout

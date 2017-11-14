@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.datamodel;
+package com.github.alexvishneuski.vkbestclient.datamodel;
 
 public class Domain {
     public void testPrint(){

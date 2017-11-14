@@ -1,11 +1,11 @@
-package com.github.alexvishneuski.vklayouts;
+package com.github.alexvishneuski.vkbestclient.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.github.alexvishneuski.datamodel.Domain;
-import com.github.alexvishneuski.interactor.Test;
+import com.github.alexvishneuski.vklayouts.R;
+import com.github.alexvishneuski.vkbestclient.datamodel.Domain;
+import com.github.alexvishneuski.vkbestclient.interactor.Test;
 
 public class MainActivity extends AppCompatActivity {
 
