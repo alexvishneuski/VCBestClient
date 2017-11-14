@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VKLayouts.iml" filepath="$PROJECT_DIR$/VKLayouts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/datamodel/datamodel.iml" filepath="$PROJECT_DIR$/datamodel/datamodel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/interactor/interactor.iml" filepath="$PROJECT_DIR$/interactor/interactor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/view/view.iml" filepath="$PROJECT_DIR$/view/view.iml" />
     </modules>
   </component>
 </project>
