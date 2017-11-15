@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="@dimen/messages_image_width">
+    android:insetLeft="@dimen/messages_line_height">
 
     <shape xmlns:android="http://schemas.android.com/apk/res/android"
         android:shape="rectangle"

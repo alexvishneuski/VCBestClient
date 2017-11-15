@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.github.alexvishneuski.vklayouts.com.github.alexvishneuski.vklbestclient.view.MainActivity">
+    tools:context="com.github.alexvishneuski.vkbestclient.view.MainActivity">
 
     <!--Container for top bar Fragment-->
     <FrameLayout
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
+        <!--TODO remove this <include>-->
         <include layout="@layout/view_top_bar_messages" />
 
     </FrameLayout>
@@ -26,7 +27,7 @@
         android:layout_below="@+id/top_bar_frame_container">
 
         <!--content itself
-        TODO to resolve issue: 1. code in this activity 2. include out view or 3. fragment-->
+        TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment-->
         <FrameLayout
             android:id="@+id/content_frame_container"
             android:layout_width="match_parent"
@@ -66,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <include layout="@layout/view_navigation_bar" />
+        <include layout="@layout/view_navigation_bar_linear_based" />
 
     </FrameLayout>
 
