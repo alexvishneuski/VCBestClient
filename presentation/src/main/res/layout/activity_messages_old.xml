@@ -29,23 +29,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/navigation_bar_frame_container"
-        android:layout_below="@+id/top_bar_frame_container"
-
-        android:divider="@drawable/divider"
-        android:orientation="vertical"
-        android:showDividers="middle">
+        android:layout_below="@+id/top_bar_frame_container">
 
         <!--content itself
-               TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment
-               decided use ListView as code in this activity-->
-        <ListView
-            android:id="@+id/messages_container_list_view"
+        TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment-->
+        <FrameLayout
+            android:id="@+id/content_frame_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true">
 
-        </ListView>
 
+            <!-- TODO fill content-->
+            <!-- for example-->
+            <include layout="@layout/list_view_messages_item" />
+        </FrameLayout>
 
         <!--top shadow-->
         <View

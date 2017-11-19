@@ -18,7 +18,8 @@
         </activity>
 
         <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.MessagesActivity" />
-
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.TestActivity" />
+        TestActivity
     </application>
 
 </manifest>

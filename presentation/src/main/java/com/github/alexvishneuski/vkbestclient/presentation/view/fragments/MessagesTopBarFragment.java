@@ -9,18 +9,13 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vklayouts.R;
 
-
-/**
- * Created by Asus on 30.10.2017.
- */
-
 public class MessagesTopBarFragment extends Fragment {
 
     /*id of container in activity*/
     private int mTopBarLayoutId;
 
     /*view of this fragment*/
-    View mView;
+    private View mView;
 
 
     @Nullable
