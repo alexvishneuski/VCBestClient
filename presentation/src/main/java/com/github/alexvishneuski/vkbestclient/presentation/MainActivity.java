@@ -1,15 +1,19 @@
 package com.github.alexvishneuski.vkbestclient.presentation;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 
-import com.github.alexvishneuski.vkbestclient.datamodel.Domain;
-import com.github.alexvishneuski.vkbestclient.interactor.Test;
+import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
+import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.BitmapUtils;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.ArrayList;
@@ -17,22 +21,35 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final String TAG = this.getClass().getSimpleName();
+
+    /*find top bar frame container*/
+    private int mTopBarFrameContainer = R.id.top_bar_frame_container;
+
     private LoadImagesTask imagesTask = null;
     private ImageView imageOwner = null;
     private ImageView image1 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
+
+        /*creating view*/
         setContentView(R.layout.activity_messages);
+
+        showTopBarFragment();
+
         imageOwner = (ImageView) findViewById(R.id.owner_photo);
         image1 = (ImageView) findViewById(R.id.sender1_avatar_image_view);
 
-        testTiers();
+        invokeOutsideTiers();
     }
+
 
     @Override
     protected void onStart() {
+        Log.d(TAG, "onStart");
         super.onStart();
         imagesTask = new LoadImagesTask();
         imagesTask.execute();
@@ -41,19 +58,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        Log.d(TAG, "onStop");
         super.onStop();
         imagesTask.cancel(true);
     }
 
-    private void testTiers() {
-        Test test = new Test();
-        System.out.println(test.getS());
+    private void invokeOutsideTiers() {
+        Log.d(TAG, "invokeOutsideTiers");
+        InteractorTest interactorTest = new InteractorTest();
+        System.out.println(interactorTest.getS());
 
-        Domain domain = new Domain();
-        domain.testPrint();
+        DomainTest domainTest = new DomainTest();
+        domainTest.testPrint();
     }
 
     private class LoadImagesTask extends AsyncTask<Void, Void, List<Bitmap>> {
+
 
         @Override
         protected List<Bitmap> doInBackground(Void... params) {
@@ -74,5 +94,20 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    /*show fragment on this activity*/
+    public void showFragment(int frameContainer, Fragment fragment) {
+        Log.d(TAG, "showFragment");
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(frameContainer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    /*and show top bar fragment*/
+    private void showTopBarFragment() {
+        Log.d(TAG, "showTopBarFragment");
+        showFragment(mTopBarFrameContainer, new TopBarFragment());
     }
 }

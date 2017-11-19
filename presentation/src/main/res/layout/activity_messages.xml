@@ -10,11 +10,11 @@
     <FrameLayout
         android:id="@+id/top_bar_frame_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_alignParentTop="true">
 
         <!--TODO remove this <include>-->
-        <include layout="@layout/view_top_bar_messages" />
+       <!-- <include layout="@layout/fragment_top_bar_messages" />-->
 
     </FrameLayout>
 
