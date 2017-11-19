@@ -59,7 +59,9 @@
     </RelativeLayout>
 
     <!--navigation bar
-    TODO to resolve issue: is it <include>-section or fragment -->
+    TODO to resolve issue: is it <include>-section or fragment
+    decided: <include>, because takes part in 5 activities(or in 1 common)-->
+
     <FrameLayout
 
         android:id="@+id/navigation_bar_frame_container"
