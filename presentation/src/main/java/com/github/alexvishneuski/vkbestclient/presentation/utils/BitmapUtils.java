@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.view.utils;
+package com.github.alexvishneuski.vkbestclient.presentation.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

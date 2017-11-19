@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.view;
+package com.github.alexvishneuski.vkbestclient.presentation;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.Domain;
 import com.github.alexvishneuski.vkbestclient.interactor.Test;
-import com.github.alexvishneuski.vkbestclient.view.utils.BitmapUtils;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.BitmapUtils;
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.ArrayList;
