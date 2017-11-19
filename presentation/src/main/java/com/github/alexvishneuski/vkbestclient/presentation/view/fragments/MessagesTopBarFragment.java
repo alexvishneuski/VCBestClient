@@ -14,10 +14,10 @@ import com.github.alexvishneuski.vklayouts.R;
  * Created by Asus on 30.10.2017.
  */
 
-public class TopBarFragment extends Fragment {
+public class MessagesTopBarFragment extends Fragment {
 
     /*id of container in activity*/
-    private int mTopBarFrameContainer;
+    private int mTopBarLayoutId;
 
     /*view of this fragment*/
     View mView;
@@ -28,10 +28,10 @@ public class TopBarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         /*find id*/
-        mTopBarFrameContainer = R.layout.fragment_top_bar_messages;
+        mTopBarLayoutId = R.layout.fragment_top_bar_messages;
 
         /*create view*/
-        mView = inflater.inflate(mTopBarFrameContainer, null);
+        mView = inflater.inflate(mTopBarLayoutId, null);
 
         return mView;
     }

@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.github.alexvishneuski.vkbestclient.presentation.MainActivity">
+    tools:context="com.github.alexvishneuski.vkbestclient.presentation.view.activities.MessagesActivity">
 
     <!--Container for top bar Fragment-->
+    <!--TODO: to resolve sort of:
+    android:layout_height="wrap_content"
+    instead
+     android:layout_height="56dp"
+      -->
     <FrameLayout
         android:id="@+id/top_bar_frame_container"
         android:layout_width="match_parent"
@@ -14,7 +19,7 @@
         android:layout_alignParentTop="true">
 
         <!--TODO remove this <include>-->
-       <!-- <include layout="@layout/fragment_top_bar_messages" />-->
+        <!-- <include layout="@layout/fragment_top_bar_messages" />-->
 
     </FrameLayout>
 

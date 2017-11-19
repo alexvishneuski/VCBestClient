@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.BitmapUtils;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.ArrayList;
@@ -117,6 +117,6 @@ public class MessagesActivity extends AppCompatActivity {
     /*show top bar fragment in top bar container*/
     private void showTopBarFragment() {
         Log.d(TAG, "showTopBarFragment");
-        showFragment(mTopBarFrameContainer, new TopBarFragment());
+        showFragment(mTopBarFrameContainer, new MessagesTopBarFragment());
     }
 }
