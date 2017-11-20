@@ -8,9 +8,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
@@ -19,7 +19,9 @@ import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.Messag
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MessagesActivity extends AppCompatActivity {
 
@@ -28,15 +30,40 @@ public class MessagesActivity extends AppCompatActivity {
     private int mTopBarFrameContainer;
 
     private ListView mMessagesListView;
-    ArrayAdapter<String> namesAdapter;
+
+    /*attribute names for adapter's Map*/
+    final String ATTRIBUTE_FRIEND_NAME = "friendName";
+    final String ATTRIBUTE_FRIEND_AVATAR = "friendAvatar";
+    final String ATTRIBUTE_OWNER_AVATAR = "ownerAvatar";
+    final String ATTRIBUTE_DATE = "date";
+    final String MESSAGE_BODY = "messageBody";
+
+    /*
+    * resources in drawable
+    */
+    private int[] mFriendAvatars;
+    private int mOwnerAvatar;
+
+    /*
+    * resources for adapter
+    */
+    private String[] mFriendNames;
+    private Bitmap[] mRoundFriendAvatars;
+    private String[] mDates;
+    private String[] mMessageBodies;
+    private Bitmap mRoundOwnerAvatar;
+
+    /*source attributes for adapter*/
+    private String[] mSourceAttributes;
+
+    /*goals for adapter*/
+    private int[] mDestinationViews;
+
+    SimpleAdapter mMessageAdapter;
 
 
-    private LoadImagesTask imagesTask;
-    private ImageView imageOwner;
-    private ImageView image1;
+    private LoadImagesTask loadImagesTask;
 
-    String[] names = {"Johnny Depp", "Al Pacino", "Robert De Niro", "Kevin Spacey", "Denzel Washington", "Russell Crowe",
-            "Brad Pitt", "Angelina Jolie", "Leonardo DiCaprio", "Tom Cruise", "John Travolta", "Arnold Schwarzenegger"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +77,65 @@ public class MessagesActivity extends AppCompatActivity {
         findTopBarContainer();
         showTopBarFragment();
 
-        /*find messages list view, create adapter, set adapter to message list view*/
-        findMessagesListView();
-        createSimpleMessagesListViewAdapter();
-        setSimpleAdapterToListView();
+        /*
+        * creating adapter:
+        * find messages list view
+        * get resources for adapter: names, Avatars, dates, bodies, ownerAvatar
+        * get source attributes for adapter
+        * find goals for adapter
+        * create adapter
+        * set adapter to ListView
+        */
+        createAdapter();
 
-
-        imageOwner = (ImageView) findViewById(R.id.owner_photo);
-        image1 = (ImageView) findViewById(R.id.sender1_avatar_image_view);
+        /*mOwnerAvatar = (ImageView) findViewById(R. @dra);
+        image1 = (ImageView) findViewById(R.id.sender1_avatar_image_view);*/
 
         invokeOutsideTiers();
+
+
+    }
+
+    private void createAdapter() {
+
+        /*find messages list view*/
+        findMessagesListView();
+
+        /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
+        getResourcesForAdapter();
+
+        /*get source attributes for adapter*/
+        findSourceAttributes();
+
+
+        /*find goals for adapter*/
+        findDestinationViews();
+
+        /*create adapter*/
+        createMessagesAdapter();
+        /*set adapter to ListView*/
+        setMessageAdapterToListView();
+    }
+
+    private void findSourceAttributes() {
+        mSourceAttributes = new String[]{
+                ATTRIBUTE_FRIEND_AVATAR, ATTRIBUTE_FRIEND_NAME, ATTRIBUTE_DATE, ATTRIBUTE_OWNER_AVATAR, MESSAGE_BODY};
+    }
+
+    /*find goals for adapter*/
+    private void findDestinationViews() {
+        mDestinationViews = new int[]{
+                R.id.friend_avatar_image_view, R.id.friend_name_text_view,
+                R.id.message_date_text_view, R.id.owner_avatar_image_view, R.id.mesage_body_text_view};
+    }
+
+    /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
+    private void getResourcesForAdapter() {
+        getFriendNames();
+        getFriendAvatars();
+        getDates();
+        getMessageBodies();
+        getOwnerAvatar();
 
     }
 
@@ -70,25 +146,79 @@ public class MessagesActivity extends AppCompatActivity {
         mMessagesListView = (ListView) findViewById(R.id.messages_container_list_view);
     }
 
+    /*get resources for adapter: names*/
+    private void getFriendNames() {
+        Log.d(TAG, "getFriendNames");
+        mFriendNames = getResources().getStringArray(R.array.friend_names);
+    }
+
+    /*get resources for adapter: dates*/
+    private void getDates() {
+        Log.d(TAG, "getDates");
+        mDates = getResources().getStringArray(R.array.dates);
+    }
+
+    /*get resources for adapter: messageBodies*/
+    private void getMessageBodies() {
+        Log.d(TAG, "getMessageBodies");
+        mMessageBodies = getResources().getStringArray(R.array.message_bodies);
+    }
+
+    /*get resources for adapter: FriendAvatars*/
+    private void getFriendAvatars() {
+        Log.d(TAG, "getFriendAvatars");
+        mFriendAvatars = new int[]{
+                R.drawable._jonny_dep, R.drawable._al_pacino, R.drawable._robert_de_niro,
+                R.drawable._kevin_spacey, R.drawable._denzel_washington, R.drawable._russel_crowe,
+                R.drawable._brad_pitt, R.drawable._angelina_jolie, R.drawable._leonardo_dicaprio,
+                R.drawable._tom_cruise, R.drawable._john_travolta, R.drawable._arnold_schwarzenegger};
+        mRoundFriendAvatars = new Bitmap[mFriendAvatars.length];
+    }
+
+    /*get resources for adapter: ownerAvatar*/
+    private void getOwnerAvatar() {
+        Log.d(TAG, "getOwnerAvatar");
+        mOwnerAvatar = R.drawable._matt_damon_ovner;
+    }
+
+
+
     /*create adapter*/
-    private void createSimpleMessagesListViewAdapter() {
+    private void createMessagesAdapter() {
+
+        /*wrap data into for adapter understandable structure  */
+        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(
+                mFriendNames.length);
+        Map<String, Object> m;
+        for (int i = 0; i < mFriendNames.length; i++) {
+            m = new HashMap<String, Object>();
+            m.put(ATTRIBUTE_FRIEND_AVATAR, mFriendAvatars[i]);
+            m.put(ATTRIBUTE_FRIEND_NAME, mFriendNames[i]);
+            m.put(ATTRIBUTE_DATE, mDates[i]);
+            m.put(ATTRIBUTE_OWNER_AVATAR, mRoundOwnerAvatar);
+            m.put(MESSAGE_BODY, mMessageBodies[i]);
+
+            data.add(m);
+
+
+        }
+
         Log.d(TAG, "createSimpleMessagesListViewAdapter");
-        namesAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, names);
+        mMessageAdapter = new SimpleAdapter(this, data, R.layout.list_view_messages_item, mSourceAttributes, mDestinationViews);
     }
 
     /*set adapter to message list view*/
-    private void setSimpleAdapterToListView() {
-        Log.d(TAG, "setSimpleAdapterToListView");
-        mMessagesListView.setAdapter(namesAdapter);
+    private void setMessageAdapterToListView() {
+        Log.d(TAG, "setMessageAdapterToListView");
+        mMessagesListView.setAdapter(mMessageAdapter);
     }
 
     @Override
     protected void onStart() {
         Log.d(TAG, "onStart");
         super.onStart();
-        //   imagesTask = new LoadImagesTask();
-        // imagesTask.execute();
+        loadImagesTask = new LoadImagesTask();
+        loadImagesTask.execute();
 
     }
 
@@ -96,7 +226,7 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onStop() {
         Log.d(TAG, "onStop");
         super.onStop();
-        //   imagesTask.cancel(true);
+        //   loadImagesTask.cancel(true);
 
     }
 
@@ -140,11 +270,15 @@ public class MessagesActivity extends AppCompatActivity {
 
         @Override
         protected List<Bitmap> doInBackground(Void... params) {
-            List<Bitmap> bitmaps = new ArrayList<>();
-            bitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), R.mipmap.ic_launcher_round), 25));
-            bitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), R.drawable._di_caprio), 25));
+            List<Bitmap> avatarBitmaps = new ArrayList<>();
+            /*for friendAvatars*/
+            for (int i = 0; i < mFriendAvatars.length; i++) {
+                avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mFriendAvatars[i]), 25));
+            }
+            /*for ownerAvatar*/
+            avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mOwnerAvatar), 25));
 
-            return bitmaps;
+            return avatarBitmaps;
 
         }
 
@@ -153,8 +287,15 @@ public class MessagesActivity extends AppCompatActivity {
             if (isCancelled() || result == null) {
                 return;
             }
-            imageOwner.setImageBitmap(result.get(0));
-            image1.setImageBitmap(result.get(1));
+            /*extract friendsAvatars*/
+            for (int i = 0; i < mRoundFriendAvatars.length; i++) {
+                mRoundFriendAvatars[i] = result.get(i);
+            }
+            /*extract ownerAvatar*/
+            mRoundOwnerAvatar = result.get(mRoundFriendAvatars.length);
+
+            /*imageOwner.setImageBitmap(result.get(0));
+            image1.setImageBitmap(result.get(1));*/
 
         }
 

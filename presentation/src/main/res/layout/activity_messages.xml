@@ -42,7 +42,8 @@
             android:id="@+id/messages_container_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:divider="@drawable/divider">
 
         </ListView>
 
