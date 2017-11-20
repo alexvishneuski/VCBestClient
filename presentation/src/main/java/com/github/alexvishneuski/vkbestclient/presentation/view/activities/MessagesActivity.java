@@ -4,11 +4,9 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -20,7 +18,6 @@ import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MessagesActivity extends AppCompatActivity {
@@ -59,10 +56,10 @@ public class MessagesActivity extends AppCompatActivity {
     /*goals for adapter*/
     private int[] mDestinationViews;
 
-    SimpleAdapter mMessageAdapter;
+    private SimpleAdapter mMessageAdapter;
 
 
-    private LoadImagesTask loadImagesTask;
+    //private LoadImagesTask loadImagesTask;
 
 
     @Override
@@ -70,8 +67,19 @@ public class MessagesActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
+
         /*creating messages view*/
         setContentView(R.layout.activity_messages);
+
+        /*for loading round pictures*/
+        getFriendAvatars();
+
+        /*FIXME must be invoked in AsyncTask*/
+        mustBeInvokedInAsyncTasc();
+
+
+       // loadImagesTask = new LoadImagesTask();
+        //loadImagesTask.execute();
 
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();
@@ -96,9 +104,27 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+
+    /*FIXME must be invoked in AsyncTask*/
+    private void mustBeInvokedInAsyncTasc() {
+
+            /*for friendAvatars*/
+        for (int i = 0; i < mFriendAvatars.length; i++) {
+            mRoundFriendAvatars[i] = BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mFriendAvatars[i]), 25);
+        }
+            /*for ownerAvatar*/
+        mRoundOwnerAvatar = BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mOwnerAvatar), 25);
+
+    }
+
+
     private void createAdapter() {
 
-        /*find messages list view*/
+
+
+
+
+                /*find messages list view*/
         findMessagesListView();
 
         /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
@@ -115,6 +141,8 @@ public class MessagesActivity extends AppCompatActivity {
         createMessagesAdapter();
         /*set adapter to ListView*/
         setMessageAdapterToListView();
+
+
     }
 
     private void findSourceAttributes() {
@@ -132,7 +160,7 @@ public class MessagesActivity extends AppCompatActivity {
     /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
     private void getResourcesForAdapter() {
         getFriendNames();
-        getFriendAvatars();
+        //getFriendAvatars();
         getDates();
         getMessageBodies();
         getOwnerAvatar();
@@ -167,12 +195,18 @@ public class MessagesActivity extends AppCompatActivity {
     /*get resources for adapter: FriendAvatars*/
     private void getFriendAvatars() {
         Log.d(TAG, "getFriendAvatars");
+
         mFriendAvatars = new int[]{
                 R.drawable._jonny_dep, R.drawable._al_pacino, R.drawable._robert_de_niro,
-                R.drawable._kevin_spacey, R.drawable._denzel_washington, R.drawable._russel_crowe,
+                R.drawable._kevin_spacey, R.drawable._denzel_washington, R.drawable._russel_crowe_2,
                 R.drawable._brad_pitt, R.drawable._angelina_jolie, R.drawable._leonardo_dicaprio,
                 R.drawable._tom_cruise, R.drawable._john_travolta, R.drawable._arnold_schwarzenegger};
+
         mRoundFriendAvatars = new Bitmap[mFriendAvatars.length];
+
+        /*preparing round bitmaps*//*
+        loadImagesTask = new LoadImagesTask();
+        loadImagesTask.execute();*/
     }
 
     /*get resources for adapter: ownerAvatar*/
@@ -182,17 +216,20 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
 
-
     /*create adapter*/
     private void createMessagesAdapter() {
 
-        /*wrap data into for adapter understandable structure  */
         ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(
                 mFriendNames.length);
+
+
+
+                 /*wrap data into for adapter understandable structure  */
+
         Map<String, Object> m;
         for (int i = 0; i < mFriendNames.length; i++) {
             m = new HashMap<String, Object>();
-            m.put(ATTRIBUTE_FRIEND_AVATAR, mFriendAvatars[i]);
+            m.put(ATTRIBUTE_FRIEND_AVATAR, mRoundFriendAvatars[i]);
             m.put(ATTRIBUTE_FRIEND_NAME, mFriendNames[i]);
             m.put(ATTRIBUTE_DATE, mDates[i]);
             m.put(ATTRIBUTE_OWNER_AVATAR, mRoundOwnerAvatar);
@@ -202,6 +239,7 @@ public class MessagesActivity extends AppCompatActivity {
 
 
         }
+
 
         Log.d(TAG, "createSimpleMessagesListViewAdapter");
         mMessageAdapter = new SimpleAdapter(this, data, R.layout.list_view_messages_item, mSourceAttributes, mDestinationViews);
@@ -217,8 +255,8 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onStart() {
         Log.d(TAG, "onStart");
         super.onStart();
-        loadImagesTask = new LoadImagesTask();
-        loadImagesTask.execute();
+        /*loadImagesTask = new LoadImagesTask();
+        loadImagesTask.execute();*/
 
     }
 
@@ -265,17 +303,17 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
-    private class LoadImagesTask extends AsyncTask<Void, Void, List<Bitmap>> {
+    /*private class LoadImagesTask extends AsyncTask<Void, Void, List<Bitmap>> {
 
 
         @Override
         protected List<Bitmap> doInBackground(Void... params) {
             List<Bitmap> avatarBitmaps = new ArrayList<>();
-            /*for friendAvatars*/
+            *//*for friendAvatars*//*
             for (int i = 0; i < mFriendAvatars.length; i++) {
                 avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mFriendAvatars[i]), 25));
             }
-            /*for ownerAvatar*/
+            *//*for ownerAvatar*//*
             avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mOwnerAvatar), 25));
 
             return avatarBitmaps;
@@ -287,17 +325,18 @@ public class MessagesActivity extends AppCompatActivity {
             if (isCancelled() || result == null) {
                 return;
             }
-            /*extract friendsAvatars*/
+            *//*extract friendsAvatars*//*
             for (int i = 0; i < mRoundFriendAvatars.length; i++) {
                 mRoundFriendAvatars[i] = result.get(i);
             }
-            /*extract ownerAvatar*/
+            *//*extract ownerAvatar*//*
             mRoundOwnerAvatar = result.get(mRoundFriendAvatars.length);
+            System.out.println(mRoundOwnerAvatar.toString());
 
-            /*imageOwner.setImageBitmap(result.get(0));
-            image1.setImageBitmap(result.get(1));*/
+            *//*imageOwner.setImageBitmap(result.get(0));
+            image1.setImageBitmap(result.get(1));*//*
 
         }
 
-    }
+    }*/
 }
