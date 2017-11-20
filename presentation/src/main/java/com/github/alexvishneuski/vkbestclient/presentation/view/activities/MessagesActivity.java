@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -22,6 +21,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/* TODO:
+* 1. make ListView layout_height: mach_parent () by hide topbar panel
+* 2. make TextView message_body layout_width : mach_parent by default of own image
+* 3. extract asynctasc, adapter in separate classes
+* 4. arrive round avatars
+*/
+
 
 public class MessagesActivity extends AppCompatActivity {
 
@@ -182,7 +189,6 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
 
-
     /*create adapter*/
     private void createMessagesAdapter() {
 
@@ -192,6 +198,9 @@ public class MessagesActivity extends AppCompatActivity {
         Map<String, Object> m;
         for (int i = 0; i < mFriendNames.length; i++) {
             m = new HashMap<String, Object>();
+            /*FIXME with
+            m.put(ATTRIBUTE_FRIEND_AVATAR, mRoundFriendAvatars[i])
+            doesn't displayed;*/
             m.put(ATTRIBUTE_FRIEND_AVATAR, mFriendAvatars[i]);
             m.put(ATTRIBUTE_FRIEND_NAME, mFriendNames[i]);
             m.put(ATTRIBUTE_DATE, mDates[i]);
