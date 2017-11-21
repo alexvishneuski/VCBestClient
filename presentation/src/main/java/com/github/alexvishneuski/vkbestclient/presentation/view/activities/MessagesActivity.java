@@ -43,7 +43,7 @@ public class MessagesActivity extends AppCompatActivity {
     final String ATTRIBUTE_FRIEND_AVATAR = "friendAvatar";
     final String ATTRIBUTE_OWNER_AVATAR = "ownerAvatar";
     final String ATTRIBUTE_DATE = "date";
-    final String MESSAGE_BODY = "messageBody";
+    final String ATTRIBUTE_MESSAGE_BODY = "messageBody";
 
     /*
     * resources in drawable
@@ -83,6 +83,11 @@ public class MessagesActivity extends AppCompatActivity {
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();
         showTopBarFragment();
+
+        /*load round avatars
+        * must be executed before creating adapter. To create adapter in onStart or add onMakeRoundAvatars
+        * */
+        makeAvatarsRound();
 
         /*
         * creating adapter:
@@ -126,7 +131,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void findSourceAttributes() {
         mSourceAttributes = new String[]{
-                ATTRIBUTE_FRIEND_AVATAR, ATTRIBUTE_FRIEND_NAME, ATTRIBUTE_DATE, ATTRIBUTE_OWNER_AVATAR, MESSAGE_BODY};
+                ATTRIBUTE_FRIEND_AVATAR, ATTRIBUTE_FRIEND_NAME, ATTRIBUTE_DATE, ATTRIBUTE_OWNER_AVATAR, ATTRIBUTE_MESSAGE_BODY};
     }
 
     /*find goals for adapter*/
@@ -205,7 +210,7 @@ public class MessagesActivity extends AppCompatActivity {
             m.put(ATTRIBUTE_FRIEND_NAME, mFriendNames[i]);
             m.put(ATTRIBUTE_DATE, mDates[i]);
             m.put(ATTRIBUTE_OWNER_AVATAR, mRoundOwnerAvatar);
-            m.put(MESSAGE_BODY, mMessageBodies[i]);
+            m.put(ATTRIBUTE_MESSAGE_BODY, mMessageBodies[i]);
 
             data.add(m);
 
@@ -226,9 +231,20 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onStart() {
         Log.d(TAG, "onStart");
         super.onStart();
+
+        /*makeAvatarsRound();*/
+        /*createAdapter();*/
+
+
+    }
+
+    private void makeAvatarsRound() {
+        Log.d(TAG, "makeAvatarsRound");
+        /*get images to array */
+        getFriendAvatars();
+        /*start task*/
         loadImagesTask = new LoadImagesTask();
         loadImagesTask.execute();
-
     }
 
     @Override
