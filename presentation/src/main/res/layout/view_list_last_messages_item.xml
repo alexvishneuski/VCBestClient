@@ -13,8 +13,15 @@
         android:paddingRight="@dimen/messages_item_padding"
         android:paddingTop="@dimen/messages_item_padding">
 
-        <ImageView
-            android:id="@+id/contact_avatar_image_view"
+        <!-- <ImageView
+             android:id="@+id/contact_avatar_image_view"
+             android:layout_width="@dimen/messages_image_background_width"
+             android:layout_height="match_parent"
+
+             android:src="@mipmap/ic_launcher_round" />-->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contact_user_avatar_image_view"
             android:layout_width="@dimen/messages_image_background_width"
             android:layout_height="match_parent"
 
@@ -62,12 +69,20 @@
 
                 <!--Can be: -->
                 <!--android:src="@null"-->
-                <ImageView
+                <!-- <ImageView
+                     android:id="@+id/current_user_avatar_image_view"
+                     android:layout_width="36dp"
+                     android:layout_height="36dp"
+                     android:layout_gravity="center"
+                     android:src="@mipmap/ic_launcher_round" />-->
+
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/current_user_avatar_image_view"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/ic_launcher_round" />
+
 
                 <TextView
                     android:id="@+id/mesage_body_text_view"

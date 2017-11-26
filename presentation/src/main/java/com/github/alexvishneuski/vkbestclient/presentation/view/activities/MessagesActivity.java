@@ -137,7 +137,7 @@ public class MessagesActivity extends AppCompatActivity {
     /*find goals for adapter*/
     private void findDestinationViews() {
         mDestinationViews = new int[]{
-                R.id.contact_avatar_image_view, R.id.contact_name_text_view,
+                R.id.contact_user_avatar_image_view, R.id.contact_name_text_view,
                 R.id.message_date_text_view, R.id.current_user_avatar_image_view, R.id.mesage_body_text_view};
     }
 

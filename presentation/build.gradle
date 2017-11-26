@@ -32,4 +32,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(':interactor')
+
+    /*for round images goals*/
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 }
