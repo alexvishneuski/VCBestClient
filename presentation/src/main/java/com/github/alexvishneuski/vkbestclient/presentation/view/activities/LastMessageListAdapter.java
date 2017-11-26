@@ -2,6 +2,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
 
 import android.content.Context;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.model.MessageViewMode
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.List;
+import java.util.Set;
 
 public class LastMessageListAdapter extends BaseAdapter {
 
@@ -22,9 +24,12 @@ public class LastMessageListAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
 
+    Set<View> viewSet;
+
     public LastMessageListAdapter(Context context, List<MessageViewModelStub> messages) {
         this.lastMessages = messages;
         this.context = context;
+        viewSet = new ArraySet<View>();
     }
 
     @Override
@@ -49,16 +54,21 @@ public class LastMessageListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.d(TAG, "getView");
 
-        inflater = LayoutInflater.from(this.context);
+        if (convertView == null) {
+            inflater = LayoutInflater.from(this.context);
+            convertView = inflater.inflate(R.layout.view_list_last_messages_item, null);
+        }
 
         final MessageViewModelStub message = lastMessages.get(position);
 
-        convertView = inflater.inflate(R.layout.view_list_last_messages_item, null);
+
         ((TextView) convertView.findViewById(R.id.contact_name_text_view)).setText(message.getCurrentUserFullName());
         ((TextView) convertView.findViewById(R.id.message_date_text_view)).setText(message.getMessageSendingDate());
         ((TextView) convertView.findViewById(R.id.mesage_body_text_view)).setText(message.getMessageBody());
 
-        Log.d(TAG, "getView: Index: " + position + " : " + convertView);
+        viewSet.add(convertView);
+
+        Log.d(TAG, "getView: Index: " + position + " : " + convertView + " Size " + viewSet.size());
         return convertView;
     }
 
