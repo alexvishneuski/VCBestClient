@@ -39,7 +39,7 @@
                TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment
                decided use ListView as code in this activity-->
         <ListView
-            android:id="@+id/messages_container_list_view"
+            android:id="@+id/last_messages_container_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

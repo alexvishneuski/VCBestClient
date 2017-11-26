@@ -6,10 +6,16 @@
     tools:context="com.github.alexvishneuski.androidmainclasses.activities.MainActivity">
 
     <Button
-        android:id="@+id/to_messages_activity_button"
+        android:id="@+id/to_last_messages_activity_first_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="to_messages_activity" />
+        android:text="to_last_messages_activity_first" />
+
+    <Button
+        android:id="@+id/to_last_messages_activity_second_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="to_last_messages_activity_second" />
 
     <Button
         android:id="@+id/to_test"

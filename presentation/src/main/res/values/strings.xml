@@ -2,7 +2,7 @@
     <string name="app_name">VKLayouts</string>
 
     <!--for list_view-->
-    <string-array name="friend_names">
+    <string-array name="contact_user_full_names">
         <item>Johnny Depp</item>
         <item>Al Pacino</item>
         <item>Robert De Niro</item>
@@ -16,7 +16,8 @@
         <item>John Travolta</item>
         <item>Arnold Schwarzenegger</item>
     </string-array>
-    <string-array name="dates">
+    <string name="recipient_name">Aliaksandr Vishneuski</string>
+    <string-array name="sending_dates">
         <item>сегодня</item>
         <item>15 ноя</item>
         <item>14 ноя</item>

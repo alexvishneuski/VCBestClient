@@ -78,7 +78,7 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_last_messages);
 
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();
@@ -98,12 +98,11 @@ public class MessagesActivity extends AppCompatActivity {
         * create adapter
         * set adapter to ListView
         */
+
+
         createAdapter();
 
-        /*mOwnerAvatar = (ImageView) findViewById(R. @dra);
-        image1 = (ImageView) findViewById(R.id.sender1_avatar_image_view);*/
-
-        invokeOutsideTiers();
+        invokeOutsideTiersTest();
 
 
     }
@@ -111,7 +110,7 @@ public class MessagesActivity extends AppCompatActivity {
     private void createAdapter() {
 
         /*find messages list view*/
-        findMessagesListView();
+        findListMessagesView();
 
         /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
         getResourcesForAdapter();
@@ -125,6 +124,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         /*create adapter*/
         createMessagesAdapter();
+
         /*set adapter to ListView*/
         setMessageAdapterToListView();
     }
@@ -137,8 +137,8 @@ public class MessagesActivity extends AppCompatActivity {
     /*find goals for adapter*/
     private void findDestinationViews() {
         mDestinationViews = new int[]{
-                R.id.friend_avatar_image_view, R.id.friend_name_text_view,
-                R.id.message_date_text_view, R.id.owner_avatar_image_view, R.id.mesage_body_text_view};
+                R.id.contact_avatar_image_view, R.id.contact_name_text_view,
+                R.id.message_date_text_view, R.id.current_user_avatar_image_view, R.id.mesage_body_text_view};
     }
 
     /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
@@ -153,21 +153,21 @@ public class MessagesActivity extends AppCompatActivity {
 
 
     /*find messages list view*/
-    private void findMessagesListView() {
-        Log.d(TAG, "findMessagesListView");
-        mMessagesListView = (ListView) findViewById(R.id.messages_container_list_view);
+    private void findListMessagesView() {
+        Log.d(TAG, "findListMessagesView");
+        mMessagesListView = (ListView) findViewById(R.id.last_messages_container_list_view);
     }
 
     /*get resources for adapter: names*/
     private void getFriendNames() {
         Log.d(TAG, "getFriendNames");
-        mFriendNames = getResources().getStringArray(R.array.friend_names);
+        mFriendNames = getResources().getStringArray(R.array.contact_user_full_names);
     }
 
     /*get resources for adapter: dates*/
     private void getDates() {
         Log.d(TAG, "getDates");
-        mDates = getResources().getStringArray(R.array.dates);
+        mDates = getResources().getStringArray(R.array.sending_dates);
     }
 
     /*get resources for adapter: messageBodies*/
@@ -218,7 +218,7 @@ public class MessagesActivity extends AppCompatActivity {
         }
 
         Log.d(TAG, "createSimpleMessagesListViewAdapter");
-        mMessageAdapter = new SimpleAdapter(this, data, R.layout.list_view_messages_item, mSourceAttributes, mDestinationViews);
+        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_list_last_messages_item, mSourceAttributes, mDestinationViews);
     }
 
     /*set adapter to message list view*/
@@ -280,8 +280,8 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
-    private void invokeOutsideTiers() {
-        Log.d(TAG, "invokeOutsideTiers");
+    private void invokeOutsideTiersTest() {
+        Log.d(TAG, "invokeOutsideTiersTest");
         InteractorTest interactorTest = new InteractorTest();
         System.out.println(interactorTest.getS());
 

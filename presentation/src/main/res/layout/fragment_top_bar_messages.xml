@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_panel_height"
     android:background="@color/colorTopBarBackgroundBlue">
@@ -15,7 +16,9 @@
         android:textScaleX="1"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:typeface="normal" />
+        android:typeface="normal"
+
+        tools:fontFamily="more fonts" />
 
 
     <!--TODO what is the best: image button or imageview?-->

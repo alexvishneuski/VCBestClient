@@ -42,7 +42,7 @@
 
             <!-- TODO fill content-->
             <!-- for example-->
-            <include layout="@layout/list_view_messages_item" />
+            <include layout="@layout/view_list_last_messages_item" />
         </FrameLayout>
 
         <!--top shadow-->
