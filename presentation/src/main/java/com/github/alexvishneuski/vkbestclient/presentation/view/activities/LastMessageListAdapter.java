@@ -2,17 +2,19 @@ package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
 
 import android.content.Context;
-import android.util.ArraySet;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.alexvishneuski.vkbestclient.presentation.model.MessageViewModelStub;
 import com.github.alexvishneuski.vklayouts.R;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,11 +29,13 @@ public class LastMessageListAdapter extends BaseAdapter {
     private Set<View> viewSet;
 
 
+
+
     public LastMessageListAdapter(Context context, List<MessageViewModelStub> messages) {
         this.lastMessages = messages;
         this.context = context;
-        viewSet = new ArraySet<View>();
-        viewHolder = new LastMessageViewHolder();
+        viewSet = new HashSet<View>();
+        LastMessageViewHolder viewHolder = new LastMessageViewHolder();
     }
 
     @Override
@@ -60,8 +64,8 @@ public class LastMessageListAdapter extends BaseAdapter {
             inflater = LayoutInflater.from(this.context);
             convertView = inflater.inflate(R.layout.view_list_last_messages_item, null);
             viewHolder = new LastMessageViewHolder();
-            viewHolder.textViewContactUserFullName = ((TextView) convertView.findViewById(R.id.contact_name_text_view));
-            viewHolder.textViewCurrentUserFullName = ((TextView) convertView.findViewById(R.id.current_user_avatar_image_view));
+            viewHolder.textViewContactUserFullName = ((TextView) convertView.findViewById(R.id.contact_user_name_text_view));
+          //  viewHolder.textViewCurrentUserFullName = ((TextView) convertView.findViewById(R.id.c));
             viewHolder.textViewMessageSendingDate = ((TextView) convertView.findViewById(R.id.message_date_text_view));
             viewHolder.textViewMessageBody = ((TextView) convertView.findViewById(R.id.mesage_body_text_view));
 
@@ -69,8 +73,8 @@ public class LastMessageListAdapter extends BaseAdapter {
 
         final MessageViewModelStub message = lastMessages.get(position);
 
-        ((TextView) convertView.findViewById(R.id.contact_name_text_view)).setText(message.getContactUserFullName());
-        ((TextView) convertView.findViewById(R.id.current_user_avatar_image_view)).setText(message.getCurrentUserFullName());
+        ((TextView) convertView.findViewById(R.id.contact_user_name_text_view)).setText(message.getContactUserFullName());
+        //((ImageView) convertView.findViewById(R.id.contact_user_avatar_image_view)).setImageBitmap(BitmapFactory.decodeResource(context.getResources(), message.getContactUserAvatarId()));
         ((TextView) convertView.findViewById(R.id.message_date_text_view)).setText(message.getMessageSendingDate());
         ((TextView) convertView.findViewById(R.id.mesage_body_text_view)).setText(message.getMessageBody());
 
@@ -83,7 +87,7 @@ public class LastMessageListAdapter extends BaseAdapter {
     private static class LastMessageViewHolder {
 
         private TextView textViewContactUserFullName;
-        private TextView textViewCurrentUserFullName;
+       // private ImageView imageViewContactUserAvatar;
         private TextView textViewMessageSendingDate;
         private TextView textViewMessageBody;
 

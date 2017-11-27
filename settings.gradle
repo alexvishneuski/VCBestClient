@@ -1,1 +1,1 @@
-include ':presentation', ':interactor', ':datamodel'
+include ':presentation', ':interactor', ':datamodel', ':image-loader', ':demo'

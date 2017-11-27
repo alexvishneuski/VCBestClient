@@ -37,7 +37,7 @@
                 android:layout_height="24dp">
 
                 <TextView
-                    android:id="@+id/contact_name_text_view"
+                    android:id="@+id/contact_user_name_text_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
