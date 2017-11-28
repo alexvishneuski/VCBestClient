@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
+import com.github.alexvishneuski.vkbestclient.presentation.view.adapters.StudyDialogsListViewAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 
@@ -19,7 +20,7 @@ import com.github.alexvishneuski.vklayouts.R;
 */
 
 
-public class LastMessagesActivity extends AppCompatActivity {
+public class StudyBasedListViewWithBaseAdapterDialogsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -28,7 +29,7 @@ public class LastMessagesActivity extends AppCompatActivity {
     private ListView listView;
     StubResourcesUtility resourcesStub;
 
-    LastMessageListAdapter lastMessageAdapter;
+    StudyDialogsListViewAdapter lastMessageAdapter;
 
     /**
      * Called when the activity is first created.
@@ -40,20 +41,20 @@ public class LastMessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_last_messages);
+        setContentView(R.layout.activity_dialogs);
 
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();
         showTopBarFragment();
 
         /*find list view*/
-        listView = (ListView) findViewById(R.id.last_messages_container_list_view);
+        listView = (ListView) findViewById(R.id.dialogs_container_list_view);
 
         /*creatingResourcesStub*/
         resourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
 
         /*create adapter*/
-        lastMessageAdapter = new LastMessageListAdapter(this, resourcesStub.getLastMessages());
+        lastMessageAdapter = new StudyDialogsListViewAdapter(this, resourcesStub.getLastMessages());
 
         /*set adapter to list*/
         listView.setAdapter(lastMessageAdapter);

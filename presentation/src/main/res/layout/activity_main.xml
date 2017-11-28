@@ -6,24 +6,22 @@
     tools:context="com.github.alexvishneuski.androidmainclasses.activities.MainActivity">
 
     <Button
-        android:id="@+id/to_last_messages_activity_first_button"
+        android:id="@+id/to_dialogs_activity_based_list_view_with_array_list_as_adapter_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="to_last_messages_activity_first" />
+        android:text="to_dialogs_based_list_view_with_array_list_as_adapter" />
 
     <Button
-        android:id="@+id/to_last_messages_activity_second_button"
+        android:id="@+id/to_dialogs_activity_based_list_view_with_array_adapter_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="to_last_messages_activity_second" />
+        android:text="to_dialogs_based_list_view_with_array_adapter" />
 
     <Button
-        android:id="@+id/to_test"
+        android:id="@+id/to_dialogs_activity_based_list_view_with_base_adapter_and_view_holder_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="to_test" />
-
-
+        android:text="to_dialogs_based_list_view_with_base_adapter_and_view_holder" />
 
 
 </LinearLayout>

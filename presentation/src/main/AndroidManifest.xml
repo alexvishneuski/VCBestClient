@@ -17,9 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.MessagesActivity" />
-        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.LastMessagesActivity" />
-        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.BasedArrayAdapterListViewActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithArrayListDialogsActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithBaseAdapterDialogsActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithArrayAdapterDialogsActivity" />
         TestActivity
     </application>
 

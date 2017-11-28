@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
 import com.github.alexvishneuski.vklayouts.R;
 
-public class BasedArrayAdapterListViewActivity extends AppCompatActivity {
+public class StudyBasedListViewWithArrayAdapterDialogsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -26,7 +26,7 @@ public class BasedArrayAdapterListViewActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_dialogs_with_array_adapter_study);
         resourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
 
         /*find list view*/

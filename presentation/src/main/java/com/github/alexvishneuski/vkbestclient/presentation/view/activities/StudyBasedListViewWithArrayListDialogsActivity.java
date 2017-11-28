@@ -30,7 +30,7 @@ import java.util.Map;
 */
 
 
-public class MessagesActivity extends AppCompatActivity {
+public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -78,7 +78,7 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_last_messages);
+        setContentView(R.layout.activity_dialogs);
 
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();
@@ -155,7 +155,7 @@ public class MessagesActivity extends AppCompatActivity {
     /*find messages list view*/
     private void findListMessagesView() {
         Log.d(TAG, "findListMessagesView");
-        mMessagesListView = (ListView) findViewById(R.id.last_messages_container_list_view);
+        mMessagesListView = (ListView) findViewById(R.id.dialogs_container_list_view);
     }
 
     /*get resources for adapter: names*/
@@ -218,7 +218,7 @@ public class MessagesActivity extends AppCompatActivity {
         }
 
         Log.d(TAG, "createSimpleMessagesListViewAdapter");
-        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_list_last_messages_item, mSourceAttributes, mDestinationViews);
+        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_list_dialogs_item, mSourceAttributes, mDestinationViews);
     }
 
     /*set adapter to message list view*/
@@ -298,10 +298,10 @@ public class MessagesActivity extends AppCompatActivity {
             List<Bitmap> avatarBitmaps = new ArrayList<>();
             /*for friendAvatars*/
             for (int i = 0; i < mFriendAvatars.length; i++) {
-                avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mFriendAvatars[i]), 25));
+                avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(StudyBasedListViewWithArrayListDialogsActivity.this.getResources(), mFriendAvatars[i]), 25));
             }
             /*for ownerAvatar*/
-            avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(MessagesActivity.this.getResources(), mOwnerAvatar), 25));
+            avatarBitmaps.add(BitmapUtils.getCircleMaskedBitmapUsingShader(BitmapFactory.decodeResource(StudyBasedListViewWithArrayListDialogsActivity.this.getResources(), mOwnerAvatar), 25));
 
             return avatarBitmaps;
 
