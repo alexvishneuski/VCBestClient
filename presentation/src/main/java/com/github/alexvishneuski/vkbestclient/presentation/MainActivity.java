@@ -10,8 +10,9 @@ import android.widget.Button;
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithArrayAdapterDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithBaseAdapterDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithArrayListDialogsActivity;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithBaseAdapterDialogsActivity;
+import com.github.alexvishneuski.vkbestclient.repository.RepositoryTest;
 import com.github.alexvishneuski.vklayouts.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         /*creating view*/
         setContentView(R.layout.activity_main);
 
-        invokeOutsideTiers();
+        checkOutsideTiersAccess();
 
         mToDialogsBasedListViewWithArrayListButton = (Button) findViewById(R.id.to_dialogs_activity_based_list_view_with_array_list_as_adapter_button);
         initToMessagesActivityFirstButton();
@@ -62,14 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void invokeOutsideTiers() {
-        Log.d(TAG, "invokeOutsideTiers");
+    private void checkOutsideTiersAccess() {
+        Log.d(TAG, "checkOutsideTiersAccess");
+
         InteractorTest interactorTest = new InteractorTest();
-        System.out.println(interactorTest.getS());
+        interactorTest.getTestMessage();
 
         DomainTest domainTest = new DomainTest();
-        domainTest.testPrint();
+        domainTest.getTestMessage();
 
+        RepositoryTest repoTest = new RepositoryTest();
+        repoTest.getTestMessage();
     }
 
     private void initToMessagesActivityFirstButton() {

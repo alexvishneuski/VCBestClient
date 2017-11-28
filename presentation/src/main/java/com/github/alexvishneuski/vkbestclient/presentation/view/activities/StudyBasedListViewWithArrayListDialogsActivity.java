@@ -11,8 +11,6 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
-import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.BitmapUtils;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
@@ -101,10 +99,6 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
 
 
         createAdapter();
-
-        invokeOutsideTiersTest();
-
-
     }
 
     private void createAdapter() {
@@ -277,16 +271,6 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
     private void showTopBarFragment() {
         Log.d(TAG, "showTopBarFragment");
         showFragment(mTopBarFrameContainer, new MessagesTopBarFragment());
-
-    }
-
-    private void invokeOutsideTiersTest() {
-        Log.d(TAG, "invokeOutsideTiersTest");
-        InteractorTest interactorTest = new InteractorTest();
-        System.out.println(interactorTest.getS());
-
-        DomainTest domainTest = new DomainTest();
-        domainTest.testPrint();
 
     }
 
