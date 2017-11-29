@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.github.alexvishneuski.vklayouts.R;
 
-//holder for for outgoing and read messages
+//holder for for incoming and read messages
 public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private TextView mContactUserFullName;

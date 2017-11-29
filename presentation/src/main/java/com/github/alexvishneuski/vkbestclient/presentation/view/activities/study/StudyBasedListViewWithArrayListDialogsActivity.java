@@ -212,7 +212,7 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
         }
 
         Log.d(TAG, "createSimpleMessagesListViewAdapter");
-        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_dialog_item_base, mSourceAttributes, mDestinationViews);
+        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_message_in_dialog_list_item_base, mSourceAttributes, mDestinationViews);
     }
 
     /*set adapter to message list view*/

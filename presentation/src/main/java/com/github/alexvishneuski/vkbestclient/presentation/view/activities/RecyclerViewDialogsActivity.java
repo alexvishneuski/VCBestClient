@@ -4,13 +4,16 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
-import com.github.alexvishneuski.vkbestclient.presentation.adapters.study.StudyDialogsListViewAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
+
+import java.util.List;
 
 /* TODO:
 * 1. make ListView layout_height: mach_parent () by hide topbar panel
@@ -24,12 +27,14 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
+    private List<MessageInDialogListViewModel> mMessageList;
+
     private int mTopBarFrameContainer;
 
     private RecyclerView mRecyclerView;
 
     //TODO delete as quickly as possible!!!
-    private StubResourcesUtility resourcesStub;
+    private StubResourcesUtility mResourcesStub;
 
 
     /**
@@ -53,13 +58,22 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
         //TODO delete as quickly as possible!!!
         /*creatingResourcesStub*/
-        resourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
+        mResourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
 
-        /*create adapter*/
-        lastMessageAdapter = new StudyDialogsListViewAdapter(this, resourcesStub.getLastMessages());
+        mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        /*set adapter to list*/
-        listView.setAdapter(lastMessageAdapter);
+        //TODO Load data, set adapter
+       /* mMessageList = //
+
+        mRecyclerView.setAdapter(new MessageRecyclerAdapter(mMessageList));
+
+
+        *//*create adapter*//*
+        lastMessageAdapter = new StudyDialogsListViewAdapter(this, mResourcesStub.getLastMessages());
+
+        *//*set adapter to list*//*
+        listView.setAdapter(lastMessageAdapter);*/
 
     }
 
