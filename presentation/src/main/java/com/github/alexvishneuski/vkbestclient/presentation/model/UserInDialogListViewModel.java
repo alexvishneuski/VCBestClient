@@ -4,7 +4,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.model;
  * Created by alex_vishneuski on 29.11.2017.
  */
 
-public class UserInDialogViewModel {
+public class UserInDialogListViewModel {
 
     private Long mUserId;
     private String mUserFullNAme;

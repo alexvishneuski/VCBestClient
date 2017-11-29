@@ -30,7 +30,7 @@ public class StudyBasedListViewWithArrayAdapterDialogsActivity extends AppCompat
         resourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
 
         /*find list view*/
-        basedArrayAdapterListView = (ListView) findViewById(R.id.test_list);
+        basedArrayAdapterListView = (ListView) findViewById(R.id.dialogs_with_array_adapter_list_view);
 
         /*create adapter*/
         messagesAdapter = new ArrayAdapter<>(this,

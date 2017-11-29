@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.view.adapters.study;
+package com.github.alexvishneuski.vkbestclient.presentation.adapters.study;
 
 
 import android.content.Context;
@@ -60,11 +60,11 @@ public class StudyDialogsListViewAdapter extends BaseAdapter {
 
         if (view == null) {
             inflater = LayoutInflater.from(this.context);
-            view = inflater.inflate(R.layout.view_list_dialogs_item, null);
+            view = inflater.inflate(R.layout.view_dialog_item_base, null);
 
             viewHolder = new LastMessageViewHolder();
             viewHolder.textViewContactUserFullName = ((TextView) view.findViewById(R.id.contact_user_name_text_view));
-            viewHolder.textViewMessageSendingDate = ((TextView) view.findViewById(R.id.message_date_text_view));
+            viewHolder.textViewMessageSendingDate = ((TextView) view.findViewById(R.id.message_sending_date_text_view));
             viewHolder.textViewMessageBody = ((TextView) view.findViewById(R.id.mesage_body_text_view));
             viewHolder.imageViewConactAvatar = ((ImageView) view.findViewById(R.id.contact_user_avatar_image_view));
 

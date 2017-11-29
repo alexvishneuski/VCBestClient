@@ -7,10 +7,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hello"></TextView>
+        android:text="hello" />
 
     <ListView
-        android:id="@+id/test_list"
+        android:id="@+id/dialogs_with_array_adapter_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content" />
 </LinearLayout>

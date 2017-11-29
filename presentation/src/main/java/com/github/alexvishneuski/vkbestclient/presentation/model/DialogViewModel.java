@@ -1,18 +1,17 @@
 package com.github.alexvishneuski.vkbestclient.presentation.model;
 
-import com.github.alexvishneuski.vkbestclient.datamodel.Message;
-
 import java.util.List;
 
 public class DialogViewModel {
 
-    List<Message> mMessageList;
+    List<MessageInDialogListViewModel> mMessageList;
 
-    public List<Message> getMessageList() {
+    public List<MessageInDialogListViewModel> getMessageList() {
+
         return mMessageList;
     }
 
-    public void setMessageList(List<Message> pMessageList) {
+    public void setMessageList(List<MessageInDialogListViewModel> pMessageList) {
         mMessageList = pMessageList;
     }
 }

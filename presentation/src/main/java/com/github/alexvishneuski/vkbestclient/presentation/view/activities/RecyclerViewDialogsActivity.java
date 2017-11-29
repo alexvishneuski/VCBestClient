@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
-import com.github.alexvishneuski.vkbestclient.presentation.view.adapters.study.StudyDialogsListViewAdapter;
+import com.github.alexvishneuski.vkbestclient.presentation.adapters.study.StudyDialogsListViewAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 
@@ -20,7 +20,7 @@ import com.github.alexvishneuski.vklayouts.R;
 */
 
 
-public class DialogActivity extends AppCompatActivity {
+public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 

@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
-import com.github.alexvishneuski.vkbestclient.presentation.view.adapters.study.StudyDialogsListViewAdapter;
+import com.github.alexvishneuski.vkbestclient.presentation.adapters.study.StudyDialogsListViewAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 

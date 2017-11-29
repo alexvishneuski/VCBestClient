@@ -4,11 +4,11 @@ package com.github.alexvishneuski.vkbestclient.presentation.model;
  * Created by alex_vishneuski on 29.11.2017.
  */
 
-public class MessageViewModel {
+public class MessageInDialogListViewModel {
 
     private Long mId;
-    private UserInDialogViewModel mCurrentUser;
-    private UserInDialogViewModel mContactUser;
+    private UserInDialogListViewModel mCurrentUser;
+    private UserInDialogListViewModel mContactUser;
     private MessageDirection mMessageDirection;
     private String mMessageSendingDate;
     private String mMessageTitle;
@@ -24,21 +24,21 @@ public class MessageViewModel {
         mId = pId;
     }
 
-    public UserInDialogViewModel getCurrentUser() {
+    public UserInDialogListViewModel getCurrentUser() {
 
         return mCurrentUser;
     }
 
-    public void setCurrentUser(UserInDialogViewModel pCurrentUser) {
+    public void setCurrentUser(UserInDialogListViewModel pCurrentUser) {
         mCurrentUser = pCurrentUser;
     }
 
-    public UserInDialogViewModel getContactUser() {
+    public UserInDialogListViewModel getContactUser() {
 
         return mContactUser;
     }
 
-    public void setContactUser(UserInDialogViewModel pContactUser) {
+    public void setContactUser(UserInDialogListViewModel pContactUser) {
         mContactUser = pContactUser;
     }
 

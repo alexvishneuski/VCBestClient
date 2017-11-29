@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.view.adapters;
+package com.github.alexvishneuski.vkbestclient.presentation.adapters;
 
 /**
  * Created by ${alex_vishneuski} on 29.11.2017.

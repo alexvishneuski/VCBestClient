@@ -132,7 +132,7 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
     private void findDestinationViews() {
         mDestinationViews = new int[]{
                 R.id.contact_user_avatar_image_view, R.id.contact_user_name_text_view,
-                R.id.message_date_text_view, R.id.current_user_avatar_image_view, R.id.mesage_body_text_view};
+                R.id.message_sending_date_text_view, R.id.current_user_avatar_image_view, R.id.mesage_body_text_view};
     }
 
     /*get resources for adapter: names, Avatars, dates, bodies, ownerAvatar*/
@@ -212,7 +212,7 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
         }
 
         Log.d(TAG, "createSimpleMessagesListViewAdapter");
-        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_list_dialogs_item, mSourceAttributes, mDestinationViews);
+        mMessageAdapter = new SimpleAdapter(this, data, R.layout.view_dialog_item_base, mSourceAttributes, mDestinationViews);
     }
 
     /*set adapter to message list view*/
