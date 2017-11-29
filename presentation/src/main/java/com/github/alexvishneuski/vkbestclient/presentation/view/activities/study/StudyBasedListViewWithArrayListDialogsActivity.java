@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
+package com.github.alexvishneuski.vkbestclient.presentation.view.activities.study;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -76,7 +76,7 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_dialogs);
+        setContentView(R.layout.activity_dialogs_based_list_view);
 
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();

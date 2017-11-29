@@ -3,7 +3,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.utils;
 import android.content.Context;
 
 import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirection;
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageViewModelStub;
+import com.github.alexvishneuski.vkbestclient.presentation.model.study.StudyMessageViewModelStub;
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class StubResourcesUtility {
 
     private Context context;
 
-    private List<MessageViewModelStub> lastMessages;
+    private List<StudyMessageViewModelStub> lastMessages;
 
     private static StubResourcesUtility stubResourcesUtility;
 
@@ -49,7 +49,7 @@ public class StubResourcesUtility {
         lastMessages = new ArrayList<>();
 
         for (int i = 0; i < contactUserFullNames.length; i++) {
-            lastMessages.add(new MessageViewModelStub(contactUserFullNames[i], currentUserFullName, directions[i], sendingDates[i], messageBodies[i], isReadArray[i]));
+            lastMessages.add(new StudyMessageViewModelStub(contactUserFullNames[i], currentUserFullName, directions[i], sendingDates[i], messageBodies[i], isReadArray[i]));
 
         }
     }
@@ -62,7 +62,7 @@ public class StubResourcesUtility {
         return stubResourcesUtility;
     }
 
-    public List<MessageViewModelStub> getLastMessages() {
+    public List<StudyMessageViewModelStub> getLastMessages() {
         return lastMessages;
     }
 

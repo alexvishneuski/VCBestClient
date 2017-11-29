@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.view.adapters;
+package com.github.alexvishneuski.vkbestclient.presentation.view.adapters.study;
 
 
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageViewModelStub;
+import com.github.alexvishneuski.vkbestclient.presentation.model.study.StudyMessageViewModelStub;
 import com.github.alexvishneuski.vklayouts.R;
 
 import java.util.HashSet;
@@ -21,13 +21,13 @@ public class StudyDialogsListViewAdapter extends BaseAdapter {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    private List<MessageViewModelStub> lastMessages;
+    private List<StudyMessageViewModelStub> lastMessages;
     private Context context;
     private LayoutInflater inflater;
     private Set<View> viewSet;
 
 
-    public StudyDialogsListViewAdapter(Context context, List<MessageViewModelStub> messages) {
+    public StudyDialogsListViewAdapter(Context context, List<StudyMessageViewModelStub> messages) {
         this.lastMessages = messages;
         this.context = context;
         viewSet = new HashSet<View>();
@@ -73,7 +73,7 @@ public class StudyDialogsListViewAdapter extends BaseAdapter {
             viewHolder = (LastMessageViewHolder) view.getTag();
         }
 
-        final MessageViewModelStub message = lastMessages.get(position);
+        final StudyMessageViewModelStub message = lastMessages.get(position);
 
         viewHolder.textViewContactUserFullName.setText(message.getContactUserFullName());
         viewHolder.textViewMessageSendingDate.setText(message.getMessageSendingDate());

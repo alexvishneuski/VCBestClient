@@ -9,10 +9,11 @@ import android.widget.Button;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithArrayAdapterDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithArrayListDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.StudyBasedListViewWithBaseAdapterDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.repository.RepositoryTest;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.DialogActivity;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayAdapterDialogsActivity;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity;
+import com.github.alexvishneuski.vkbestclient.repo.RepositoryTest;
 import com.github.alexvishneuski.vklayouts.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mToDialogsBasedListViewWithArrayListButton;
 
-    private Button mToDialogsBasedListViewWithBasedapterAndViewHolderButton;
+    private Button mToDialogsBasedListViewWithBaseAdapterAndViewHolderButton;
 
     private Button mToDialogsBasedListViewWithArrayAdapterButton;
+
+    private Button mToDialogsBasedRecyclerViewButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +36,26 @@ public class MainActivity extends AppCompatActivity {
         /*creating view*/
         setContentView(R.layout.activity_main);
 
+        /*creating buttons*/
+        initButtons();
+
         checkOutsideTiersAccess();
+    }
 
+    private void initButtons() {
+        Log.d(TAG, "initButtons");
         mToDialogsBasedListViewWithArrayListButton = (Button) findViewById(R.id.to_dialogs_activity_based_list_view_with_array_list_as_adapter_button);
-        initToMessagesActivityFirstButton();
+        initToDialogsBasedListViewWithArrayListButton();
 
-        mToDialogsBasedListViewWithBasedapterAndViewHolderButton = (Button) findViewById(R.id.to_dialogs_activity_based_list_view_with_base_adapter_and_view_holder_button);
-        initToMessagesActivitySecondButton();
+        mToDialogsBasedListViewWithBaseAdapterAndViewHolderButton = (Button) findViewById(R.id.to_dialogs_activity_based_list_view_with_base_adapter_and_view_holder_button);
+        initToDialogsBasedListViewWithBaseAdapterAndViewHolderButton();
 
         /*TODO delete after testing*/
         mToDialogsBasedListViewWithArrayAdapterButton = (Button) findViewById(R.id.to_dialogs_activity_based_list_view_with_array_adapter_button);
-        initToTestActivityButton();
+        initToDialogsBasedListViewWithArrayAdapterButton();
 
-
+        mToDialogsBasedRecyclerViewButton = findViewById(R.id.to_dialogs_activity_based_recycler_view_button);
+        initToDialogsBasedRecyclerViewButton();
     }
 
 
@@ -76,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
         repoTest.getTestMessage();
     }
 
-    private void initToMessagesActivityFirstButton() {
-        Log.d(TAG, "initToMessagesActivityFirstButton");
+    private void initToDialogsBasedListViewWithArrayListButton() {
+        Log.d(TAG, "initToDialogsBasedListViewWithArrayListButton");
         mToDialogsBasedListViewWithArrayListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initToMessagesActivitySecondButton() {
-        Log.d(TAG, "initToMessagesActivitySecondButton");
-        mToDialogsBasedListViewWithBasedapterAndViewHolderButton.setOnClickListener(new View.OnClickListener() {
+    private void initToDialogsBasedListViewWithBaseAdapterAndViewHolderButton() {
+        Log.d(TAG, "initToDialogsBasedListViewWithBaseAdapterAndViewHolderButton");
+        mToDialogsBasedListViewWithBaseAdapterAndViewHolderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StudyBasedListViewWithBaseAdapterDialogsActivity.class);
@@ -103,12 +113,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*TODO delete after testing*/
-    private void initToTestActivityButton() {
-        Log.d(TAG, "initToTestActivityButton");
+    private void initToDialogsBasedListViewWithArrayAdapterButton() {
+        Log.d(TAG, "initToDialogsBasedListViewWithArrayAdapterButton");
         mToDialogsBasedListViewWithArrayAdapterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StudyBasedListViewWithArrayAdapterDialogsActivity.class);
+                //Case #1.2
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initToDialogsBasedRecyclerViewButton() {
+        Log.d(TAG, "initToDialogsBasedRecyclerViewButton");
+        mToDialogsBasedListViewWithArrayAdapterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DialogActivity.class);
                 //Case #1.2
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);

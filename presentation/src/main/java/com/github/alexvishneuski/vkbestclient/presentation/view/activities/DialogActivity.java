@@ -4,11 +4,11 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
-import com.github.alexvishneuski.vkbestclient.presentation.view.adapters.StudyDialogsListViewAdapter;
+import com.github.alexvishneuski.vkbestclient.presentation.view.adapters.study.StudyDialogsListViewAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 
@@ -20,16 +20,17 @@ import com.github.alexvishneuski.vklayouts.R;
 */
 
 
-public class StudyBasedListViewWithBaseAdapterDialogsActivity extends AppCompatActivity {
+public class DialogActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
     private int mTopBarFrameContainer;
 
-    private ListView listView;
-    StubResourcesUtility resourcesStub;
+    private RecyclerView mRecyclerView;
 
-    StudyDialogsListViewAdapter lastMessageAdapter;
+    //TODO delete as quickly as possible!!!
+    private StubResourcesUtility resourcesStub;
+
 
     /**
      * Called when the activity is first created.
@@ -41,15 +42,16 @@ public class StudyBasedListViewWithBaseAdapterDialogsActivity extends AppCompatA
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_dialogs);
+        setContentView(R.layout.activity_dialogs_based_list_view);
 
         /*find top bar container end show there top bar fragment*/
         findTopBarContainer();
         showTopBarFragment();
 
         /*find list view*/
-        listView = (ListView) findViewById(R.id.dialogs_container_list_view);
+        mRecyclerView = findViewById(R.id.dialogs_container_recycler_view);
 
+        //TODO delete as quickly as possible!!!
         /*creatingResourcesStub*/
         resourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
 

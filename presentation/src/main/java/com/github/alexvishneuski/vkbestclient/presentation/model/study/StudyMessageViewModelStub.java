@@ -1,6 +1,8 @@
-package com.github.alexvishneuski.vkbestclient.presentation.model;
+package com.github.alexvishneuski.vkbestclient.presentation.model.study;
 
-public class MessageViewModelStub {
+import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirection;
+
+public class StudyMessageViewModelStub {
 
     private Long id;
     private String contactUserFullName;
@@ -12,7 +14,7 @@ public class MessageViewModelStub {
     private int currentUserAvatarId;
     private Boolean isMessageRead;
 
-    public MessageViewModelStub(String contactUserFullName, String currentUserFullName, MessageDirection messageDirection, String messageSendingDate, String messageBody, Boolean isMessageRead) {
+    public StudyMessageViewModelStub(String contactUserFullName, String currentUserFullName, MessageDirection messageDirection, String messageSendingDate, String messageBody, Boolean isMessageRead) {
         this.contactUserFullName = contactUserFullName;
         this.currentUserFullName = currentUserFullName;
         this.messageDirection = messageDirection;

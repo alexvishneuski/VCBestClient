@@ -23,5 +23,10 @@
         android:layout_height="wrap_content"
         android:text="to_dialogs_based_list_view_with_base_adapter_and_view_holder" />
 
+    <Button
+        android:id="@+id/to_dialogs_activity_based_recycler_view_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="to_dialogs_based_recycler_view" />
 
 </LinearLayout>

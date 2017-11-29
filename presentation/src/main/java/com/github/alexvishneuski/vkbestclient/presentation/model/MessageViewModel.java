@@ -1,91 +1,92 @@
 package com.github.alexvishneuski.vkbestclient.presentation.model;
 
+/**
+ * Created by alex_vishneuski on 29.11.2017.
+ */
+
 public class MessageViewModel {
 
-    private Long id;
-    private String contactUserFullName;
-    private String currentUserFullName;
-    private MessageDirection messageDirection;
-    private String messageSendingDate;
-   // private String title;
-    private String MessageBody;
-    private String contactUserAvatarUrl;
-    private String currentUserAvatarUrl;
-    private Boolean isMessageRead;
+    private Long mId;
+    private UserInDialogViewModel mCurrentUser;
+    private UserInDialogViewModel mContactUser;
+    private MessageDirection mMessageDirection;
+    private String mMessageSendingDate;
+    private String mMessageTitle;
+    private String mMessageBody;
+    private Boolean mIsMessageRead;
 
     public Long getId() {
-        return id;
+
+        return mId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long pId) {
+        mId = pId;
     }
 
-    public String getContactUserFullName() {
-        return contactUserFullName;
+    public UserInDialogViewModel getCurrentUser() {
+
+        return mCurrentUser;
     }
 
-    public void setContactUserFullName(String contactUserFullName) {
-        this.contactUserFullName = contactUserFullName;
+    public void setCurrentUser(UserInDialogViewModel pCurrentUser) {
+        mCurrentUser = pCurrentUser;
     }
 
-    public String getCurrentUserFullName() {
-        return currentUserFullName;
+    public UserInDialogViewModel getContactUser() {
+
+        return mContactUser;
     }
 
-    public void setCurrentUserFullName(String currentUserFullName) {
-        this.currentUserFullName = currentUserFullName;
+    public void setContactUser(UserInDialogViewModel pContactUser) {
+        mContactUser = pContactUser;
     }
 
     public MessageDirection getMessageDirection() {
-        return messageDirection;
+
+        return mMessageDirection;
     }
 
-    public void setMessageDirection(MessageDirection messageDirection) {
-        this.messageDirection = messageDirection;
+    public void setMessageDirection(MessageDirection pMessageDirection) {
+        mMessageDirection = pMessageDirection;
     }
 
     public String getMessageSendingDate() {
-        return messageSendingDate;
+        return mMessageSendingDate;
     }
 
-    public void setMessageSendingDate(String messageSendingDate) {
-        this.messageSendingDate = messageSendingDate;
+    public void setMessageSendingDate(String pMessageSendingDate) {
+        mMessageSendingDate = pMessageSendingDate;
+    }
+
+    public String getMessageTitle() {
+
+        return mMessageTitle;
+    }
+
+    public void setMessageTitle(String pMessageTitle) {
+        mMessageTitle = pMessageTitle;
     }
 
     public String getMessageBody() {
-        return MessageBody;
+
+        return mMessageBody;
     }
 
-    public void setMessageBody(String messageBody) {
-        this.MessageBody = messageBody;
+    public void setMessageBody(String pMessageBody) {
+        mMessageBody = pMessageBody;
     }
 
-    public String getContactUserAvatarUrl() {
-        return contactUserAvatarUrl;
+    public Boolean getMessageRead() {
+
+        return mIsMessageRead;
     }
 
-    public void setContactUserAvatarUrl(String contactUserAvatarUrl) {
-        this.contactUserAvatarUrl = contactUserAvatarUrl;
-    }
-
-    public String getCurrentUserAvatarUrl() {
-        return currentUserAvatarUrl;
-    }
-
-    public void setCurrentUserAvatarUrl(String currentUserAvatarUrl) {
-        this.currentUserAvatarUrl = currentUserAvatarUrl;
-    }
-
-    public Boolean getRead() {
-        return isMessageRead;
-    }
-
-    public void setRead(Boolean read) {
-        isMessageRead = read;
+    public void setMessageRead(Boolean pMessageRead) {
+        mIsMessageRead = pMessageRead;
     }
 }
-   /*
+  /*
     https://vk.com/dev/objects/message
    Список объектов › Личное сообщение
         Объект, описывающий личное сообщение, содержит следующие поля:

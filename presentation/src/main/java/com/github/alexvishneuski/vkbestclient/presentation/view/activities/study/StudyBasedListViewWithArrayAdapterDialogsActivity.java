@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
+package com.github.alexvishneuski.vkbestclient.presentation.view.activities.study;
 
 
 import android.os.Bundle;
@@ -26,7 +26,7 @@ public class StudyBasedListViewWithArrayAdapterDialogsActivity extends AppCompat
         Log.d(TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dialogs_with_array_adapter_study);
+        setContentView(R.layout.activity_dialogs_based_list_view_with_array_adapter_study);
         resourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
 
         /*find list view*/
