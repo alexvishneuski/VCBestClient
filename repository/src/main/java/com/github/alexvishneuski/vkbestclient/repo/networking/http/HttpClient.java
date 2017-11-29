@@ -1,4 +1,6 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.http;
+package com.github.alexvishneuski.vkbestclient.repo.networking.http;
+
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,10 +9,14 @@ import java.net.URL;
 
 public class HttpClient implements IHttpClient {
 
+    public final String TAG = this.getClass().getSimpleName();
+
     private HttpURLConnection con;
 
     @Override
     public void request(final String url, final ResponseListener listener) {
+        Log.d(TAG, "request");
+
         try {
             final InputStream is = openStream(url);
             listener.onResponse(is);
@@ -25,6 +31,8 @@ public class HttpClient implements IHttpClient {
     }
 
     InputStream openStream(final String url) throws IOException {
+        Log.d(TAG, "openStream");
+
         con = (HttpURLConnection) (new URL(url)).openConnection();
         return con.getInputStream();
     }

@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.http;
+package com.github.alexvishneuski.vkbestclient.repo.networking.http;
 
 public interface IHttpClient {
 

@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository;
+package com.github.alexvishneuski.vkbestclient.repo;
 
 public class RepositoryTest {
 
