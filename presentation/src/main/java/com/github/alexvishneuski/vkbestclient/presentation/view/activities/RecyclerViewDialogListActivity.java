@@ -25,7 +25,7 @@ import java.util.List;
 */
 
 
-public class RecyclerViewDialogsActivity extends AppCompatActivity {
+public class RecyclerViewDialogListActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 

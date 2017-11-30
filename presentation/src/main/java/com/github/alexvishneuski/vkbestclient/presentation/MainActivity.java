@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogsActivity;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogListActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayAdapterDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity;
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         mToDialogsBasedRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecyclerViewDialogsActivity.class);
+                Intent intent = new Intent(MainActivity.this, RecyclerViewDialogListActivity.class);
                 //Case #1.2
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);

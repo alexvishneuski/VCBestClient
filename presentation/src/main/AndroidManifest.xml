@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogsActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogListActivity" />
 
         <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity" />
         <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity" />
