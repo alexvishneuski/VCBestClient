@@ -11,9 +11,7 @@ import com.github.alexvishneuski.vklayouts.R;
 public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private TextView mContactUserFullName;
-    //FIXME TextView or ImageView???
     //private ImageView mCurrentUserAvatarPath;
-    //FIXME TextView or ImageView???
     private ImageView mContactUserAvatarPath;
     private TextView mMessageSendingDate;
     private TextView mMessageBody;

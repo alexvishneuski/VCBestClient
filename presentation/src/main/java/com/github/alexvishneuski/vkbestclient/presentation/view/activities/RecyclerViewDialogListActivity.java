@@ -27,6 +27,8 @@ import java.util.List;
 
 public class RecyclerViewDialogListActivity extends AppCompatActivity {
 
+    public static final String VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
+
     public final String TAG = this.getClass().getSimpleName();
 
     private int mTopBarFrameContainer;

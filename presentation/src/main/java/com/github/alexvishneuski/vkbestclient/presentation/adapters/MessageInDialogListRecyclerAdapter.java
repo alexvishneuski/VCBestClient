@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.alexvishneuski.vkbestclient.imageloader.NOrda;
 import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.viewholder.MessageInDialogListRecyclerViewHolder;
 import com.github.alexvishneuski.vklayouts.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,11 +39,12 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         final MessageInDialogListViewModel messageModel = mMessageList.get(pPosition);
 
-        pHolder.getContactUserFullName().setText(messageModel.getContactUser().getUserFullNAme());
+        pHolder.getContactUserFullName().setText(messageModel.getContactUser().getUserFullName());
         //FiXME add imageloader
-        //pHolder.getContactUserAvatarPath().
+
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
         pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
+        NOrda.INSTANCE.load(messageModel.getContactUser().getUserAvatarPath()).into(pHolder.getContactUserAvatarPath());
     }
 
     @Override

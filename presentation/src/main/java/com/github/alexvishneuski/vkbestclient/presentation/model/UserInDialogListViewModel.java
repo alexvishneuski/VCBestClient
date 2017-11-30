@@ -7,14 +7,14 @@ package com.github.alexvishneuski.vkbestclient.presentation.model;
 public class UserInDialogListViewModel {
 
     private Long mUserId;
-    private String mUserFullNAme;
+    private String mUserFullName;
     private String mUserAvatarPath;
 
     public UserInDialogListViewModel() {
     }
 
-    public UserInDialogListViewModel(String pUserFullNAme, String pUserAvatarPath) {
-        mUserFullNAme = pUserFullNAme;
+    public UserInDialogListViewModel(String pUserFullName, String pUserAvatarPath) {
+        mUserFullName = pUserFullName;
         mUserAvatarPath = pUserAvatarPath;
     }
 
@@ -27,13 +27,13 @@ public class UserInDialogListViewModel {
         mUserId = pUserId;
     }
 
-    public String getUserFullNAme() {
+    public String getUserFullName() {
 
-        return mUserFullNAme;
+        return mUserFullName;
     }
 
-    public void setUserFullNAme(String pUserFullNAme) {
-        mUserFullNAme = pUserFullNAme;
+    public void setUserFullName(String pUserFullName) {
+        mUserFullName = pUserFullName;
     }
 
     public String getUserAvatarPath() {
