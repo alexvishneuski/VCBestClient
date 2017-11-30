@@ -8,11 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.utils.StubResourcesUtility;
+import com.github.alexvishneuski.vkbestclient.presentation.model.UserInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vklayouts.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /* TODO:
@@ -27,59 +29,53 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    private List<MessageInDialogListViewModel> mMessageList;
-
     private int mTopBarFrameContainer;
 
+    private List<MessageInDialogListViewModel> mMessageList;
     private RecyclerView mRecyclerView;
+    private MessageInDialogListRecyclerAdapter mAdapter;
 
-    //TODO delete as quickly as possible!!!
-    private StubResourcesUtility mResourcesStub;
-
-
-    /**
-     * Called when the activity is first created.
-     */
     public void onCreate(Bundle savedInstanceState) {
 
         Log.d(TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
-
         /*creating messages view*/
-        setContentView(R.layout.activity_dialogs_based_list_view);
+        setContentView(R.layout.activity_recycler_view_dialogs);
+        initFragments();
 
-        /*find top bar container end show there top bar fragment*/
-        findTopBarContainer();
-        showTopBarFragment();
+        createRecyclerViewAndSetLayoutManager();
+        loadDataToMessageList();
+        createAdapter();
 
-        /*find list view*/
-        mRecyclerView = findViewById(R.id.dialogs_container_recycler_view);
-
-        //TODO delete as quickly as possible!!!
-        /*creatingResourcesStub*/
-        mResourcesStub = StubResourcesUtility.getStubResourcesUtility(getApplicationContext());
-
-        mRecyclerView.setHasFixedSize(false);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        //TODO Load data, set adapter
-       /* mMessageList = //
-
-        mRecyclerView.setAdapter(new MessageRecyclerAdapter(mMessageList));
-
-
-        *//*create adapter*//*
-        lastMessageAdapter = new StudyDialogsListViewAdapter(this, mResourcesStub.getLastMessages());
-
-        *//*set adapter to list*//*
-        listView.setAdapter(lastMessageAdapter);*/
-
+        /*set adapter to view*/
+        mRecyclerView.setAdapter(mAdapter);
     }
 
+    /*create recycler view set linearLayoutManager to him*/
+    private void createRecyclerViewAndSetLayoutManager() {
+        Log.d(TAG, "createRecyclerViewAndSetLayoutManager");
+        mRecyclerView = findViewById(R.id.dialogs_container_recycler_view);
 
-        /*show any fragment on this activity*/
+        mRecyclerView.setHasFixedSize(false);
 
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
+
+    /*create adapter and send him messageList*/
+    private void createAdapter() {
+        Log.d(TAG, "createAdapter");
+        mAdapter = new MessageInDialogListRecyclerAdapter(mMessageList);
+    }
+
+    /*find top bar container end show there top bar fragment*/
+    private void initFragments() {
+        Log.d(TAG, "initFragments");
+        findTopBarContainer();
+        showTopBarFragment();
+    }
+
+    /*show any fragment on this activity*/
     public void showFragment(int frameContainer, Fragment fragment) {
         Log.d(TAG, "showFragment");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -103,4 +99,12 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     }
 
+    private void loadDataToMessageList() {
+        Log.d(TAG, "loadDataToMessageList");
+        mMessageList = new ArrayList<>();
+
+        for (int i = 0; i < 20; i++) {
+            mMessageList.add(new MessageInDialogListViewModel(new UserInDialogListViewModel("Contact user full name" + i, "http://www.avatars." + i), i + "." + i, "Message message  message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message" + i));
+        }
+    }
 }

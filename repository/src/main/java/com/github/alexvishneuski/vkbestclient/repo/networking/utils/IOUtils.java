@@ -1,9 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repo.networking.utils;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
@@ -18,7 +15,6 @@ import java.io.OutputStream;
 
 public class IOUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IOUtils.class);
 
     public static void close(Closeable closeable) {
         if (closeable != null) {
@@ -26,7 +22,6 @@ public class IOUtils {
                 closeable.close();
             } catch (IOException e) {
                 //can be ignored
-                LOGGER.error("IOUtils", e.getMessage());
             }
         }
     }
@@ -37,7 +32,6 @@ public class IOUtils {
                 closeable.close();
             } catch (Exception e) {
                 //can be ignored
-                LOGGER.error("IOUtils", e.getMessage());
             }
         }
     }
@@ -48,7 +42,6 @@ public class IOUtils {
                 closeable.close();
             } catch (Exception e) {
                 //can be ignored
-                LOGGER.error("IOUtils", e.getMessage());
             }
         }
     }

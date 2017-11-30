@@ -38,12 +38,13 @@
         <!--content itself
                TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment
                decided use ListView as code in this activity-->
+        <!--TODO why is there not showing dividers in RV??? In ListView it works-->
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/dialogs_container_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:divider="@drawable/divider" />
+            android:layout_alignParentTop="true" />
 
         <!--top shadow-->
         <View

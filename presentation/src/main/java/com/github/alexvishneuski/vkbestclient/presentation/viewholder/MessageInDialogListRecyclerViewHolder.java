@@ -65,6 +65,7 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
     }
 
     public TextView getMessageBody() {
+
         return mMessageBody;
     }
 

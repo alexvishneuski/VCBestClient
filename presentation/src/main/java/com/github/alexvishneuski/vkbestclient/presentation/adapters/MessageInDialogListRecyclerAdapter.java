@@ -9,6 +9,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialog
 import com.github.alexvishneuski.vkbestclient.presentation.viewholder.MessageInDialogListRecyclerViewHolder;
 import com.github.alexvishneuski.vklayouts.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
     @Override
     public MessageInDialogListRecyclerViewHolder onCreateViewHolder(ViewGroup pParent, int pViewType) {
+
         final View view = LayoutInflater.from(pParent.getContext()).inflate(R.layout.view_message_in_dialog_list_item_base, pParent, false);
 
         return new MessageInDialogListRecyclerViewHolder(view);
@@ -34,17 +36,19 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
     @Override
     public void onBindViewHolder(MessageInDialogListRecyclerViewHolder pHolder, int pPosition) {
+
         final MessageInDialogListViewModel messageModel = mMessageList.get(pPosition);
 
         pHolder.getContactUserFullName().setText(messageModel.getContactUser().getUserFullNAme());
         //FiXME add imageloader
         //pHolder.getContactUserAvatarPath().
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
-        pHolder.getMessageSendingDate().setText(messageModel.getMessageBody());
+        pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
     }
 
     @Override
     public int getItemCount() {
+
         return mMessageList.size();
     }
 
@@ -53,4 +57,6 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         return super.getItemViewType(position);
     }
+
+
 }

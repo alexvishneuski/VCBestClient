@@ -10,6 +10,14 @@ public class UserInDialogListViewModel {
     private String mUserFullNAme;
     private String mUserAvatarPath;
 
+    public UserInDialogListViewModel() {
+    }
+
+    public UserInDialogListViewModel(String pUserFullNAme, String pUserAvatarPath) {
+        mUserFullNAme = pUserFullNAme;
+        mUserAvatarPath = pUserAvatarPath;
+    }
+
     public Long getUserId() {
 
         return mUserId;

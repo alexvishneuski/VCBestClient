@@ -15,6 +15,15 @@ public class MessageInDialogListViewModel {
     private String mMessageBody;
     private Boolean mIsMessageRead;
 
+    public MessageInDialogListViewModel() {
+    }
+
+    public MessageInDialogListViewModel(UserInDialogListViewModel pContactUser, String pMessageSendingDate, String pMessageBody) {
+        mContactUser = pContactUser;
+        mMessageSendingDate = pMessageSendingDate;
+        mMessageBody = pMessageBody;
+    }
+
     public Long getId() {
 
         return mId;

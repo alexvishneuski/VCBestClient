@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initToDialogsBasedRecyclerViewButton() {
         Log.d(TAG, "initToDialogsBasedRecyclerViewButton");
-        mToDialogsBasedListViewWithArrayAdapterButton.setOnClickListener(new View.OnClickListener() {
+        mToDialogsBasedRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecyclerViewDialogsActivity.class);
