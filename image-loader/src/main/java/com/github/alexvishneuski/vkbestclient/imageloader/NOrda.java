@@ -21,9 +21,11 @@ public enum NOrda {
 
     INSTANCE;
 
+    /*size of memory cache */
     private static final int MAX_MEMORY_FOR_IMAGES = 64 * 1024 * 1024;
 
     private final BlockingDeque<ImageRequest> queue;
+    /*last recently used*/
     private final LruCache<String, Bitmap> lruCache;
     private final ExecutorService executorService;
     private final Object lock = new Object();
@@ -34,9 +36,10 @@ public enum NOrda {
         lruCache = new LruCache<String, Bitmap>(getCacheSize()) {
 
             @Override
+            /*for size detecting of every incomming BItmap*/
             protected int sizeOf(final String key, final Bitmap value) {
                 return key.length() + value.getByteCount();
-        }
+            }
 
         };
     }
@@ -69,10 +72,15 @@ public enum NOrda {
     }
 
     void enqueue(ImageRequest request) {
+        /*where is get overridet in?*/
         ImageView imageView = request.target.get();
 
-        if (imageView == null) return;
+        if (imageView == null) {
+            return;
+        }
 
+        /*where is get overridet in?*/
+        /*or I can set default image*/
         imageView.setImageBitmap(null);
 
         if (imageHasSize(request)) {
@@ -84,9 +92,11 @@ public enum NOrda {
         }
     }
 
+    /*Goal of method???*/
     private void deferImageRequest(final ImageRequest request) {
         ImageView imageView = request.target.get();
         imageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+
             @Override
             public boolean onPreDraw() {
                 ImageView view = request.target.get();
@@ -180,9 +190,9 @@ public enum NOrda {
             ImageResult result = null;
 
             try {
-
+                /*getting the same request as in enqueue?*/
                 ImageRequest request = queue.takeFirst();
-                Log.d(TAG, "doInBackground: "+request.url);
+                Log.d(TAG, "doInBackground: " + request.url);
 
                 result = new ImageResult(request);
 
@@ -203,7 +213,9 @@ public enum NOrda {
                     synchronized (lock) {
                         lruCache.put(request.url, bitmap);
                     }
-                } else throw new IllegalStateException("Bitmap is null");
+                } else {
+                    throw new IllegalStateException("Bitmap is null");
+                }
 
                 return result;
             } catch (Exception e) {

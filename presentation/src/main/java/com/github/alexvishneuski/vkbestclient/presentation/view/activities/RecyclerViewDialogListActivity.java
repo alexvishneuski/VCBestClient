@@ -25,7 +25,6 @@ import java.util.List;
 * 4. arrive round avatars
 */
 
-
 public class RecyclerViewDialogListActivity extends AppCompatActivity {
 
     public static final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
@@ -88,21 +87,18 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
         transaction.replace(frameContainer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
-
     }
 
     /*find top bar container for top bar fragment*/
     private void findTopBarContainer() {
         Log.d(TAG, "findTopBarContainer");
         mTopBarFrameContainer = R.id.top_bar_frame_container;
-
     }
 
     /*show top bar fragment in top bar container*/
     private void showTopBarFragment() {
         Log.d(TAG, "showTopBarFragment");
         showFragment(mTopBarFrameContainer, new MessagesTopBarFragment());
-
     }
 
     private void loadDataToMessageList() {

@@ -1,8 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.repo.networking.imageloader.impl;
 
-import android.widget.ImageView;
+import android.graphics.Bitmap;
 
-import com.github.alexvishneuski.vkbestclient.imageloader.NOrda;
 import com.github.alexvishneuski.vkbestclient.repo.networking.imageloader.IImageLoaderNetworking;
 
 /**
@@ -10,8 +9,10 @@ import com.github.alexvishneuski.vkbestclient.repo.networking.imageloader.IImage
  */
 
 public class ImageLoaderNetworkingImpl implements IImageLoaderNetworking {
+
     @Override
-    public void loadImage(String pSourcePath, ImageView pDestinationView) {
-        NOrda.INSTANCE.load(pSourcePath).into(pDestinationView);
+    public Bitmap loadImage(String pSourcePath) {
+
+        throw new UnsupportedOperationException("class ImageLoaderNetworkingImpl method loadImage is unsupported yet");
     }
 }
