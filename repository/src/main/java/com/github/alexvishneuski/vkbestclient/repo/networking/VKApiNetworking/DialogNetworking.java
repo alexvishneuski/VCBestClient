@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking;
+package com.github.alexvishneuski.vkbestclient.repo.networking.VKApiNetworking;
 
 
 import com.github.alexvishneuski.vkbestclient.repo.networking.http.HttpClient;
