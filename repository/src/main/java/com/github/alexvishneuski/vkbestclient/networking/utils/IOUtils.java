@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.utils;
+package com.github.alexvishneuski.vkbestclient.networking.utils;
 
 
 import java.io.BufferedReader;

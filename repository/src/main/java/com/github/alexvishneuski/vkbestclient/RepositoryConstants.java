@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo;
+package com.github.alexvishneuski.vkbestclient;
 
 public class RepositoryConstants {
 

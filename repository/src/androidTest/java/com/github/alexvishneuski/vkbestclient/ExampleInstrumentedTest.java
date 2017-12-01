@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo;
+package com.github.alexvishneuski.vkbestclient;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

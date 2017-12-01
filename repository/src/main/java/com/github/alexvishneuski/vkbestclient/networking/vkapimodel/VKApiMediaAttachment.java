@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 * object Attachment
 * https://vk.com/dev/objects/attachments_m
 */
-class VKApiMediaAttachment {
+public  class VKApiMediaAttachment {
 
     @SerializedName("type")
     private VKApiMediaAttachmentType mType;

@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
 
 /*
 * model for VK API
@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-class VKApiMessage {
+public class VKApiMessage {
 
     // идентификатор сообщения (не возвращается для пересланных сообщений)
     @SerializedName("id")

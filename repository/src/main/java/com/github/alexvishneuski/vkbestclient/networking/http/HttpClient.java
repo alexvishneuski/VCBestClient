@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.http;
+package com.github.alexvishneuski.vkbestclient.networking.http;
 
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
@@ -16,7 +16,7 @@ public class HttpClient implements IHttpClient {
 
     @Override
     public void request(final String url, final ResponseListener listener) {
-        Log.d(TAG, "request");
+//        Log.d(TAG, "request");
 
         try {
             final InputStream is = openStream(url);

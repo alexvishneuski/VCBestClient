@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +9,7 @@ import java.util.List;
 * of VK API method: messages.getDialogs
 * url: https://vk.com/dev/messages.getDialogs
 */
-class VKApiMessagesGetDialogsResponse {
+public class VKApiMessagesGetDialogsResponse {
 
     @SerializedName("count")
     private Integer mDialogCount;

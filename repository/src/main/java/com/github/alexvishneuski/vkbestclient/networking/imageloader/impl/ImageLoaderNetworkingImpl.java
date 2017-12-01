@@ -1,8 +1,8 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.imageloader.impl;
+package com.github.alexvishneuski.vkbestclient.networking.imageloader.impl;
 
 import android.graphics.Bitmap;
 
-import com.github.alexvishneuski.vkbestclient.repo.networking.imageloader.IImageLoaderNetworking;
+import com.github.alexvishneuski.vkbestclient.networking.imageloader.IImageLoaderNetworking;
 
 /**
  * Created by alex_vishneuski on 30.11.2017.

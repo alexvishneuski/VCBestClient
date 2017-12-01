@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repo.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 * model for VK API
 * object Place
 */
-class VKApiPlace {
+public class VKApiPlace {
 
     // идентификатор места (если назначено)
     @SerializedName("id")

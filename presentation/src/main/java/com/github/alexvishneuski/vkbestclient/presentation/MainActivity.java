@@ -13,7 +13,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.view.activities.Recyc
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayAdapterDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.repo.RepositoryTest;
+import com.github.alexvishneuski.vkbestclient.RepositoryTest;
 import com.github.alexvishneuski.vklayouts.R;
 
 public class MainActivity extends AppCompatActivity {
