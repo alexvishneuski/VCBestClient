@@ -2,7 +2,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.utils;
 
 import android.content.Context;
 
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirection;
+import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.model.study.StudyMessageViewModelStub;
 import com.github.alexvishneuski.vklayouts.R;
 
@@ -19,7 +19,7 @@ public class StubResourcesUtility {
     private String currentUserFullName;
     private String[] sendingDates;
     private String[] messageBodies;
-    private MessageDirection[] directions;
+    private MessageDirectionViewModel[] directions;
     private Boolean[] isReadArray;
 
     /*
@@ -82,7 +82,7 @@ public class StubResourcesUtility {
         return messageBodies;
     }
 
-    public MessageDirection[] getDirections() {
+    public MessageDirectionViewModel[] getDirections() {
         return directions;
     }
 
@@ -112,10 +112,10 @@ public class StubResourcesUtility {
         return booleanIsReadArray;
     }
 
-    private MessageDirection[] createMessageDirectionArray() {
-        MessageDirection[] enumDirectionArray = new MessageDirection[12];
+    private MessageDirectionViewModel[] createMessageDirectionArray() {
+        MessageDirectionViewModel[] enumDirectionArray = new MessageDirectionViewModel[12];
         for (int i = 0; i < enumDirectionArray.length; i++) {
-            enumDirectionArray[i] = i % 2 == 0 ? MessageDirection.INCOMING : MessageDirection.OUTGOING;
+            enumDirectionArray[i] = i % 2 == 0 ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING;
         }
         return enumDirectionArray;
     }

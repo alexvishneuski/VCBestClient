@@ -9,7 +9,7 @@ public class MessageInDialogListViewModel {
     private Long mId;
     private UserInDialogListViewModel mCurrentUser;
     private UserInDialogListViewModel mContactUser;
-    private MessageDirection mMessageDirection;
+    private MessageDirectionViewModel mMessageDirection;
     private String mMessageSendingDate;
     private String mMessageTitle;
     private String mMessageBody;
@@ -51,12 +51,12 @@ public class MessageInDialogListViewModel {
         mContactUser = pContactUser;
     }
 
-    public MessageDirection getMessageDirection() {
+    public MessageDirectionViewModel getMessageDirection() {
 
         return mMessageDirection;
     }
 
-    public void setMessageDirection(MessageDirection pMessageDirection) {
+    public void setMessageDirection(MessageDirectionViewModel pMessageDirection) {
         mMessageDirection = pMessageDirection;
     }
 

@@ -1,20 +1,20 @@
 package com.github.alexvishneuski.vkbestclient.presentation.model.study;
 
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirection;
+import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
 
 public class StudyMessageViewModelStub {
 
     private Long id;
     private String contactUserFullName;
     private String currentUserFullName;
-    private MessageDirection messageDirection;
+    private MessageDirectionViewModel messageDirection;
     private String messageSendingDate;
     private String messageBody;
     private int contactUserAvatarId;
     private int currentUserAvatarId;
     private Boolean isMessageRead;
 
-    public StudyMessageViewModelStub(String contactUserFullName, String currentUserFullName, MessageDirection messageDirection, String messageSendingDate, String messageBody, Boolean isMessageRead) {
+    public StudyMessageViewModelStub(String contactUserFullName, String currentUserFullName, MessageDirectionViewModel messageDirection, String messageSendingDate, String messageBody, Boolean isMessageRead) {
         this.contactUserFullName = contactUserFullName;
         this.currentUserFullName = currentUserFullName;
         this.messageDirection = messageDirection;
@@ -47,11 +47,11 @@ public class StudyMessageViewModelStub {
         this.currentUserFullName = currentUserFullName;
     }
 
-    public MessageDirection getMessageDirection() {
+    public MessageDirectionViewModel getMessageDirection() {
         return messageDirection;
     }
 
-    public void setMessageDirection(MessageDirection messageDirection) {
+    public void setMessageDirection(MessageDirectionViewModel messageDirection) {
         this.messageDirection = messageDirection;
     }
 

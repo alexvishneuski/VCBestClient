@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repo.networking.http;
 
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.net.URL;
 
 public class HttpClient implements IHttpClient {
 
-    public final String TAG = this.getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     private HttpURLConnection con;
 
@@ -30,7 +31,8 @@ public class HttpClient implements IHttpClient {
         }
     }
 
-    InputStream openStream(final String url) throws IOException {
+    @VisibleForTesting
+    private InputStream openStream(final String url) throws IOException {
         Log.d(TAG, "openStream");
 
         con = (HttpURLConnection) (new URL(url)).openConnection();
@@ -38,6 +40,7 @@ public class HttpClient implements IHttpClient {
     }
 
     public interface ResponseListener {
+
         void onResponse(InputStream pInputStream) throws Exception;
 
         void onError(Throwable pThrowable);
