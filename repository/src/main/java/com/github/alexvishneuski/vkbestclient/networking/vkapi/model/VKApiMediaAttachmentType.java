@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
 /*
 * model for VK API

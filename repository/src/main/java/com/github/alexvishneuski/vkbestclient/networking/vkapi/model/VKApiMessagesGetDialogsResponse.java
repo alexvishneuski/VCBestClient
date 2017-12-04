@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -36,5 +36,13 @@ public class VKApiMessagesGetDialogsResponse {
 
     public void setDialogList(final List<VKApiDialog> pDialogList) {
         mDialogList = pDialogList;
+    }
+
+    @Override
+    public String toString() {
+        return "VKApiMessagesGetDialogsResponse{" +
+                "mDialogCount=" + mDialogCount +
+                ", mDialogList=" + mDialogList +
+                '}';
     }
 }

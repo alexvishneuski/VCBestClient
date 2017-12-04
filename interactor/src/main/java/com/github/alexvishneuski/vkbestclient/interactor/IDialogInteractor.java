@@ -13,13 +13,17 @@ public interface IDialogInteractor {
     /**
      * @return list of current user's dialogs, default 20 items
      */
-    List<Dialog> getDialogs();
+    List<Dialog> getDialogList();
 
     /**
      * @param pCount count of dialog's items in request
      * @return list of current user's dialogs
      */
-    List<Dialog> getDialogs(int pCount);
+    List<Dialog> getDialogList(int pCount);
+
+
+    //TODO delete after testing
+    String getResult();
 }
 
 

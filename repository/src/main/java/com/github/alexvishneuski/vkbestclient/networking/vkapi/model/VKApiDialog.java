@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -62,6 +62,16 @@ public class VKApiDialog {
 
     public void setLastReadMessageByContactUserId(final Integer pLastReadMessageByContactUserId) {
         mLastReadMessageByContactUserId = pLastReadMessageByContactUserId;
+    }
+
+    @Override
+    public String toString() {
+        return "VKApiDialog{" +
+                "mUnreadCount=" + mUnreadCount +
+                ", mMessage=" + mMessage +
+                ", mLastReadMessageByCurrentUserId=" + mLastReadMessageByCurrentUserId +
+                ", mLastReadMessageByContactUserId=" + mLastReadMessageByContactUserId +
+                '}';
     }
 }
 

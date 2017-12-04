@@ -1,16 +1,16 @@
 package com.github.alexvishneuski.vkbestclient.json;
 
-import com.github.alexvishneuski.vkbestclient.networking.VKApiNetworking.DialogVKApiNetworking;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.network.impl.DialogVKApiNetworkingImpl;
 
 import org.junit.Test;
 
 public class DialogVKApiNetworkingTest {
 
-    DialogVKApiNetworking q;
+    DialogVKApiNetworkingImpl q;
 
     @Test
     public void dialogVKApiNetworkingTesting() {
-        q = new DialogVKApiNetworking();
+        q = new DialogVKApiNetworkingImpl();
 
         String result = q.getDialogList();
         System.out.println(result);

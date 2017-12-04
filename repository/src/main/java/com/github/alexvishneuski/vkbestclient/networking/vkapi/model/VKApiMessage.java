@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
 /*
 * model for VK API
@@ -56,7 +56,7 @@ public class VKApiMessage {
     private List<VKApiMessage> mRedirectedMessageList;
 
     // содержатся ли в сообщении emoji-смайлы [0,1]
-    @SerializedName("attachments")
+    @SerializedName("emoji")
     private Integer mHasEmoji;
 
     // является ли сообщение важным [0,1]
@@ -206,6 +206,27 @@ public class VKApiMessage {
 
     public void setRandomId(final Integer pRandomId) {
         mRandomId = pRandomId;
+    }
+
+    @Override
+    public String toString() {
+        return "VKApiMessage{" +
+                "mId=" + mId +
+                ", mContactUserId=" + mContactUserId +
+                ", mAuthorId=" + mAuthorId +
+                ", mSendingDate=" + mSendingDate +
+                ", mReadStatus=" + mReadStatus +
+                ", mDirection=" + mDirection +
+                ", mTitle='" + mTitle + '\'' +
+                ", mBody='" + mBody + '\'' +
+                ", mGeo=" + mGeo +
+                ", mAttachmentList=" + mAttachmentList +
+                ", mRedirectedMessageList=" + mRedirectedMessageList +
+                ", mHasEmoji=" + mHasEmoji +
+                ", mIsImportant=" + mIsImportant +
+                ", mIsDeleted=" + mIsDeleted +
+                ", mRandomId=" + mRandomId +
+                '}';
     }
 }
 

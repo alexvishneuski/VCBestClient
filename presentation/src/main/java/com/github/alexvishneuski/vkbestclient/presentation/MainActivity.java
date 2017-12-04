@@ -1,19 +1,22 @@
 package com.github.alexvishneuski.vkbestclient.presentation;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.github.alexvishneuski.vkbestclient.RepositoryTest;
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
+import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
+import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogListActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayAdapterDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.RepositoryTest;
 import com.github.alexvishneuski.vklayouts.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mToDialogsBasedRecyclerViewButton;
 
+    private static IDialogInteractor mDialogInteractor;
+
+    private GetDialogListAsyncTasc mAsyncTasc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -40,7 +47,32 @@ public class MainActivity extends AppCompatActivity {
         initButtons();
 
         checkOutsideTiersAccess();
+
+        executeGetDialogListAsyncTasc();
     }
+
+    private void executeGetDialogListAsyncTasc() {
+        Log.d(TAG, "executeGetDialogListAsyncTasc: called");
+        mAsyncTasc = new GetDialogListAsyncTasc();
+        mAsyncTasc.execute();
+    }
+
+    private static class GetDialogListAsyncTasc extends AsyncTask<Void, Void, String> {
+        private static final String ASYNC_TASK_TAG = "GetDialogListAsyncTasc";
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+
+            mDialogInteractor = new DialogInteractorImpl();
+            String result = mDialogInteractor.getResult();
+            Log.d(ASYNC_TASK_TAG, "doInBackground: print result");
+            System.out.println(result);
+
+            return result;
+        }
+    }
+
 
     private void initButtons() {
         Log.d(TAG, "initButtons");

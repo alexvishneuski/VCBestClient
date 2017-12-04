@@ -1,21 +1,31 @@
-package com.github.alexvishneuski.vkbestclient.networking.VKApiNetworking;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.network.impl;
 
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.networking.http.HttpClient;
-import com.github.alexvishneuski.vkbestclient.networking.vkapimodel.VKApiMessagesGetDialogsResult;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.VKApiMessagesGetDialogsResult;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.network.IDialogVKApiNetworking;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.util.VKApiConstants;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class DialogVKApiNetworking {
+/**
+ *
+ */
+public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
     public String getDialogList() {
 
-        final String url = "https://api.vk.com/method/messages.getDialogs?access_token=TOKEN&v=5.69";
+        Log.d(TAG, "getDialogList called");
+
+        final String url = VKApiConstants.VK_API_SERVICE_URL + VKApiConstants.VK_API_METHOD_NAME + "?access_token=" + VKApiConstants.VK_API_ACCESS_TOKEN + "&v=" + VKApiConstants.VK_API_VERSION;
+
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
 
@@ -26,8 +36,10 @@ public class DialogVKApiNetworking {
         VKApiMessagesGetDialogsResult result = listener.getResult();
 
         if (result.getError() != null) {
+            Log.d(TAG, "getDialogList() returned Error");
             return result.getError();
         } else {
+            Log.d(TAG, "getDialogList() returned Response");
             return result.getResponse().toString();
         }
     }

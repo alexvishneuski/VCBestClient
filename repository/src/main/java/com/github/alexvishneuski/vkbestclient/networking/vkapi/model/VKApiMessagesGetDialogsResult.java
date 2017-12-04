@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapimodel;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -19,6 +19,7 @@ public class VKApiMessagesGetDialogsResult {
     }
 
     public VKApiMessagesGetDialogsResponse getResponse() {
+
         return mResponse;
     }
 
@@ -27,6 +28,7 @@ public class VKApiMessagesGetDialogsResult {
     }
 
     public String getError() {
+
         return mError;
     }
 
