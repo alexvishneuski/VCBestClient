@@ -1,5 +1,6 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments;
 
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.supportingobjectsandvaluessets.VKApiPhotoSizeDescriptionFormat;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * object Photo
  * https://vk.com/dev/objects/photo
  */
-class VKApiMediaAttachmentTypePhoto {
+public class VKApiMediaAttachmentTypePhoto {
 
     // идентификатор фотографии
     @SerializedName("id")

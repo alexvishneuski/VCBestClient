@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

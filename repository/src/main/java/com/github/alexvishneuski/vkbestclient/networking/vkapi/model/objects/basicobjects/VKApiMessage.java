@@ -1,10 +1,12 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.basicobjects;
 
 /*
 * model for VK API
 * object Message
 */
 
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.VKApiGeo;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments.VKApiMediaAttachment;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

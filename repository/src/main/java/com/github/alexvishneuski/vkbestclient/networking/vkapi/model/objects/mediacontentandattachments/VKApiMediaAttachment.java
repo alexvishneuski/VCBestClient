@@ -1,5 +1,6 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments;
 
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments.VKApiMediaAttachmentTypePhoto;
 import com.google.gson.annotations.SerializedName;
 
 /*

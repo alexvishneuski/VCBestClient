@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
+package com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments;
 
 /**
 * model for VK API
