@@ -205,5 +205,26 @@ class VKApiMediaAttachmentTypePhoto {
     public void setOriginalHeightInPx(Integer pOriginalHeightInPx) {
         mOriginalHeightInPx = pOriginalHeightInPx;
     }
+
+    @Override
+    public String toString() {
+        return "VKApiMediaAttachmentTypePhoto{" +
+                "mId=" + mId +
+                ", mAlbumId=" + mAlbumId +
+                ", mPhotosOwnerId=" + mPhotosOwnerId +
+                ", mUploadUserId=" + mUploadUserId +
+                ", mDescriptionText='" + mDescriptionText + '\'' +
+                ", mUploadDate=" + mUploadDate +
+                ", mPhotoCopiesArray=" + mPhotoCopiesArray +
+                ", mMaxSize75x75pxUrl='" + mMaxSize75x75pxUrl + '\'' +
+                ", mMaxSize130x130pxUrl='" + mMaxSize130x130pxUrl + '\'' +
+                ", mMaxSize604x604pxUrl='" + mMaxSize604x604pxUrl + '\'' +
+                ", mMaxSize807x807pxUrl='" + mMaxSize807x807pxUrl + '\'' +
+                ", mMaxSize1280x1024pxUrl='" + mMaxSize1280x1024pxUrl + '\'' +
+                ", mMaxSize2560x2048pxUrl='" + mMaxSize2560x2048pxUrl + '\'' +
+                ", mOriginalWidthInPx=" + mOriginalWidthInPx +
+                ", mOriginalHeightInPx=" + mOriginalHeightInPx +
+                '}';
+    }
 }
 
