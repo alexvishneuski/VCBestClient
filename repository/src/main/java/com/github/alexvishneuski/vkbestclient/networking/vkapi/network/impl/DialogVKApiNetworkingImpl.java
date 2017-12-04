@@ -36,6 +36,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         }
         VKApiMessagesGetDialogsResult result = listener.getResult();
 
+        //TODO refactor to: throw new VKApiException, change return to VKApiDialog object
         if (result.getError() != null) {
             Log.d(TAG, "getDialogList() returned Error");
             return result.getError();

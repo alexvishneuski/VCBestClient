@@ -1,6 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.networking.vkapi.model;
 
-/*
+/**
 * model for VK API
 * object Type of Attachment
 * https://vk.com/dev/objects/attachments_m
