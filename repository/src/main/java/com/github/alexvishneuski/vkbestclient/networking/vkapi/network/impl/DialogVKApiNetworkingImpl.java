@@ -4,6 +4,8 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.networking.http.HttpClient;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.exception.VKApiException;
+import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.VKApiMessagesGetDialogsResponse;
 import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.VKApiMessagesGetDialogsResult;
 import com.github.alexvishneuski.vkbestclient.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.networking.vkapi.util.VKApiConstants;
@@ -20,7 +22,37 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
     private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
-    public String getDialogList() {
+    public String getDialogListAsString() {
+
+        Log.d(TAG, "getDialogListAsString called");
+
+        //final String url = VKApiConstants.VK_API_SERVICE_URL + VKApiConstants.VK_API_METHOD_NAME + "?access_token=" + VKApiConstants.VK_API_ACCESS_TOKEN + "&v=" + VKApiConstants.VK_API_VERSION;
+        final String url = String.format("%s%s?access_token=%s&v=%s", VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+
+        final MyResponseListener listener = new MyResponseListener();
+        new HttpClient().request(url, listener);
+
+        if (listener.getThrowable() != null) {
+            //TODO implement error handling on UI
+            throw new RuntimeException(listener.getThrowable());
+        }
+        final VKApiMessagesGetDialogsResult result = listener.getResult();
+
+        //TODO refactor to: throw new VKApiException, change return to VKApiDialog object
+        if (result.getError() != null) {
+            Log.d(TAG, "getDialogListAsString() returned Error");
+
+            return result.getError();
+        } else {
+            Log.d(TAG, "getDialogListAsString() returned Response toString");
+
+            return result.getResponse().toString();
+        }
+    }
+
+    @WorkerThread
+
+    public VKApiMessagesGetDialogsResponse getDialogList() {
 
         Log.d(TAG, "getDialogList called");
 
@@ -34,16 +66,17 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
             //TODO implement error handling on UI
             throw new RuntimeException(listener.getThrowable());
         }
-        VKApiMessagesGetDialogsResult result = listener.getResult();
+        final VKApiMessagesGetDialogsResult result = listener.getResult();
 
         //TODO refactor to: throw new VKApiException, change return to VKApiDialog object
         if (result.getError() != null) {
-            Log.d(TAG, "getDialogList() returned Error");
-            return result.getError();
-        } else {
-            Log.d(TAG, "getDialogList() returned Response");
-            return result.getResponse().toString();
+            //Log.d(TAG, "getDialogList() returned Error");
+            //return result.getError();
+            throw new VKApiException();
         }
+        Log.d(TAG, "getDialogList() returned Response");
+
+        return result.getResponse();
     }
 
     public static class MyResponseListener implements HttpClient.ResponseListener {

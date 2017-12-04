@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static IDialogInteractor mDialogInteractor;
 
-    private GetDialogListAsyncTasc mAsyncTasc;
+    private GetDialogListAsStringAsyncTasc mAsyncTasc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,31 +48,31 @@ public class MainActivity extends AppCompatActivity {
 
         checkOutsideTiersAccess();
 
-        executeGetDialogListAsyncTasc();
+        executeGetDialogListAsStringAsyncTasc();
     }
 
-    private void executeGetDialogListAsyncTasc() {
-        Log.d(TAG, "executeGetDialogListAsyncTasc: called");
-        mAsyncTasc = new GetDialogListAsyncTasc();
+    private void executeGetDialogListAsStringAsyncTasc() {
+        Log.d(TAG, "executeGetDialogListAsStringAsyncTasc: called");
+        mAsyncTasc = new GetDialogListAsStringAsyncTasc();
         mAsyncTasc.execute();
     }
 
-    private static class GetDialogListAsyncTasc extends AsyncTask<Void, Void, String> {
-        private static final String ASYNC_TASK_TAG = "GetDialogListAsyncTasc";
+    private static class GetDialogListAsStringAsyncTasc extends AsyncTask<Void, Void, String> {
+
+        private static final String ASYNC_TASK_TAG = "GetDialogListAsStringAT";
 
         @Override
         protected String doInBackground(Void... voids) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
 
             mDialogInteractor = new DialogInteractorImpl();
-            String result = mDialogInteractor.getResult();
+            String result = mDialogInteractor.getResultAsString();
             Log.d(ASYNC_TASK_TAG, "doInBackground: print result");
             System.out.println(result);
 
             return result;
         }
     }
-
 
     private void initButtons() {
         Log.d(TAG, "initButtons");
@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         mToDialogsBasedRecyclerViewButton = findViewById(R.id.to_dialogs_activity_based_recycler_view_button);
         initToDialogsBasedRecyclerViewButton();
     }
-
 
     @Override
     protected void onStart() {
@@ -121,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
     private void initToDialogsBasedListViewWithArrayListButton() {
         Log.d(TAG, "initToDialogsBasedListViewWithArrayListButton");
         mToDialogsBasedListViewWithArrayListButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StudyBasedListViewWithArrayListDialogsActivity.class);
@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
     private void initToDialogsBasedListViewWithBaseAdapterAndViewHolderButton() {
         Log.d(TAG, "initToDialogsBasedListViewWithBaseAdapterAndViewHolderButton");
         mToDialogsBasedListViewWithBaseAdapterAndViewHolderButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StudyBasedListViewWithBaseAdapterDialogsActivity.class);
@@ -148,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
     private void initToDialogsBasedListViewWithArrayAdapterButton() {
         Log.d(TAG, "initToDialogsBasedListViewWithArrayAdapterButton");
         mToDialogsBasedListViewWithArrayAdapterButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StudyBasedListViewWithArrayAdapterDialogsActivity.class);
@@ -161,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
     private void initToDialogsBasedRecyclerViewButton() {
         Log.d(TAG, "initToDialogsBasedRecyclerViewButton");
         mToDialogsBasedRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecyclerViewDialogListActivity.class);

@@ -28,10 +28,10 @@ public class DialogInteractorImpl implements IDialogInteractor {
     }
 
     @Override
-    public String getResult() {
-        Log.d(TAG, "getResult called");
-        String result = mDialogVKApiNetworkingImpl.getDialogList();
-        Log.d(TAG, "getResult returned");
+    public String getResultAsString() {
+        Log.d(TAG, "getResultAsString called");
+        String result = mDialogVKApiNetworkingImpl.getDialogListAsString();
+        Log.d(TAG, "getResultAsString returned");
 
         return result;
     }

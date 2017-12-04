@@ -23,7 +23,7 @@ public interface IDialogInteractor {
 
 
     //TODO delete after testing
-    String getResult();
+    String getResultAsString();
 }
 
 
