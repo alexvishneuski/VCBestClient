@@ -1,6 +1,5 @@
 package com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments;
 
-import com.github.alexvishneuski.vkbestclient.networking.vkapi.model.objects.mediacontentandattachments.VKApiMediaAttachmentTypePhoto;
 import com.google.gson.annotations.SerializedName;
 
 /*
@@ -18,6 +17,10 @@ public class VKApiMediaAttachment {
 
     @SerializedName("photo")
     private VKApiMediaAttachmentTypePhoto mPhoto;
+
+    @SerializedName("doc")
+    private VKApiMediaAttachmentTypeDocument mDocument;
+
 
     public String getType() {
 
@@ -37,11 +40,21 @@ public class VKApiMediaAttachment {
         mPhoto = pPhoto;
     }
 
+    public VKApiMediaAttachmentTypeDocument getDocument() {
+
+        return mDocument;
+    }
+
+    public void setDocument(VKApiMediaAttachmentTypeDocument pDocument) {
+        mDocument = pDocument;
+    }
+
     @Override
     public String toString() {
         return "VKApiMediaAttachment{" +
                 "mType='" + mType + '\'' +
                 ", mPhoto=" + mPhoto +
+                ", mDocument=" + mDocument +
                 '}';
     }
 }
