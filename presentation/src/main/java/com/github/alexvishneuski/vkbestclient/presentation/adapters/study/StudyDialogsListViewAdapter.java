@@ -60,7 +60,7 @@ public class StudyDialogsListViewAdapter extends BaseAdapter {
 
         if (view == null) {
             inflater = LayoutInflater.from(this.context);
-            view = inflater.inflate(R.layout.view_message_in_dialog_list_item_base, null);
+            view = inflater.inflate(R.layout.view_message_in_dialog_list_item_outgoing_read, null);
 
             viewHolder = new LastMessageViewHolder();
             viewHolder.textViewContactUserFullName = ((TextView) view.findViewById(R.id.contact_user_name_text_view));

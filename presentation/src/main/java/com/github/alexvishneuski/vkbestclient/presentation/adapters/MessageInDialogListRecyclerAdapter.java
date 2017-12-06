@@ -29,7 +29,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
     @Override
     public MessageInDialogListRecyclerViewHolder onCreateViewHolder(ViewGroup pParent, int pViewType) {
 
-        final View view = LayoutInflater.from(pParent.getContext()).inflate(R.layout.view_message_in_dialog_list_item_base, pParent, false);
+        final View view = LayoutInflater.from(pParent.getContext()).inflate(R.layout.view_message_in_dialog_list_item_outgoing_read, pParent, false);
 
         return new MessageInDialogListRecyclerViewHolder(view);
     }
