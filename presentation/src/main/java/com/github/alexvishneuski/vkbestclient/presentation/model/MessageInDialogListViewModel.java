@@ -13,15 +13,17 @@ public class MessageInDialogListViewModel {
     private String mMessageSendingDate;
     private String mMessageTitle;
     private String mMessageBody;
-    private Boolean mIsMessageRead;
+    private boolean mIsMessageRead;
 
     public MessageInDialogListViewModel() {
     }
 
-    public MessageInDialogListViewModel(UserInDialogListViewModel pContactUser, String pMessageSendingDate, String pMessageBody) {
+    public MessageInDialogListViewModel(UserInDialogListViewModel pContactUser, String pMessageSendingDate, String pMessageBody, MessageDirectionViewModel pMessageDirection, boolean pIsMessageRead) {
         mContactUser = pContactUser;
         mMessageSendingDate = pMessageSendingDate;
         mMessageBody = pMessageBody;
+        mMessageDirection = pMessageDirection;
+        mIsMessageRead = pIsMessageRead;
     }
 
     public Long getId() {
@@ -86,12 +88,12 @@ public class MessageInDialogListViewModel {
         mMessageBody = pMessageBody;
     }
 
-    public Boolean getMessageRead() {
+    public boolean getMessageRead() {
 
         return mIsMessageRead;
     }
 
-    public void setMessageRead(Boolean pMessageRead) {
+    public void setMessageRead(boolean pMessageRead) {
         mIsMessageRead = pMessageRead;
     }
 }

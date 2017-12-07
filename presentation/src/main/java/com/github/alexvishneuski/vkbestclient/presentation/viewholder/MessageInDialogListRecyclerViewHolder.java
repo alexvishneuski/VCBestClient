@@ -11,7 +11,7 @@ import com.github.alexvishneuski.vklayouts.R;
 public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private TextView mContactUserFullName;
-    //private ImageView mCurrentUserAvatarPath;
+    private ImageView mCurrentUserAvatarPath;
     private ImageView mContactUserAvatarPath;
     private TextView mMessageSendingDate;
     private TextView mMessageBody;
@@ -21,7 +21,7 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
 
         mContactUserFullName = pView.findViewById(R.id.contact_user_name_text_view);
         mContactUserAvatarPath = pView.findViewById(R.id.contact_user_avatar_image_view);
-        //  mCurrentUserAvatarPath = pView.findViewById(R.id.current_user_avatar_image_view);
+        mCurrentUserAvatarPath = pView.findViewById(R.id.current_user_avatar_image_view);
         mMessageBody = pView.findViewById(R.id.mesage_body_text_view);
         mMessageSendingDate = pView.findViewById(R.id.message_sending_date_text_view);
     }
@@ -35,14 +35,14 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
         mContactUserFullName = pContactUserFullName;
     }
 
-    /*public ImageView getCurrentUserAvatarPath() {
+    public ImageView getCurrentUserAvatarPath() {
 
         return mCurrentUserAvatarPath;
     }
 
     public void setCurrentUserAvatarPath(ImageView pCurrentUserAvatarPath) {
         mCurrentUserAvatarPath = pCurrentUserAvatarPath;
-    }*/
+    }
 
     public ImageView getContactUserAvatarPath() {
 

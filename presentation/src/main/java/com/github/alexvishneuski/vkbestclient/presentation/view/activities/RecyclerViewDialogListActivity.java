@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
+import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.model.UserInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
@@ -30,7 +31,7 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
     public static final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
     public static final String TEST_CONTACT_USER_NAME = "Contact user full name %s";
     public static final String TEST_MESSAGE_BODY = getMesageBody() + "%s";
-    public static final String TEST_SENDING_DATE = "%s.%s";
+    public static final String TEST_MESSAGE_SENDING_DATE = "%s.%s";
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -109,7 +110,10 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
             mMessageList.add(new MessageInDialogListViewModel(
                     new UserInDialogListViewModel(
                             String.format(TEST_CONTACT_USER_NAME, i), TEST_VIEW_URL),
-                    String.format(TEST_SENDING_DATE, i, i), String.format(TEST_MESSAGE_BODY, i)));
+                    String.format(TEST_MESSAGE_SENDING_DATE, i, i),
+                    String.format(TEST_MESSAGE_BODY, i),
+                    (i % 2 == 0) ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING,
+                    (i % 2 == 0) ? true : false));
         }
     }
 

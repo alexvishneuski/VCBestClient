@@ -5,4 +5,5 @@ public enum MessageDirectionViewModel {
 
     OUTGOING, INCOMING
 
+
 }
