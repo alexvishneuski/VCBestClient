@@ -12,7 +12,7 @@ public class DialogVKApiNetworkingTest {
     public void dialogVKApiNetworkingTesting() {
         q = new DialogVKApiNetworkingImpl();
 
-        String result = q.getDialogList();
+        String result = q.getDialogListAsString();
         System.out.println(result);
     }
 
