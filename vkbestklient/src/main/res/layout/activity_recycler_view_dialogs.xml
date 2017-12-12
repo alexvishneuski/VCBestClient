@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity">
+
+    <!--Container for top bar Fragment-->
+    <!--TODO: to resolve sort of:
+    android:layout_height="wrap_content"
+    instead
+     android:layout_height="56dp"
+      -->
+    <FrameLayout
+        android:id="@+id/top_bar_frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true">
+
+        <!--TODO remove this <include>-->
+        <!-- <include layout="@layfragment_top_bar_dialogsages" />-->
+
+    </FrameLayout>
+
+    <!--content-->
+    <RelativeLayout
+        android:id="@+id/content_area_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/navigation_bar_frame_container"
+        android:layout_below="@+id/top_bar_frame_container"
+
+        android:divider="@drawable/divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <!--content itself
+               TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment
+               decided use ListView as code in this activity-->
+        <!--TODO why is there not showing dividers in RV??? In ListView it works-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dialogs_container_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+        <!--top shadow-->
+        <View
+            android:id="@+id/top_shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_top_bar_shadow_dark" />
+
+        <!--bottom shadow-->
+        <View
+            android:id="@+id/bottom_shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_navigation_bar_shadow_dark" />
+
+    </RelativeLayout>
+
+    <!--navigation bar
+    TODO to resolve issue: is it <include>-section or fragment
+    decided: <include>, because takes part in 5 activities(or in 1 common)-->
+
+    <FrameLayout
+
+        android:id="@+id/navigation_bar_frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/view_navigation_bar" />
+
+    </FrameLayout>
+
+</RelativeLayout>

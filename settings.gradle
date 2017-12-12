@@ -1,1 +1,1 @@
-include ':presentation', ':interactor', ':datamodel', ':image-loader', ':demo', ':repository'
+include ':vkbestklient', ':datamodel', ':image-loader', ':demo'
