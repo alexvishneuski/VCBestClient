@@ -2,8 +2,11 @@ package com.github.alexvishneuski.vkbestclient;
 
 public class RepositoryConstants {
 
+
+
     public interface RepositoryTest {
         String TEST_MESSAGE = "I'm repository's test";
+        int SDK_VERSION = 21;
     }
 
     public interface VkApiRequest {

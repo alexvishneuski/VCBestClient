@@ -1,8 +1,9 @@
-package com.github.alexvishneuski.vkbestclient.db;
+package com.github.alexvishneuski.vklayouts;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.RepositoryConstants;
 import com.github.alexvishneuski.vkbestclient.database.SqlConnector;
@@ -27,6 +28,8 @@ import static junit.framework.Assert.assertEquals;
 )
 public class DatabaseTest {
 
+    public final String TAG = this.getClass().getSimpleName();
+
     private SqlConnector mSqlConnector;
 
     @Before
@@ -49,8 +52,10 @@ public class DatabaseTest {
 
     @Test
     public void putRegisteredUsersToDb() {
+        Log.d(TAG, "putRegisteredUsersToDb called");
+
         UserDbModel[] userArray = prepareUsersForInsertIntoDb();
-        assertEquals(userArray.length, 3);
+        assertEquals(3, userArray.length);
 
         SQLiteDatabase writeConnection = mSqlConnector.getWritableDatabase();
         writeConnection.beginTransaction();
@@ -62,7 +67,10 @@ public class DatabaseTest {
 
             //TODO read about nullColumnHack
             //TODO read about conflicts
-            writeConnection.insert(UsersTable.TABLE_NAME, null, contentValues);
+            long id = writeConnection.insert(UsersTable.TABLE_NAME, null, contentValues);
+            Log.d(TAG, String.format("added user into Db %s with  id = %d, first name =%s, avatar path = %s: ", UsersTable.TABLE_NAME, id, user.getFirstName(), user.getAvatarPath()));
+            writeConnection.getPageSize();
+
         }
 
         writeConnection.setTransactionSuccessful();
@@ -92,7 +100,7 @@ public class DatabaseTest {
         Cursor usersDbCursor = readableConnection.query(UsersTable.TABLE_NAME, null, null,
                 null, null, null, null, null);
 
-        assertEquals(usersDbCursor.getCount(), 3);
+        assertEquals(3, usersDbCursor.getCount());
 
         usersDbCursor.close();
 
@@ -113,7 +121,7 @@ public class DatabaseTest {
 
     private UserDbModel[] prepareUsersForInsertIntoDb() {
         //TODO fill data
-        return new UserDbModel[]{new UserDbModel(), new UserDbModel(), new UserDbModel()};
+        return new UserDbModel[]{new UserDbModel("1","2","3"), new UserDbModel("1","2","3"), new UserDbModel("1","2","3")};
     }
 
    /* private RegisteredUser[] readRegisteredUsers() {

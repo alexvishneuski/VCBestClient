@@ -16,7 +16,7 @@ public class DbConstants {
 
     }
 
-    public interface MessagesTable {
+    /*public interface MessagesTable {
 
         String TABLE_NAME = "messages";
 
@@ -27,15 +27,15 @@ public class DbConstants {
         String RECEIVER_ID = "receiver_id";
         String SENDING_DATE = "sending_date";
         String READ_STATUS = "read_status";
-    }
+    }*/
 
     public interface UsersTable {
 
         String TABLE_NAME = "users";
 
         String ID = "_id";
-        String FIRST_NAME = "_id";
-        //String LAST_NAME = "_id";
-        String AVATAR_PATH = "title";
+        String FIRST_NAME = "first_name";
+        String LAST_NAME = "last_name";
+        String AVATAR_PATH = "avatar_path";
     }
 }

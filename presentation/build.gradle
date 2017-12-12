@@ -28,10 +28,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-   /* testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.4.2'
     testCompile 'org.mockito:mockito-core:2.3.9'
-*/
+
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
@@ -40,10 +40,17 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
 
-
-
-
-
     /*for round images goals*/
     compile 'de.hdodenhof:circleimageview:2.2.0'
+
+    // Gradle dependency on Stetho
+    compile 'com.facebook.stetho:stetho:1.5.0'
+
+    // using one of the network helpers
+    // deprecated OkHttp 2.x
+    compile 'com.facebook.stetho:stetho-okhttp:1.4.2'
+    // OkHttp 3.x
+    compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
+    compile 'com.facebook.stetho:stetho-urlconnection:1.4.2'
+
 }

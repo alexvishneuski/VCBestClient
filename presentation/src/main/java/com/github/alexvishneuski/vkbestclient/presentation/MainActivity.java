@@ -1,6 +1,8 @@
 package com.github.alexvishneuski.vkbestclient.presentation;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.alexvishneuski.vkbestclient.RepositoryTest;
+import com.github.alexvishneuski.vkbestclient.database.SqlConnector;
+import com.github.alexvishneuski.vkbestclient.database.domainmodel.UserDbModel;
+import com.github.alexvishneuski.vkbestclient.database.util.DbConstants;
 import com.github.alexvishneuski.vkbestclient.datamodel.DomainTest;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.InteractorTest;
@@ -18,6 +23,8 @@ import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity;
 import com.github.alexvishneuski.vklayouts.R;
+
+import static junit.framework.Assert.assertEquals;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +56,36 @@ public class MainActivity extends AppCompatActivity {
         checkOutsideTiersAccess();
 
         executeGetDialogListAsStringAsyncTasc();
+
+        /*!!!*/
+        SqlConnector mSqlConnector = new SqlConnector(this);
+
+        UserDbModel[] userArray = prepareUsersForInsertIntoDb();
+        assertEquals(3, userArray.length);
+
+        SQLiteDatabase writeConnection = mSqlConnector.getWritableDatabase();
+        writeConnection.beginTransaction();
+
+        for (UserDbModel user : userArray) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DbConstants.UsersTable.FIRST_NAME, user.getFirstName());
+            contentValues.put(DbConstants.UsersTable.AVATAR_PATH, user.getAvatarPath());
+
+            //TODO read about nullColumnHack
+            //TODO read about conflicts
+            long id = writeConnection.insert(DbConstants.UsersTable.TABLE_NAME, null, contentValues);
+            writeConnection.getPageSize();
+
+        }
+
+        writeConnection.setTransactionSuccessful();
+        writeConnection.endTransaction();
+
+    }
+
+    private UserDbModel[] prepareUsersForInsertIntoDb() {
+        //TODO fill data
+        return new UserDbModel[]{new UserDbModel("1","2","3"), new UserDbModel("1","2","3"), new UserDbModel("1","2","3")};
     }
 
     private void executeGetDialogListAsStringAsyncTasc() {
