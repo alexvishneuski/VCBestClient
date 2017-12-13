@@ -5,7 +5,7 @@
     android:background="@color/colorTopBarBackgroundBlue">
 
     <TextView
-        android:id="@+id/dialogs_top_bar_title_text_view"
+        android:id="@+id/notifications_top_bar_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="@string/dialogs_top_bar_title"
+        android:text="@string/notifications_top_bar_title"
         android:textColor="@color/colorTopBarWhite"
         android:textScaleX="1"
         android:textSize="20sp"
@@ -24,16 +24,17 @@
     <!--TODO what is the best: image button or imageview?-->
 
     <ImageView
-        android:id="@+id/add_image_view"
+        android:id="@+id/arrow_image_view"
         android:layout_width="@dimen/top_bar_panel_height"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@+id/search_image_button"
+        android:layout_toEndOf="@+id/notifications_top_bar_title_text_view"
+        android:layout_toRightOf="@+id/notifications_top_bar_title_text_view"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_add_white_24dp" />
+        android:src="@drawable/ic_arrow_drop_down_white_24px" />
 
     <ImageButton
-        android:id="@+id/search_image_button"
+        android:id="@+id/notification_settings_image_button"
         android:layout_width="@dimen/top_bar_panel_height"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
@@ -41,5 +42,5 @@
         android:layout_alignParentTop="true"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_search_white_24dp" />
+        android:src="@drawable/ic_nitification_settings_white_24px"/>
 </RelativeLayout>
