@@ -60,13 +60,13 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
         initNavigationBarButtons();
 
-        createRecyclerViewAndSetLayoutManager();
+        createRecyclerView();
+        setLayoutManagerToRecyclerView();
         loadDataToMessageList();
         createAdapter();
-
-        /*set adapter to view*/
-        mRecyclerView.setAdapter(mAdapter);
+        setAdapterToView();
     }
+
 
     private void initNavigationBarButtons() {
         Log.d(TAG, "initNavigationBarButtons called ");
@@ -81,7 +81,6 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
         mToNotificationsImageButton = findViewById(R.id.notifications_image_button);
         setToNotificationsListener();
     }
-
 
     private void setToNotificationsListener() {
         Log.d(TAG, "setToNotificationsListener called");
@@ -105,13 +104,15 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
         });
     }
 
-    /*create recycler view set linearLayoutManager to him*/
-    private void createRecyclerViewAndSetLayoutManager() {
-        Log.d(TAG, "createRecyclerViewAndSetLayoutManager");
+    /*create recycler view*/
+    private void createRecyclerView() {
+        Log.d(TAG, "createRecyclerView");
         mRecyclerView = findViewById(R.id.dialogs_container_recycler_view);
-
         mRecyclerView.setHasFixedSize(false);
+    }
 
+    private void setLayoutManagerToRecyclerView() {
+        Log.d(TAG, "setLayoutManagerToRecyclerView called");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
@@ -120,6 +121,12 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
         Log.d(TAG, "createAdapter");
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessageList);
     }
+
+    private void setAdapterToView() {
+        Log.d(TAG, "setAdapterToView called ");
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
 
     /*find top bar container end show there top bar fragment*/
     private void initFragments() {
