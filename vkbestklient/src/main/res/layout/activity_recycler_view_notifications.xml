@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/navigation_bar_frame_container"
-        android:layout_below="@+id/top_bar_frame_container"
+        android:layout_below="@+id/dialogs_top_bar_frame_container"
 
         android:divider="@drawable/divider"
         android:orientation="vertical"

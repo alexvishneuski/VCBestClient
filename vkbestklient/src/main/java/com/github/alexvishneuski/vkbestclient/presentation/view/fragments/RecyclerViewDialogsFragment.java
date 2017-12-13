@@ -1,34 +1,33 @@
-package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
+package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsTopBarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/* TODO:
-* 1. make ListView layout_height: mach_parent () by hide topbar panel
-* 2. make TextView message_body layout_width : mach_parent by default of own image
-* 3. extract asynctasc, adapter in separate classes
-* 4. arrive round avatars
-*/
+public class RecyclerViewDialogsFragment extends Fragment {
 
-public class RecyclerViewDialogsActivity extends AppCompatActivity {
+    /*id of container in activity*/
+    private int mDialogsLayoutId;
+
+    /*view of this fragment*/
+    private View mView;
+
 
     public static final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
     public static final String TEST_CONTACT_USER_NAME = "Contact user full name %s";
@@ -39,121 +38,44 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     private int mTopBarFrameContainer;
 
-    private View mToNewsImageButton;
-    private View mToSearchImageButton;
-    private View mToDialogsImageButton;
-    private View mToNotificationsImageButton;
-
     private List<MessageInDialogListViewModel> mMessageList;
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
 
-    public void onCreate(Bundle savedInstanceState) {
 
-        Log.d(TAG, "onCreate");
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView called");
 
-        super.onCreate(savedInstanceState);
+        initView(inflater);
 
-        /*creating messages view*/
-        setContentView(R.layout.activity_recycler_view_dialogs);
-        initFragments();
-
-        initNavigationBarButtons();
-
-        createRecyclerView();
+        createRecyclerView(mView);
         setLayoutManagerToRecyclerView();
         loadDataToMessageList();
         createAdapter();
         setAdapterToView();
+
+        return mView;
     }
 
-
-    private void initNavigationBarButtons() {
-        Log.d(TAG, "initNavigationBarButtons called ");
-
-        mToNewsImageButton = findViewById(R.id.news_image_button);
-
-        mToSearchImageButton = findViewById(R.id.search_image_button);
-
-        mToDialogsImageButton = findViewById(R.id.messages_image_button);
-        setToDialogsListener();
-
-        mToNotificationsImageButton = findViewById(R.id.notifications_image_button);
-        setToNotificationsListener();
-    }
-
-    private void setToNotificationsListener() {
-        Log.d(TAG, "setToNotificationsListener called");
-        mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecyclerViewDialogsActivity.this, RecyclerViewNotificationsActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void setToDialogsListener() {
-        Log.d(TAG, "setToDialogsListener called ");
-        mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecyclerViewDialogsActivity.this, RecyclerViewDialogsActivity.class);
-                startActivity(intent);
-            }
-        });
+    private void initView(LayoutInflater inflater) {
+    /*find id*/
+        mDialogsLayoutId = R.layout.fragment_recycler_view;
+        /*create view*/
+        mView = inflater.inflate(mDialogsLayoutId, null);
     }
 
     /*create recycler view*/
-    private void createRecyclerView() {
+    private void createRecyclerView(View pView) {
         Log.d(TAG, "createRecyclerView");
-        mRecyclerView = findViewById(R.id.dialogs_container_recycler_view);
+        mRecyclerView = pView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(false);
     }
 
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-    }
-
-    /*create adapter and send him messageList*/
-    private void createAdapter() {
-        Log.d(TAG, "createAdapter");
-        mAdapter = new MessageInDialogListRecyclerAdapter(mMessageList);
-    }
-
-    private void setAdapterToView() {
-        Log.d(TAG, "setAdapterToView called ");
-        mRecyclerView.setAdapter(mAdapter);
-    }
-
-
-    /*find top bar container end show there top bar fragment*/
-    private void initFragments() {
-        Log.d(TAG, "initFragments");
-        findTopBarContainer();
-        showTopBarFragment();
-    }
-
-    /*show any fragment on this activity*/
-    public void showFragment(int frameContainer, Fragment fragment) {
-        Log.d(TAG, "showFragment");
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(frameContainer, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    /*find top bar container for top bar fragment*/
-    private void findTopBarContainer() {
-        Log.d(TAG, "findTopBarContainer");
-        mTopBarFrameContainer = R.id.dialogs_top_bar_frame_container;
-    }
-
-    /*show top bar fragment in top bar container*/
-    private void showTopBarFragment() {
-        Log.d(TAG, "showTopBarFragment");
-        showFragment(mTopBarFrameContainer, new DialogsTopBarFragment());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
     private void loadDataToMessageList() {
@@ -170,6 +92,18 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
                     (i % 2 == 0) ? true : false));
         }
     }
+
+    /*create adapter and send him messageList*/
+    private void createAdapter() {
+        Log.d(TAG, "createAdapter");
+        mAdapter = new MessageInDialogListRecyclerAdapter(mMessageList);
+    }
+
+    private void setAdapterToView() {
+        Log.d(TAG, "setAdapterToView called ");
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
 
     @NonNull
     private static String getMesageBody() {
