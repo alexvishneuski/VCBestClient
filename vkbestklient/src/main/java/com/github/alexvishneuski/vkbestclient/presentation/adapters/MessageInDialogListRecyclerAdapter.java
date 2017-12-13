@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.imageloader.NOrda;
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.viewholder.MessageInDialogListRecyclerViewHolder;
 import com.github.alexvishneuski.vkbestclient.R;
 

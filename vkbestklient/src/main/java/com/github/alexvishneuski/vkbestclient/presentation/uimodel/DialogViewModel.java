@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.model;
+package com.github.alexvishneuski.vkbestclient.presentation.uimodel;
 
 import java.util.List;
 

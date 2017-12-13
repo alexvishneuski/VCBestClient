@@ -9,12 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.model.UserInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 import com.github.alexvishneuski.vkbestclient.R;
+import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,7 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
+
         /*creating messages view*/
         setContentView(R.layout.activity_recycler_view_dialogs);
         initFragments();

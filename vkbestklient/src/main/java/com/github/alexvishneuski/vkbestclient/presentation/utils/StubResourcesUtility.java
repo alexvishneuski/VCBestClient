@@ -2,8 +2,8 @@ package com.github.alexvishneuski.vkbestclient.presentation.utils;
 
 import android.content.Context;
 
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.model.study.StudyMessageViewModelStub;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.study.StudyMessageViewModelStub;
 import com.github.alexvishneuski.vkbestclient.R;
 
 import java.util.ArrayList;

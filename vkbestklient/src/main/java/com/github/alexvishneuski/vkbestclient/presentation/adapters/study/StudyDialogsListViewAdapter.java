@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.alexvishneuski.vkbestclient.presentation.model.study.StudyMessageViewModelStub;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.study.StudyMessageViewModelStub;
 import com.github.alexvishneuski.vkbestclient.R;
 
 import java.util.HashSet;

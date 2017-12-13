@@ -1,6 +1,6 @@
-package com.github.alexvishneuski.vkbestclient.presentation.model.study;
+package com.github.alexvishneuski.vkbestclient.presentation.uimodel.study;
 
-import com.github.alexvishneuski.vkbestclient.presentation.model.MessageDirectionViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 
 public class StudyMessageViewModelStub {
 

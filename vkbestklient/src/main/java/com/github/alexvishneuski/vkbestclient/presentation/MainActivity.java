@@ -57,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
         checkOutsideTiersAccess();
 
+        /*getting dialog List*/
         executeGetDialogListAsStringAsyncTasc();
+
+        /*FROM*/
+        /*<--------------------------->*/
 
         /*!!CREATING USERS!*/
         SqlConnector mSqlConnector = new SqlConnector(this);
@@ -92,19 +96,17 @@ public class MainActivity extends AppCompatActivity {
             messageContentValues.put(MessagesTableModel.IS_READ, !m.isMessageRead() ? 0 : 1);
         }
 
-            writeConnection.setTransactionSuccessful();
+        writeConnection.setTransactionSuccessful();
         writeConnection.endTransaction();
 
         /*!!CREATING MESSAGES!*/
-
-
-
-
-
-
+        /*TO*/
+        /*<--------------------------->*/
 
     }
 
+    /*FROM*/
+    /*<--------------------------->*/
     private UserDbModel[] prepareUsersForInsertIntoDb() {
         //TODO fill data
         return new UserDbModel[]{new UserDbModel("1", "2", "3"), new UserDbModel("1", "2", "3"), new UserDbModel("1", "2", "3")};
@@ -114,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         //TODO fill data
         return new MessageDbModel[]{new MessageDbModel(1, 2, 3, "m1", "m2", true), new MessageDbModel(2, 3, 3, "m1", "m2", true), new MessageDbModel(4, 5, 3, "m1", "m2", true)};
     }
+    /*TO*/
+    /*<--------------------------->*/
 
     private void executeGetDialogListAsStringAsyncTasc() {
         Log.d(TAG, "executeGetDialogListAsStringAsyncTasc: called");
@@ -131,8 +135,10 @@ public class MainActivity extends AppCompatActivity {
 
             mDialogInteractor = new DialogInteractorImpl();
             String result = mDialogInteractor.getResultAsString();
-            Log.d(ASYNC_TASK_TAG, "doInBackground: print result");
+
+            Log.d(ASYNC_TASK_TAG, "doInBackground: start result print");
             System.out.println(result);
+            Log.d(ASYNC_TASK_TAG, "doInBackground: finish result print");
 
             return result;
         }

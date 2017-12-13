@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.model;
+package com.github.alexvishneuski.vkbestclient.presentation.uimodel;
 
 /**
  * Created by alex_vishneuski on 29.11.2017.
