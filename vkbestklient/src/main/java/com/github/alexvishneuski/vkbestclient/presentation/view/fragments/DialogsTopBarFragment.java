@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 
-public class MessagesTopBarFragment extends Fragment {
+public class DialogsTopBarFragment extends Fragment {
 
     /*id of container in activity*/
     private int mTopBarLayoutId;

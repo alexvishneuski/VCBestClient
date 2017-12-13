@@ -23,7 +23,7 @@ public class NotificationsTopBarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         /*find id*/
-        mTopBarLayoutId = R.layout.fragment_top_bar_dialogs;
+        mTopBarLayoutId = R.layout.fragment_top_bar_notifications;
 
         /*create view*/
         mView = inflater.inflate(mTopBarLayoutId, null);

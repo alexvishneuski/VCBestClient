@@ -14,7 +14,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDia
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsTopBarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +100,7 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
     /*show top bar fragment in top bar container*/
     private void showTopBarFragment() {
         Log.d(TAG, "showTopBarFragment");
-        showFragment(mTopBarFrameContainer, new MessagesTopBarFragment());
+        showFragment(mTopBarFrameContainer, new DialogsTopBarFragment());
     }
 
     private void loadDataToMessageList() {

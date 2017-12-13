@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.github.alexvishneuski.vkbestclient.presentation.utils.BitmapUtils;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesTopBarFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsTopBarFragment;
 import com.github.alexvishneuski.vkbestclient.R;
 
 import java.util.ArrayList;
@@ -270,7 +270,7 @@ public class StudyBasedListViewWithArrayListDialogsActivity extends AppCompatAct
     /*show top bar fragment in top bar container*/
     private void showTopBarFragment() {
         Log.d(TAG, "showTopBarFragment");
-        showFragment(mTopBarFrameContainer, new MessagesTopBarFragment());
+        showFragment(mTopBarFrameContainer, new DialogsTopBarFragment());
 
     }
 
