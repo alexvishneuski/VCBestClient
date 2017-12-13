@@ -2,12 +2,14 @@ package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
@@ -26,7 +28,7 @@ import java.util.List;
 * 4. arrive round avatars
 */
 
-public class RecyclerViewDialogListActivity extends AppCompatActivity {
+public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     public static final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
     public static final String TEST_CONTACT_USER_NAME = "Contact user full name %s";
@@ -36,6 +38,11 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
     public final String TAG = this.getClass().getSimpleName();
 
     private int mTopBarFrameContainer;
+
+    private View mToNewsImageButton;
+    private View mToSearchImageButton;
+    private View mToDialogsImageButton;
+    private View mToNotificationsImageButton;
 
     private List<MessageInDialogListViewModel> mMessageList;
     private RecyclerView mRecyclerView;
@@ -51,12 +58,51 @@ public class RecyclerViewDialogListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view_dialogs);
         initFragments();
 
+        initNavigationBarButtons();
+
         createRecyclerViewAndSetLayoutManager();
         loadDataToMessageList();
         createAdapter();
 
         /*set adapter to view*/
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void initNavigationBarButtons() {
+        Log.d(TAG, "initNavigationBarButtons called ");
+
+        mToNewsImageButton = findViewById(R.id.news_image_button);
+
+        mToSearchImageButton = findViewById(R.id.search_image_button);
+
+        mToDialogsImageButton = findViewById(R.id.messages_image_button);
+        setToDialogsListener();
+
+        mToNotificationsImageButton = findViewById(R.id.notifications_image_button);
+        setToNotificationsListener();
+    }
+
+
+    private void setToNotificationsListener() {
+        Log.d(TAG, "setToNotificationsListener called");
+        mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecyclerViewDialogsActivity.this, RecyclerViewNotificationsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setToDialogsListener() {
+        Log.d(TAG, "setToDialogsListener called ");
+        mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecyclerViewDialogsActivity.this, RecyclerViewDialogsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /*create recycler view set linearLayoutManager to him*/
