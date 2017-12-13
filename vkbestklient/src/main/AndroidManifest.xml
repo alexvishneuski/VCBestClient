@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.alexvishneuski.vklayouts">
+    package="com.github.alexvishneuski.vkbestclient">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
 
-        android:name="presentation.utils.StethoApp"
+        android:name="com.github.alexvishneuski.vkbestclient.presentation.utils.StethoApp"
 
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="presentation.MainActivity">
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="presentation.view.activities.RecyclerViewDialogListActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogListActivity" />
 
-        <activity android:name="presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity" />
-        <activity android:name="presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity" />
-        <activity android:name="presentation.view.activities.study.StudyBasedListViewWithArrayAdapterDialogsActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayListDialogsActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithBaseAdapterDialogsActivity" />
+        <activity android:name="com.github.alexvishneuski.vkbestclient.presentation.view.activities.study.StudyBasedListViewWithArrayAdapterDialogsActivity" />
 
 
     </application>
