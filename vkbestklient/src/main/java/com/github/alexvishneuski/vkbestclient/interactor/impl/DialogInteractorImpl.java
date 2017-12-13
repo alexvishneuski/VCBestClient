@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.Dialog;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.impl.DialogVKApiNetworkingImpl;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class DialogInteractorImpl implements IDialogInteractor {
@@ -17,9 +18,13 @@ public class DialogInteractorImpl implements IDialogInteractor {
     private IDialogVKApiNetworking mDialogVKApiNetworkingImpl = new DialogVKApiNetworkingImpl();
 
     @Override
-    public List<Dialog> getDialogList() {
+    public List<VKApiDialog> getDialogList() {
+        Log.d(TAG, "getDialogList: ");
+        List<VKApiDialog> dialogs = new ArrayList<>();
+        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogList().getDialogList());
+        Log.d(TAG, "getDialogList: ");
 
-        return null;
+        return dialogs;
     }
 
     @Override

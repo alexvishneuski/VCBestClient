@@ -16,7 +16,7 @@ public class HttpClient implements IHttpClient {
 
     @Override
     public void request(final String url, final ResponseListener listener) {
-//        Log.d(TAG, "request");
+        Log.d(TAG, "request called");
 
         try {
             final InputStream is = openStream(url);

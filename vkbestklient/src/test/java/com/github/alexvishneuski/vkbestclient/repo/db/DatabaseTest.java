@@ -1,3 +1,5 @@
+package com.github.alexvishneuski.vkbestclient.repo.db;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

@@ -25,6 +25,10 @@ import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.Messag
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.MessagesTableModel;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UsersTableModel;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -42,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static IDialogInteractor mDialogInteractor;
 
-    private GetDialogListAsStringAsyncTasc mAsyncTasc;
+    private GetDialogListAsStringAsyncTasc mGetDialogAsStringAsyncTasc;
+
+    GetDialogListAsyncTasc mGetDialogListAsyncTasc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         checkOutsideTiersAccess();
 
+        /*getting dialog List as String*/
+        //  executeGetDialogListAsStringAsyncTasc();
+
         /*getting dialog List*/
-        executeGetDialogListAsStringAsyncTasc();
+        executeGetDialogListAsyncTasc();
 
         /*FROM*/
         /*<--------------------------->*/
@@ -105,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     /*FROM*/
     /*<--------------------------->*/
     private UserDbModel[] prepareUsersForInsertIntoDb() {
@@ -119,10 +129,17 @@ public class MainActivity extends AppCompatActivity {
     /*TO*/
     /*<--------------------------->*/
 
+
+    private void executeGetDialogListAsyncTasc() {
+        Log.d(TAG, "executeGetDialogListAsyncTasc: called");
+        mGetDialogListAsyncTasc = new GetDialogListAsyncTasc();
+        mGetDialogListAsyncTasc.execute();
+    }
+
     private void executeGetDialogListAsStringAsyncTasc() {
         Log.d(TAG, "executeGetDialogListAsStringAsyncTasc: called");
-        mAsyncTasc = new GetDialogListAsStringAsyncTasc();
-        mAsyncTasc.execute();
+        mGetDialogAsStringAsyncTasc = new GetDialogListAsStringAsyncTasc();
+        mGetDialogAsStringAsyncTasc.execute();
     }
 
     private static class GetDialogListAsStringAsyncTasc extends AsyncTask<Void, Void, String> {
@@ -141,6 +158,27 @@ public class MainActivity extends AppCompatActivity {
             Log.d(ASYNC_TASK_TAG, "doInBackground: finish result print");
 
             return result;
+        }
+    }
+
+    private static class GetDialogListAsyncTasc extends AsyncTask<Void, Void, List<VKApiDialog>> {
+
+        private static final String ASYNC_TASK_TAG = "GetDialogListAsStringAT";
+
+        @Override
+        protected List<VKApiDialog> doInBackground(Void... voids) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+
+            List<VKApiDialog> dialogs = new ArrayList<>();
+
+            mDialogInteractor = new DialogInteractorImpl();
+            dialogs.addAll(mDialogInteractor.getDialogList());
+
+            Log.d(ASYNC_TASK_TAG, "doInBackground: start dialogList print");
+            System.out.println(dialogs);
+            Log.d(ASYNC_TASK_TAG, "doInBackground: finish dialogList print");
+
+            return dialogs;
         }
     }
 

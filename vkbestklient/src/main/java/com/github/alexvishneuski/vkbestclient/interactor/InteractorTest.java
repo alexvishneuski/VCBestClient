@@ -7,4 +7,6 @@ public class InteractorTest {
     public String getTestMessage() {
         return testMessage;
     }
+
+
 }

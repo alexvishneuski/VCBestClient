@@ -1,6 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.interactor;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.Dialog;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface IDialogInteractor {
     /**
      * @return list of current user's dialogs, default 20 items
      */
-    List<Dialog> getDialogList();
+    List<VKApiDialog> getDialogList();
 
     /**
      * @param pCount count of dialog's items in request

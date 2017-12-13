@@ -53,8 +53,9 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         }
     }
 
-    @WorkerThread
 
+
+    @WorkerThread
     public VKApiMessagesGetDialogsResponse getDialogList() {
 
         final String methodsTag = "getDialogList()";
