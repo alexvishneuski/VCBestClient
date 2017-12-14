@@ -52,7 +52,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
         createRecyclerView(mView);
         setLayoutManagerToRecyclerView();
-        loadDataToMessageList();
+        loadDataToMessageInDialogList();
         createAdapter();
         setAdapterToView();
 
@@ -78,8 +78,8 @@ public class RecyclerViewDialogsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
-    private void loadDataToMessageList() {
-        Log.d(TAG, "loadDataToMessageList");
+    private void loadDataToMessageInDialogList() {
+        Log.d(TAG, "loadDataToMessageInDialogList called");
         mMessageList = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
@@ -92,6 +92,64 @@ public class RecyclerViewDialogsFragment extends Fragment {
                     (i % 2 == 0) ? true : false));
         }
     }
+
+
+    private void loadDataToMessageInDialogList(String pRealDataTAG) {
+        Log.d(TAG, "loadDataToMessageInDialogList called");
+        mMessageList = new ArrayList<>();
+
+        /*
+        UIModel
+       ======================
+        private Long mId;
+        private UserInDialogListViewModel mCurrentUser;
+        private UserInDialogListViewModel mContactUser;
+        private MessageDirectionViewModel mMessageDirection;
+        private String mMessageSendingDate;
+        private String mMessageTitle;
+        private String mMessageBody;
+        private boolean mIsMessageRead;
+
+        steps in presentation
+       =======================
+        1. get messagesInDialogList from interactor
+
+        2. convert from datamodel to UI model
+
+        3. return UI MOdel
+        */
+
+
+       /*
+
+        steps in interactor
+       =======================
+
+       1. get data from Repository
+            AsyncTaks:
+            1.1 AT for currentUser(name, avatar)
+            getCurrentUser().getAvatarUrl()
+
+            1.2. AT get messagesInDialog
+
+            1.3. AT for each contactUser(name, avatar)
+            getConactUSer();
+
+       2. build datamodel
+
+       3. return datamodel
+
+
+       steps in repository
+       =======================
+
+        1. executing interactor's requests
+
+        2. convert every result to datamodel
+       */
+
+    }
+
 
     /*create adapter and send him messageList*/
     private void createAdapter() {
