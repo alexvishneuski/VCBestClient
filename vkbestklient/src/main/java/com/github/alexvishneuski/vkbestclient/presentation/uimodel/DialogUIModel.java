@@ -2,7 +2,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.uimodel;
 
 import java.util.List;
 
-public class DialogViewModel {
+public class DialogUIModel {
 
     List<MessageInDialogListViewModel> mMessageList;
 
