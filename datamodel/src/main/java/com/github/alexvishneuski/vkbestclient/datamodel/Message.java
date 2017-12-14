@@ -1,8 +1,18 @@
 package com.github.alexvishneuski.vkbestclient.datamodel;
 
 /**
- * Created by Asus on 29.11.2017.
+ * from current user's view
  */
 
 public class Message {
+
+    private long mId;
+    private long mCurrentUserId;
+    private long mContactUserId;
+    private MessageDirection mMessageDirection;
+    private long mMessageSendingDate;
+    private String mMessageTitle;
+    private String mMessageBody;
+    private boolean mIsMessageRead;
+
 }
