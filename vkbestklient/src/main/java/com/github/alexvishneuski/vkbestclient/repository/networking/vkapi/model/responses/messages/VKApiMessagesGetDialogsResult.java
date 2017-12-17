@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages;
 
 import com.google.gson.annotations.SerializedName;
 

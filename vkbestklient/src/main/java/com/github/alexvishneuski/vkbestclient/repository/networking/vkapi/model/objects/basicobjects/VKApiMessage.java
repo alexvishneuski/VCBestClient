@@ -5,7 +5,7 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model
 * object Message
 */
 
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.VKApiGeo;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjectsadd.VKApiGeo;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.mediacontentandattachments.VKApiMediaAttachment;
 import com.google.gson.annotations.SerializedName;
 

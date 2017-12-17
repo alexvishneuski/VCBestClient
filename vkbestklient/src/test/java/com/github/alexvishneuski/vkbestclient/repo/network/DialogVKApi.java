@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.IHttpClient;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.VKApiMessagesGetDialogsResponse;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResponse;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.impl.DialogVKApiNetworkingImpl;

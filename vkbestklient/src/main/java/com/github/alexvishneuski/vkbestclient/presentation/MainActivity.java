@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static class GetDialogListAsyncTasc extends AsyncTask<Void, Void, List<VKApiDialog>> {
 
-        private static final String ASYNC_TASK_TAG = "GetDialogListAsStringAT";
+        private static final String ASYNC_TASK_TAG = "GetDialogListAT";
 
         @Override
         protected List<VKApiDialog> doInBackground(Void... voids) {

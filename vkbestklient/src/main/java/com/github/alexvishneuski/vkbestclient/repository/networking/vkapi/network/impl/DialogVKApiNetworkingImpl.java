@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.VKApiMessagesGetDialogsResponse;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.VKApiMessagesGetDialogsResult;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResponse;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.util.VKApiConstants;
 import com.google.gson.GsonBuilder;
