@@ -50,7 +50,8 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         List<VKApiDialog> dialogs = new ArrayList<>();
         dialogs.addAll(result.getResponse().getDialogs());
 
-        Log.d(TAG, "getDialogs returned dialogs");
+        int dialogCount = result.getResponse().getDialogCount();
+        Log.d(TAG, "getDialogs returned " + dialogCount + " dialogs");
 
         return dialogs;
     }

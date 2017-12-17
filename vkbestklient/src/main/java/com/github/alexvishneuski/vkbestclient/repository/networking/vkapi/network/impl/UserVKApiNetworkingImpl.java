@@ -23,9 +23,6 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private static final String METHOD_BASE_PATH = "%s%s?access_token=%s&v=%s";
-
-
     @WorkerThread
     public List<VKApiUser> getUsers() {
 
@@ -33,8 +30,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         Log.d(TAG, "getUsers called");
 
-        //final String url = VKApiConstants.VK_API_SERVICE_URL + VKApiConstants.VK_API_METHOD_NAME + "?access_token=" + VKApiConstants.VK_API_ACCESS_TOKEN + "&v=" + VKApiConstants.VK_API_VERSION;
-        final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+        final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_USERS_GET, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
 
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
@@ -53,7 +49,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         List<VKApiUser> users = new ArrayList<>();
         users.addAll(result.getResponse().getUsers());
 
-        Log.d(TAG, "getUsers() returned Users");
+        Log.d(TAG, "getUsers() returned users");
 
         return users;
     }
