@@ -10,6 +10,11 @@ public interface IUserInteractor {
      * @return List<VKApiUser>
      */
     List<VKApiUser> getUsers();
+
+    /**
+     * @return current VKApiUser
+     */
+    VKApiUser getCurrentUser();
 }
 
 

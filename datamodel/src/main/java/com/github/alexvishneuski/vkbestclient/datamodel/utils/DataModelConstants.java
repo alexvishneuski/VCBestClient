@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.datamodel;
+package com.github.alexvishneuski.vkbestclient.datamodel.utils;
 
 public class DataModelConstants {
 

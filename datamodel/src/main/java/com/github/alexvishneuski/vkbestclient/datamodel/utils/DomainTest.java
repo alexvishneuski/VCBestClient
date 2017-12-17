@@ -1,4 +1,6 @@
-package com.github.alexvishneuski.vkbestclient.datamodel;
+package com.github.alexvishneuski.vkbestclient.datamodel.utils;
+
+import com.github.alexvishneuski.vkbestclient.datamodel.utils.DataModelConstants;
 
 public class DomainTest {
 

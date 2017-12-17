@@ -3,7 +3,7 @@ package com.github.alexvishneuski.vkbestclient.datamodel;
 
 public class User {
 
-    private Long mUserId;
+    private int mUserId;
     private String mUserFirstName;
     private String mUserLastName;
     private String mUserAvatarPath;
@@ -11,11 +11,11 @@ public class User {
     public User() {
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return mUserId;
     }
 
-    public void setUserId(Long pUserId) {
+    public void setUserId(int pUserId) {
         mUserId = pUserId;
     }
 

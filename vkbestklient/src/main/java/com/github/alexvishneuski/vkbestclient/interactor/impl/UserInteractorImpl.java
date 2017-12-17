@@ -27,4 +27,13 @@ public class UserInteractorImpl implements IUserInteractor {
 
         return users;
     }
+
+    @Override
+    public VKApiUser getCurrentUser() {
+        Log.d(TAG, "getCurrentUser: called");
+
+        VKApiUser currentUser = this.getUsers().get(0);
+        Log.d(TAG, "getCurrentUser: returned current user vith id: " + currentUser.getId());
+        return currentUser;
+    }
 }
