@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /*
 * model for VK API
 * object Dialog
+* url: https://vk.com/dev/messages.getDialogs
 */
 public class VKApiDialog {
 
@@ -12,6 +13,18 @@ public class VKApiDialog {
     //(если все сообщения прочитаны, поле не возвращается
     @SerializedName("unread")
     private Integer mUnreadCount;
+
+    //Если был передан параметр start_message_id, будет также возвращено поле real_offset –
+    // итоговое смещение данного подмножества диалогов
+    // (оно может быть отрицательным, если был указан отрицательный offset).
+    //not works this rule ('count' by 'start_message_id' specifying returns all dialog's count):
+    //Если был передан параметр start_message_id, будет найдена позиция диалога в списке,
+    // идентификатор последнего сообщения которого равен start_message_id
+    // (или ближайший к нему более ранний). Начиная с этой позиции будет возвращено count диалогов.
+    // Смещение offset в этом случае будет отсчитываться от этой позиции
+    // (оно может быть отрицательным).
+    @SerializedName("real_offset")
+    private Integer mRealOffset;
 
     //message — объект, описывающий личное сообщение;
     @SerializedName("message")
@@ -35,6 +48,15 @@ public class VKApiDialog {
 
     public void setUnreadCount(final Integer pUnreadCount) {
         mUnreadCount = pUnreadCount;
+    }
+
+    public Integer getRealOffset() {
+
+        return mRealOffset;
+    }
+
+    public void setRealOffset(Integer pRealOffset) {
+        mRealOffset = pRealOffset;
     }
 
     public VKApiMessage getMessage() {
@@ -68,6 +90,7 @@ public class VKApiDialog {
     public String toString() {
         return "VKApiDialog{" +
                 "mUnreadCount=" + mUnreadCount +
+                ", mRealOffset=" + mRealOffset +
                 ", mMessage=" + mMessage +
                 ", mLastReadMessageByCurrentUserId=" + mLastReadMessageByCurrentUserId +
                 ", mLastReadMessageByContactUserId=" + mLastReadMessageByContactUserId +
