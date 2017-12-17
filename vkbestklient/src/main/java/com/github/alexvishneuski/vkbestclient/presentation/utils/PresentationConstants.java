@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation;
+package com.github.alexvishneuski.vkbestclient.presentation.utils;
 
 public class PresentationConstants {
 

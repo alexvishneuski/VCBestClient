@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.interactor;
+package com.github.alexvishneuski.vkbestclient.interactor.utils;
 
 public class InteractorTest {
 
