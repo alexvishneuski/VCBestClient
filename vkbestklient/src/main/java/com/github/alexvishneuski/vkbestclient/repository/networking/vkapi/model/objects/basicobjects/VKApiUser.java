@@ -100,7 +100,7 @@ public class VKApiUser {
     public void setPhoto50(String pPhoto50) {
         mPhoto50 = pPhoto50;
     }
-    
+
 
 /*
 

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             List<VKApiDialog> dialogs = new ArrayList<>();
 
             mDialogInteractor = new DialogInteractorImpl();
-            dialogs.addAll(mDialogInteractor.getDialogList());
+            dialogs.addAll(mDialogInteractor.getDialogs());
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start dialogList print");
             System.out.println(dialogs);

@@ -18,21 +18,23 @@ public class DialogInteractorImpl implements IDialogInteractor {
     private IDialogVKApiNetworking mDialogVKApiNetworkingImpl = new DialogVKApiNetworkingImpl();
 
     @Override
-    public List<VKApiDialog> getDialogList() {
-        Log.d(TAG, "getDialogList: ");
+    public List<VKApiDialog> getDialogs() {
+        Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
-        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogList().getDialogList());
-        Log.d(TAG, "getDialogList: ");
+        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogs());
+
+        Log.d(TAG, "getDialogs returns dialogs");
 
         return dialogs;
     }
 
     @Override
-    public List<Dialog> getDialogList(int pCount) {
+    public List<Dialog> getDialogs(int pCount) {
 
         return null;
     }
 
+    /*TODO delete after testing*/
     @Override
     public String getResultAsString() {
         Log.d(TAG, "getResultAsString called");

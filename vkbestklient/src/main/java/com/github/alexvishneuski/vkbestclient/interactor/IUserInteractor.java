@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Asus on 29.11.2017.
  */
 
-public interface IDialogInteractor {
+public interface IUserInteractor {
 
     /**
      * @return list of current user's dialogs, default 20 items

@@ -53,7 +53,7 @@ public class DialogVKApi {
         mDialogCount = mDialogProvider.getDialogList().getDialogCount();
         Log.d(TAG, "recd dialogs items = " + mDialogCount);
 
-        mDialogs.addAll(mDialogProvider.getDialogList().getDialogList());
+        mDialogs.addAll(mDialogProvider.getDialogList().getDialogs());
 
         Log.d(TAG, "dialogs are recd");
         for (VKApiDialog dialog : mDialogs
@@ -79,7 +79,7 @@ public class DialogVKApi {
 
         //prepared response with jsonObject
 
-        mDialogCount = mDialogProvider.getDialogList().getDialogCount();
+        mDialogCount = mDialogProvider.getDialogs().getDialogCount();
         Log.d(TAG, "recd dialogs items = " + mDialogCount);
 
 
@@ -92,7 +92,7 @@ public class DialogVKApi {
         //InputStream response = mHttpClient.request("http://myBackEnd/getInvoice?id=29", mListener);
 
 
-        mDialogs.addAll(mDialogProvider.getDialogList().getDialogList());
+        mDialogs.addAll(mDialogProvider.getDialogs().getDialogs());
 
         //  Log.d(TAG, "dialogs are recd");
         for (VKApiDialog dialog : mDialogs

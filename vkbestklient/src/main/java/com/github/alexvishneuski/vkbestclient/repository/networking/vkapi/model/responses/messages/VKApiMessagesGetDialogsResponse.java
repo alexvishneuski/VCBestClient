@@ -16,7 +16,7 @@ public class VKApiMessagesGetDialogsResponse {
     private Integer mDialogCount;
 
     @SerializedName("items")
-    private List<VKApiDialog> mDialogList;
+    private List<VKApiDialog> mDialogs;
 
     public VKApiMessagesGetDialogsResponse() {
     }
@@ -30,20 +30,20 @@ public class VKApiMessagesGetDialogsResponse {
         mDialogCount = pDialogCount;
     }
 
-    public List<VKApiDialog> getDialogList() {
+    public List<VKApiDialog> getDialogs() {
 
-        return mDialogList;
+        return mDialogs;
     }
 
-    public void setDialogList(final List<VKApiDialog> pDialogList) {
-        mDialogList = pDialogList;
+    public void setDialogs(final List<VKApiDialog> pDialogs) {
+        mDialogs = pDialogs;
     }
 
     @Override
     public String toString() {
         return "VKApiMessagesGetDialogsResponse{" +
                 "mDialogCount=" + mDialogCount +
-                ", mDialogList=" + mDialogList +
+                ", mDialogs=" + mDialogs +
                 '}';
     }
 }
