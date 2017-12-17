@@ -2,15 +2,15 @@ package com.github.alexvishneuski.vkbestclient.repository.database.dbmodel;
 
 public class MessageDbModel {
 
-    private long mId;
-    private long mAuthor_id;
-    private long mRecipient_id;
-    private long mMessageSendingDate;
+    private int mId;
+    private int mAuthor_id;
+    private int mRecipient_id;
+    private int mMessageSendingDate;
     private String mMessageTitle;
     private String mMessageBody;
     private boolean mIsMessageRead;
 
-    public MessageDbModel(long pAuthor_id, long pRecipient_id, long pMessageSendingDate, String pMessageTitle, String pMessageBody, boolean pIsMessageRead) {
+    public MessageDbModel(int pAuthor_id, int pRecipient_id, int pMessageSendingDate, String pMessageTitle, String pMessageBody, boolean pIsMessageRead) {
         mAuthor_id = pAuthor_id;
         mRecipient_id = pRecipient_id;
         mMessageSendingDate = pMessageSendingDate;
@@ -19,35 +19,35 @@ public class MessageDbModel {
         mIsMessageRead = pIsMessageRead;
     }
 
-    public long getId() {
+    public int getId() {
         return mId;
     }
 
-    public void setId(long pId) {
+    public void setId(int pId) {
         mId = pId;
     }
 
-    public long getAuthor_id() {
+    public int getAuthor_id() {
         return mAuthor_id;
     }
 
-    public void setAuthor_id(long pAuthor_id) {
+    public void setAuthor_id(int pAuthor_id) {
         mAuthor_id = pAuthor_id;
     }
 
-    public long getRecipient_id() {
+    public int getRecipient_id() {
         return mRecipient_id;
     }
 
-    public void setRecipient_id(long pRecipient_id) {
+    public void setRecipient_id(int pRecipient_id) {
         mRecipient_id = pRecipient_id;
     }
 
-    public long getMessageSendingDate() {
+    public int getMessageSendingDate() {
         return mMessageSendingDate;
     }
 
-    public void setMessageSendingDate(long pMessageSendingDate) {
+    public void setMessageSendingDate(int pMessageSendingDate) {
         mMessageSendingDate = pMessageSendingDate;
     }
 

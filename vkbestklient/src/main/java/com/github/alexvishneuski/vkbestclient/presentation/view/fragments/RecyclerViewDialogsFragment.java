@@ -145,7 +145,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
         1. executing interactor's requests
 
-        2. convert every result to datamodel
+        2. convert every result to datamodel---
        */
 
     }
