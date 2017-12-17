@@ -101,8 +101,19 @@ public class VKApiUser {
         mPhoto50 = pPhoto50;
     }
 
+    @Override
+    public String toString() {
+        return "VKApiUser{" +
+                "mId=" + mId +
+                ", mFirstName='" + mFirstName + '\'' +
+                ", mLastName='" + mLastName + '\'' +
+                ", mDeactivatedFlag='" + mDeactivatedFlag + '\'' +
+                ", mHiddenFlag=" + mHiddenFlag +
+                ", mPhoto50='" + mPhoto50 + '\'' +
+                '}';
+    }
 
-/*
+    /*
 
 about string	содержимое поля «О себе» из профиля.
 

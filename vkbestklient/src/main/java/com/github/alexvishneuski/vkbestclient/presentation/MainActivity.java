@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             dialogs.addAll(mDialogInteractor.getDialogs());
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start dialogList print");
+            System.out.println("printed " + dialogs.size() + " dialogs");
             System.out.println(dialogs);
             Log.d(ASYNC_TASK_TAG, "doInBackground: finish dialogList print");
 
@@ -110,13 +111,17 @@ public class MainActivity extends AppCompatActivity {
         protected List<VKApiUser> doInBackground(Void... voids) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
 
-            List<VKApiUser> users;
+            List<VKApiUser> users = new ArrayList<>();
 
             mUserInteractor = new UserInteractorImpl();
+
             users  = mUserInteractor.getUsers();
 
+            //System.out.println("printed " + users.size() + " users");
+            //users.addAll(mUserInteractor.getUsers());
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start userList print");
+            //System.out.println("printed " + users.size() + " users");
             System.out.println(users);
             Log.d(ASYNC_TASK_TAG, "doInBackground: finish userList print");
 

@@ -23,8 +23,8 @@ public class UserInteractorImpl implements IUserInteractor {
         List<VKApiUser> users = new ArrayList<>();
         users.addAll(mUserVKApiNet.getUsers());
 
-        Log.d(TAG, "getUsers: returns users");
+        Log.d(TAG, "getUsers: returned users");
 
-        return null;
+        return users;
     }
 }

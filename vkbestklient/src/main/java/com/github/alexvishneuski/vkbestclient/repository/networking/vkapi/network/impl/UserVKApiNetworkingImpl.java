@@ -31,6 +31,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         Log.d(TAG, "getUsers called");
 
         final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_USERS_GET, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+        Log.d(TAG, "url called: " + url);
 
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
@@ -47,7 +48,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         }
 
         List<VKApiUser> users = new ArrayList<>();
-        users.addAll(result.getResponse().getUsers());
+        users.addAll(result.getUsers());
 
         Log.d(TAG, "getUsers() returned users");
 

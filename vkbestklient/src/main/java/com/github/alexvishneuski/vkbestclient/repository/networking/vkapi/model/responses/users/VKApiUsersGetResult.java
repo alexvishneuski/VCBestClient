@@ -1,6 +1,9 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users;
 
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /*
 * model for VK API
@@ -9,8 +12,11 @@ import com.google.gson.annotations.SerializedName;
 */
 public class VKApiUsersGetResult {
 
-    @SerializedName("response")
+    /*@SerializedName("response")
     private VKApiUsersGetResponse mResponse;
+*/
+    @SerializedName("response")
+    private List<VKApiUser> mUsers;
 
     @SerializedName("error")
     private String mError;
@@ -18,13 +24,22 @@ public class VKApiUsersGetResult {
     public VKApiUsersGetResult() {
     }
 
-    public VKApiUsersGetResponse getResponse() {
+    /*public VKApiUsersGetResponse getResponse() {
 
         return mResponse;
     }
 
     public void setResponse(VKApiUsersGetResponse pResponse) {
         mResponse = pResponse;
+    }
+*/
+
+    public List<VKApiUser> getUsers() {
+        return mUsers;
+    }
+
+    public void setUsers(List<VKApiUser> pUsers) {
+        mUsers = pUsers;
     }
 
     public String getError() {
@@ -39,7 +54,7 @@ public class VKApiUsersGetResult {
     @Override
     public String toString() {
         return "VKApiUsersGetResult{" +
-                "mResponse=" + mResponse +
+                "mUsers=" + mUsers +
                 ", mError='" + mError + '\'' +
                 '}';
     }
