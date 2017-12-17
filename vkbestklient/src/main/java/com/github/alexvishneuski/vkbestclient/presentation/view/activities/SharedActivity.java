@@ -64,7 +64,8 @@ public class SharedActivity extends AppCompatActivity {
     }
 
     //TODO resolve, what is the entry point?
-    /*find top bar container for top bar fragment*/
+    /*find top bar container and show top bar fragment
+    * for first time - dialogsfragment*/
     private void initTopBarFragment() {
         Log.d(TAG, "initTopBarFragment");
         mTopBarFrameContainer = R.id.top_bar_frame_container;
