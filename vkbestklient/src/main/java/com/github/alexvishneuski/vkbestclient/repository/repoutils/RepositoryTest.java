@@ -1,4 +1,6 @@
-package com.github.alexvishneuski.vkbestclient.repository;
+package com.github.alexvishneuski.vkbestclient.repository.repoutils;
+
+import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 public class RepositoryTest {
 

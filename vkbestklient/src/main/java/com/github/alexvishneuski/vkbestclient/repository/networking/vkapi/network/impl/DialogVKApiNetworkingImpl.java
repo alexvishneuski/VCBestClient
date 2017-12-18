@@ -3,13 +3,13 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.netwo
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
+import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResponse;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.util.VKApiConstants;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
@@ -31,7 +31,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         Log.d(TAG, "getDialogs called");
 
-        final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+        final String url = String.format(RepositoryConstants.VKApiConstants.METHOD_BASE_PATH, RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL, RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN, RepositoryConstants.VKApiConstants.VK_API_VERSION);
 
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
@@ -65,7 +65,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         Log.d(TAG, "getDialogs called");
 
         //final String url = VKApiConstants.VK_API_SERVICE_URL + VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS + "?access_token=" + VKApiConstants.VK_API_ACCESS_TOKEN + "&v=" + VKApiConstants.VK_API_VERSION;
-        final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+        final String url = String.format(RepositoryConstants.VKApiConstants.METHOD_BASE_PATH, RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL, RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN, RepositoryConstants.VKApiConstants.VK_API_VERSION);
 
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
@@ -91,8 +91,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         Log.d(TAG, "getDialogListAsString called");
 
-        //final String url = VKApiConstants.VK_API_SERVICE_URL + VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS + "?access_token=" + VKApiConstants.VK_API_ACCESS_TOKEN + "&v=" + VKApiConstants.VK_API_VERSION;
-        final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+        final String url = String.format(RepositoryConstants.VKApiConstants.METHOD_BASE_PATH, RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL, RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN, RepositoryConstants.VKApiConstants.VK_API_VERSION);
 
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);

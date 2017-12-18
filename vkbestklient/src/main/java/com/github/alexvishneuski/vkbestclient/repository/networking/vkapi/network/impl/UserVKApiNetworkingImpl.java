@@ -3,12 +3,12 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.netwo
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
+import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users.VKApiUsersGetResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IUserVKApiNetworking;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.util.VKApiConstants;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
@@ -30,7 +30,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         Log.d(TAG, "getUsers called");
 
-        final String url = String.format(VKApiConstants.METHOD_BASE_PATH, VKApiConstants.VK_API_SERVICE_URL, VKApiConstants.VK_API_METHOD_NAME_USERS_GET, VKApiConstants.VK_API_ACCESS_TOKEN, VKApiConstants.VK_API_VERSION);
+        final String url = String.format(RepositoryConstants.VKApiConstants.METHOD_BASE_PATH, RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL, RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_USERS_GET, RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN, RepositoryConstants.VKApiConstants.VK_API_VERSION);
         Log.d(TAG, "url called: " + url);
 
         final MyResponseListener listener = new MyResponseListener();
@@ -65,6 +65,8 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         @Override
         public void onResponse(final InputStream pInputStream) throws Exception {
+            Log.e(TAG, "onResponse() called, has got pInputStream = [" + pInputStream + "]");
+
             InputStreamReader inputStreamReader = null;
             try {
                 inputStreamReader = new InputStreamReader(pInputStream);
@@ -73,7 +75,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
                         .create().fromJson(inputStreamReader, VKApiUsersGetResult.class);
                 //http exception
             } catch (Exception e) {
-                Log.e(TAG, "onResponse() called, has got pInputStream = [" + pInputStream + "]");
+                Log.e(TAG, "onResponse() got Error: " + e.toString());
                 mThrowable = e;
             } finally {
 
