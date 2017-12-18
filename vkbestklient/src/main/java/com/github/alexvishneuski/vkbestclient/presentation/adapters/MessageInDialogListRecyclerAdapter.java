@@ -71,7 +71,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
         pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
-        //FiXME add imageloader
+        //TODO add imageloader
         NOrda.INSTANCE.load(messageModel.getContactUser().getUserAvatarPath()).into(pHolder.getContactUserAvatarPath());
     }
 

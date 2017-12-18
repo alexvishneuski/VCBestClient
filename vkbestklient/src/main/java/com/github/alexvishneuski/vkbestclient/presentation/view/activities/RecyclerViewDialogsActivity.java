@@ -161,7 +161,7 @@ public class RecyclerViewDialogsActivity extends AppCompatActivity {
         mMessageList = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            mMessageList.add(new MessageInDialogListViewModel(
+            mMessageList.add(new MessageInDialogListViewModel(new UserInDialogListViewModel("CurrentUserStub", TEST_VIEW_URL),
                     new UserInDialogListViewModel(
                             String.format(TEST_CONTACT_USER_NAME, i), TEST_VIEW_URL),
                     String.format(TEST_MESSAGE_SENDING_DATE, i, i),

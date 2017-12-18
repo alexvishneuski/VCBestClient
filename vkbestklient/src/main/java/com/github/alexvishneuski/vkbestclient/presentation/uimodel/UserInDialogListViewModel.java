@@ -6,7 +6,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.uimodel;
 
 public class UserInDialogListViewModel {
 
-    private Long mUserId;
+    private int mUserId;
     private String mUserFullName;
     private String mUserAvatarPath;
 
@@ -18,12 +18,12 @@ public class UserInDialogListViewModel {
         mUserAvatarPath = pUserAvatarPath;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
 
         return mUserId;
     }
 
-    public void setUserId(Long pUserId) {
+    public void setUserId(int pUserId) {
         mUserId = pUserId;
     }
 

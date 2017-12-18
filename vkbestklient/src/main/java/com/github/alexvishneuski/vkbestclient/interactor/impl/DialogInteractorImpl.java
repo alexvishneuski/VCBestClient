@@ -77,7 +77,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
             VKApiMessage message = dialog.getMessage();
 
-            //todo extrakt to converter
+            //todo extract to converter
             Message domainMessage = new Message();
 
             domainMessage.setId(message.getId());
@@ -86,11 +86,10 @@ public class DialogInteractorImpl implements IDialogInteractor {
             domainMessage.setMessageDirection((message.getDirection() == 0) ? MessageDirection.INCOMING : MessageDirection.OUTGOING);
             domainMessage.setMessageSendingDate(message.getSendingDate());
             domainMessage.setMessageTitle(message.getTitle());
-            domainMessage.setMessageBody(message.getTitle());
+            domainMessage.setMessageBody(message.getBody());
             domainMessage.setMessageRead((message.getReadStatus() == 0) ? false : true);
 
             domainMessages.add(domainMessage);
-
         }
 
         return domainMessages;

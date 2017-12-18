@@ -124,6 +124,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         @Override
         public void onResponse(final InputStream pInputStream) throws Exception {
+            Log.e(TAG, "onResponse() called, has got pInputStream = [" + pInputStream + "]");
             InputStreamReader inputStreamReader = null;
             try {
                 inputStreamReader = new InputStreamReader(pInputStream);
@@ -131,8 +132,9 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
                         .setLenient()
                         .create().fromJson(inputStreamReader, VKApiMessagesGetDialogsResult.class);
                 //http exception
+                //TODO add VKAPI error parsing sort of: mError = GsonBuilder...VKApiMessagesGetDialogsResult.class
             } catch (Exception e) {
-                Log.e(TAG, "onResponse() called, has got pInputStream = [" + pInputStream + "]");
+                Log.e(TAG, "onResponse(): has got Exception" + e.toString());
                 mThrowable = e;
             } finally {
 

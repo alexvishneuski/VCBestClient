@@ -18,7 +18,8 @@ public class MessageInDialogListViewModel {
     public MessageInDialogListViewModel() {
     }
 
-    public MessageInDialogListViewModel(UserInDialogListViewModel pContactUser, String pMessageSendingDate, String pMessageBody, MessageDirectionViewModel pMessageDirection, boolean pIsMessageRead) {
+    public MessageInDialogListViewModel(UserInDialogListViewModel pCurrentUser, UserInDialogListViewModel pContactUser, String pMessageSendingDate, String pMessageBody, MessageDirectionViewModel pMessageDirection, boolean pIsMessageRead) {
+        mCurrentUser = pCurrentUser;
         mContactUser = pContactUser;
         mMessageSendingDate = pMessageSendingDate;
         mMessageBody = pMessageBody;
