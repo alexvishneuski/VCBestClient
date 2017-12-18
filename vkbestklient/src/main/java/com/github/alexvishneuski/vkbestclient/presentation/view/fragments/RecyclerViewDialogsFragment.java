@@ -1,6 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
+import com.github.alexvishneuski.vkbestclient.datamodel.Message;
+import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
+import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
@@ -42,6 +46,9 @@ public class RecyclerViewDialogsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
 
+    private static IDialogInteractor mDialogInteractor;
+    private GetMessagesInDialogListAsyncTasc mGetMessagesAsyncTasc;
+
 
     @Nullable
     @Override
@@ -52,7 +59,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
         createRecyclerView(mView);
         setLayoutManagerToRecyclerView();
-        loadDataToMessageInDialogList();
+        loadDataToMessageInDialogList("REAL_DATA");
         createAdapter();
         setAdapterToView();
 
@@ -82,6 +89,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
         Log.d(TAG, "loadDataToMessageInDialogList called");
         mMessageList = new ArrayList<>();
 
+
         for (int i = 0; i < 20; i++) {
             mMessageList.add(new MessageInDialogListViewModel(
                     new UserInDialogListViewModel(
@@ -93,10 +101,19 @@ public class RecyclerViewDialogsFragment extends Fragment {
         }
     }
 
+    private void executeGetMessagesInDialogListAsyncTasc() {
+        Log.d(TAG, "executeGetMessagesInDialogListAsyncTasc: called");
+        mGetMessagesAsyncTasc = new GetMessagesInDialogListAsyncTasc();
+        mGetMessagesAsyncTasc.execute();
+    }
 
     private void loadDataToMessageInDialogList(String pRealDataTAG) {
         Log.d(TAG, "loadDataToMessageInDialogList called");
         mMessageList = new ArrayList<>();
+
+        executeGetMessagesInDialogListAsyncTasc();
+
+        //TODO getting reasult from async tasc and convert to UI model, add getting users AsyncTask
 
         /*
         UIModel
@@ -150,6 +167,28 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
     }
 
+
+    private static class GetMessagesInDialogListAsyncTasc extends AsyncTask<Void, Void, List<Message>> {
+
+        private static final String ASYNC_TASK_TAG = "GetDialogListAT";
+
+        @Override
+        protected List<Message> doInBackground(Void... voids) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+
+            List<Message> messages = new ArrayList<>();
+
+            mDialogInteractor = new DialogInteractorImpl();
+            messages.addAll(mDialogInteractor.getMessagesForDialogList());
+
+            Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");
+            System.out.println("printed " + messages.size() + " messages");
+            System.out.println(messages);
+            Log.d(ASYNC_TASK_TAG, "doInBackground: finish messageList print");
+
+            return messages;
+        }
+    }
 
     /*create adapter and send him messageList*/
     private void createAdapter() {
