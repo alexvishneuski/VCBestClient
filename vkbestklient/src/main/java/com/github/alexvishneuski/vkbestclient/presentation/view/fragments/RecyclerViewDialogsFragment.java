@@ -154,7 +154,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
        2. build datamodel
 
-       3. return datamodel
+       3. return datamodel(public methods, methods return repo-models should be private/protected)
 
 
        steps in repository
@@ -162,7 +162,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
         1. executing interactor's requests
 
-        2. convert every result to datamodel---
+        ??? 2. convert every result to datamodel
        */
 
     }
