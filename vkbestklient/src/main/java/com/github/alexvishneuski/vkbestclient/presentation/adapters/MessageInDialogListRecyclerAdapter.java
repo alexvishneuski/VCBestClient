@@ -94,7 +94,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
     }
 
 
-    //TODO add unread & attachment types detection logic
+    //TODO add unread & attachment types according logic
 
     /**
      * @param pMessage

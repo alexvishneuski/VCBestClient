@@ -3,12 +3,12 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.netwo
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
-import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users.VKApiUsersGetResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IUserVKApiNetworking;
+import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;

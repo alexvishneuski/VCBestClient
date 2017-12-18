@@ -183,7 +183,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
                     //todo add data conferting long -> string format
                     "17:17",
                     message.getMessageBody(),
-                    MessageDirectionViewModel.OUTGOING,
+                    MessageDirectionViewModel.INCOMING,
                     true
             ));
         }
