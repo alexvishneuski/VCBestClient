@@ -23,6 +23,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogL
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class RecyclerViewDialogsFragment extends Fragment {
 
@@ -42,7 +43,8 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
     private int mTopBarFrameContainer;
 
-    private List<MessageInDialogListViewModel> mMessageList;
+    private List<Message> mMessages;
+    private List<MessageInDialogListViewModel> mMessagesUI;
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
 
@@ -60,6 +62,20 @@ public class RecyclerViewDialogsFragment extends Fragment {
         createRecyclerView(mView);
         setLayoutManagerToRecyclerView();
         loadDataToMessageInDialogList("REAL_DATA");
+
+        try {
+            Log.d(TAG, "onCreateView: getting result from AsyncTasc");
+            mMessages = mGetMessagesAsyncTasc.get();
+            Log.d(TAG, "onCreateView: got result from AsyncTasc: returned" + mMessages.size());
+        } catch (InterruptedException pE) {
+            pE.printStackTrace();
+        } catch (ExecutionException pE) {
+            pE.printStackTrace();
+        }
+
+        //convert from messages -> messagesUI
+        
+
         createAdapter();
         setAdapterToView();
 
@@ -87,11 +103,11 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
     private void loadDataToMessageInDialogList() {
         Log.d(TAG, "loadDataToMessageInDialogList called");
-        mMessageList = new ArrayList<>();
+        mMessagesUI = new ArrayList<>();
 
 
         for (int i = 0; i < 20; i++) {
-            mMessageList.add(new MessageInDialogListViewModel(
+            mMessagesUI.add(new MessageInDialogListViewModel(
                     new UserInDialogListViewModel(
                             String.format(TEST_CONTACT_USER_NAME, i), TEST_VIEW_URL),
                     String.format(TEST_MESSAGE_SENDING_DATE, i, i),
@@ -109,7 +125,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
     private void loadDataToMessageInDialogList(String pRealDataTAG) {
         Log.d(TAG, "loadDataToMessageInDialogList called");
-        mMessageList = new ArrayList<>();
+        mMessagesUI = new ArrayList<>();
 
         executeGetMessagesInDialogListAsyncTasc();
 
@@ -188,12 +204,14 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
             return messages;
         }
+
+
     }
 
     /*create adapter and send him messageList*/
     private void createAdapter() {
         Log.d(TAG, "createAdapter");
-        mAdapter = new MessageInDialogListRecyclerAdapter(mMessageList);
+        mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
     }
 
     private void setAdapterToView() {
