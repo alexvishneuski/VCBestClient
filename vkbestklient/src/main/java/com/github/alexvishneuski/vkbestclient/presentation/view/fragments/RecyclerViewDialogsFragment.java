@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+//TODO rename class
+//TODO remove comments
 public class RecyclerViewDialogsFragment extends Fragment {
 
     /*id of container in activity*/
@@ -44,8 +46,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
 
-    private static IDialogInteractor mDialogInteractor;
-    private GetMessagesInDialogListAsyncTasc mGetMessagesAsyncTasc;
+    private GetMessagesInDialogListAsyncTask mGetMessagesAsyncTasc;
 
 
     @Nullable
@@ -91,7 +92,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
     private void executeGetMessagesInDialogListAsyncTasc() {
         Log.d(TAG, "executeGetMessagesInDialogListAsyncTasc: called");
-        mGetMessagesAsyncTasc = new GetMessagesInDialogListAsyncTasc();
+        mGetMessagesAsyncTasc = new GetMessagesInDialogListAsyncTask();
         mGetMessagesAsyncTasc.execute();
     }
 
@@ -160,6 +161,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
         try {
             Log.d(TAG, "onCreateView: getting result from AsyncTasc");
+            //TODO run asynctask like async task. It work in UI thread
             mMessages = mGetMessagesAsyncTasc.get();
             Log.d(TAG, "onCreateView: got result from AsyncTasc: returned" + mMessages.size());
         } catch (InterruptedException pE) {
@@ -200,7 +202,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private static class GetMessagesInDialogListAsyncTasc extends AsyncTask<Void, Void, List<Message>> {
+    private static class GetMessagesInDialogListAsyncTask extends AsyncTask<Void, Void, List<Message>> {
 
         private static final String ASYNC_TASK_TAG = "GetDialogListAT";
 
@@ -210,7 +212,7 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
             List<Message> messages = new ArrayList<>();
 
-            mDialogInteractor = new DialogInteractorImpl();
+            IDialogInteractor mDialogInteractor = new DialogInteractorImpl();
             messages.addAll(mDialogInteractor.getMessagesForDialogList());
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");

@@ -17,6 +17,7 @@ public class UserInteractorImpl implements IUserInteractor {
     private IUserVKApiNetworking mUserVKApiNet = new UserVKApiNetworkingImpl();
 
     @Override
+    //TODO can be removed.
     public List<VKApiUser> getUsers() {
         Log.d(TAG, "getUsers: called");
 

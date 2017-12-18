@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 * object Attachment
 * https://vk.com/dev/objects/attachments_m
 */
+//TODO rename package and classes
 public class VKApiMediaAttachment {
 
    /* @SerializedName("type")

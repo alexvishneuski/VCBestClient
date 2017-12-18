@@ -30,6 +30,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         Log.d(TAG, "getUsers called");
 
+        //TODO create some builder for api
         final String url = String.format(RepositoryConstants.VKApiConstants.METHOD_BASE_PATH, RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL, RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_USERS_GET, RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN, RepositoryConstants.VKApiConstants.VK_API_VERSION);
         Log.d(TAG, "url called: " + url);
 

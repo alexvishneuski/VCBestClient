@@ -68,8 +68,10 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         final String url = String.format(RepositoryConstants.VKApiConstants.METHOD_BASE_PATH, RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL, RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS, RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN, RepositoryConstants.VKApiConstants.VK_API_VERSION);
 
         final MyResponseListener listener = new MyResponseListener();
+        //TODO listener not need in that case. add additional method for request model and return parsed model
         new HttpClient().request(url, listener);
 
+        //TODO can be removed. throw exception if it happen
         if (listener.getThrowable() != null) {
             //TODO implement error handling on UI
             throw new RuntimeException(listener.getThrowable());
@@ -87,6 +89,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
     /*method used for testing if json is coming*/
     @WorkerThread
+    //TODO copy/paste
     public String getDialogListAsString() {
 
         Log.d(TAG, "getDialogListAsString called");

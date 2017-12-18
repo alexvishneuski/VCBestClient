@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mToSharedActivityViewButton;
 
+    //TODO static is evil.
     private static IDialogInteractor mDialogInteractor;
 
     private static IUserInteractor mUserInteractor;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GetMessagesInDialogListAsyncTasc mGetMessagesAsyncTasc;
 
-    private GetDialogsAsyncTasc mGetDialogListAsyncTasc;
+    private GetDialogsAsyncTask mGetDialogListAsyncTasc;
 
     private GetDialogsAsStringAsyncTasc mGetDialogAsStringAsyncTasc;
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void executeGetDialogsAsyncTasc() {
         Log.d(TAG, "executeGetDialogsAsyncTasc: called");
-        mGetDialogListAsyncTasc = new GetDialogsAsyncTasc();
+        mGetDialogListAsyncTasc = new GetDialogsAsyncTask();
         mGetDialogListAsyncTasc.execute();
     }
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //TODO remove asynctasks out of activity
     private static class GetMessagesInDialogListAsyncTasc extends AsyncTask<Void, Void, List<Message>> {
 
         private static final String ASYNC_TASK_TAG = "GetDialogListAT";
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static class GetDialogsAsyncTasc extends AsyncTask<Void, Void, List<VKApiDialog>> {
+    private static class GetDialogsAsyncTask extends AsyncTask<Void, Void, List<VKApiDialog>> {
 
         private static final String ASYNC_TASK_TAG = "GetDialogListAT";
 

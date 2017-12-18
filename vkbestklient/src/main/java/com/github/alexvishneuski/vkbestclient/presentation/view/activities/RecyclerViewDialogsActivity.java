@@ -30,7 +30,9 @@ import java.util.List;
 
 public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
+    //TODO hardcoded url
     public static final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
+    //TODO hardcoded strings
     public static final String TEST_CONTACT_USER_NAME = "Contact user full name %s";
     public static final String TEST_MESSAGE_BODY = getMesageBody() + "%s";
     public static final String TEST_MESSAGE_SENDING_DATE = "%s.%s";
