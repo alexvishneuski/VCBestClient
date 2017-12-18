@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.alexvishneuski.vkbestclient.R;
+import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private GetUsersAsyncTasc mGetUsersAsyncTasc;
 
+    private GetMessagesInDialogListAsyncTasc mGetMessagesAsyncTasc;
+
     private GetDialogsAsyncTasc mGetDialogListAsyncTasc;
 
     private GetDialogsAsStringAsyncTasc mGetDialogAsStringAsyncTasc;
@@ -59,8 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
         /*getting users List*/
         executeGetUsersAsyncTasc();
+
+        executeGetMessagesInDialogListAsyncTasc();
     }
 
+    private void executeGetMessagesInDialogListAsyncTasc() {
+        Log.d(TAG, "executeGetMessagesInDialogListAsyncTasc: called");
+        mGetMessagesAsyncTasc = new GetMessagesInDialogListAsyncTasc();
+        mGetMessagesAsyncTasc.execute();
+    }
 
     private void executeGetDialogsAsyncTasc() {
         Log.d(TAG, "executeGetDialogsAsyncTasc: called");
@@ -80,6 +90,28 @@ public class MainActivity extends AppCompatActivity {
         mGetDialogAsStringAsyncTasc.execute();
     }
 
+
+    private static class GetMessagesInDialogListAsyncTasc extends AsyncTask<Void, Void, List<Message>> {
+
+        private static final String ASYNC_TASK_TAG = "GetDialogListAT";
+
+        @Override
+        protected List<Message> doInBackground(Void... voids) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+
+            List<Message> messages = new ArrayList<>();
+
+            mDialogInteractor = new DialogInteractorImpl();
+            messages.addAll(mDialogInteractor.getMessagesForDialogList());
+
+            Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");
+            System.out.println("printed " + messages.size() + " messages");
+            System.out.println(messages);
+            Log.d(ASYNC_TASK_TAG, "doInBackground: finish messageList print");
+
+            return messages;
+        }
+    }
 
     private static class GetDialogsAsyncTasc extends AsyncTask<Void, Void, List<VKApiDialog>> {
 
@@ -115,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
             mUserInteractor = new UserInteractorImpl();
 
-            users  = mUserInteractor.getUsers();
+            users = mUserInteractor.getUsers();
+            System.out.println(users.size() + " users");
 
             //System.out.println("printed " + users.size() + " users");
             //users.addAll(mUserInteractor.getUsers());

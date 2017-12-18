@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.Dialog;
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
+import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
+import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiMessage;
@@ -20,6 +22,8 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     private IDialogVKApiNetworking mDialogVKApiNetworkingImpl = new DialogVKApiNetworkingImpl();
 
+    private IUserInteractor mUserInteractor = new UserInteractorImpl();
+
     @Override
     public List<VKApiDialog> getDialogs() {
         Log.d(TAG, "getDialogs called ");
@@ -33,18 +37,18 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
 
     /*
-    Message Domain
+    Message Domain (VKAPI/DB-> Interactor)
     ================
-    private int mId;
-    private int mCurrentUserId;
-    private int mContactUserId;
-    private MessageDirection mMessageDirection;
-    private int mMessageSendingDate;
-    private String mMessageTitle;
-    private String mMessageBody;
-    private boolean mIsMessageRead;
+   + private int mId;
+    +private int mCurrentUserId;
+    +private int mContactUserId;
+    +private MessageDirection mMessageDirection;
+    +private int mMessageSendingDate;
+    +private String mMessageTitle;
+    +private String mMessageBody;
+    +private boolean mIsMessageRead;
 
-    Message DB
+    Message DB (Interactor -> DB)
     ================
     private int mId;
     private int mAuthor_id;
@@ -58,26 +62,38 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     @Override
     public List<Message> getMessagesForDialogList() {
-        List<Message> messages = new ArrayList<>();
+        List<Message> domainMessages = new ArrayList<>();
         UserInDialogListViewModel mCurrentUser = null;
         UserInDialogListViewModel mContactUser = null;
 
+        //TODO make sort of currrentUserHolder
+        int currentUserId = mUserInteractor.getCurrentUser().getId();
+
+
         List<VKApiDialog> dialogs = this.getDialogs();
-        VKApiMessage message = null;
 
         for (VKApiDialog dialog : dialogs
                 ) {
-            message = dialog.getMessage();
-            int contactUserId = message.getContactUserId();
-            int recipientId = message.;
 
+            VKApiMessage message = dialog.getMessage();
 
+            //todo extrakt to converter
+            Message domainMessage = new Message();
 
-            //getting author
+            domainMessage.setId(message.getId());
+            domainMessage.setContactUserId(message.getContactUserId());
+            domainMessage.setCurrentUserId(currentUserId);
+            domainMessage.setMessageDirection((message.getDirection() == 0) ? MessageDirection.INCOMING : MessageDirection.OUTGOING);
+            domainMessage.setMessageSendingDate(message.getSendingDate());
+            domainMessage.setMessageTitle(message.getTitle());
+            domainMessage.setMessageBody(message.getTitle());
+            domainMessage.setMessageRead((message.getReadStatus() == 0) ? false : true);
+
+            domainMessages.add(domainMessage);
 
         }
 
-        return null;
+        return domainMessages;
     }
 
     @Override
