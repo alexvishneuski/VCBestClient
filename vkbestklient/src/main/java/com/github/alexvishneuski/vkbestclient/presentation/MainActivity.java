@@ -188,11 +188,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         mToActivitysBasedButton = findViewById(R.id.to_app_based_activities_button);
-        initToActivitysBasedButton();
+        initToAppBasedActivitysButton();
 
         mToFragmentsBasedButton = findViewById(R.id.to_app_based_fragments_button);
 
-        initToFragmentsBasedButton();
+        initToAppBasedFragmentsButton();
     }
 
     @Override
@@ -210,8 +210,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Deprecated
-    private void initToActivitysBasedButton() {
-        Log.d(TAG, "initToActivitysBasedButton");
+    private void initToAppBasedActivitysButton() {
+        Log.d(TAG, "initToAppBasedActivitysButton");
         mToActivitysBasedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initToFragmentsBasedButton() {
+    private void initToAppBasedFragmentsButton() {
         Log.d(TAG, "initToFragmentsBasedButton called");
         mToFragmentsBasedButton.setOnClickListener(new View.OnClickListener() {
 
