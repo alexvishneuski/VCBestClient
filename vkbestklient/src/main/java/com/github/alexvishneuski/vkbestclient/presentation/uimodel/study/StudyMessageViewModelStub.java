@@ -2,6 +2,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.uimodel.study;
 
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 
+@Deprecated
 public class StudyMessageViewModelStub {
 
     private Long id;

@@ -27,7 +27,7 @@ import java.util.List;
 * 3. extract asynctasc, adapter in separate classes
 * 4. arrive round avatars
 */
-
+@Deprecated
 public class RecyclerViewDialogsActivity extends AppCompatActivity {
 
     //TODO hardcoded url

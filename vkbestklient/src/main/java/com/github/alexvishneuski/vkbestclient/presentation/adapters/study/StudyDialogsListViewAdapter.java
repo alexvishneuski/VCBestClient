@@ -16,7 +16,7 @@ import com.github.alexvishneuski.vkbestclient.R;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@Deprecated
 public class StudyDialogsListViewAdapter extends BaseAdapter {
 
     public final String TAG = this.getClass().getSimpleName();
