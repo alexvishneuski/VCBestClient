@@ -64,6 +64,8 @@ public class SharedActivity extends AppCompatActivity {
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
 
         initEntryPointFragments();
+
+
         /*to*/
 
         /* initTopBarFragment();
@@ -154,7 +156,8 @@ public class SharedActivity extends AppCompatActivity {
             }
         });
     }
-
+    //TODO must be next logic: if doesn't exist saved state - default view (profile, dialogs.)
+    //TODO (continue) If it exists - to this view and prefer to this point in view
     private void initEntryPointFragments() {
         mPairs = getPairsForDialogInitialisation();
         showAllFragments(mPairs);
