@@ -38,7 +38,8 @@ public class SharedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_shared);
+        //setContentView(R.layout.activity_shared);
+        setContentView(R.layout.activity_shared_with_coordinator);
 
         initFragments();
 
