@@ -2,9 +2,9 @@
     <string name="app_name">VKLayouts</string>
 
     <string name="dialogs_top_bar_title">Cообщения</string>
-    <string name="notifications_top_bar_title">"Уведомления"</string>
-    <string name="search_top_bar_hidden_title">"Поиск"</string>
-    <string name="news_top_bar_title">"Новости"</string>
+    <string name="notifications_top_bar_title">Уведомления</string>
+    <string name="search_top_bar_hidden_title">Поиск</string>
+    <string name="news_top_bar_title">Новости</string>
 
 
 
