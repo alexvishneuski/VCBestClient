@@ -3,13 +3,19 @@ package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsTopBarFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.NotificationsTopBarFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.RecyclerViewDialogsFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /* TODO:
 * 1. make ListView layout_height: mach_parent () by hide topbar panel
@@ -31,6 +37,8 @@ public class SharedActivity extends AppCompatActivity {
     private View mToDialogsImageButton;
     private View mToNotificationsImageButton;
 
+    private List<Pair<Integer, ? extends Fragment>> mPairs;
+
     public void onCreate(Bundle savedInstanceState) {
 
         Log.d(TAG, "onCreate");
@@ -38,7 +46,8 @@ public class SharedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         /*creating messages view*/
-        setContentView(R.layout.activity_shared);
+        //setContentView(R.layout.activity_shared);
+        setContentView(R.layout.activity_shared_with_coordinator);
 
         initFragments();
 
@@ -50,8 +59,33 @@ public class SharedActivity extends AppCompatActivity {
     /*find top bar container end show there top bar fragment*/
     private void initFragments() {
         Log.d(TAG, "initFragments");
-        initTopBarFragment();
-        initRecyclerViewFragment();
+/*from*/
+        mTopBarFrameContainer = R.id.top_bar_frame_container;
+        mRecyclerViewFrameContainer = R.id.container_recycler_view;
+
+        initEntryPointFragments();
+        /*to*/
+
+        /* initTopBarFragment();
+
+        initRecyclerViewFragment();*/
+    }
+
+
+    /*show all necessary fragments on this activity*/
+    public void showAllFragments(List<Pair<Integer, ? extends Fragment>> pPairList) {
+        Log.d(TAG, "showAllFragments");
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        for (Pair<Integer, ? extends Fragment> pair : pPairList
+                ) {
+            int frameContainer = pair.first;
+            Fragment fragment = pair.second;
+            transaction.replace(frameContainer, fragment);
+        }
+
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     /*show any fragment on this activity*/
@@ -63,9 +97,10 @@ public class SharedActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    /*
     //TODO resolve, what is the entry point?
-    /*find top bar container and show top bar fragment
-    * for first time - dialogsfragment*/
+    *//*find top bar container and show top bar fragment
+    * for first time - dialogsfragment*//*
     private void initTopBarFragment() {
         Log.d(TAG, "initTopBarFragment");
         mTopBarFrameContainer = R.id.top_bar_frame_container;
@@ -73,12 +108,14 @@ public class SharedActivity extends AppCompatActivity {
     }
 
 
-    /*show top bar fragment in top bar container*/
     private void initRecyclerViewFragment() {
         Log.d(TAG, "initRecyclerViewFragment");
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
         showFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
     }
+
+    */
+
 
     private void initNavigationBarButtons() {
         Log.d(TAG, "initNavigationBarButtons called ");
@@ -94,13 +131,14 @@ public class SharedActivity extends AppCompatActivity {
         setToNotificationsListener();
     }
 
-    //todo add notific
+
+    //todo change 2. par to notificationFragment
     private void setToNotificationsListener() {
         Log.d(TAG, "setToNotificationsListener called");
         mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(mTopBarFrameContainer, new DialogsTopBarFragment());
+                showFragment(mTopBarFrameContainer, new NotificationsTopBarFragment());
                 showFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
             }
         });
@@ -111,9 +149,37 @@ public class SharedActivity extends AppCompatActivity {
         mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(mTopBarFrameContainer, new DialogsTopBarFragment());
-                showFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+                mPairs = getPairsForDialogInitialisation();
+                showAllFragments(mPairs);
             }
         });
+    }
+
+    private void initEntryPointFragments() {
+        mPairs = getPairsForDialogInitialisation();
+        showAllFragments(mPairs);
+    }
+
+    @NonNull
+    private List<Pair<Integer, ? extends Fragment>> getPairsForDialogInitialisation() {
+        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new DialogsTopBarFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        pairs.add(pair1);
+        pairs.add(pair2);
+
+        return pairs;
+    }
+
+    @NonNull
+    private List<Pair<Integer, ? extends Fragment>> getPairsForNotificationInitialisation() {
+        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new NotificationsTopBarFragment());
+        //todo change 2. par to notificationFragment
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        pairs.add(pair1);
+        pairs.add(pair2);
+
+        return pairs;
     }
 }

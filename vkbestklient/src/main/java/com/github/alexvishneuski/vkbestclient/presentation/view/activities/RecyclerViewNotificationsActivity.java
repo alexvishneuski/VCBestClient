@@ -17,7 +17,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.Notifi
 * 3. extract asynctasc, +adapter in separate classes
 * 4. arrive round avatars
 */
-
+@Deprecated
 public class RecyclerViewNotificationsActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();

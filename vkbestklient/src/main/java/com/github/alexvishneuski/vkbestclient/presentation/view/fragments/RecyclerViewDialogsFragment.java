@@ -39,8 +39,6 @@ public class RecyclerViewDialogsFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    private int mTopBarFrameContainer;
-
     private List<Message> mMessages;
     private List<MessageInDialogListViewModel> mMessagesUI;
     private RecyclerView mRecyclerView;

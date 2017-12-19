@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
+    @Deprecated
+    private Button mToActivitysBasedButton;
 
-    private Button mToDialogsBasedRecyclerViewButton;
-
-    private Button mToSharedActivityViewButton;
+    private Button mToFragmentsBasedButton;
 
     //TODO static is evil.
     private static IDialogInteractor mDialogInteractor;
@@ -187,12 +187,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "initButtons");
 
 
-        mToDialogsBasedRecyclerViewButton = findViewById(R.id.to_app_based_activities_button);
-        initToDialogsBasedRecyclerViewButton();
+        mToActivitysBasedButton = findViewById(R.id.to_app_based_activities_button);
+        initToAppBasedActivitysButton();
 
-        mToSharedActivityViewButton = findViewById(R.id.to_app_based_fragments_button);
+        mToFragmentsBasedButton = findViewById(R.id.to_app_based_fragments_button);
 
-        initToSharedActivityViewButton();
+        initToAppBasedFragmentsButton();
     }
 
     @Override
@@ -209,9 +209,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initToDialogsBasedRecyclerViewButton() {
-        Log.d(TAG, "initToDialogsBasedRecyclerViewButton");
-        mToDialogsBasedRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
+    @Deprecated
+    private void initToAppBasedActivitysButton() {
+        Log.d(TAG, "initToAppBasedActivitysButton");
+        mToActivitysBasedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -221,9 +222,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initToSharedActivityViewButton() {
-        Log.d(TAG, "initToSharedActivityViewButton called");
-        mToSharedActivityViewButton.setOnClickListener(new View.OnClickListener() {
+    private void initToAppBasedFragmentsButton() {
+        Log.d(TAG, "initToFragmentsBasedButton called");
+        mToFragmentsBasedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
