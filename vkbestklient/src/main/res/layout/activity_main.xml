@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.github.alexvishneuski.vkbestclient.presentation.MainActivity">
+    tools:context=".presentation.view.activities.MainActivity">
 
     <Button
         android:id="@+id/to_app_based_activities_button"

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 
-public class NotificationsTopBarFragment extends Fragment {
+public class TopBarNotificationsFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
 

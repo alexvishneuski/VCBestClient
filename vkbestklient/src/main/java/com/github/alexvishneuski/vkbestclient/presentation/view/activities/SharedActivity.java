@@ -10,8 +10,8 @@ import android.util.Pair;
 import android.view.View;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsTopBarFragment;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.NotificationsTopBarFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.RecyclerViewDialogsFragment;
 
 import java.util.ArrayList;
@@ -106,7 +106,7 @@ public class SharedActivity extends AppCompatActivity {
     private void initTopBarFragment() {
         Log.d(TAG, "initTopBarFragment");
         mTopBarFrameContainer = R.id.top_bar_frame_container;
-        showFragment(mTopBarFrameContainer, new DialogsTopBarFragment());
+        showFragment(mTopBarFrameContainer, new TopBarDialogsFragment());
     }
 
 
@@ -140,7 +140,7 @@ public class SharedActivity extends AppCompatActivity {
         mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(mTopBarFrameContainer, new NotificationsTopBarFragment());
+                showFragment(mTopBarFrameContainer, new TopBarNotificationsFragment());
                 showFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
             }
         });
@@ -166,7 +166,7 @@ public class SharedActivity extends AppCompatActivity {
     @NonNull
     private List<Pair<Integer, ? extends Fragment>> getPairsForDialogInitialisation() {
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
-        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new DialogsTopBarFragment());
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarDialogsFragment());
         Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
@@ -177,7 +177,7 @@ public class SharedActivity extends AppCompatActivity {
     @NonNull
     private List<Pair<Integer, ? extends Fragment>> getPairsForNotificationInitialisation() {
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
-        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new NotificationsTopBarFragment());
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarNotificationsFragment());
         //todo change 2. par to notificationFragment
         Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
         pairs.add(pair1);

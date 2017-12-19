@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation;
+package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,8 +14,6 @@ import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.UserInteractorImpl;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.RecyclerViewDialogsActivity;
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 
@@ -65,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         executeGetUsersAsyncTasc();
 
         executeGetMessagesInDialogListAsyncTasc();
+
+        goToAuthActivity();
+    }
+
+    private void goToAuthActivity() {
+
     }
 
     private void executeGetMessagesInDialogListAsyncTasc() {
@@ -187,9 +191,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "initButtons");
 
 
-        mToActivitysBasedButton = findViewById(R.id.to_app_based_activities_button);
-        initToAppBasedActivitysButton();
-
         mToFragmentsBasedButton = findViewById(R.id.to_app_based_fragments_button);
 
         initToAppBasedFragmentsButton();
@@ -209,18 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Deprecated
-    private void initToAppBasedActivitysButton() {
-        Log.d(TAG, "initToAppBasedActivitysButton");
-        mToActivitysBasedButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecyclerViewDialogsActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     private void initToAppBasedFragmentsButton() {
         Log.d(TAG, "initToFragmentsBasedButton called");

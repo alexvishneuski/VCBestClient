@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 
-public class DialogsTopBarFragment extends Fragment {
+public class TopBarDialogsFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
 
