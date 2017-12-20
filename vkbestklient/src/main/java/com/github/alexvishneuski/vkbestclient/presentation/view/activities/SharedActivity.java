@@ -10,9 +10,12 @@ import android.util.Pair;
 import android.view.View;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.RecyclerViewDialogsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNewsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarProfileFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarSearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +35,12 @@ public class SharedActivity extends AppCompatActivity {
 
     private int mRecyclerViewFrameContainer;
 
-    private View mToNewsImageButton;
-    private View mToSearchImageButton;
+    private View mToProfileImageButton;
     private View mToDialogsImageButton;
     private View mToNotificationsImageButton;
+    private View mToNewsImageButton;
+    private View mToSearchImageButton;
+
 
     private List<Pair<Integer, ? extends Fragment>> mPairs;
 
@@ -122,9 +127,15 @@ public class SharedActivity extends AppCompatActivity {
     private void initNavigationBarButtons() {
         Log.d(TAG, "initNavigationBarButtons called ");
 
+
+        mToProfileImageButton = findViewById(R.id.profile_image_button);
+        setToProfileListener();
+
         mToNewsImageButton = findViewById(R.id.news_image_button);
+        setToNewsListener();
 
         mToSearchImageButton = findViewById(R.id.search_image_button);
+        setToSearchListener();
 
         mToDialogsImageButton = findViewById(R.id.messages_image_button);
         setToDialogsListener();
@@ -133,6 +144,16 @@ public class SharedActivity extends AppCompatActivity {
         setToNotificationsListener();
     }
 
+    private void setToDialogsListener() {
+        Log.d(TAG, "setToDialogsListener called ");
+        mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPairs = getPairsForDialogsInitialisation();
+                replaceAllFragments(mPairs);
+            }
+        });
+    }
 
     //todo change 2. par to notificationFragment
     private void setToNotificationsListener() {
@@ -146,25 +167,49 @@ public class SharedActivity extends AppCompatActivity {
         });
     }
 
-    private void setToDialogsListener() {
+    private void setToNewsListener() {
         Log.d(TAG, "setToDialogsListener called ");
-        mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
+        mToNewsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPairs = getPairsForDialogInitialisation();
+                mPairs = getPairsForNewsInitialisation();
                 replaceAllFragments(mPairs);
             }
         });
     }
+
+    private void setToSearchListener() {
+        Log.d(TAG, "setToDialogsListener called ");
+        mToSearchImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPairs = getPairsForSearchInitialisation();
+                replaceAllFragments(mPairs);
+            }
+        });
+    }
+
+    private void setToProfileListener() {
+        Log.d(TAG, "setToDialogsListener called ");
+        mToProfileImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPairs = getPairsForProfileInitialisation();
+                replaceAllFragments(mPairs);
+            }
+        });
+    }
+
     //TODO must be next logic: if doesn't exist saved state - default view (profile, dialogs.)
     //TODO (continue) If it exists - to this view and prefer to this point in view
     private void initEntryPointFragments() {
-        mPairs = getPairsForDialogInitialisation();
+        mPairs = getPairsForDialogsInitialisation();
         replaceAllFragments(mPairs);
     }
 
     @NonNull
-    private List<Pair<Integer, ? extends Fragment>> getPairsForDialogInitialisation() {
+    private List<Pair<Integer, ? extends Fragment>> getPairsForDialogsInitialisation() {
+
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarDialogsFragment());
         Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
@@ -176,9 +221,43 @@ public class SharedActivity extends AppCompatActivity {
 
     @NonNull
     private List<Pair<Integer, ? extends Fragment>> getPairsForNotificationInitialisation() {
+
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarNotificationsFragment());
         //todo change 2. par to notificationFragment
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        pairs.add(pair1);
+        pairs.add(pair2);
+
+        return pairs;
+    }
+
+    private List<Pair<Integer, ? extends Fragment>> getPairsForNewsInitialisation() {
+
+        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarNewsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        pairs.add(pair1);
+        pairs.add(pair2);
+
+        return pairs;
+    }
+
+    private List<Pair<Integer, ? extends Fragment>> getPairsForSearchInitialisation() {
+
+        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarSearchFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        pairs.add(pair1);
+        pairs.add(pair2);
+
+        return pairs;
+    }
+
+    private List<Pair<Integer, ? extends Fragment>> getPairsForProfileInitialisation() {
+
+        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarProfileFragment());
         Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);

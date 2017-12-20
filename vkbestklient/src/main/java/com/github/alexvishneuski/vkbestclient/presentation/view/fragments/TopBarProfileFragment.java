@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 
-public class TopBarDialogsFragment extends Fragment {
+public class TopBarProfileFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -19,7 +19,7 @@ public class TopBarDialogsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
 
-        int topBarLayoutId = R.layout.fragment_top_bar_dialogs;
+        int topBarLayoutId = R.layout.fragment_top_bar_profile;
 
         View view = inflater.inflate(topBarLayoutId, null);
 

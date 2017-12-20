@@ -10,16 +10,17 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 
-public class TopBarDialogsFragment extends Fragment {
+public class TopBarNewsFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView called");
 
-        int topBarLayoutId = R.layout.fragment_top_bar_dialogs;
+        Log.d(TAG, "onCreateView called ");
+
+        int topBarLayoutId = R.layout.fragment_top_bar_news;
 
         View view = inflater.inflate(topBarLayoutId, null);
 
