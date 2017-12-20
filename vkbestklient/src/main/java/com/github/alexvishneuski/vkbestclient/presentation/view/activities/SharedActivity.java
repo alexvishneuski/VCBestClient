@@ -149,6 +149,7 @@ public class SharedActivity extends AppCompatActivity {
         mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO if now I'm on this fragment, must nothing to do
                 mPairs = getPairsForDialogsInitialisation();
                 replaceAllFragments(mPairs);
             }
