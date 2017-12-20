@@ -37,7 +37,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
 
     /*
-    Message Domain (VKAPI/DB-> Interactor)
+    Message Domain  (VKAPI/DB-> Interactor)
     ================
    + private int mId;
     +private int mCurrentUserId;
@@ -101,13 +101,5 @@ public class DialogInteractorImpl implements IDialogInteractor {
         return null;
     }
 
-    /*TODO delete after testing*/
-    @Override
-    public String getResultAsString() {
-        Log.d(TAG, "getResultAsString called");
-        String result = mDialogVKApiNetworkingImpl.getDialogListAsString();
-        Log.d(TAG, "getResultAsString returned");
 
-        return result;
-    }
 }

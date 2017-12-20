@@ -30,8 +30,7 @@ public interface IDialogInteractor {
     List<Dialog> getDialogs(int pCount);
 
 
-    //TODO delete after testing
-    String getResultAsString();
+
 }
 
 

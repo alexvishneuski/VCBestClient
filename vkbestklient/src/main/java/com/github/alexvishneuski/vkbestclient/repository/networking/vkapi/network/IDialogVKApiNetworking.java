@@ -10,6 +10,4 @@ public interface IDialogVKApiNetworking {
     List<VKApiDialog> getDialogs();
 
     VKApiMessagesGetDialogsResponse getDialogList();
-
-    String getDialogListAsString();
 }

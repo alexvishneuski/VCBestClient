@@ -31,7 +31,7 @@ public class DialogVKApi {
 
     private ArrayList<VKApiDialog> mDialogs;
     private IDialogVKApiNetworking mDialogProvider;
-    private DialogVKApiNetworkingImpl.MyResponseListener mListener;
+
 
 
     //classMember initialization
