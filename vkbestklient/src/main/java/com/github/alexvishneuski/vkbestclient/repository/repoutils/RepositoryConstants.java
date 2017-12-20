@@ -8,7 +8,7 @@ public class RepositoryConstants {
         String METHOD_BASE_PATH = "%s/%s?access_token=%s&v=%s";
 
         String VK_API_SERVICE_URL = "https://api.vk.com/method";
-        String VK_API_ACCESS_TOKEN = "";
+        String VK_API_ACCESS_TOKEN = "bd681548925b84215fb2feee10ef0824687ef2459f8f4e6bb08e7877508c3af7cd2f74b48b63e96dc913a";
         String VK_API_VERSION = "5.69";
 
         /*method names*/

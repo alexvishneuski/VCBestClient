@@ -47,45 +47,20 @@ public class AuthActivity extends AppCompatActivity {
         /*creating messages view*/
         setContentView(R.layout.activity_auth);
 
-        initFragments();
+
 
         onSuccess();
     }
 
 
     private void onSuccess() {
-        Intent intent = new Intent(AuthActivity.this, AuthActivity.class);
+        Intent intent = new Intent(AuthActivity.this, SharedActivity.class);
         startActivity(intent);
     }
 
 
-    /*find top bar container end show there top bar fragment*/
-    private void initFragments() {
-        Log.d(TAG, "initFragments");
-        findTopBarContainer();
-        showTopBarFragment();
-    }
 
-    /*show any fragment on this activity*/
-    public void showFragment(int frameContainer, Fragment fragment) {
-        Log.d(TAG, "showFragment");
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(frameContainer, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 
-    /*find top bar container for top bar fragment*/
-    private void findTopBarContainer() {
-        Log.d(TAG, "findTopBarContainer");
-        mTopBarFrameContainer = R.id.top_bar_frame_container;
-    }
-
-    /*show top bar fragment in top bar container*/
-    private void showTopBarFragment() {
-        Log.d(TAG, "showTopBarFragment");
-        showFragment(mTopBarFrameContainer, new TopBarDialogsFragment());
-    }
 
 
 }

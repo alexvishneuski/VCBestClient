@@ -47,7 +47,7 @@ public class SharedActivity extends AppCompatActivity {
 
         /*creating messages view*/
         //setContentView(R.layout.activity_shared);
-        setContentView(R.layout.activity_shared_with_coordinator);
+        setContentView(R.layout.activity_shared);
 
         initFragments();
 
@@ -75,8 +75,8 @@ public class SharedActivity extends AppCompatActivity {
 
 
     /*show all necessary fragments on this activity*/
-    public void showAllFragments(List<Pair<Integer, ? extends Fragment>> pPairList) {
-        Log.d(TAG, "showAllFragments");
+    public void replaceAllFragments(List<Pair<Integer, ? extends Fragment>> pPairList) {
+        Log.d(TAG, "replaceAllFragments");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         for (Pair<Integer, ? extends Fragment> pair : pPairList
@@ -91,8 +91,8 @@ public class SharedActivity extends AppCompatActivity {
     }
 
     /*show any fragment on this activity*/
-    public void showFragment(int frameContainer, Fragment fragment) {
-        Log.d(TAG, "showFragment");
+    public void replaceFragment(int frameContainer, Fragment fragment) {
+        Log.d(TAG, "replaceFragment");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(frameContainer, fragment);
         transaction.addToBackStack(null);
@@ -106,14 +106,14 @@ public class SharedActivity extends AppCompatActivity {
     private void initTopBarFragment() {
         Log.d(TAG, "initTopBarFragment");
         mTopBarFrameContainer = R.id.top_bar_frame_container;
-        showFragment(mTopBarFrameContainer, new TopBarDialogsFragment());
+        replaceFragment(mTopBarFrameContainer, new TopBarDialogsFragment());
     }
 
 
     private void initRecyclerViewFragment() {
         Log.d(TAG, "initRecyclerViewFragment");
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
-        showFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        replaceFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
     }
 
     */
@@ -140,8 +140,8 @@ public class SharedActivity extends AppCompatActivity {
         mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(mTopBarFrameContainer, new TopBarNotificationsFragment());
-                showFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+                replaceFragment(mTopBarFrameContainer, new TopBarNotificationsFragment());
+                replaceFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
             }
         });
     }
@@ -152,7 +152,7 @@ public class SharedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mPairs = getPairsForDialogInitialisation();
-                showAllFragments(mPairs);
+                replaceAllFragments(mPairs);
             }
         });
     }
@@ -160,7 +160,7 @@ public class SharedActivity extends AppCompatActivity {
     //TODO (continue) If it exists - to this view and prefer to this point in view
     private void initEntryPointFragments() {
         mPairs = getPairsForDialogInitialisation();
-        showAllFragments(mPairs);
+        replaceAllFragments(mPairs);
     }
 
     @NonNull

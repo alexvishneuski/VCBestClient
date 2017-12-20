@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.presentation.utils;
+package com.github.alexvishneuski.vkbestclient;
 
 import android.app.Application;
 

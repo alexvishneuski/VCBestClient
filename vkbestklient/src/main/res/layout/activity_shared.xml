@@ -1,70 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity">
+    tools:context="presentation.view.activities.SharedActivity">
 
-
-    <FrameLayout
-        android:id="@+id/top_bar_frame_container"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation_bar_frame_container">
 
-        <!--TODO remove this <include>-->
-        <!-- <include layout="@layfragment_top_bar_dialogsages" />-->
-
-    </FrameLayout>
-
-    <!--content-->
-    <RelativeLayout
-        android:id="@+id/content_area_relative_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/navigation_bar_frame_container"
-        android:layout_below="@+id/top_bar_frame_container"
-
-        android:divider="@drawable/divider"
-        android:orientation="vertical"
-        android:showDividers="middle">
-
-        <!--content itself
-               TODO: to resolve issue: 1. code in this activity 2. include out view or 3. fragment
-               decided use ListView as code in this activity-->
-        <!--TODO why is there not showing dividers in RV??? In ListView it works-->
-
-        <FrameLayout
-            android:id="@+id/container_recycler_view"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-        <!--top shadow-->
-        <View
-            android:id="@+id/top_shadow_view"
+            <!--
+            container for
+            @layout/fragment_top_bar_dialogs
+            @layout/fragment_top_bar_notifications
+            news
+            search
+            prifile
+            -->
+            <FrameLayout
+                android:id="@+id/top_bar_frame_container"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_alignParentTop="true"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <!--content-->
+        <RelativeLayout
+            android:id="@+id/content_area_relative_layout"
             android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/bg_top_bar_shadow_dark" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appBar"
+            android:divider="@drawable/divider"
+            android:orientation="vertical"
+            android:showDividers="middle">
 
-        <!--bottom shadow-->
-        <View
-            android:id="@+id/bottom_shadow_view"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_navigation_bar_shadow_dark" />
+            <FrameLayout
+                android:id="@+id/container_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/fragment_top_bar_dialogs" />
 
-    </RelativeLayout>
+            <View
+                android:id="@+id/bottom_shadow_view"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_navigation_bar_shadow_dark" />
+        </RelativeLayout>
 
-    <!--navigation bar
-    TODO to resolve issue: is it <include>-section or fragment
-    decided: <include>, because takes part in 5 activities(or in 1 common)-->
+    </android.support.design.widget.CoordinatorLayout>
 
     <FrameLayout
-
         android:id="@+id/navigation_bar_frame_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
