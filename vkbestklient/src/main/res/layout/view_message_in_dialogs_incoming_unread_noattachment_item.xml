@@ -7,7 +7,8 @@
     android:paddingBottom="@dimen/messages_item_padding"
     android:paddingEnd="@dimen/messages_item_padding"
     android:paddingRight="@dimen/messages_item_padding"
-    android:paddingTop="@dimen/messages_item_padding">
+    android:paddingTop="@dimen/messages_item_padding"
+    tools:ignore="RtlSymmetry">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contact_user_avatar_image_view"
@@ -40,31 +41,57 @@
                 android:id="@+id/message_sending_date_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_weight="1"
                 android:textSize="16sp"
                 tools:text="26 oct" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="36dp">
 
             <TextView
                 android:id="@+id/mesage_body_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="4sp"
                 android:layout_marginStart="4sp"
+                android:layout_weight="4"
                 android:ellipsize="end"
                 android:lineSpacingExtra="-1dp"
                 android:maxLines="2"
                 android:textColor="@color/colorTextGrey"
                 android:textSize="14sp"
                 tools:text="Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! " />
+
+            <FrameLayout
+
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <!--???-->
+                <ImageView
+                    android:id="@+id/message_unread_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:text="1"
+                    android:textColor="@color/colorTextBlack" />
+
+                <ImageView
+                    android:id="@+id/message_unread_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_round_unread_msg_blue_24px" />
+
+
+
+            </FrameLayout>
 
         </LinearLayout>
 

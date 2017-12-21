@@ -7,7 +7,8 @@
     android:paddingBottom="@dimen/messages_item_padding"
     android:paddingEnd="@dimen/messages_item_padding"
     android:paddingRight="@dimen/messages_item_padding"
-    android:paddingTop="@dimen/messages_item_padding">
+    android:paddingTop="@dimen/messages_item_padding"
+    tools:ignore="RtlSymmetry">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contact_user_avatar_image_view"
@@ -40,10 +41,10 @@
                 android:id="@+id/message_sending_date_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_weight="1"
                 android:textSize="16sp"
                 tools:text="26 oct" />
+
         </LinearLayout>
 
         <LinearLayout
