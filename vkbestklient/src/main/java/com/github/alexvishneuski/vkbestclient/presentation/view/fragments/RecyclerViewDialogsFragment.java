@@ -13,14 +13,18 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
+import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -176,17 +180,27 @@ public class RecyclerViewDialogsFragment extends Fragment {
         for (Message message : mMessages
                 ) {
             mMessagesUI.add(new MessageInDialogListViewModel(
-                    //todo to think if to apply setters instead constructor
+                    //todo to think if to apply setters or Builder instead constructor
                     //todo change to real data
                     new UserInDialogListViewModel("CurrentUserName", TEST_VIEW_URL),
                     new UserInDialogListViewModel("ContactUserName", TEST_VIEW_URL),
-                    //todo add data conferting long -> string format
-                    "17:17",
+
+                    convertUnixtimeToString(message.getMessageSendingDate(), Constants.DateFormat.PATTERN_DD_MM),
                     message.getMessageBody(),
-                    MessageDirectionViewModel.INCOMING,
-                    true
+                    (MessageDirection.INCOMING == message.getMessageDirection() ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING),
+                    message.isMessageRead()
             ));
         }
+    }
+
+    //todo extract to separate class
+    private String convertUnixtimeToString(int pDateLong, String pattern) {
+
+        Date date = new Date(pDateLong * 1000L);
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        String dateText = format.format(date);
+
+        return dateText;
     }
 
     /*create adapter and send him messageList*/
