@@ -2,8 +2,11 @@ package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,6 +29,8 @@ import java.util.List;
 public class AuthActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
+
+    AppCompatActivity mSharedActivity = new SharedActivity();
 
     private int mTopBarFrameContainer;
 
@@ -50,13 +55,18 @@ public class AuthActivity extends AppCompatActivity {
 
 
         onSuccess();
+
+
+
     }
 
 
     private void onSuccess() {
-        Intent intent = new Intent(AuthActivity.this, SharedActivity.class);
+        Intent intent = new Intent(AuthActivity.this, mSharedActivity.getClass());
         startActivity(intent);
     }
+
+
 
 
 
