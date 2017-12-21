@@ -21,10 +21,9 @@ import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirect
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -185,22 +184,12 @@ public class RecyclerViewDialogsFragment extends Fragment {
                     new UserInDialogListViewModel("CurrentUserName", TEST_VIEW_URL),
                     new UserInDialogListViewModel("ContactUserName", TEST_VIEW_URL),
 
-                    convertUnixtimeToString(message.getMessageSendingDate(), Constants.DateFormat.PATTERN_DD_MM),
+                    Converter.convertUnixtimeToString(message.getMessageSendingDate(), Constants.DateFormat.PATTERN_DD_MM),
                     message.getMessageBody(),
                     (MessageDirection.INCOMING == message.getMessageDirection() ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING),
                     message.isMessageRead()
             ));
         }
-    }
-
-    //todo extract to separate class
-    private String convertUnixtimeToString(int pDateLong, String pattern) {
-
-        Date date = new Date(pDateLong * 1000L);
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        String dateText = format.format(date);
-
-        return dateText;
     }
 
     /*create adapter and send him messageList*/
