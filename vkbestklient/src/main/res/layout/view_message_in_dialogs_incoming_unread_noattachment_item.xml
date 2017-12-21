@@ -66,7 +66,8 @@
                 android:textSize="14sp"
                 tools:text="Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! " />
 
-            <FrameLayout
+            <RelativeLayout
+
 
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -74,24 +75,31 @@
                 android:layout_weight="1">
 
                 <!--???-->
-                <ImageView
-                    android:id="@+id/message_unread_count"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
 
-                    android:text="1"
-                    android:textColor="@color/colorTextBlack" />
 
                 <ImageView
                     android:id="@+id/message_unread_icon"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:contentDescription="@null"
                     android:src="@drawable/ic_round_unread_msg_blue_24px" />
 
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/message_unread_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
+                    android:text="@null"
+                    tools:text="1"
+                    android:textSize="13sp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorWhite"
+                    android:scaleType="fitCenter"/>
 
-            </FrameLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
