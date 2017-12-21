@@ -46,13 +46,13 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         switch (pViewType) {
             case MessageType.INCOMING_READ:
-                viewId = R.layout.view_message_in_dialog_list_item_incoming_read;
+                viewId = R.layout.view_message_in_dialog_list_incoming_read_item;
                 break;
             case MessageType.OUTGOING_READ:
-                viewId = R.layout.view_message_in_dialog_list_item_outgoing_read;
+                viewId = R.layout.view_message_in_dialog_list_outgoing_read_item;
                 break;
             default:
-                viewId = R.layout.view_message_in_dialog_list_item_incoming_read;
+                viewId = R.layout.view_message_in_dialog_list_incoming_read_item;
                 break;
         }
 
