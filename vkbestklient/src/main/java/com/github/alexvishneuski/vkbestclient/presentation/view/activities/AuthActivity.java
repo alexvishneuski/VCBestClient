@@ -30,7 +30,7 @@ public class AuthActivity extends AppCompatActivity {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    AppCompatActivity mSharedActivity = new SharedActivity();
+    
 
     private int mTopBarFrameContainer;
 
@@ -62,7 +62,7 @@ public class AuthActivity extends AppCompatActivity {
 
 
     private void onSuccess() {
-        Intent intent = new Intent(AuthActivity.this, mSharedActivity.getClass());
+        Intent intent = new Intent(AuthActivity.this, SharedActivity.class);
         startActivity(intent);
     }
 
