@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.imageloader.NOrda;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.viewholder.MessageInDialogListRecyclerViewHolder;
-import com.github.alexvishneuski.vkbestclient.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -25,12 +25,18 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
     //TODO Handle view types (interface...)
 
-    @IntDef({MessageType.OUTGOING_READ, MessageType.INCOMING_READ})
+    @IntDef({
+            MessageType.OUTGOING_READ_NOATTACHMENT,
+            MessageType.INCOMING_READ_NOATTACHMENT,
+            MessageType.OUTGOING_UNREAD_NOATTACHMENT,
+            MessageType.INCOMING_UNREAD_NOATTACHMENT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MessageType {
 
-        int OUTGOING_READ = 0;
-        int INCOMING_READ = 1;
+        int OUTGOING_READ_NOATTACHMENT = 0;
+        int INCOMING_READ_NOATTACHMENT = 1;
+        int OUTGOING_UNREAD_NOATTACHMENT = 2;
+        int INCOMING_UNREAD_NOATTACHMENT = 3;
         //TODO Add new types: with attachments, unread...
     }
 
@@ -45,14 +51,20 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         final int viewId;
 
         switch (pViewType) {
-            case MessageType.INCOMING_READ:
-                viewId = R.layout.view_message_in_dialog_list_item_incoming_read;
+            case MessageType.INCOMING_READ_NOATTACHMENT:
+                viewId = R.layout.view_message_in_dialogs_incoming_read_noattachment_item;
                 break;
-            case MessageType.OUTGOING_READ:
-                viewId = R.layout.view_message_in_dialog_list_item_outgoing_read;
+            case MessageType.OUTGOING_READ_NOATTACHMENT:
+                viewId = R.layout.view_message_in_dialogs_outgoing_read_noattachment_item;
+                break;
+            case MessageType.INCOMING_UNREAD_NOATTACHMENT:
+                viewId = R.layout.view_message_in_dialogs_incoming_unread_noattachment_item;
+                break;
+            case MessageType.OUTGOING_UNREAD_NOATTACHMENT:
+                viewId = R.layout.view_message_in_dialogs_outgoing_unread_noattachment_item;
                 break;
             default:
-                viewId = R.layout.view_message_in_dialog_list_item_incoming_read;
+                viewId = R.layout.view_message_in_dialogs_incoming_read_noattachment_item;
                 break;
         }
 
@@ -71,6 +83,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
         pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
+
         //TODO add imageloader
         NOrda.INSTANCE.load(messageModel.getContactUser().getUserAvatarPath()).into(pHolder.getContactUserAvatarPath());
     }
@@ -89,7 +102,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
             return getMessageType(message);
         }
-        //returned type OUTGOING_READ
+        //returned type OUTGOING_READ_NOATTACHMENT
         return 0;
     }
 
@@ -102,11 +115,20 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
      */
     private int getMessageType(@NonNull MessageInDialogListViewModel pMessage) {
 
-        if (pMessage.getMessageDirection()==(MessageDirectionViewModel.OUTGOING) && pMessage.getMessageRead()) {
-            return MessageType.OUTGOING_READ;
-        } else
-            //if (pMessage.getMessageDirection() == MessageDirectionViewModel.INCOMING & pMessage.getMessageRead() == Boolean.TRUE) {
+        if (pMessage.getMessageDirection() == (MessageDirectionViewModel.OUTGOING) && pMessage.getMessageRead()) {
 
-            return MessageType.INCOMING_READ;
+            return MessageType.OUTGOING_READ_NOATTACHMENT;
+        } else if (pMessage.getMessageDirection() == MessageDirectionViewModel.OUTGOING && !pMessage.getMessageRead()) {
+
+            return MessageType.OUTGOING_UNREAD_NOATTACHMENT;
+        } else if (pMessage.getMessageDirection() == MessageDirectionViewModel.INCOMING && pMessage.getMessageRead()) {
+
+            return MessageType.INCOMING_READ_NOATTACHMENT;
+        } else if (pMessage.getMessageDirection() == MessageDirectionViewModel.INCOMING && !pMessage.getMessageRead()) {
+
+            return MessageType.INCOMING_UNREAD_NOATTACHMENT;
+        }
+
+        return MessageType.INCOMING_READ_NOATTACHMENT;
     }
 }
