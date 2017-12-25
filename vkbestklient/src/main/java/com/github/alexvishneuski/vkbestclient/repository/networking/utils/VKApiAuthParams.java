@@ -2,33 +2,20 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
 public class VKApiAuthParams implements Parameters {
 
-    //обязательный	Идентификатор Вашего приложения.
-    private String client_id;
+    private String mClientId;
 
-    //обязательный	Адрес, на который будет переадресован пользователь после прохождения авторизации (см. redirect_uri).
-    private String redirect_uri;
+    private String mRedirectUri;
 
+    private String mDisplay;
 
-    //Указывает тип отображения страницы авторизации. Поддерживаются следующие варианты:
-    //page — форма авторизации в отдельном окне;
-    //popup — всплывающее окно;
-    //mobile — авторизация для мобильных устройств (без использования Javascript)
-    //Если пользователь авторизуется с мобильного устройства, будет использован тип mobile.
-    private String display;
-    //Битовая маска настроек доступа приложения, которые необходимо проверить при авторизации пользователя и запросить отсутствующие.
+    private String mScope;
 
-    private String scope;
-    //Тип ответа, который необходимо получить. Укажите token.
+    private String mResponseType;
 
-    private String response_type;
-    //Версия API, которую Вы используете. Актуальная версия: 5.69.
+    private String mVersion;
 
-    private String v;
-    //Произвольная строка, которая будет возвращена вместе с результатом авторизации.
+    private String mState;
 
-    private String state;
-    //Параметр, указывающий, что необходимо не пропускать этап подтверждения прав, даже если пользователь уже авторизован.
-
-    private String revoke = "1";
+    private String mRevoke;
 
 }
