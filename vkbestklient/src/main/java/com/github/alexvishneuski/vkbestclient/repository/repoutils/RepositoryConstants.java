@@ -76,8 +76,15 @@ public class RepositoryConstants {
     public static final String VK_SCOPE_MARKET = "market";
 
     //methods
-    public static final String VK_METHOD_GET_MESSAGES = "https";
+    public static final String VK_METHOD_MESSAGES_GET_DIALOGS = "messages.getDialogs";
 
-
+    //parameters for "messages.getDialogs"
+    public static final String VK_OFFSET_KEY = "offset";
+    public static final String VK_COUNT_KEY = "count";
+    public static final String VK_START_MESSAGE_ID_KEY = "start_message_id";
+    public static final String VK_PREVIEW_LENGTH_KEY = "preview_length";
+    public static final String VK_UNREAD_KEY = "unread";
+    public static final String VK_IMPORTANT_KEY = "important";
+    public static final String VK_UNANSWERED_KEY = "unanswered";
 
 }
