@@ -35,7 +35,7 @@ public class VKApiUri {
         return new VKApiUri().new Builder();
     }
 
-    class Builder {
+    public class Builder {
 
         private Builder() {
         }
