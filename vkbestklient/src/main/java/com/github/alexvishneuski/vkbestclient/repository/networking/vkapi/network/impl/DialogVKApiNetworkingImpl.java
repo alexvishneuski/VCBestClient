@@ -33,14 +33,14 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         Log.d(TAG, "getDialogs called");
         //TODO Extract the params ssetting for this method into Interactor
-        VKApiGetDialogsParams getDialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
-        VKApiUri getDialogsUri = VKApiUri.getBuilder()
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
+        VKApiUri dialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
                 .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
-                .setParameters(getDialogsParams)
+                .setParameters(dialogsParams)
                 .build();
-        final String url = VKApiRequestParser.parse(getDialogsUri);
+        final String url = VKApiRequestParser.parse(dialogsUri);
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)

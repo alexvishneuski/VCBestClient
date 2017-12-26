@@ -4,10 +4,13 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
+import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiRequestParser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users.VKApiUsersGetResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IUserVKApiNetworking;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetUsersParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 import java.util.ArrayList;
@@ -24,13 +27,15 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         Log.d(TAG, "getUsers called");
 
-        //TODO create some builder for api
-        final String url = String.format(
-                RepositoryConstants.VKApiConstants.METHOD_BASE_PATH,
-                RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL,
-                RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_USERS_GET,
-                RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN,
-                RepositoryConstants.VKApiConstants.VK_API_VERSION);
+        VKApiGetUsersParams usersParams = VKApiGetUsersParams.getBuilder().build();
+        VKApiUri usersUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodUsersGet.METHOD_NAME)
+                .setParameters(usersParams)
+                .build();
+        final String url = VKApiRequestParser.parse(usersUri);
+
         Log.d(TAG, "url called: " + url);
 
         @SuppressWarnings("unchecked") final VKApiUsersGetResult result =
