@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 
-//TODO remove.
-//TODO move out of utils package
 public class StethoApp extends Application {
 
     @Override

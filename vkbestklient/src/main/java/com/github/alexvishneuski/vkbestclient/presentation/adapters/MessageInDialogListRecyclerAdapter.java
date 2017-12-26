@@ -37,7 +37,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         int INCOMING_READ_NOATTACHMENT = 1;
         int OUTGOING_UNREAD_NOATTACHMENT = 2;
         int INCOMING_UNREAD_NOATTACHMENT = 3;
-        //TODO Add new types: with attachments, unread...
+        //TODO Add new types: with attachments...
     }
 
     private List<MessageInDialogListViewModel> mMessageList;
@@ -118,12 +118,15 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         if (pMessage.getMessageDirection() == (MessageDirectionViewModel.OUTGOING) && pMessage.getMessageRead()) {
 
             return MessageType.OUTGOING_READ_NOATTACHMENT;
+
         } else if (pMessage.getMessageDirection() == MessageDirectionViewModel.OUTGOING && !pMessage.getMessageRead()) {
 
             return MessageType.OUTGOING_UNREAD_NOATTACHMENT;
+
         } else if (pMessage.getMessageDirection() == MessageDirectionViewModel.INCOMING && pMessage.getMessageRead()) {
 
             return MessageType.INCOMING_READ_NOATTACHMENT;
+
         } else if (pMessage.getMessageDirection() == MessageDirectionViewModel.INCOMING && !pMessage.getMessageRead()) {
 
             return MessageType.INCOMING_UNREAD_NOATTACHMENT;

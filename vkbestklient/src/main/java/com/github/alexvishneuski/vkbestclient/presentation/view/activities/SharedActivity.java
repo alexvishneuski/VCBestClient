@@ -10,7 +10,7 @@ import android.util.Pair;
 import android.view.View;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.RecyclerViewDialogsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNewsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
@@ -118,7 +118,7 @@ public class SharedActivity extends AppCompatActivity {
     private void initRecyclerViewFragment() {
         Log.d(TAG, "initRecyclerViewFragment");
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
-        replaceFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        replaceFragment(mRecyclerViewFrameContainer, new DialogsFragment());
     }
 
     */
@@ -163,7 +163,7 @@ public class SharedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 replaceFragment(mTopBarFrameContainer, new TopBarNotificationsFragment());
-                replaceFragment(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+                replaceFragment(mRecyclerViewFrameContainer, new DialogsFragment());
             }
         });
     }
@@ -213,7 +213,7 @@ public class SharedActivity extends AppCompatActivity {
 
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarDialogsFragment());
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
 
@@ -226,7 +226,7 @@ public class SharedActivity extends AppCompatActivity {
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarNotificationsFragment());
         //todo change 2. par to notificationFragment
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
 
@@ -237,7 +237,7 @@ public class SharedActivity extends AppCompatActivity {
 
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarNewsFragment());
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
 
@@ -248,7 +248,7 @@ public class SharedActivity extends AppCompatActivity {
 
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarSearchFragment());
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
 
@@ -259,7 +259,7 @@ public class SharedActivity extends AppCompatActivity {
 
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarProfileFragment());
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new RecyclerViewDialogsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
 

@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutionException;
 
 //TODO rename class
 //TODO remove comments
-public class RecyclerViewDialogsFragment extends Fragment {
+public class DialogsFragment extends Fragment {
 
     /*id of container in activity*/
     private int mDialogsLayoutId;
