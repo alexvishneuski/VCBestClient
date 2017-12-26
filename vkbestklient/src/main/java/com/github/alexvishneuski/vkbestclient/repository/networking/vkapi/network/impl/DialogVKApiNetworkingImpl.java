@@ -32,7 +32,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         final String methodsTag = "getDialogs()";
 
         Log.d(TAG, "getDialogs called");
-
+//TODO Extract the params ssetting for this method into Interactor
         VKApiGetDialogsParams getDialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
         VKApiUri getDialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
