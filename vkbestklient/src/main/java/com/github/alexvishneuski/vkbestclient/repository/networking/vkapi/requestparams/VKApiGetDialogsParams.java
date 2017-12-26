@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams;
 
 /**
  * used to build request's part related to the method VK API messages.getDialogs

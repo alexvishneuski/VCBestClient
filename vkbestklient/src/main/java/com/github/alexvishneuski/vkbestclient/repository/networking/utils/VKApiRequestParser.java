@@ -1,5 +1,9 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.Parameters;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiAuthParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 /**
