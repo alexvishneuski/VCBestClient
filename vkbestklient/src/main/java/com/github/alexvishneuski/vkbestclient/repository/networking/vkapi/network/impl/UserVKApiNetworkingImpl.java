@@ -4,10 +4,13 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
+import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiRequestParser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users.VKApiUsersGetResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IUserVKApiNetworking;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetUsersParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 import java.util.ArrayList;
@@ -18,19 +21,22 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
     private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
-    public List<VKApiUser> getUsers() {
+    public List<VKApiUser> getUsers(VKApiUri pUri) {
 
         final String methodsTag = "getUsers()";
 
         Log.d(TAG, "getUsers called");
 
-        //TODO create some builder for api
-        final String url = String.format(
-                RepositoryConstants.VKApiConstants.METHOD_BASE_PATH,
-                RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL,
-                RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_USERS_GET,
-                RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN,
-                RepositoryConstants.VKApiConstants.VK_API_VERSION);
+        VKApiGetUsersParams usersParams = VKApiGetUsersParams.getBuilder().build();
+        VKApiUri usersUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodUsersGet.METHOD_NAME)
+                .setParameters(usersParams)
+                .build();
+
+        final String url = VKApiRequestParser.parse(pUri);
+
         Log.d(TAG, "url called: " + url);
 
         @SuppressWarnings("unchecked") final VKApiUsersGetResult result =
@@ -45,7 +51,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         List<VKApiUser> users = new ArrayList<>();
         users.addAll(result.getUsers());
 
-        Log.d(TAG, "getUsers() returned users");
+        Log.d(TAG, "getUsers() returned " + users.size() + " users");
 
         return users;
     }

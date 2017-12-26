@@ -64,6 +64,8 @@ public class DialogVKApi {
     }
 
 
+
+
     /*@Before
     public void setUp() {
         mHttpClient = mock(HttpClient.class);

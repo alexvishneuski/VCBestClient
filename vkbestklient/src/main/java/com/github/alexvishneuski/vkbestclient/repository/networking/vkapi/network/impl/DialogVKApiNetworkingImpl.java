@@ -4,6 +4,9 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiRequestParser;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResponse;
@@ -22,21 +25,17 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
     private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
-    public List<VKApiDialog> getDialogs() {
+    public List<VKApiDialog> getDialogs(VKApiUri pUri) {
 
         final String methodsTag = "getDialogs()";
 
         Log.d(TAG, "getDialogs called");
 
-        final String url = String.format(
-                RepositoryConstants.VKApiConstants.METHOD_BASE_PATH,
-                RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL,
-                RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS,
-                RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN,
-                RepositoryConstants.VKApiConstants.VK_API_VERSION);
+        final String url = VKApiRequestParser.parse(pUri);
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
+                        //instead String url
                         new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
@@ -56,6 +55,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
 
     @WorkerThread
+    @Deprecated
     public VKApiMessagesGetDialogsResponse getDialogList() {
 
         final String methodsTag = "getDialogs()";

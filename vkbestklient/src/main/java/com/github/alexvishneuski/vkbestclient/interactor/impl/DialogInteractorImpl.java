@@ -12,6 +12,9 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiMessage;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.impl.DialogVKApiNetworkingImpl;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
+import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,18 @@ public class DialogInteractorImpl implements IDialogInteractor {
     public List<VKApiDialog> getDialogs() {
         Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
-        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogs());
+
+        final String DIALOG_COUNT = "200";
+
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
+        VKApiUri dialogsUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
+                .setParameters(dialogsParams)
+                .build();
+
+        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogs(dialogsUri));
 
         Log.d(TAG, "getDialogs returns dialogs");
 
