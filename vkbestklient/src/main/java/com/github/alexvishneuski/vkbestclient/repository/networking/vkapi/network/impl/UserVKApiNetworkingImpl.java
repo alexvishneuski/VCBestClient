@@ -27,6 +27,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         Log.d(TAG, "getUsers called");
 
+        //TODO Extract the params ssetting for this method into Interactor, change getUsers() to getUsers(VKAPIparams params)
         VKApiGetUsersParams usersParams = VKApiGetUsersParams.getBuilder().build();
         VKApiUri usersUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
@@ -50,7 +51,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         List<VKApiUser> users = new ArrayList<>();
         users.addAll(result.getUsers());
 
-        Log.d(TAG, "getUsers() returned users");
+        Log.d(TAG, "getUsers() returned "+  users.size()+ " users");
 
         return users;
     }

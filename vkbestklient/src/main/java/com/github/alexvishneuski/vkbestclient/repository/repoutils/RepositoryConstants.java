@@ -105,11 +105,80 @@ public class RepositoryConstants {
 
         String METHOD_NAME = "users.get";
 
-        //parameters keys for "users.getDialogs"
+        //parameter's keys for "users.getDialogs"
         String USER_IDS_KEY = "user_ids";
         String FIELDS_KEY = "fields";
         String NAME_CASE_KEY = "name_case";
+
+        //parameter's values for "users.getDialogs fields_key"
+        String FIELD_PHOTO_ID = "photo_id";
+        String FIELD_VERIFIED = "verified";
+        String FIELD_SEX = "sex";
+        String FIELD_BDATE = "bdate";
+        String FIELD_CITY = "city";
+        String FIELD_COUNTRY = "country";
+        String FIELD_HOME_TOWN = "home_town";
+        String FIELD_HAS_PHOTO = "has_photo";
+        String FIELD_PHOTO_50 = "photo_50";
+        String FIELD_PHOTO_100 = "photo_100";
+        String FIELD_PHOTO_200_ORIG = "photo_200_orig";
+        String FIELD_PHOTO_200 = "photo_200";
+        String FIELD_PHOTO_400_ORIG = "photo_400_orig";
+        String FIELD_PHOTO_MAX = "photo_max";
+        String FIELD_PHOTO_MAX_ORIG = "photo_max_orig";
+        String FIELD_ONLINE = "online";
+        String FIELD_DOMAIN = "domain";
+        String FIELD_HAS_MOBILE = "has_mobile";
+        String FIELD_CONTACTS = "contacts";
+        String FIELD_SITE = "site";
+        String FIELD_EDUCATION = "education";
+        String FIELD_UNIVERSITIES = "universities";
+        String FIELD_SCHOOLS = "schools";
+        String FIELD_STATUS = "status";
+        String FIELD_LAST_SEEN = "last_seen";
+        String FIELD_FOLLOWERS_COUNT = "followers_count";
+        String FIELD_COMMON_COUNT = "common_count";
+        String FIELD_OCCUPATION = "occupation";
+        String FIELD_NICKNAME = "nickname";
+        String FIELD_RELATIVES = "relatives";
+        String FIELD_RELATION = "relation";
+        String FIELD_PERSONAL = "personal";
+        String FIELD_CONNECTIONS = "connections";
+        String FIELD_EXPORTS = "exports";
+        String FIELD_WALL_COMMENTS = "wall_comments";
+        String FIELD_ACTIVITIES = "activities";
+        String FIELD_INTERESTS = "interests";
+        String FIELD_MUSIC = "music";
+        String FIELD_MOVIES = "movies";
+        String FIELD_TV = "tv";
+        String FIELD_BOOKS = "books";
+        String FIELD_GAMES = "games";
+        String FIELD_ABOUT = "about";
+        String FIELD_QUOTES = "quotes";
+        String FIELD_CAN_POST = "can_post";
+        String FIELD_CAN_SEE_ALL_POSTS = "can_see_all_posts";
+        String FIELD_CAN_SEE_AUDIO = "can_see_audio";
+        String FIELD_CAN_WRITE_PRIVATE_MESSAGE = "can_write_private_message";
+        String FIELD_CAN_SEND_FRIEND_REQUEST = "can_send_friend_request";
+        String FIELD_IS_FAVORITE = "is_favorite";
+        String FIELD_IS_HIDDEN_FROM_FEED = "is_hidden_from_feed";
+        String FIELD_TIMEZONE = "timezone";
+        String FIELD_SCREEN_NAME = "screen_name";
+        String FIELD_MAIDEN_NAME = "maiden_name";
+        String FIELD_CROP_PHOTO = "crop_photo";
+        String FIELD_IS_FRIEND = "is_friend";
+        String FIELD_FRIEND_STATUS = "friend_status";
+        String FIELD_CAREER = "career";
+        String FIELD_MILITARY = "military";
+        String FIELD_BLACKLISTED = "blacklisted";
+        String FIELD_BLACKLISTED_BY_ME = "blacklisted_by_me";
+
+        //parameter's values for "users.getDialogs name_case_key"
+        String NAME_CASE_NOM = "nom";
+        String NAME_CASE_GEN = "gen";
+        String NAME_CASE_DAT = "dat";
+        String NAME_CASE_ACC = "acc";
+        String NAME_CASE_INS = "ins";
+        String NAME_CASE_ABL = "abl";
     }
-
-
 }
