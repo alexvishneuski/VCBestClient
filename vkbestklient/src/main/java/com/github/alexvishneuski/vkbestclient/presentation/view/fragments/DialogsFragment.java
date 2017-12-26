@@ -22,6 +22,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO add getting users AsyncTask
 //TODO remove comments
 public class DialogsFragment extends Fragment {
 
@@ -29,10 +30,10 @@ public class DialogsFragment extends Fragment {
 
     private View mView;
 
-    private List<Message> mMessages;
     private List<MessageInDialogListViewModel> mMessagesUI;
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
+    private int mItemCount;
 
 
     @Nullable
@@ -48,10 +49,6 @@ public class DialogsFragment extends Fragment {
         setAdapterToView();
 
         startLoadMessages();
-        // getLoadingsResult();
-
-        // convertMessagesFromDomainToUIModel(mMessages);
-
 
         return mView;
     }
@@ -64,7 +61,6 @@ public class DialogsFragment extends Fragment {
         mView = inflater.inflate(dialogsLayoutId, null);
     }
 
-    /*create recycler view*/
     private void createRecyclerView(View pView) {
         Log.d(TAG, "createRecyclerView");
         mRecyclerView = pView.findViewById(R.id.recycler_view);
@@ -77,31 +73,10 @@ public class DialogsFragment extends Fragment {
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
-    private void executeGetMessagesInDialogListAsyncTasc() {
-        Log.d(TAG, "executeGetMessagesInDialogListAsyncTasc: called");
-        GetMessagesInDialogListAsyncTask getMessagesAsyncTasc = new GetMessagesInDialogListAsyncTask();
-        getMessagesAsyncTasc.execute();
-    }
-
     private void startLoadMessages() {
         Log.d(TAG, "startLoadMessages called");
-
-
-        executeGetMessagesInDialogListAsyncTasc();
-
-        //TODO getting reasult from async tasc and convert to UI model, add getting users AsyncTask
-
-        /*
-
-
-        steps in presentation
-       =======================
-        1. get messagesInDialogList from interactor
-
-        2. convert from datamodel to UI model
-
-        3. return UI MOdel
-        */
+        GetMessagesInDialogListAsyncTask getMessagesAsyncTask = new GetMessagesInDialogListAsyncTask();
+        getMessagesAsyncTask.execute();
     }
 
     private void createAdapter() {
@@ -115,11 +90,14 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void onDataDownload(List<Message> pMessages) {
-        //1. do not reinitialize an existing reference, instead  need to  act directly on the existing reference
+    public void onLoaded(List<Message> pMessages) {
+        //record this value before making any changes to the existing list
+        mItemCount = mAdapter.getItemCount();
+        //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
         mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessages));
         //notify adapter
-        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyItemRangeInserted(mItemCount, pMessages.size());
+        //mAdapter.notifyDataSetChanged();
     }
 
 
@@ -131,7 +109,6 @@ public class DialogsFragment extends Fragment {
         @Override
         protected List<Message> doInBackground(Void... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
-
 
             List<Message> messages = new ArrayList<>();
 
@@ -150,7 +127,7 @@ public class DialogsFragment extends Fragment {
         protected void onPostExecute(List<Message> pMessages) {
             super.onPostExecute(pMessages);
 
-            onDataDownload(pMessages);
+            onLoaded(pMessages);
         }
     }
 }
