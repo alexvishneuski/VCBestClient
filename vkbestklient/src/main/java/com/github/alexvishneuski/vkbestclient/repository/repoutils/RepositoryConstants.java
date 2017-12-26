@@ -8,7 +8,7 @@ public class RepositoryConstants {
         String METHOD_BASE_PATH = "%s/%s?access_token=%s&v=%s";
 
         String VK_API_SERVICE_URL = "https://api.vk.com/method";
-        String VK_API_ACCESS_TOKEN = "bd02994c4534c152b19cf9e3ef82867543346185a82e4610f55a930368edddad9cc037d249a4364df9d84";
+        String VK_API_ACCESS_TOKEN = "1c563fcd6ef2f8e9d105c2ab4321f4376b63f96317144cdeff3fed798f0fe5b6e2eb46bccb0d7ed9da5bc";
         String VK_API_VERSION = "5.69";
 
         /*method names*/
@@ -20,22 +20,35 @@ public class RepositoryConstants {
         String TEST_MESSAGE = "I'm com.github.alexvishneuski.vkbestclient.repository's test";
     }
 
-
     //common signs
-    public static final String SIGN_EQUAL = "=";
-    public static final String SIGN_COLON = ":";
-    public static final String SIGN_SLASH = "/";
-    public static final String SIGN_DOUBLE_SLASH = "//";
-    public static final String SIGN_COLON_DOUBLE_SLASH = "://";
-    public static final String SIGN_AMPERSAND = "&";
-    public static final String SIGN_QUESTION = "?";
-    public static final String SIGN_COMMA = ",";
+    public interface Sign {
 
-    //common url parts
-    public static final String PROTOCOL = "https";
+        String EQUAL = "=";
+        String COLON = ":";
+        String SLASH = "/";
+        String DOUBLE_SLASH = "//";
+        String COLON_DOUBLE_SLASH = "://";
+        String AMPERSAND = "&";
+        String QUESTION = "?";
+        String COMMA = ",";
+    }
 
-    public static final String VK_AUTH_BASE_PATH = "oauth.vk.com/authorize";
-    public static final String VK_METHOD_BASE_PATH = "api.vk.com/method";
+
+    public interface CommonUrlParts{
+        //common url parts
+        String PROTOCOL = "https";
+
+        String VK_AUTH_BASE_PATH = "oauth.vk.com/authorize";
+        String VK_METHOD_BASE_PATH = "api.vk.com/method";
+
+        String ACCESS_TOKEN_KEY = "access_token";
+
+        String VERSION_KEY = "v";
+        String VERSION = "5.69";
+    }
+
+
+
 
     //authorization params keys
     public static final String VK_CLIENT_ID_KEY = "client_id";
@@ -43,7 +56,7 @@ public class RepositoryConstants {
     public static final String VK_DISPLAY_KEY = "display";
     public static final String VK_SCOPE_KEY = "scope";
     public static final String VK_RESPONSE_TYPE_KEY = "response_type";
-    public static final String VK_VERSION_KEY = "v";
+
     public static final String VK_STATE_KEY = "state";
     public static final String VK_REVOKE_KEY = "revoke";
 
@@ -52,7 +65,7 @@ public class RepositoryConstants {
     public static final String VK_REDIRECT_URI = "https://oauth.vk.com/blank.html";
     public static final String VK_DISPLAY = "mobile";
     public static final String VK_RESPONSE_TYPE = "oauth.vk.com/authorize";
-    public static final String VK_VERSION = "5.69";
+
     public static final String VK_STATE = "123456";
     public static final String VK_REVOKE_1 = "1";
 
@@ -75,16 +88,20 @@ public class RepositoryConstants {
     public static final String VK_SCOPE_EMAIL = "email";
     public static final String VK_SCOPE_MARKET = "market";
 
-    //methods
-    public static final String VK_METHOD_MESSAGES_GET_DIALOGS = "messages.getDialogs";
 
-    //parameters for "messages.getDialogs"
-    public static final String VK_OFFSET_KEY = "offset";
-    public static final String VK_COUNT_KEY = "count";
-    public static final String VK_START_MESSAGE_ID_KEY = "start_message_id";
-    public static final String VK_PREVIEW_LENGTH_KEY = "preview_length";
-    public static final String VK_UNREAD_KEY = "unread";
-    public static final String VK_IMPORTANT_KEY = "important";
-    public static final String VK_UNANSWERED_KEY = "unanswered";
+    public interface VkMethodMessagesGetDialogs {
+        //methods
+        String METHOD_NAME = "messages.getDialogs";
+
+        //parameters keys for "messages.getDialogs"
+        String OFFSET_KEY = "offset";
+        String COUNT_KEY = "count";
+        String START_MESSAGE_ID_KEY = "start_message_id";
+        String PREVIEW_LENGTH_KEY = "preview_length";
+        String UNREAD_KEY = "unread";
+        String IMPORTANT_KEY = "important";
+        String UNANSWERED_KEY = "unanswered";
+    }
+
 
 }

@@ -1,6 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
-public class VKApiUri {
+public class VKApiUri  {
 
     private String mProtocol;
     private String mBasePath;
@@ -35,7 +35,7 @@ public class VKApiUri {
         return new VKApiUri().new Builder();
     }
 
-    public class Builder {
+    public class Builder  {
 
         private Builder() {
         }

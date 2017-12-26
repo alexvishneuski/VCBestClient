@@ -1,6 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
-public class VKApiGetDialogsParams implements Parameters {
+public class VKApiGetDialogsParams implements Parameters  {
 
     private String mOffset;
     private String mCount;
