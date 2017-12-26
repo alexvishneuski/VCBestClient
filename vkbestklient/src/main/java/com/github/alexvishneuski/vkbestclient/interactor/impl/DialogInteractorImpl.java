@@ -28,13 +28,13 @@ public class DialogInteractorImpl implements IDialogInteractor {
     private IUserInteractor mUserInteractor = new UserInteractorImpl();
 
     @Override
-    public List<VKApiDialog> getDialogs() {
+    public List<VKApiDialog> getDialogs(int pCount, int pOffset) {
         Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
 
-        final String DIALOG_COUNT = "20";
+        String dialogCount = String.valueOf(pCount);
 
-        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(dialogCount).build();
         VKApiUri dialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
@@ -92,7 +92,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
     * */
 
     @Override
-    public List<Message> getMessagesForDialogList() {
+    public List<Message> getMessagesForDialogList(int pCount, int pOffset) {
         List<Message> domainMessages = new ArrayList<>();
         UserInDialogListViewModel mCurrentUser = null;
         UserInDialogListViewModel mContactUser = null;
@@ -101,7 +101,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         int currentUserId = mUserInteractor.getCurrentUser().getId();
 
 
-        List<VKApiDialog> dialogs = this.getDialogs();
+        List<VKApiDialog> dialogs = this.getDialogs(pCount, pOffset);
 
         for (VKApiDialog dialog : dialogs
                 ) {

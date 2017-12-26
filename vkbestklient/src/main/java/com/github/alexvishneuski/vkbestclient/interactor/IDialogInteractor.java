@@ -15,12 +15,12 @@ public interface IDialogInteractor {
     /**
      * @return list of current user's dialogs, default 20 items
      */
-    List<VKApiDialog> getDialogs();
+    List<VKApiDialog> getDialogs(int pCount, int pOffset);
 
     /**
      * @return List<Message>
      */
-    List<Message> getMessagesForDialogList();
+    List<Message> getMessagesForDialogList(int pCount, int pOffset);
 
 
     /**

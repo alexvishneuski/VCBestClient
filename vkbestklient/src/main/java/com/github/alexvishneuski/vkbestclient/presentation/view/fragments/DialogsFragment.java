@@ -26,6 +26,9 @@ import java.util.List;
 //TODO remove comments
 public class DialogsFragment extends Fragment {
 
+    public static final int LOAD_DIALOGS_COUNT = 20;
+    public static final int LOAD_DIALOGS_OFFSET = 0;
+
     public final String TAG = this.getClass().getSimpleName();
 
     private View mView;
@@ -76,7 +79,7 @@ public class DialogsFragment extends Fragment {
     private void startLoadMessages() {
         Log.d(TAG, "startLoadMessages called");
         GetMessagesInDialogListAsyncTask getMessagesAsyncTask = new GetMessagesInDialogListAsyncTask();
-        getMessagesAsyncTask.execute();
+        getMessagesAsyncTask.execute(LOAD_DIALOGS_COUNT, LOAD_DIALOGS_OFFSET);
     }
 
     private void createAdapter() {
@@ -102,18 +105,21 @@ public class DialogsFragment extends Fragment {
 
 
     //TODO to deliverance from static maybe using Threads?
-    public class GetMessagesInDialogListAsyncTask extends AsyncTask<Void, Void, List<Message>> {
+    public class GetMessagesInDialogListAsyncTask extends AsyncTask<Integer, Void, List<Message>> {
 
         private static final String ASYNC_TASK_TAG = "GetDialogListAT";
 
         @Override
-        protected List<Message> doInBackground(Void... pArgs) {
+        protected List<Message> doInBackground(Integer... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+
+            int count = pArgs[0];
+            int offset = pArgs[1];
 
             List<Message> messages = new ArrayList<>();
 
             IDialogInteractor mDialogInteractor = new DialogInteractorImpl();
-            messages.addAll(mDialogInteractor.getMessagesForDialogList());
+            messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");
             System.out.println("printed " + messages.size() + " messages");
