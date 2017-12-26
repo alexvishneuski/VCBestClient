@@ -21,13 +21,12 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
     private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
-    public List<VKApiUser> getUsers() {
+    public List<VKApiUser> getUsers(VKApiUri pUri) {
 
         final String methodsTag = "getUsers()";
 
         Log.d(TAG, "getUsers called");
 
-        //TODO Extract the params ssetting for this method into Interactor, change getUsers() to getUsers(VKAPIparams params)
         VKApiGetUsersParams usersParams = VKApiGetUsersParams.getBuilder().build();
         VKApiUri usersUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
@@ -35,7 +34,8 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
                 .setMethod(RepositoryConstants.VkMethodUsersGet.METHOD_NAME)
                 .setParameters(usersParams)
                 .build();
-        final String url = VKApiRequestParser.parse(usersUri);
+
+        final String url = VKApiRequestParser.parse(pUri);
 
         Log.d(TAG, "url called: " + url);
 
@@ -51,7 +51,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         List<VKApiUser> users = new ArrayList<>();
         users.addAll(result.getUsers());
 
-        Log.d(TAG, "getUsers() returned "+  users.size()+ " users");
+        Log.d(TAG, "getUsers() returned " + users.size() + " users");
 
         return users;
     }

@@ -25,22 +25,13 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
     private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
-    public List<VKApiDialog> getDialogs() {
-
-        final String DIALOG_COUNT = "200";
+    public List<VKApiDialog> getDialogs(VKApiUri pUri) {
 
         final String methodsTag = "getDialogs()";
 
         Log.d(TAG, "getDialogs called");
-        //TODO Extract the params ssetting for this method into Interactor, change getUsers() to getUsers(VKAPIparams params)
-        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
-        VKApiUri dialogsUri = VKApiUri.getBuilder()
-                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
-                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
-                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
-                .setParameters(dialogsParams)
-                .build();
-        final String url = VKApiRequestParser.parse(dialogsUri);
+
+        final String url = VKApiRequestParser.parse(pUri);
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
