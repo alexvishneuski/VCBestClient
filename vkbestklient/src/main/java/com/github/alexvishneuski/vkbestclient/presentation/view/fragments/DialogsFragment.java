@@ -13,41 +13,26 @@ import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
-import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
-import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageDirectionViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
-import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-//TODO rename class
 //TODO remove comments
 public class DialogsFragment extends Fragment {
 
-    /*id of container in activity*/
-    private int mDialogsLayoutId;
-
-    /*view of this fragment*/
-    private View mView;
-
-
-    public static final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
-
     public final String TAG = this.getClass().getSimpleName();
+
+    private View mView;
 
     private List<Message> mMessages;
     private List<MessageInDialogListViewModel> mMessagesUI;
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
-
-    private GetMessagesInDialogListAsyncTask mGetMessagesAsyncTasc;
 
 
     @Nullable
@@ -59,24 +44,24 @@ public class DialogsFragment extends Fragment {
 
         createRecyclerView(mView);
         setLayoutManagerToRecyclerView();
-
-        startLoadMessages();
-        getLoadingsResult();
-
-        convertMessagesFromDomainToUIModel();
-
         createAdapter();
         setAdapterToView();
+
+        startLoadMessages();
+        // getLoadingsResult();
+
+        // convertMessagesFromDomainToUIModel(mMessages);
+
 
         return mView;
     }
 
 
     private void initView(LayoutInflater inflater) {
-    /*find id*/
-        mDialogsLayoutId = R.layout.fragment_recycler_view;
-        /*create view*/
-        mView = inflater.inflate(mDialogsLayoutId, null);
+
+        int dialogsLayoutId = R.layout.fragment_recycler_view;
+
+        mView = inflater.inflate(dialogsLayoutId, null);
     }
 
     /*create recycler view*/
@@ -88,34 +73,26 @@ public class DialogsFragment extends Fragment {
 
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
     private void executeGetMessagesInDialogListAsyncTasc() {
         Log.d(TAG, "executeGetMessagesInDialogListAsyncTasc: called");
-        mGetMessagesAsyncTasc = new GetMessagesInDialogListAsyncTask();
-        mGetMessagesAsyncTasc.execute();
+        GetMessagesInDialogListAsyncTask getMessagesAsyncTasc = new GetMessagesInDialogListAsyncTask();
+        getMessagesAsyncTasc.execute();
     }
 
     private void startLoadMessages() {
         Log.d(TAG, "startLoadMessages called");
-        mMessagesUI = new ArrayList<>();
+
 
         executeGetMessagesInDialogListAsyncTasc();
 
         //TODO getting reasult from async tasc and convert to UI model, add getting users AsyncTask
 
         /*
-        UIModel
-       ======================
-        private Long mId;
-        private UserInDialogListViewModel mCurrentUser;
-        private UserInDialogListViewModel mContactUser;
-        private MessageDirectionViewModel mMessageDirection;
-        private String mMessageSendingDate;
-        private String mMessageTitle;
-        private String mMessageBody;
-        private boolean mIsMessageRead;
+
 
         steps in presentation
        =======================
@@ -125,76 +102,11 @@ public class DialogsFragment extends Fragment {
 
         3. return UI MOdel
         */
-
-
-       /*
-
-        steps in interactor
-       =======================
-
-       1. get data from Repository
-            AsyncTaks:
-            1.1 AT for currentUser(name, avatar)
-            getCurrentUser().getAvatarUrl()
-
-            1.2. AT get messagesInDialog
-
-            1.3. AT for each contactUser(name, avatar)
-            getConactUSer();
-
-       2. build datamodel
-
-       3. return datamodel(public methods, methods return repo-models should be private/protected)
-
-
-       steps in repository
-       =======================
-
-        1. executing interactor's requests
-
-        ??? 2. convert every result to datamodel
-       */
-
     }
 
-    private void getLoadingsResult() {
-        Log.d(TAG, "getLoadingsResult: called");
-
-        try {
-            Log.d(TAG, "onCreateView: getting result from AsyncTasc");
-            //TODO run asynctask like async task. It work in UI thread
-            mMessages = mGetMessagesAsyncTasc.get();
-            Log.d(TAG, "onCreateView: got result from AsyncTasc: returned" + mMessages.size());
-        } catch (InterruptedException pE) {
-            pE.printStackTrace();
-        } catch (ExecutionException pE) {
-            pE.printStackTrace();
-        }
-    }
-
-    private void convertMessagesFromDomainToUIModel() {
-        Log.d(TAG, "convertMessagesFromDomainToUIModel: called");
-        mMessagesUI = new ArrayList<>();
-
-        for (Message message : mMessages
-                ) {
-            mMessagesUI.add(new MessageInDialogListViewModel(
-                    //todo to think if to apply setters or Builder instead constructor
-                    //todo change to real data
-                    new UserInDialogListViewModel("CurrentUserName", TEST_VIEW_URL),
-                    new UserInDialogListViewModel("ContactUserName", TEST_VIEW_URL),
-
-                    Converter.convertUnixtimeToString(message.getMessageSendingDate(), Constants.DateFormat.PATTERN_DD_MM),
-                    message.getMessageBody(),
-                    (MessageDirection.INCOMING == message.getMessageDirection() ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING),
-                    message.isMessageRead()
-            ));
-        }
-    }
-
-    /*create adapter and send him messageList*/
     private void createAdapter() {
         Log.d(TAG, "createAdapter");
+        mMessagesUI = new ArrayList<>();
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
     }
 
@@ -203,13 +115,23 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private static class GetMessagesInDialogListAsyncTask extends AsyncTask<Void, Void, List<Message>> {
+    public void onDataDownload(List<Message> pMessages) {
+        //1. do not reinitialize an existing reference, instead  need to  act directly on the existing reference
+        mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessages));
+        //notify adapter
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+    //TODO to deliverance from static maybe using Threads?
+    public class GetMessagesInDialogListAsyncTask extends AsyncTask<Void, Void, List<Message>> {
 
         private static final String ASYNC_TASK_TAG = "GetDialogListAT";
 
         @Override
-        protected List<Message> doInBackground(Void... voids) {
+        protected List<Message> doInBackground(Void... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+
 
             List<Message> messages = new ArrayList<>();
 
@@ -222,6 +144,13 @@ public class DialogsFragment extends Fragment {
             Log.d(ASYNC_TASK_TAG, "doInBackground: finish messageList print");
 
             return messages;
+        }
+
+        @Override
+        protected void onPostExecute(List<Message> pMessages) {
+            super.onPostExecute(pMessages);
+
+            onDataDownload(pMessages);
         }
     }
 }

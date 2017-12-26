@@ -86,6 +86,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         //TODO add imageloader
         NOrda.INSTANCE.load(messageModel.getContactUser().getUserAvatarPath()).into(pHolder.getContactUserAvatarPath());
+        NOrda.INSTANCE.load(messageModel.getCurrentUser().getUserAvatarPath()).into(pHolder.getCurrentUserAvatarPath());
     }
 
     @Override

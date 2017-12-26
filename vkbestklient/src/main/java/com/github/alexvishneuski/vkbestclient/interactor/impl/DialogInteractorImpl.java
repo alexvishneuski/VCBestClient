@@ -32,7 +32,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
 
-        final String DIALOG_COUNT = "200";
+        final String DIALOG_COUNT = "20";
 
         VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
         VKApiUri dialogsUri = VKApiUri.getBuilder()
@@ -49,6 +49,23 @@ public class DialogInteractorImpl implements IDialogInteractor {
         return dialogs;
     }
 
+    /*steps in interactor
+       =======================
+
+     1. get data from Repository
+            AsyncTaks:
+            1.1 AT for currentUser(name, avatar)
+            getCurrentUser().getAvatarUrl()
+
+            1.2. AT get messagesInDialog
+
+            1.3. AT for each contactUser(name, avatar)
+           getConactUSer();
+
+      2. build datamodel
+
+      3. return datamodel(public methods, methods return repo-models should be private/protected)
+    */
 
     /*
     Message Domain  (VKAPI/DB-> Interactor)
