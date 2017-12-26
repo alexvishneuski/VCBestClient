@@ -27,11 +27,13 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
     @WorkerThread
     public List<VKApiDialog> getDialogs() {
 
+        String DIALOG_COUNT = "20";
+
         final String methodsTag = "getDialogs()";
 
         Log.d(TAG, "getDialogs called");
 
-        VKApiGetDialogsParams getDialogsParams = VKApiGetDialogsParams.getBuilder().build();
+        VKApiGetDialogsParams getDialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
         VKApiUri getDialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)

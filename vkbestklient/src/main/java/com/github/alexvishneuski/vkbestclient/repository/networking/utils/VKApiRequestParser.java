@@ -1,9 +1,5 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
-import com.github.alexvishneuski.vkbestclient.repository.networking.utils.Parameters;
-import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiAuthParams;
-import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiGetDialogsParams;
-import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 public class VKApiRequestParser {
@@ -47,10 +43,11 @@ public class VKApiRequestParser {
         uriBuilder
                 .append(RepositoryConstants.CommonUrlParts.ACCESS_TOKEN_KEY)
                 .append(RepositoryConstants.Sign.EQUAL)
-                .append(RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN);
+                .append(RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN)
+                .append(RepositoryConstants.Sign.AMPERSAND);
 
         uriBuilder
-                .append(RepositoryConstants.Sign.AMPERSAND)
+
                 .append(RepositoryConstants.CommonUrlParts.VERSION_KEY)
                 .append(RepositoryConstants.Sign.EQUAL)
                 .append(RepositoryConstants.CommonUrlParts.VERSION);
@@ -72,10 +69,15 @@ public class VKApiRequestParser {
             paramsBuilder
                     .append(RepositoryConstants.VkMethodMessagesGetDialogs.OFFSET_KEY)
                     .append(RepositoryConstants.Sign.EQUAL)
-                    .append(pParams.getOffset());
+                    .append(pParams.getOffset())
+                    .append(RepositoryConstants.Sign.AMPERSAND);
         }
         if (pParams.getCount() != null) {
-//
+            paramsBuilder
+                    .append(RepositoryConstants.VkMethodMessagesGetDialogs.COUNT_KEY)
+                    .append(RepositoryConstants.Sign.EQUAL)
+                    .append(pParams.getCount())
+                    .append(RepositoryConstants.Sign.AMPERSAND);
         }
         if (pParams.getStartMessageId() != null) {
 //
