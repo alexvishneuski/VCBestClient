@@ -34,7 +34,7 @@ public class RepositoryConstants {
     }
 
 
-    public interface CommonUrlParts{
+    public interface CommonUrlParts {
         //common url parts
         String PROTOCOL = "https";
 
@@ -46,8 +46,6 @@ public class RepositoryConstants {
         String VERSION_KEY = "v";
         String VERSION = "5.69";
     }
-
-
 
 
     //authorization params keys
@@ -90,7 +88,7 @@ public class RepositoryConstants {
 
 
     public interface VkMethodMessagesGetDialogs {
-        //methods
+
         String METHOD_NAME = "messages.getDialogs";
 
         //parameters keys for "messages.getDialogs"
@@ -101,6 +99,16 @@ public class RepositoryConstants {
         String UNREAD_KEY = "unread";
         String IMPORTANT_KEY = "important";
         String UNANSWERED_KEY = "unanswered";
+    }
+
+    public interface VkMethodUsersGet {
+
+        String METHOD_NAME = "users.get";
+
+        //parameters keys for "users.getDialogs"
+        String USER_IDS_KEY = "user_ids";
+        String FIELDS_KEY = "fields";
+        String NAME_CASE_KEY = "name_case";
     }
 
 
