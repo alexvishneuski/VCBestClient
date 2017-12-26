@@ -27,12 +27,12 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
     @WorkerThread
     public List<VKApiDialog> getDialogs() {
 
-        String DIALOG_COUNT = "20";
+        final String DIALOG_COUNT = "200";
 
         final String methodsTag = "getDialogs()";
 
         Log.d(TAG, "getDialogs called");
-//TODO Extract the params ssetting for this method into Interactor
+        //TODO Extract the params ssetting for this method into Interactor
         VKApiGetDialogsParams getDialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
         VKApiUri getDialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
@@ -40,7 +40,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
                 .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
                 .setParameters(getDialogsParams)
                 .build();
-        String url = VKApiRequestParser.parse(getDialogsUri);
+        final String url = VKApiRequestParser.parse(getDialogsUri);
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
@@ -62,7 +62,9 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         return dialogs;
     }
 
+
     @WorkerThread
+    @Deprecated
     public VKApiMessagesGetDialogsResponse getDialogList() {
 
         final String methodsTag = "getDialogs()";

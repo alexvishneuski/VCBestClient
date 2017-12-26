@@ -2,6 +2,9 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
+/**
+ * used to build uri for any request related to VK API (through extracting request's params)
+ */
 public class VKApiRequestParser {
 
     public VKApiRequestParser() {
@@ -35,7 +38,7 @@ public class VKApiRequestParser {
         } else if (isServiceMethod
                 //if message.getDialogs params
                 && (params instanceof VKApiGetDialogsParams)) {
-            //TODO EXTRACT TO SEPARATE METHOD
+            //parsing message.getDialogs params
             uriBuilder.append(parseParams((VKApiGetDialogsParams) params));
         }
         //if ( (uriBuilder.charAt(uriBuilder.length() - 1)).equals(RepositoryConstants.Sign.QUESTION)){}

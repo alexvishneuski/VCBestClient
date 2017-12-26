@@ -1,6 +1,9 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
-public class VKApiGetDialogsParams implements Parameters  {
+/**
+ * used to build request's part related to the method VK API messages.getDialogs
+ */
+public class VKApiGetDialogsParams implements Parameters {
 
     private String mOffset;
     private String mCount;
@@ -94,11 +97,9 @@ public class VKApiGetDialogsParams implements Parameters  {
             return this;
         }
 
-
         public VKApiGetDialogsParams build() {
 
             return VKApiGetDialogsParams.this;
         }
-
     }
 }

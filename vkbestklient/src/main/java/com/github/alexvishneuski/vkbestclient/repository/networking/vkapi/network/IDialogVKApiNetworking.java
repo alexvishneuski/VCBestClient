@@ -9,5 +9,6 @@ public interface IDialogVKApiNetworking {
 
     List<VKApiDialog> getDialogs();
 
+    @Deprecated
     VKApiMessagesGetDialogsResponse getDialogList();
 }

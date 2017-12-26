@@ -1,5 +1,9 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
+
+/**
+ * used to build request's part related to authorization in VK API
+ */
 public class VKApiAuthParams implements Parameters {
 
     private String mClientId;

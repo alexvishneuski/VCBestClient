@@ -1,5 +1,8 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.utils;
 
+/**
+ * used to build request's common part to VK API
+ */
 public class VKApiUri  {
 
     private String mProtocol;
