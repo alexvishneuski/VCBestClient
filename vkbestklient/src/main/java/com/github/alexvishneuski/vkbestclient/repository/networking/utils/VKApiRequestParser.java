@@ -6,6 +6,9 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.reques
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * used to build uri for any request related to VK API (through extracting request's params)
  */
@@ -14,6 +17,7 @@ public class VKApiRequestParser {
     public VKApiRequestParser() {
     }
 
+    //the highest level method
     public static String parse(VKApiUri pUri) {
 
         StringBuilder uriBuilder = new StringBuilder();
@@ -64,27 +68,29 @@ public class VKApiRequestParser {
         return resultUri;
     }
 
+    //one-level-nested method
     private static StringBuilder parseParams(VKApiAuthParams pParams) {
 
         return null;
     }
 
+    //one-level-nested method
     private static StringBuilder parseParams(VKApiGetDialogsParams pParams) {
+
         StringBuilder paramsBuilder = new StringBuilder();
+
+        //HashMap is not used because the order is impportant
+        List<String> paramsKeys = new ArrayList<>();
+        List<String> paramsValues = new ArrayList<>();
+
         //parsing message.getDialogs params
         if (pParams.getOffset() != null) {
-            paramsBuilder
-                    .append(RepositoryConstants.VkMethodMessagesGetDialogs.OFFSET_KEY)
-                    .append(RepositoryConstants.Sign.EQUAL)
-                    .append(pParams.getOffset())
-                    .append(RepositoryConstants.Sign.AMPERSAND);
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetDialogs.OFFSET_KEY);
+            paramsValues.add(pParams.getOffset());
         }
         if (pParams.getCount() != null) {
-            paramsBuilder
-                    .append(RepositoryConstants.VkMethodMessagesGetDialogs.COUNT_KEY)
-                    .append(RepositoryConstants.Sign.EQUAL)
-                    .append(pParams.getCount())
-                    .append(RepositoryConstants.Sign.AMPERSAND);
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetDialogs.COUNT_KEY);
+            paramsValues.add(pParams.getCount());
         }
         if (pParams.getStartMessageId() != null) {
 //
@@ -102,6 +108,24 @@ public class VKApiRequestParser {
 //
         }
 
+        paramsBuilder.append(concatParameters(paramsKeys, paramsValues));
+
         return paramsBuilder;
+    }
+
+    //two-level-nested method
+    private static StringBuilder concatParameters(List<String> pParamsKeys, List<String> pParamsValues) {
+        StringBuilder concatBuilder = new StringBuilder();
+
+        for (int i = 0; i < pParamsKeys.size(); i++) {
+
+            concatBuilder
+                    .append(pParamsKeys.get(i))
+                    .append(RepositoryConstants.Sign.EQUAL)
+                    .append(pParamsValues.get(i))
+                    .append(RepositoryConstants.Sign.AMPERSAND);
+        }
+
+        return concatBuilder;
     }
 }
