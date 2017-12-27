@@ -2,7 +2,6 @@ package com.github.alexvishneuski.vkbestclient.interactor.impl;
 
 import android.util.Log;
 
-import com.github.alexvishneuski.vkbestclient.datamodel.Dialog;
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
@@ -128,10 +127,18 @@ public class DialogInteractorImpl implements IDialogInteractor {
     }
 
     @Override
-    public List<Dialog> getDialogs(int pCount) {
+    public int getDialogsTotalCount() {
 
-        return null;
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().build();
+        VKApiUri dialogsUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
+                .setParameters(dialogsParams)
+                .build();
+
+        int dialogCount = mDialogVKApiNetworkingImpl.getTotalDialogsCount(dialogsUri);
+
+        return dialogCount;
     }
-
-
 }

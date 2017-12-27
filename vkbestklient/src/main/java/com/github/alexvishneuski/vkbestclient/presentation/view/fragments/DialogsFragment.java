@@ -24,12 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO add getting users AsyncTask
-//TODO remove comments
+
 public class DialogsFragment extends Fragment {
 
     public final int LOAD_DIALOGS_COUNT = 20;
-    public int LOAD_DIALOGS_OFFSET = 0;
-    public final int OFFSET_LEVERAGE = 20;
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -39,16 +37,18 @@ public class DialogsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    private int mItemCount;
 
-    RecyclerView.OnScrollListener mOnScrollListener;
+    private RecyclerView.OnScrollListener mOnScrollListener;
     int mVisibleItemCount;
     int mTotalItemCount;
-    int mFirstVisibleItems;
+    int mFirstVisibleItemPosition;
     private boolean mIsLoading = true;
 
-    GetMessagesInDialogListAsyncTask mLoadTask;
+    private IDialogInteractor mDialogInteractor = new DialogInteractorImpl();
 
+    private LoadDialogsAT mLoadTask;
+
+    private int mApiDialogsTotalCount;
 
     @Nullable
     @Override
@@ -63,13 +63,15 @@ public class DialogsFragment extends Fragment {
         createAdapter();
         setAdapterToView();
 
-        startLoadMessages();
+        loadDialogsTotalCount();
+        loadMessagesFirstTime();
 
         addOnScrollListener();
-        mRecyclerView.setOnScrollListener(mOnScrollListener);
+        setOnScrollListener();
 
         return mView;
     }
+
 
     private void addOnScrollListener() {
         mOnScrollListener = new RecyclerView.OnScrollListener()
@@ -79,18 +81,24 @@ public class DialogsFragment extends Fragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                mVisibleItemCount = mLayoutManager.getChildCount();//смотрим сколько элементов на экране
-                mTotalItemCount = mLayoutManager.getItemCount();//сколько всего элементов
-                mFirstVisibleItems = mLayoutManager.findFirstVisibleItemPosition();//какая позиция первого элемента
+                mVisibleItemCount = mLayoutManager.getChildCount();
+                mTotalItemCount = mLayoutManager.getItemCount();
+                mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
 
-                if (!mIsLoading) {//проверяем, грузим мы что-то или нет, эта переменная должна быть вне класса  OnScrollListener
-                    if ((mVisibleItemCount + mFirstVisibleItems) >= mTotalItemCount) {
-                        mIsLoading = true;//ставим флаг что мы попросили еще элемены
+                if (!mIsLoading) {
+                    if ((mVisibleItemCount + mFirstVisibleItemPosition) >= mTotalItemCount) {
+                        mIsLoading = true;
 
                         if (mLoadTask != null) {
-                            mLoadTask = new GetMessagesInDialogListAsyncTask();
+                            mLoadTask = new LoadDialogsAT();
                         }
-                            mLoadTask.execute(LOAD_DIALOGS_COUNT, mTotalItemCount);//нужно еще элементов и с какой позиции начинать загрузку
+                        if (LOAD_DIALOGS_COUNT + mTotalItemCount <= mApiDialogsTotalCount) {
+                            assert mLoadTask != null;
+                            mLoadTask.execute(LOAD_DIALOGS_COUNT, mTotalItemCount);
+                        } else {
+                            assert mLoadTask != null;
+                            mLoadTask.execute((mApiDialogsTotalCount - mTotalItemCount), mTotalItemCount);
+                        }
 
                     }
                 }
@@ -99,6 +107,9 @@ public class DialogsFragment extends Fragment {
         };
     }
 
+    private void setOnScrollListener() {
+        mRecyclerView.setOnScrollListener(mOnScrollListener);
+    }
 
     private void addDevider() {
         RecyclerView.ItemDecoration itemDecoration = new
@@ -121,20 +132,15 @@ public class DialogsFragment extends Fragment {
 
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
-
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
         mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
-    private void startLoadMessages() {
-        Log.d(TAG, "startLoadMessages called");
-        mLoadTask = new GetMessagesInDialogListAsyncTask();
-        executeLoading();
-    }
 
-    private void executeLoading() {
-        mLoadTask.execute(LOAD_DIALOGS_COUNT, LOAD_DIALOGS_OFFSET);
+    private void loadMessagesFirstTime() {
+        Log.d(TAG, "loadMessagesFirstTime called");
+        mLoadTask = new LoadDialogsAT();
+        mLoadTask.execute(LOAD_DIALOGS_COUNT, 0);
     }
 
     private void createAdapter() {
@@ -150,21 +156,28 @@ public class DialogsFragment extends Fragment {
 
     public void onLoaded(List<Message> pMessages) {
         //record this value before making any changes to the existing list
-        mItemCount = mAdapter.getItemCount();
+        int itemCount = mAdapter.getItemCount();
         //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
         mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessages));
         //notify adapter
-        mAdapter.notifyItemRangeInserted(mItemCount, pMessages.size());
+        mAdapter.notifyItemRangeInserted(itemCount, pMessages.size());
         //mAdapter.notifyDataSetChanged();
-
         mIsLoading = false;
     }
 
+    private void loadDialogsTotalCount() {
+        LoadDialogsCountAT loadCountTask = new LoadDialogsCountAT();
+        loadCountTask.execute();
+    }
+
+    private void onCountLoaded(Integer pCount) {
+        mApiDialogsTotalCount = pCount;
+    }
 
     //TODO to deliverance from static maybe using Threads?
-    public class GetMessagesInDialogListAsyncTask extends AsyncTask<Integer, Void, List<Message>> {
+    public class LoadDialogsAT extends AsyncTask<Integer, Void, List<Message>> {
 
-        private static final String ASYNC_TASK_TAG = "GetDialogListAT";
+        private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
 
         @Override
         protected List<Message> doInBackground(Integer... pArgs) {
@@ -174,14 +187,8 @@ public class DialogsFragment extends Fragment {
             int offset = pArgs[1];
 
             List<Message> messages = new ArrayList<>();
-
-            IDialogInteractor mDialogInteractor = new DialogInteractorImpl();
             messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));
-
-            Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");
-            System.out.println("printed " + messages.size() + " messages");
-            System.out.println(messages);
-            Log.d(ASYNC_TASK_TAG, "doInBackground: finish messageList print");
+            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + messages.size() + " messages");
 
             return messages;
         }
@@ -189,8 +196,27 @@ public class DialogsFragment extends Fragment {
         @Override
         protected void onPostExecute(List<Message> pMessages) {
             super.onPostExecute(pMessages);
-
             onLoaded(pMessages);
+        }
+    }
+
+    public class LoadDialogsCountAT extends AsyncTask<Void, Void, Integer> {
+
+        private static final String ASYNC_TASK_TAG = "LoadDialogsCountAT";
+
+        @Override
+        protected Integer doInBackground(Void... pVoids) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+            int dialogsCount = mDialogInteractor.getDialogsTotalCount();
+            Log.d(ASYNC_TASK_TAG, "doInBackground returned " + dialogsCount + " dialogs");
+
+            return dialogsCount;
+        }
+
+        @Override
+        protected void onPostExecute(Integer pCount) {
+            super.onPostExecute(pCount);
+            onCountLoaded(pCount);
         }
     }
 }

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 )
 public class DialogVKApi {
 
-    public final String TAG = this.getClass().getSimpleName();
+    /*public final String TAG = this.getClass().getSimpleName();
 
     private VKApiMessagesGetDialogsResponse mResponse;
 
@@ -62,7 +62,7 @@ public class DialogVKApi {
         }
 
     }
-
+*/
 
 
 
