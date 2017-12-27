@@ -4,15 +4,12 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
 import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiRequestParser;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResponse;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
-import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +22,8 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
     private final String TAG = this.getClass().getSimpleName();
 
     @WorkerThread
+    @Override
     public List<VKApiDialog> getDialogs(VKApiUri pUri) {
-
-        final String methodsTag = "getDialogs()";
 
         Log.d(TAG, "getDialogs called");
 
@@ -35,11 +31,10 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
-                        //instead String url
                         new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
-            final String errorMessage = TAG + " in " + methodsTag + ": " + result.getError();
+            final String errorMessage = TAG + result.getError();
             //TODO refactor to: throw new VKApiException, change return to VKApiDialog object
             throw new VKApiException(errorMessage);
         }
@@ -53,26 +48,27 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         return dialogs;
     }
 
-
     @WorkerThread
-    @Deprecated
-    public VKApiMessagesGetDialogsResponse getDialogList() {
+    @Override
+    public int getTotalDialogsCount(VKApiUri pUri) {
 
-        final String methodsTag = "getDialogs()";
+        Log.d(TAG, "getTotalDialogsCount() called with: pUri = [" + pUri + "]");
 
-        Log.d(TAG, "getDialogs called");
+        final String url = VKApiRequestParser.parse(pUri);
 
-        final String url = String.format(
-                RepositoryConstants.VKApiConstants.METHOD_BASE_PATH,
-                RepositoryConstants.VKApiConstants.VK_API_SERVICE_URL,
-                RepositoryConstants.VKApiConstants.VK_API_METHOD_NAME_MESSAGES_GET_DIALOGS,
-                RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN,
-                RepositoryConstants.VKApiConstants.VK_API_VERSION);
+        @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
+                (VKApiMessagesGetDialogsResult)
+                        new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
 
-        @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResponse response =
-                (VKApiMessagesGetDialogsResponse)
-                        new HttpClient().request(url, VKApiMessagesGetDialogsResponse.class);
+        if (result.getError() != null) {
+            final String errorMessage = TAG + result.getError();
+            //TODO refactor to: throw new VKApiException, change return to VKApiDialog object
+            throw new VKApiException(errorMessage);
+        }
 
-        return response;
+        int dialogCount = result.getResponse().getDialogCount();
+        Log.d(TAG, "getTotalDialogsCount returned " + dialogCount + " dialogs");
+
+        return dialogCount;
     }
 }

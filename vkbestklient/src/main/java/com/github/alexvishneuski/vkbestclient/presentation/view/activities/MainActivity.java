@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         /*creating view*/
         setContentView(R.layout.activity_main);
 
-        executeGetUsersAsyncTasc();
+     /*   executeGetUsersAsyncTasc();
 
         executeGetMessagesInDialogListAsyncTasc();
-
+*/
         goToAuthActivity();
     }
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void executeGetMessagesInDialogListAsyncTasc() {
+  /*  private void executeGetMessagesInDialogListAsyncTasc() {
         Log.d(TAG, "executeGetMessagesInDialogListAsyncTasc: called");
         GetMessagesInDialogListAsyncTasc getMessagesAsyncTasc = new GetMessagesInDialogListAsyncTasc();
         getMessagesAsyncTasc.execute();
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "executeGetUsersAsyncTasc: called");
         GetUsersAsyncTasc getUsersAsyncTasc = new GetUsersAsyncTasc();
         getUsersAsyncTasc.execute();
-    }
+    }*/
 
 
     //TODO remove asynctasks out of activity
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             List<Message> messages = new ArrayList<>();
 
             IDialogInteractor dialogInteractor = new DialogInteractorImpl();
-            messages.addAll(dialogInteractor.getMessagesForDialogList());
+            messages.addAll(dialogInteractor.getMessagesForDialogList(0, 0));
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");
             System.out.println("printed " + messages.size() + " messages");

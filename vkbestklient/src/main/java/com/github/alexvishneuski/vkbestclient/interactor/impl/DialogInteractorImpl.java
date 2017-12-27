@@ -2,7 +2,6 @@ package com.github.alexvishneuski.vkbestclient.interactor.impl;
 
 import android.util.Log;
 
-import com.github.alexvishneuski.vkbestclient.datamodel.Dialog;
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
@@ -28,13 +27,14 @@ public class DialogInteractorImpl implements IDialogInteractor {
     private IUserInteractor mUserInteractor = new UserInteractorImpl();
 
     @Override
-    public List<VKApiDialog> getDialogs() {
+    public List<VKApiDialog> getDialogs(int pCount, int pOffset) {
         Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
 
-        final String DIALOG_COUNT = "200";
+        String dialogCount = String.valueOf(pCount);
+        String dialogOffset = String.valueOf(pOffset);
 
-        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(DIALOG_COUNT).build();
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(dialogCount).setOffset(dialogOffset).build();
         VKApiUri dialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
@@ -49,6 +49,23 @@ public class DialogInteractorImpl implements IDialogInteractor {
         return dialogs;
     }
 
+    /*steps in interactor
+       =======================
+
+     1. get data from Repository
+            AsyncTaks:
+            1.1 AT for currentUser(name, avatar)
+            getCurrentUser().getAvatarUrl()
+
+            1.2. AT get messagesInDialog
+
+            1.3. AT for each contactUser(name, avatar)
+           getConactUSer();
+
+      2. build datamodel
+
+      3. return datamodel(public methods, methods return repo-models should be private/protected)
+    */
 
     /*
     Message Domain  (VKAPI/DB-> Interactor)
@@ -75,7 +92,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
     * */
 
     @Override
-    public List<Message> getMessagesForDialogList() {
+    public List<Message> getMessagesForDialogList(int pCount, int pOffset) {
         List<Message> domainMessages = new ArrayList<>();
         UserInDialogListViewModel mCurrentUser = null;
         UserInDialogListViewModel mContactUser = null;
@@ -84,7 +101,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         int currentUserId = mUserInteractor.getCurrentUser().getId();
 
 
-        List<VKApiDialog> dialogs = this.getDialogs();
+        List<VKApiDialog> dialogs = this.getDialogs(pCount, pOffset);
 
         for (VKApiDialog dialog : dialogs
                 ) {
@@ -110,10 +127,18 @@ public class DialogInteractorImpl implements IDialogInteractor {
     }
 
     @Override
-    public List<Dialog> getDialogs(int pCount) {
+    public int getDialogsTotalCount() {
 
-        return null;
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().build();
+        VKApiUri dialogsUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
+                .setParameters(dialogsParams)
+                .build();
+
+        int dialogCount = mDialogVKApiNetworkingImpl.getTotalDialogsCount(dialogsUri);
+
+        return dialogCount;
     }
-
-
 }
