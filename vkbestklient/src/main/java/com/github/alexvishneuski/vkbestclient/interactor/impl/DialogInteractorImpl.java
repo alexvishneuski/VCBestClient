@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
+import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
@@ -25,6 +26,8 @@ public class DialogInteractorImpl implements IDialogInteractor {
     private IDialogVKApiNetworking mDialogVKApiNetworkingImpl = new DialogVKApiNetworkingImpl();
 
     private IUserInteractor mUserInteractor = new UserInteractorImpl();
+
+    /*Result as Repository API*/
 
     @Override
     public List<VKApiDialog> getDialogs(int pCount, int pOffset) {
@@ -49,23 +52,6 @@ public class DialogInteractorImpl implements IDialogInteractor {
         return dialogs;
     }
 
-    /*steps in interactor
-       =======================
-
-     1. get data from Repository
-            AsyncTaks:
-            1.1 AT for currentUser(name, avatar)
-            getCurrentUser().getAvatarUrl()
-
-            1.2. AT get messagesInDialog
-
-            1.3. AT for each contactUser(name, avatar)
-           getConactUSer();
-
-      2. build datamodel
-
-      3. return datamodel(public methods, methods return repo-models should be private/protected)
-    */
 
     /*
     Message Domain  (VKAPI/DB-> Interactor)
@@ -91,11 +77,21 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     * */
 
+    /*Result as own Interactor API*/
+
     @Override
     public List<Message> getMessagesForDialogList(int pCount, int pOffset) {
+
+        /*steps:
+        * 1. getting dialoglist - VK API
+        * 2. extract contactuser Ids
+        * 3. getting users Info by ids - VK API
+         * 4. mapping userInfo into dialogllist
+        * */
+
         List<Message> domainMessages = new ArrayList<>();
-        UserInDialogListViewModel mCurrentUser = null;
-        UserInDialogListViewModel mContactUser = null;
+        User mCurrentUser = null;
+        User mContactUser = null;
 
         //TODO make sort of currrentUserHolder
         int currentUserId = mUserInteractor.getCurrentUser().getId();
