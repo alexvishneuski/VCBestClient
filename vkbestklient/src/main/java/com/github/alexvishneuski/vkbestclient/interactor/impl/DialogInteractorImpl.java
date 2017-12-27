@@ -7,7 +7,6 @@ import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
-import com.github.alexvishneuski.vkbestclient.presentation.uimodel.UserInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiMessage;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
@@ -79,15 +78,17 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     /*Result as own Interactor API*/
 
+
+    /*steps:
+           * 1. getting dialoglist - VK API
+           * 2. extract contactuser Ids
+           * 3. getting users Info by ids - VK API
+            * 4. mapping userInfo into dialogllist
+            * 5. convert into domainModel
+           * */
     @Override
     public List<Message> getMessagesForDialogList(int pCount, int pOffset) {
 
-        /*steps:
-        * 1. getting dialoglist - VK API
-        * 2. extract contactuser Ids
-        * 3. getting users Info by ids - VK API
-         * 4. mapping userInfo into dialogllist
-        * */
 
         List<Message> domainMessages = new ArrayList<>();
         User mCurrentUser = null;

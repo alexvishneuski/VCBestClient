@@ -22,6 +22,9 @@ import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 //TODO add getting users AsyncTask
 
@@ -183,11 +186,22 @@ public class DialogsFragment extends Fragment {
         protected List<Message> doInBackground(Integer... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
 
-            int count = pArgs[0];
-            int offset = pArgs[1];
+            final int count = pArgs[0];
+            final int offset = pArgs[1];
 
-            List<Message> messages = new ArrayList<>();
-            messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));
+            final List<Message> messages = new ArrayList<>();
+
+            new Runnable() {
+                @Override
+                public void run() {
+                    messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));
+                }
+            }.run();
+
+int userIds;
+
+
+
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + messages.size() + " messages");
 
             return messages;
