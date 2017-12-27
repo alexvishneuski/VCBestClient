@@ -61,7 +61,7 @@ public class VKApiRequestParser {
         uriBuilder
                 .append(RepositoryConstants.CommonUrlParts.ACCESS_TOKEN_KEY)
                 .append(RepositoryConstants.Sign.EQUAL)
-                .append(RepositoryConstants.VKApiConstants.VK_API_ACCESS_TOKEN)
+                .append(RepositoryConstants.CommonUrlParts.ACCESS_TOKEN)
                 .append(RepositoryConstants.Sign.AMPERSAND);
 
         uriBuilder
