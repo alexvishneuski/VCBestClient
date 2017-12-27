@@ -33,8 +33,9 @@ public class DialogInteractorImpl implements IDialogInteractor {
         List<VKApiDialog> dialogs = new ArrayList<>();
 
         String dialogCount = String.valueOf(pCount);
+        String dialogOffset = String.valueOf(pOffset);
 
-        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(dialogCount).build();
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(dialogCount).setOffset(dialogOffset).build();
         VKApiUri dialogsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)

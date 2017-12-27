@@ -27,8 +27,9 @@ import java.util.List;
 //TODO remove comments
 public class DialogsFragment extends Fragment {
 
-    public static final int LOAD_DIALOGS_COUNT = 20;
-    public static final int LOAD_DIALOGS_OFFSET = 0;
+    public final int LOAD_DIALOGS_COUNT = 20;
+    public int LOAD_DIALOGS_OFFSET = 0;
+    public final int OFFSET_LEVERAGE = 20;
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -37,7 +38,16 @@ public class DialogsFragment extends Fragment {
     private List<MessageInDialogListViewModel> mMessagesUI;
     private RecyclerView mRecyclerView;
     private MessageInDialogListRecyclerAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
     private int mItemCount;
+
+    RecyclerView.OnScrollListener mOnScrollListener;
+    int mVisibleItemCount;
+    int mTotalItemCount;
+    int mFirstVisibleItems;
+    private boolean mIsLoading = true;
+
+    GetMessagesInDialogListAsyncTask mLoadTask;
 
 
     @Nullable
@@ -55,10 +65,40 @@ public class DialogsFragment extends Fragment {
 
         startLoadMessages();
 
-
+        addOnScrollListener();
+        mRecyclerView.setOnScrollListener(mOnScrollListener);
 
         return mView;
     }
+
+    private void addOnScrollListener() {
+        mOnScrollListener = new RecyclerView.OnScrollListener()
+
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                mVisibleItemCount = mLayoutManager.getChildCount();//смотрим сколько элементов на экране
+                mTotalItemCount = mLayoutManager.getItemCount();//сколько всего элементов
+                mFirstVisibleItems = mLayoutManager.findFirstVisibleItemPosition();//какая позиция первого элемента
+
+                if (!mIsLoading) {//проверяем, грузим мы что-то или нет, эта переменная должна быть вне класса  OnScrollListener
+                    if ((mVisibleItemCount + mFirstVisibleItems) >= mTotalItemCount) {
+                        mIsLoading = true;//ставим флаг что мы попросили еще элемены
+
+                        if (mLoadTask != null) {
+                            mLoadTask = new GetMessagesInDialogListAsyncTask();
+                        }
+                            mLoadTask.execute(LOAD_DIALOGS_COUNT, mTotalItemCount);//нужно еще элементов и с какой позиции начинать загрузку
+
+                    }
+                }
+
+            }
+        };
+    }
+
 
     private void addDevider() {
         RecyclerView.ItemDecoration itemDecoration = new
@@ -81,14 +121,20 @@ public class DialogsFragment extends Fragment {
 
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
-        mRecyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     private void startLoadMessages() {
         Log.d(TAG, "startLoadMessages called");
-        GetMessagesInDialogListAsyncTask getMessagesAsyncTask = new GetMessagesInDialogListAsyncTask();
-        getMessagesAsyncTask.execute(LOAD_DIALOGS_COUNT, LOAD_DIALOGS_OFFSET);
+        mLoadTask = new GetMessagesInDialogListAsyncTask();
+        executeLoading();
+    }
+
+    private void executeLoading() {
+        mLoadTask.execute(LOAD_DIALOGS_COUNT, LOAD_DIALOGS_OFFSET);
     }
 
     private void createAdapter() {
@@ -110,6 +156,8 @@ public class DialogsFragment extends Fragment {
         //notify adapter
         mAdapter.notifyItemRangeInserted(mItemCount, pMessages.size());
         //mAdapter.notifyDataSetChanged();
+
+        mIsLoading = false;
     }
 
 
