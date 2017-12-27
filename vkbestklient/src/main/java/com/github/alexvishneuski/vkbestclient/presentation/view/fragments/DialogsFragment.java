@@ -8,12 +8,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
+import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
@@ -22,9 +24,6 @@ import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 //TODO add getting users AsyncTask
 
@@ -157,13 +156,13 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void onLoaded(List<Message> pMessages) {
+    public void onLoaded(Pair<List<Message>, List<User>> pMessagesWithUsers) {
         //record this value before making any changes to the existing list
         int itemCount = mAdapter.getItemCount();
         //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
-        mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessages));
+        mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessagesWithUsers));
         //notify adapter
-        mAdapter.notifyItemRangeInserted(itemCount, pMessages.size());
+        mAdapter.notifyItemRangeInserted(itemCount, pMessagesWithUsers.first.size());
         //mAdapter.notifyDataSetChanged();
         mIsLoading = false;
     }
@@ -178,39 +177,30 @@ public class DialogsFragment extends Fragment {
     }
 
     //TODO to deliverance from static maybe using Threads?
-    public class LoadDialogsAT extends AsyncTask<Integer, Void, List<Message>> {
+    public class LoadDialogsAT extends AsyncTask<Integer, Void, Pair<List<Message>, List<User>>> {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
 
         @Override
-        protected List<Message> doInBackground(Integer... pArgs) {
+        protected Pair<List<Message>, List<User>> doInBackground(Integer... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
 
-            final int count = pArgs[0];
-            final int offset = pArgs[1];
+            int count = pArgs[0];
+            int offset = pArgs[1];
 
-            final List<Message> messages = new ArrayList<>();
+            Pair<List<Message>, List<User>> msgWithUsers = mDialogInteractor.getPreparedForUiMessages(count, offset);
 
-            new Runnable() {
-                @Override
-                public void run() {
-                    messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));
-                }
-            }.run();
+                        /*List<Message> messages = new ArrayList<>();
+            messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));*/
+            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgWithUsers.first.size() + " messages");
 
-int userIds;
-
-
-
-            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + messages.size() + " messages");
-
-            return messages;
+            return msgWithUsers;
         }
 
         @Override
-        protected void onPostExecute(List<Message> pMessages) {
-            super.onPostExecute(pMessages);
-            onLoaded(pMessages);
+        protected void onPostExecute(Pair<List<Message>, List<User>> pMessagesWithUsers) {
+            super.onPostExecute(pMessagesWithUsers);
+            onLoaded(pMessagesWithUsers);
         }
     }
 

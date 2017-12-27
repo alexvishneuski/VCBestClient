@@ -1,6 +1,9 @@
 package com.github.alexvishneuski.vkbestclient.interactor;
 
+import android.util.Pair;
+
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
+import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 
 import java.util.List;
@@ -20,6 +23,8 @@ public interface IDialogInteractor {
      * @return List<Message>
      */
     List<Message> getMessagesForDialogList(int pCount, int pOffset);
+
+    Pair<List<Message>, List<User>> getPreparedForUiMessages(int pCount, int pOffset);
 
     int getDialogsTotalCount();
 

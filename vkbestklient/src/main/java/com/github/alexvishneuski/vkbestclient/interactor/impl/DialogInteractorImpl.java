@@ -1,6 +1,8 @@
 package com.github.alexvishneuski.vkbestclient.interactor.impl;
 
+import android.util.ArraySet;
 import android.util.Log;
+import android.util.Pair;
 
 import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
@@ -16,7 +18,9 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.reques
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DialogInteractorImpl implements IDialogInteractor {
 
@@ -79,13 +83,38 @@ public class DialogInteractorImpl implements IDialogInteractor {
     /*Result as own Interactor API*/
 
 
-    /*steps:
-           * 1. getting dialoglist - VK API
-           * 2. extract contactuser Ids
-           * 3. getting users Info by ids - VK API
+/*steps:
+
+
+           * 3. getting user's Info by ids - VK API
             * 4. mapping userInfo into dialogllist
             * 5. convert into domainModel
            * */
+    public Pair<List<Message>, List<User>> getPreparedForUiMessages(int pCount, int pOffset) {
+
+        // 1. getting dialoglist - VK API
+        List<Message> domainMessages = new ArrayList<>();
+        domainMessages.addAll(this.getMessagesForDialogList(pCount, pOffset));
+
+        //2. extract contactuser Ids
+        Set<Integer> userIds = new HashSet<>();
+        for (Message msg: domainMessages
+             ) {
+            System.out.println("!!!===========" + msg.getContactUserId());
+            userIds.add(msg.getContactUserId());
+
+            mUserInteractor.getUsers(userIds);
+
+        }
+
+
+
+
+        //stub
+        return new Pair<>(domainMessages, null);
+    }
+
+
     @Override
     public List<Message> getMessagesForDialogList(int pCount, int pOffset) {
 
@@ -122,6 +151,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         return domainMessages;
     }
+
 
     @Override
     public int getDialogsTotalCount() {
