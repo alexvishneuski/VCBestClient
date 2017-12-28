@@ -18,6 +18,7 @@ import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
+import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
@@ -156,13 +157,13 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void onLoaded(Pair<List<Message>, List<User>> pMessagesWithUsers) {
+    public void onLoaded(List<MessageInDialogs> pMessages) {
         //record this value before making any changes to the existing list
         int itemCount = mAdapter.getItemCount();
         //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
-        mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessagesWithUsers));
+        mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessages));
         //notify adapter
-        mAdapter.notifyItemRangeInserted(itemCount, pMessagesWithUsers.first.size());
+        mAdapter.notifyItemRangeInserted(itemCount, pMessages.size());
         //mAdapter.notifyDataSetChanged();
         mIsLoading = false;
     }
@@ -177,12 +178,12 @@ public class DialogsFragment extends Fragment {
     }
 
     //TODO to deliverance from static maybe using Threads?
-    public class LoadDialogsAT extends AsyncTask<Integer, Void, Pair<List<Message>, List<User>>> {
+    public class LoadDialogsAT extends AsyncTask<Integer, Void, List<MessageInDialogs>> {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
 
         @Override
-        protected Pair<List<Message>, List<User>> doInBackground(Integer... pArgs) {
+        protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
 
             int count = pArgs[0];
@@ -198,9 +199,9 @@ public class DialogsFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(Pair<List<Message>, List<User>> pMessagesWithUsers) {
-            super.onPostExecute(pMessagesWithUsers);
-            onLoaded(pMessagesWithUsers);
+        protected void onPostExecute(List<MessageInDialogs> pMessages) {
+            super.onPostExecute(pMessages);
+            onLoaded(pMessages);
         }
     }
 
