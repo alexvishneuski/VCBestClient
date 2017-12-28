@@ -1,6 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.interactor.model;
 
-class UserInDialogs {
+public class UserInDialogs {
 
     private int mUserId;
     private String mUserFullName;

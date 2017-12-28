@@ -1,14 +1,13 @@
 package com.github.alexvishneuski.vkbestclient.interactor.impl;
 
-import android.util.ArraySet;
 import android.util.Log;
-import android.util.Pair;
+import android.util.SparseArray;
 
-import com.github.alexvishneuski.vkbestclient.datamodel.Message;
-import com.github.alexvishneuski.vkbestclient.datamodel.MessageDirection;
-import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
+import com.github.alexvishneuski.vkbestclient.interactor.model.MessageDirection;
+import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
+import com.github.alexvishneuski.vkbestclient.interactor.model.UserInDialogs;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiMessage;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
@@ -18,9 +17,7 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.reques
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DialogInteractorImpl implements IDialogInteractor {
 
@@ -29,31 +26,6 @@ public class DialogInteractorImpl implements IDialogInteractor {
     private IDialogVKApiNetworking mDialogVKApiNetworkingImpl = new DialogVKApiNetworkingImpl();
 
     private IUserInteractor mUserInteractor = new UserInteractorImpl();
-
-    /*Result as Repository API*/
-
-    @Override
-    public List<VKApiDialog> getDialogs(int pCount, int pOffset) {
-        Log.d(TAG, "getDialogs called ");
-        List<VKApiDialog> dialogs = new ArrayList<>();
-
-        String dialogCount = String.valueOf(pCount);
-        String dialogOffset = String.valueOf(pOffset);
-
-        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(dialogCount).setOffset(dialogOffset).build();
-        VKApiUri dialogsUri = VKApiUri.getBuilder()
-                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
-                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
-                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
-                .setParameters(dialogsParams)
-                .build();
-
-        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogs(dialogsUri));
-
-        Log.d(TAG, "getDialogs returns dialogs");
-
-        return dialogs;
-    }
 
 
     /*
@@ -80,53 +52,51 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     * */
 
+
+
     /*Result as own Interactor API*/
+    /*==========================================================================================*/
+
+    /*steps:
+
+                * 1. try get info from DB
+                * 2. if false getting info from VK API
+                *   2.1 getting array dialoglist - VK API (List)
+                *   2.2 extract array contactuser Ids (List)
+                *   2.3 getting array user's Info  by ids - VK API (HashMap id - USer)
+                *   2.4 mapping userInfo and dialog list into array messageInDialog (List)
+                * 3. save info into DB
+                 * */
 
 
-/*steps:
+    @Override
+    public List<MessageInDialogs> getMessagesInDialogListFromRepo(int pCount, int pOffset) {
 
+        //List<MessageInDialogs> msg;
+        //msg = this.getMessagesInDialogListFromDB(pCount, pOffset);
+        //if success - return msg
+        //if false -
+        //msg = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
+        //save msg into DB;
+        //return or go to DB
+        List<MessageInDialogs> msg = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
 
-           * 3. getting user's Info by ids - VK API
-            * 4. mapping userInfo into dialogllist
-            * 5. convert into domainModel
-           * */
-    public Pair<List<Message>, List<User>> getPreparedForUiMessages(int pCount, int pOffset) {
-
-        // 1. getting dialoglist - VK API
-        List<Message> domainMessages = new ArrayList<>();
-        domainMessages.addAll(this.getMessagesForDialogList(pCount, pOffset));
-
-        //2. extract contactuser Ids
-        List<Integer> userIds = new ArrayList<>();
-        for (Message msg: domainMessages
-             ) {
-            System.out.println("!!!===========" + msg.getContactUserId());
-            userIds.add(msg.getContactUserId());
-
-            mUserInteractor.getUsers(userIds);
-
-        }
-
-
-
-
-        //stub
-        return new Pair<>(domainMessages, null);
+        return msg;
     }
 
 
     @Override
-    public List<Message> getMessagesForDialogList(int pCount, int pOffset) {
+    public List<MessageInDialogs> getMessagesInDialogListFromVKApi(int pCount, int pOffset) {
 
-
-        List<Message> domainMessages = new ArrayList<>();
-        User mCurrentUser = null;
-        User mContactUser = null;
+        List<MessageInDialogs> domainMessages = new ArrayList<>();
 
         //TODO make sort of currrentUserHolder
-        int currentUserId = mUserInteractor.getCurrentUser().getId();
+        UserInDialogs currentUser = mUserInteractor.getCurrentUserDomain();
+        UserInDialogs contactUser;
 
+        List<Integer> contactUserIds = new ArrayList<>();
 
+        // 1. getting dialoglist - VK API
         List<VKApiDialog> dialogs = this.getDialogs(pCount, pOffset);
 
         for (VKApiDialog dialog : dialogs
@@ -135,11 +105,15 @@ public class DialogInteractorImpl implements IDialogInteractor {
             VKApiMessage message = dialog.getMessage();
 
             //todo extract to converter
-            Message domainMessage = new Message();
+            MessageInDialogs domainMessage = new MessageInDialogs();
+
+            domainMessage.setCurrentUser(currentUser);
+
+            contactUser = new UserInDialogs();
+            contactUser.setUserId(message.getContactUserId());
+            domainMessage.setContactUser(contactUser);
 
             domainMessage.setId(message.getId());
-            domainMessage.setContactUserId(message.getContactUserId());
-            domainMessage.setCurrentUserId(currentUserId);
             domainMessage.setMessageDirection((message.getDirection() == 0) ? MessageDirection.INCOMING : MessageDirection.OUTGOING);
             domainMessage.setMessageSendingDate(message.getSendingDate());
             domainMessage.setMessageTitle(message.getTitle());
@@ -147,12 +121,71 @@ public class DialogInteractorImpl implements IDialogInteractor {
             domainMessage.setMessageRead((message.getReadStatus() == 0) ? false : true);
 
             domainMessages.add(domainMessage);
+
+            //2. extract contactuser Ids
+            contactUserIds.add(message.getContactUserId());
         }
 
+
+        //3 getting array user's Info  by ids
+
+        List<UserInDialogs> users = mUserInteractor.getDomainUsers(contactUserIds);
+
+        SparseArray<UserInDialogs> usersInDialogs = new SparseArray<>();
+
+        for (UserInDialogs user : users
+                ) {
+            usersInDialogs.append(user.getUserId(), user);
+        }
+
+        //4 mapping userInfo and dialog list into array messageInDialog (List)
+
+        for (MessageInDialogs message : domainMessages
+                ) {
+            message.setContactUser(usersInDialogs.get(message.getContactUser().getUserId()));
+        }
+
+        //stub
         return domainMessages;
     }
 
+    @Override
+    public List<MessageInDialogs> getMessagesInDialogListFromDB(int pCount, int pOffset) {
+        throw new UnsupportedOperationException("method in DialogInteractorImpl isn't supported jet");
+    }
 
+        /*Result as Repository DB API*/
+    /*==========================================================================================*/
+
+
+    //TODO remove methods are bottom to repository
+     /*Result as Repository VK API - sort of RequestBuilders*/
+    /*==========================================================================================*/
+
+
+    private List<VKApiDialog> getDialogs(int pCount, int pOffset) {
+        Log.d(TAG, "getDialogs called ");
+        List<VKApiDialog> dialogs = new ArrayList<>();
+
+        String dialogCount = String.valueOf(pCount);
+        String dialogOffset = String.valueOf(pOffset);
+
+        VKApiGetDialogsParams dialogsParams = VKApiGetDialogsParams.getBuilder().setCount(dialogCount).setOffset(dialogOffset).build();
+        VKApiUri dialogsUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
+                .setParameters(dialogsParams)
+                .build();
+
+        dialogs.addAll(mDialogVKApiNetworkingImpl.getDialogs(dialogsUri));
+
+        Log.d(TAG, "getDialogs returns dialogs");
+
+        return dialogs;
+    }
+
+    //TODO make getDialogsTotalCount() in Interactor
     @Override
     public int getDialogsTotalCount() {
 
@@ -164,8 +197,6 @@ public class DialogInteractorImpl implements IDialogInteractor {
                 .setParameters(dialogsParams)
                 .build();
 
-        int dialogCount = mDialogVKApiNetworkingImpl.getTotalDialogsCount(dialogsUri);
-
-        return dialogCount;
+        return mDialogVKApiNetworkingImpl.getDialogsTotalCount(dialogsUri);
     }
 }

@@ -2,7 +2,7 @@ package com.github.alexvishneuski.vkbestclient.interactor.model;
 
 public class MessageInDialogs {
 
-    private Long mId;
+    private int mId;
     private UserInDialogs mCurrentUser;
     private UserInDialogs mContactUser;
     private MessageDirection mMessageDirection;
@@ -14,7 +14,7 @@ public class MessageInDialogs {
     public MessageInDialogs() {
     }
 
-    public MessageInDialogs(Long pId, UserInDialogs pCurrentUser, UserInDialogs pContactUser, MessageDirection pMessageDirection, int pMessageSendingDate, String pMessageTitle, String pMessageBody, boolean pIsMessageRead) {
+    public MessageInDialogs(int pId, UserInDialogs pCurrentUser, UserInDialogs pContactUser, MessageDirection pMessageDirection, int pMessageSendingDate, String pMessageTitle, String pMessageBody, boolean pIsMessageRead) {
         mId = pId;
         mCurrentUser = pCurrentUser;
         mContactUser = pContactUser;
@@ -25,11 +25,11 @@ public class MessageInDialogs {
         mIsMessageRead = pIsMessageRead;
     }
 
-    public Long getId() {
+    public int getId() {
         return mId;
     }
 
-    public void setId(Long pId) {
+    public void setId(int pId) {
         mId = pId;
     }
 

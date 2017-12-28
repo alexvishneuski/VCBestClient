@@ -8,14 +8,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.datamodel.Message;
-import com.github.alexvishneuski.vkbestclient.datamodel.User;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
@@ -182,20 +179,21 @@ public class DialogsFragment extends Fragment {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
 
+        /**
+         * @param pArgs [0] - count, [1] - offset
+         */
         @Override
         protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
-            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+            Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
 
             int count = pArgs[0];
             int offset = pArgs[1];
 
-            Pair<List<Message>, List<User>> msgWithUsers = mDialogInteractor.getPreparedForUiMessages(count, offset);
+            List<MessageInDialogs> msgs = mDialogInteractor.getMessagesInDialogListFromRepo(count, offset);
 
-                        /*List<Message> messages = new ArrayList<>();
-            messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));*/
-            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgWithUsers.first.size() + " messages");
+            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
-            return msgWithUsers;
+            return msgs;
         }
 
         @Override

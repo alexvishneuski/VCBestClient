@@ -9,5 +9,5 @@ public interface IDialogVKApiNetworking {
 
     List<VKApiDialog> getDialogs(VKApiUri pUri);
 
-    int getTotalDialogsCount(VKApiUri pUri);
+    int getDialogsTotalCount(VKApiUri pUri);
 }
