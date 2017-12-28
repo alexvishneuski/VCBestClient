@@ -43,12 +43,12 @@ public class UserInteractorImpl implements IUserInteractor {
     }
 
     @Override
-    public List<VKApiUser> getUsers(Set<Integer> pUserIds) {
+    public List<VKApiUser> getUsers(List<Integer> pUserIds) {
         Log.d(TAG, "getUsers() called with: pUserIds = [" + pUserIds + "]");
 
         String[] array = new String[pUserIds.size()];
         for (int i = 0; i < pUserIds.size(); i++) {
-            array[i] = String.valueOf(pUserIds.iterator().next());
+            array[i] = String.valueOf(pUserIds.get(i));
         }
 
         List<VKApiUser> users = new ArrayList<>();

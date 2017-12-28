@@ -97,7 +97,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         domainMessages.addAll(this.getMessagesForDialogList(pCount, pOffset));
 
         //2. extract contactuser Ids
-        Set<Integer> userIds = new HashSet<>();
+        List<Integer> userIds = new ArrayList<>();
         for (Message msg: domainMessages
              ) {
             System.out.println("!!!===========" + msg.getContactUserId());

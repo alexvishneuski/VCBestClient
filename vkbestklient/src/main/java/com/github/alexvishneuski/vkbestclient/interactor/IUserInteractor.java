@@ -13,7 +13,7 @@ public interface IUserInteractor {
     /**
      * @return List<VKApiUser>
      */
-    List<VKApiUser> getUsers(Set<Integer> pUserIds);
+    List<VKApiUser> getUsers(List<Integer> pUserIds);
 
     /**
      * @return current VKApiUser
