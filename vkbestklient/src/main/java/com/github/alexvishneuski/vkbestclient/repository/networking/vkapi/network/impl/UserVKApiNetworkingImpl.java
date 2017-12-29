@@ -9,9 +9,7 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.except
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users.VKApiUsersGetResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IUserVKApiNetworking;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetUsersParams;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
-import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +24,6 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
         final String methodsTag = "getUsers()";
 
         Log.d(TAG, "getUsers called");
-
-        VKApiGetUsersParams usersParams = VKApiGetUsersParams.getBuilder().build();
-        VKApiUri usersUri = VKApiUri.getBuilder()
-                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
-                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
-                .setMethod(RepositoryConstants.VkMethodUsersGet.METHOD_NAME)
-                .setParameters(usersParams)
-                .build();
 
         final String url = VKApiRequestParser.parse(pUri);
 
