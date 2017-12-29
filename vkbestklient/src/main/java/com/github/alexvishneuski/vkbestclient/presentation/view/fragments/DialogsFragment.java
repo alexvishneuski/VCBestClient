@@ -13,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
+import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
@@ -154,7 +154,7 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void onLoaded(List<Message> pMessages) {
+    public void onLoaded(List<MessageInDialogs> pMessages) {
         //record this value before making any changes to the existing list
         int itemCount = mAdapter.getItemCount();
         //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
@@ -175,26 +175,34 @@ public class DialogsFragment extends Fragment {
     }
 
     //TODO to deliverance from static maybe using Threads?
-    public class LoadDialogsAT extends AsyncTask<Integer, Void, List<Message>> {
+    public class LoadDialogsAT extends AsyncTask<Integer, Void, List<MessageInDialogs>> {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
 
+        /**
+         * @param pArgs [0] - count, [1] - offset
+         */
         @Override
-        protected List<Message> doInBackground(Integer... pArgs) {
-            Log.d(ASYNC_TASK_TAG, "doInBackground: called");
+        protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
 
             int count = pArgs[0];
             int offset = pArgs[1];
 
-            List<Message> messages = new ArrayList<>();
-            messages.addAll(mDialogInteractor.getMessagesForDialogList(count, offset));
-            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + messages.size() + " messages");
+            List<MessageInDialogs> msgs = mDialogInteractor.getMessagesInDialogListFromRepo(count, offset);
 
-            return messages;
+            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
+
+            for (MessageInDialogs mes: msgs
+                 ) {
+                System.out.println("!!!===============!!! " +mes.getContactUser());
+
+            }
+            return msgs;
         }
 
         @Override
-        protected void onPostExecute(List<Message> pMessages) {
+        protected void onPostExecute(List<MessageInDialogs> pMessages) {
             super.onPostExecute(pMessages);
             onLoaded(pMessages);
         }

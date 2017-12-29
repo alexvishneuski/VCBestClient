@@ -50,9 +50,9 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
     @WorkerThread
     @Override
-    public int getTotalDialogsCount(VKApiUri pUri) {
+    public int getDialogsTotalCount(VKApiUri pUri) {
 
-        Log.d(TAG, "getTotalDialogsCount() called with: pUri = [" + pUri + "]");
+        Log.d(TAG, "getDialogsTotalCount() called with: pUri = [" + pUri + "]");
 
         final String url = VKApiRequestParser.parse(pUri);
 
@@ -67,7 +67,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
         }
 
         int dialogCount = result.getResponse().getDialogCount();
-        Log.d(TAG, "getTotalDialogsCount returned " + dialogCount + " dialogs");
+        Log.d(TAG, "getDialogsTotalCount returned " + dialogCount + " dialogs");
 
         return dialogCount;
     }

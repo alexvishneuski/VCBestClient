@@ -12,6 +12,7 @@ import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.UserInteractorImpl;
+import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
 
 import java.util.ArrayList;
@@ -59,18 +60,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     //TODO remove asynctasks out of activity
-    private static class GetMessagesInDialogListAsyncTasc extends AsyncTask<Void, Void, List<Message>> {
+    private static class GetMessagesInDialogListAsyncTasc extends AsyncTask<Void, Void, List<MessageInDialogs>> {
 
         private static final String ASYNC_TASK_TAG = "GetDialogListAT";
 
         @Override
-        protected List<Message> doInBackground(Void... voids) {
+        protected List<MessageInDialogs> doInBackground(Void... voids) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
 
-            List<Message> messages = new ArrayList<>();
+            List<MessageInDialogs> messages = new ArrayList<>();
 
             IDialogInteractor dialogInteractor = new DialogInteractorImpl();
-            messages.addAll(dialogInteractor.getMessagesForDialogList(0, 0));
+            messages.addAll(dialogInteractor.getMessagesInDialogListFromRepo(0, 0));
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: start messageList print");
             System.out.println("printed " + messages.size() + " messages");
