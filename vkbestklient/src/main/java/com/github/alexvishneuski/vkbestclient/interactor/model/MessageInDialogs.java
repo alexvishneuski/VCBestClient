@@ -88,4 +88,18 @@ public class MessageInDialogs {
     public void setMessageRead(boolean pMessageRead) {
         mIsMessageRead = pMessageRead;
     }
+
+    @Override
+    public String toString() {
+        return "MessageInDialogs{" +
+                "mId=" + mId +
+                ", mCurrentUser=" + mCurrentUser +
+                ", mContactUser=" + mContactUser +
+                ", mMessageDirection=" + mMessageDirection +
+                ", mMessageSendingDate=" + mMessageSendingDate +
+                ", mMessageTitle='" + mMessageTitle + '\'' +
+                ", mMessageBody='" + mMessageBody + '\'' +
+                ", mIsMessageRead=" + mIsMessageRead +
+                '}';
+    }
 }

@@ -38,6 +38,15 @@ public class UserInDialogs {
     public void setUserAvatarPath(String pUserAvatarPath) {
         mUserAvatarPath = pUserAvatarPath;
     }
+
+    @Override
+    public String toString() {
+        return "UserInDialogs{" +
+                "mUserId=" + mUserId +
+                ", mUserFullName='" + mUserFullName + '\'' +
+                ", mUserAvatarPath='" + mUserAvatarPath + '\'' +
+                '}';
+    }
 }
 
 

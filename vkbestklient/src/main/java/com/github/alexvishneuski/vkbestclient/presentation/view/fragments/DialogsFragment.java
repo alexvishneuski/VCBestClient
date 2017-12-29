@@ -193,6 +193,11 @@ public class DialogsFragment extends Fragment {
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
+            for (MessageInDialogs mes: msgs
+                 ) {
+                System.out.println("!!!===============!!! " +mes.getContactUser());
+
+            }
             return msgs;
         }
 
