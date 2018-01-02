@@ -23,11 +23,9 @@ import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO add getting users AsyncTask
+public class MessagesFragment extends Fragment {
 
-public class DialogsFragment extends Fragment {
-
-    public final int LOAD_DIALOGS_COUNT = 20;
+    public final int LOAD_MESSAGES_COUNT = 20;
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -39,9 +37,6 @@ public class DialogsFragment extends Fragment {
     private LinearLayoutManager mLayoutManager;
 
     private RecyclerView.OnScrollListener mOnScrollListener;
-    private RecyclerView.OnScrollListener mToHistoryOnClickListener;
-    private RecyclerView.OnScrollListener mToProfileOnClickListener;
-
     int mVisibleItemCount;
     int mTotalItemCount;
     int mFirstVisibleItemPosition;
@@ -95,9 +90,9 @@ public class DialogsFragment extends Fragment {
                         if (mLoadTask != null) {
                             mLoadTask = new LoadDialogsAT();
                         }
-                        if (LOAD_DIALOGS_COUNT + mTotalItemCount <= mApiDialogsTotalCount) {
+                        if (LOAD_MESSAGES_COUNT + mTotalItemCount <= mApiDialogsTotalCount) {
                             assert mLoadTask != null;
-                            mLoadTask.execute(LOAD_DIALOGS_COUNT, mTotalItemCount);
+                            mLoadTask.execute(LOAD_MESSAGES_COUNT, mTotalItemCount);
                         } else {
                             assert mLoadTask != null;
                             mLoadTask.execute((mApiDialogsTotalCount - mTotalItemCount), mTotalItemCount);
@@ -112,12 +107,6 @@ public class DialogsFragment extends Fragment {
 
     private void setOnScrollListener() {
         mRecyclerView.setOnScrollListener(mOnScrollListener);
-    }
-
-
-
-    private void setOnClickListener() {
-        mRecyclerView.setOnClickListener((View.OnClickListener) mToHistoryOnClickListener);
     }
 
     private void addDevider() {
@@ -149,7 +138,7 @@ public class DialogsFragment extends Fragment {
     private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
         mLoadTask = new LoadDialogsAT();
-        mLoadTask.execute(LOAD_DIALOGS_COUNT, 0);
+        mLoadTask.execute(LOAD_MESSAGES_COUNT, 0);
     }
 
     private void createAdapter() {
@@ -202,9 +191,9 @@ public class DialogsFragment extends Fragment {
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
-            for (MessageInDialogs mes: msgs
-                 ) {
-                System.out.println("!!!===============!!! " +mes.getContactUser());
+            for (MessageInDialogs mes : msgs
+                    ) {
+                System.out.println("!!!===============!!! " + mes.getContactUser());
 
             }
             return msgs;
