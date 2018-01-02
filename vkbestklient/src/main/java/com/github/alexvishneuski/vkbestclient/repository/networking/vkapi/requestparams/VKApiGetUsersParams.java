@@ -44,13 +44,13 @@ public class VKApiGetUsersParams implements Parameters {
             return this;
         }
 
-        public Builder setCount(String... pFields) {
+        public Builder setFields(String... pFields) {
             VKApiGetUsersParams.this.mFields = pFields;
 
             return this;
         }
 
-        public Builder setStartMessageId(String pNameCase) {
+        public Builder setNameCase(String pNameCase) {
             VKApiGetUsersParams.this.mNameCase = pNameCase;
 
             return this;

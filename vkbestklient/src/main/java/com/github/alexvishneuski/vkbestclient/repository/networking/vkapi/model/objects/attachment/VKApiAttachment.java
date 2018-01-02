@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.mediacontentandattachments;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.attachment;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,20 +7,20 @@ import com.google.gson.annotations.SerializedName;
 * object Attachment
 * https://vk.com/dev/objects/attachments_m
 */
-//TODO rename package and classes
-public class VKApiMediaAttachment {
+
+public class VKApiAttachment {
 
    /* @SerializedName("type")
-    private VKApiMediaAttachmentType mType;*/
+    private VKApiType mType;*/
 
     @SerializedName("type")
     private String mType;
 
     @SerializedName("photo")
-    private VKApiMediaAttachmentTypePhoto mPhoto;
+    private VKApiPhoto mPhoto;
 
     @SerializedName("doc")
-    private VKApiMediaAttachmentTypeDocument mDocument;
+    private VKApiDocument mDocument;
 
 
     public String getType() {
@@ -32,27 +32,27 @@ public class VKApiMediaAttachment {
         mType = pType;
     }
 
-    public VKApiMediaAttachmentTypePhoto getPhoto() {
+    public VKApiPhoto getPhoto() {
 
         return mPhoto;
     }
 
-    public void setPhoto(VKApiMediaAttachmentTypePhoto pPhoto) {
+    public void setPhoto(VKApiPhoto pPhoto) {
         mPhoto = pPhoto;
     }
 
-    public VKApiMediaAttachmentTypeDocument getDocument() {
+    public VKApiDocument getDocument() {
 
         return mDocument;
     }
 
-    public void setDocument(VKApiMediaAttachmentTypeDocument pDocument) {
+    public void setDocument(VKApiDocument pDocument) {
         mDocument = pDocument;
     }
 
     @Override
     public String toString() {
-        return "VKApiMediaAttachment{" +
+        return "VKApiAttachment{" +
                 "mType='" + mType + '\'' +
                 ", mPhoto=" + mPhoto +
                 ", mDocument=" + mDocument +

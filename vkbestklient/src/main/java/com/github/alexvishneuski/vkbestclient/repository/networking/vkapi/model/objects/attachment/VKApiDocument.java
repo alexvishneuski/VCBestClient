@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.mediacontentandattachments;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.attachment;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * object Document
  * https://vk.com/dev/objects/doc
  */
-public class VKApiMediaAttachmentTypeDocument {
+public class VKApiDocument {
 
     // идентификатор документа
     @SerializedName("id")
@@ -37,7 +37,7 @@ public class VKApiMediaAttachmentTypeDocument {
 
     @Override
     public String toString() {
-        return "VKApiMediaAttachmentTypeDocument{" +
+        return "VKApiDocument{" +
                 "mId=" + mId +
                 ", mDocUploadUserId=" + mDocUploadUserId +
                 '}';

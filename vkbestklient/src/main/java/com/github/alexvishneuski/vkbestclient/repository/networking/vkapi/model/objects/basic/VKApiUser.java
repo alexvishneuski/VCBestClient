@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic;
 
 
 import com.google.gson.annotations.SerializedName;

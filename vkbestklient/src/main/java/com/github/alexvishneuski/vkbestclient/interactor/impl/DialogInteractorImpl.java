@@ -8,8 +8,8 @@ import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.interactor.model.UserInDialogs;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiMessage;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiDialog;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiMessage;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.impl.DialogVKApiNetworkingImpl;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
@@ -129,7 +129,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         //3 getting array user's Info  by ids
 
-        List<UserInDialogs> users = mUserInteractor.getDomainUsers(contactUserIds);
+        List<UserInDialogs> users = mUserInteractor.getDomainUsersBasicInfo(contactUserIds);
 
         SparseArray<UserInDialogs> usersInDialogs = new SparseArray<>();
 

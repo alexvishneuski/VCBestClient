@@ -78,13 +78,10 @@ public class Converter {
 
     private static UserInDialogListViewModel convertFromDomainToUIModel(UserInDialogs pUserDomain) {
 
-        final String TEST_VIEW_URL = "https://pp.userapi.com/c627921/v627921671/289ec/CTenEfmZ2Rw.jpg";
-
         UserInDialogListViewModel userUI = new UserInDialogListViewModel();
         userUI.setUserId(pUserDomain.getUserId());
         userUI.setUserFullName(pUserDomain.getUserFullName());
-        //todo change to real data
-        userUI.setUserAvatarPath(TEST_VIEW_URL);
+        userUI.setUserAvatarPath(pUserDomain.getUserAvatarPath());
 
         return userUI;
     }

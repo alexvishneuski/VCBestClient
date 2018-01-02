@@ -6,7 +6,7 @@ import android.util.Log;
 import com.github.alexvishneuski.vkbestclient.repository.networking.http.HttpClient;
 import com.github.alexvishneuski.vkbestclient.repository.networking.utils.VKApiRequestParser;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResult;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
@@ -31,7 +31,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
-                        new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
+                        new HttpClient().requestGet(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
             final String errorMessage = TAG + result.getError();
@@ -58,7 +58,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
-                        new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
+                        new HttpClient().requestGet(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
             final String errorMessage = TAG + result.getError();

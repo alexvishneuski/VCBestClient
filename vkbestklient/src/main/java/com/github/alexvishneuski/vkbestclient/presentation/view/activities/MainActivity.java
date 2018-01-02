@@ -7,13 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.datamodel.Message;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.UserInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiUser;
 
 import java.util.ArrayList;
 import java.util.List;

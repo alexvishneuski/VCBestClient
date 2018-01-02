@@ -1,22 +1,11 @@
 package com.github.alexvishneuski.vkbestclient.repo.network;
 
-import android.util.Log;
-
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
-import com.github.alexvishneuski.vkbestclient.repository.networking.http.IHttpClient;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages.VKApiMessagesGetDialogsResponse;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiDialog;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.impl.DialogVKApiNetworkingImpl;
 import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -89,9 +78,9 @@ public class DialogVKApi {
 
         InputStream mockedInputStream = Mocks.stream("VKApiMessagesGetDialogsResult.json");
 
-        doReturn(mockedInputStream),when(mHttpClient.request(null,null));
-        when(mHttpClient.request(Matchers.anyString(), mListener)).thenReturn(mockedInputStream);
-        //InputStream response = mHttpClient.request("http://myBackEnd/getInvoice?id=29", mListener);
+        doReturn(mockedInputStream),when(mHttpClient.requestGet(null,null));
+        when(mHttpClient.requestGet(Matchers.anyString(), mListener)).thenReturn(mockedInputStream);
+        //InputStream response = mHttpClient.requestGet("http://myBackEnd/getInvoice?id=29", mListener);
 
 
         mDialogs.addAll(mDialogProvider.getDialogs().getDialogs());
