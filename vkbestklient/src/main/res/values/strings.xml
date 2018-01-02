@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">VKLayouts</string>
+
+    <string name="dialogs_top_bar_title">Messages</string>
+    <string name="messagess_top_bar_title">Messages in history</string>
+    <string name="notifications_top_bar_title">Notifications</string>
+    <string name="search_top_bar_hidden_title">Search</string>
+    <string name="news_top_bar_title">News</string>
+    <string name="profile_top_bar_title">Prifile</string>
+
+
+
+    <!--for list_view-->
+    <string-array name="contact_user_full_names">
+        <item>Johnny Depp</item>
+        <item>Al Pacino</item>
+        <item>Robert De Niro</item>
+        <item>Kevin Spacey</item>
+        <item>Denzel Washington</item>
+        <item>Russell Crowe</item>
+        <item>Brad Pitt</item>
+        <item>Angelina Jolie</item>
+        <item>Leonardo DiCaprio</item>
+        <item>Tom Cruise</item>
+        <item>John Travolta</item>
+        <item>Arnold Schwarzenegger</item>
+    </string-array>
+    <string name="recipient_name">Aliaksandr Vishneuski</string>
+    <string-array name="sending_dates">
+        <item>сегодня</item>
+        <item>15 ноя</item>
+        <item>14 ноя</item>
+        <item>12 ноя</item>
+        <item>11 ноя</item>
+        <item>10 ноя</item>
+        <item>9 ноя</item>
+        <item>8 ноя</item>
+        <item>7 ноя</item>
+        <item>6 ноя</item>
+        <item>5 ноя</item>
+        <item>4 ноя</item>
+    </string-array>
+    <string-array name="message_bodies">
+        <item>Hello, Alex, are you coming to my party today? </item>
+        <item>Oh, my God, I completely forgot, sorry, of course, I’ll be there!</item>
+        <item>Please, take a few bottles of Cola and some snacks: crisps, for example.</item>
+        <item>Ok, I’ll bring what I can. When can I come?</item>
+        <item>We begin to gather at seven o’clock. Waiting for you!</item>
+        <item>Me too. What are you doing today?</item>
+        <item>Well, I’m thinking what to do.</item>
+        <item>What about going to the new car exhibition?</item>
+        <item>Hello, on what occasion is the party?</item>
+        <item>And who else is invited?</item>
+        <item>Оh, it ‘ll be fun! What shall I bring with me?</item>
+        <item>No doubt!</item>
+    </string-array>
+
+
+</resources>

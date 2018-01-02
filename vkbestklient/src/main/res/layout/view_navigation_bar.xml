@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_bar_panel_height"
+    android:background="@color/colorNavigationBarBackgroundLightGrey">
+
+    <ImageButton
+        android:id="@+id/news_image_button"
+        style="@style/NivagationBarButton"
+        android:src="@drawable/ic_news_grey_24dp" />
+
+
+    <ImageButton
+        android:id="@+id/search_image_button"
+        style="@style/NivagationBarButton"
+        android:src="@drawable/ic_search_grey_24dp" />
+
+    <ImageButton
+        android:id="@+id/messages_image_button"
+        style="@style/NivagationBarButton"
+        android:src="@drawable/ic_msg_blue_24dp" />
+
+    <ImageButton
+        android:id="@+id/notifications_image_button"
+        style="@style/NivagationBarButton"
+        android:src="@drawable/ic_notifications_grey_24px" />
+
+    <ImageButton
+        android:id="@+id/profile_image_button"
+        style="@style/NivagationBarButton"
+        android:src="@drawable/ic_menu_grey_24dp" />
+
+    <!--news, search+, messages+, notifications, profile-menu-->
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".presentation.view.activities.MainActivity">
+
+    <Button
+        android:id="@+id/to_app_based_activities_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="to_app_based_activities_button" />
+
+    <Button
+        android:id="@+id/to_app_based_fragments_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="to_app_based_fragments_button" />
+
+</LinearLayout>
