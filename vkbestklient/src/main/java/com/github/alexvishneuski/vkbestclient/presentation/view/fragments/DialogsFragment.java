@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
@@ -46,6 +47,7 @@ public class DialogsFragment extends Fragment {
     int mTotalItemCount;
     int mFirstVisibleItemPosition;
     private boolean mIsLoading = true;
+
 
     private IDialogInteractor mDialogInteractor = new DialogInteractorImpl();
 
@@ -114,12 +116,6 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setOnScrollListener(mOnScrollListener);
     }
 
-
-
-    private void setOnClickListener() {
-        mRecyclerView.setOnClickListener((View.OnClickListener) mToHistoryOnClickListener);
-    }
-
     private void addDevider() {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
@@ -156,6 +152,14 @@ public class DialogsFragment extends Fragment {
         Log.d(TAG, "createAdapter");
         mMessagesUI = new ArrayList<>();
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
+        mAdapter.setOnItemClickListener(new MessageInDialogListRecyclerAdapter.OnItemClickListener() {
+            @Override
+            //TODO replace with transition to messages or to contacts
+            public void onItemClick(View itemView, int position) {
+                String name = mMessagesUI.get(position).getContactUser().getUserFullName();
+                Toast.makeText(getActivity(), name + " was clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setAdapterToView() {
@@ -202,9 +206,9 @@ public class DialogsFragment extends Fragment {
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
-            for (MessageInDialogs mes: msgs
-                 ) {
-                System.out.println("!!!===============!!! " +mes.getContactUser());
+            for (MessageInDialogs mes : msgs
+                    ) {
+                System.out.println("!!!===============!!! " + mes.getContactUser());
 
             }
             return msgs;

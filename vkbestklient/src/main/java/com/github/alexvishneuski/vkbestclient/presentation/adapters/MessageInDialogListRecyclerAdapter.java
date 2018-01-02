@@ -46,6 +46,26 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         mMessageList = pMessageList;
     }
 
+
+
+    /***** Creating OnItemClickListener *****/
+    // Define listener member variable
+    private OnItemClickListener listener;
+
+    public OnItemClickListener getListener() {
+        return listener;
+    }
+    // Define the listener interface
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+
+    // Define the method that allows the parent activity or fragment to define the listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
     @Override
     public MessageInDialogListRecyclerViewHolder onCreateViewHolder(ViewGroup pParent, int pViewType) {
         final int viewId;
@@ -70,7 +90,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         final View view = LayoutInflater.from(pParent.getContext()).inflate(viewId, pParent, false);
 
-        return new MessageInDialogListRecyclerViewHolder(view);
+        return new MessageInDialogListRecyclerViewHolder(view, this);
     }
 
     //TODO to resolve create a few separate viewHolder for every view?
