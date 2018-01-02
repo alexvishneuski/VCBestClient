@@ -40,11 +40,42 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         //TODO Add new types: with attachments...
     }
 
+    //TO Handle click area on recyclerview item
+    @IntDef({
+            ViewArea.MESSAGE_AREA,
+            ViewArea.USER_AREA})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ViewArea {
+
+        int MESSAGE_AREA = 0;
+        int USER_AREA = 1;
+    }
+
     private List<MessageInDialogListViewModel> mMessageList;
 
     public MessageInDialogListRecyclerAdapter(final List<MessageInDialogListViewModel> pMessageList) {
         mMessageList = pMessageList;
     }
+
+
+    /***** Creating OnItemClickListener *****/
+    // Define listener member variable
+    private OnItemClickListener listener;
+
+    public OnItemClickListener getListener() {
+        return listener;
+    }
+
+    // Define the listener interface
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position, int pViewArea);
+    }
+
+    // Define the method that allows the parent activity or fragment to define the listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 
     @Override
     public MessageInDialogListRecyclerViewHolder onCreateViewHolder(ViewGroup pParent, int pViewType) {
@@ -70,7 +101,7 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
         final View view = LayoutInflater.from(pParent.getContext()).inflate(viewId, pParent, false);
 
-        return new MessageInDialogListRecyclerViewHolder(view);
+        return new MessageInDialogListRecyclerViewHolder(view, this);
     }
 
     //TODO to resolve create a few separate viewHolder for every view?

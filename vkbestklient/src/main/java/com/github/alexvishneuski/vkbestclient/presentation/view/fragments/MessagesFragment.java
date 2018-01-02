@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
@@ -24,14 +23,9 @@ import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.OnItemClickListener;
-import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.ViewArea;
+public class MessagesFragment extends Fragment {
 
-//TODO add getting users AsyncTask
-
-public class DialogsFragment extends Fragment {
-
-    public final int LOAD_DIALOGS_COUNT = 20;
+    public final int LOAD_MESSAGES_COUNT = 20;
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -43,14 +37,10 @@ public class DialogsFragment extends Fragment {
     private LinearLayoutManager mLayoutManager;
 
     private RecyclerView.OnScrollListener mOnScrollListener;
-    private RecyclerView.OnScrollListener mToHistoryOnClickListener;
-    private RecyclerView.OnScrollListener mToProfileOnClickListener;
-
     int mVisibleItemCount;
     int mTotalItemCount;
     int mFirstVisibleItemPosition;
     private boolean mIsLoading = true;
-
 
     private IDialogInteractor mDialogInteractor = new DialogInteractorImpl();
 
@@ -72,7 +62,6 @@ public class DialogsFragment extends Fragment {
         setAdapterToView();
 
         loadDialogsTotalCount();
-
         loadMessagesFirstTime();
 
         addOnScrollListener();
@@ -101,9 +90,9 @@ public class DialogsFragment extends Fragment {
                         if (mLoadTask != null) {
                             mLoadTask = new LoadDialogsAT();
                         }
-                        if (LOAD_DIALOGS_COUNT + mTotalItemCount <= mApiDialogsTotalCount) {
+                        if (LOAD_MESSAGES_COUNT + mTotalItemCount <= mApiDialogsTotalCount) {
                             assert mLoadTask != null;
-                            mLoadTask.execute(LOAD_DIALOGS_COUNT, mTotalItemCount);
+                            mLoadTask.execute(LOAD_MESSAGES_COUNT, mTotalItemCount);
                         } else {
                             assert mLoadTask != null;
                             mLoadTask.execute((mApiDialogsTotalCount - mTotalItemCount), mTotalItemCount);
@@ -149,25 +138,13 @@ public class DialogsFragment extends Fragment {
     private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
         mLoadTask = new LoadDialogsAT();
-        mLoadTask.execute(LOAD_DIALOGS_COUNT, 0);
+        mLoadTask.execute(LOAD_MESSAGES_COUNT, 0);
     }
 
     private void createAdapter() {
         Log.d(TAG, "createAdapter");
         mMessagesUI = new ArrayList<>();
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
-
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            //TODO replace with transition to messages or to contacts
-            public void onItemClick(View itemView, int position, int area) {
-                String toastText;
-                if (area == ViewArea.MESSAGE_AREA) {
-                    toastText = mMessagesUI.get(position).getMessageBody();
-                } else toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
-                Toast.makeText(getActivity(), toastText + " was clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void setAdapterToView() {
