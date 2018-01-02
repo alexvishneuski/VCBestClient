@@ -24,6 +24,7 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
         mCurrentUserAvatarPath = pView.findViewById(R.id.current_user_avatar_image_view);
         mMessageBody = pView.findViewById(R.id.mesage_body_text_view);
         mMessageSendingDate = pView.findViewById(R.id.message_sending_date_text_view);
+
     }
 
     public TextView getContactUserFullName() {
