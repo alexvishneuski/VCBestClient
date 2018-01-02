@@ -13,7 +13,7 @@
 
 
     <TextView
-        android:id="@+id/contact_user_name_text_view"
+        android:id="@+id/message_in_history_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"

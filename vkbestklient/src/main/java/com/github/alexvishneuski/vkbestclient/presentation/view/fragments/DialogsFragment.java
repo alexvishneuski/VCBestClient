@@ -170,18 +170,28 @@ public class DialogsFragment extends Fragment {
         setOnclickListenerToAdapter();
     }
 
+    //TODO to remove toasts
     private void setOnclickListenerToAdapter() {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             //TODO replace with transition to messages or to contacts
             public void onItemClick(View itemView, int position, int area) {
                 String toastText;
+
                 if (area == TouchArea.MESSAGE_AREA) {
                     toastText = mMessagesUI.get(position).getMessageBody();
+
                     if (getActivity() != null) {
                         mParentActivity.goToMessagesFragment();
                     }
-                } else toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
+                } else {
+                    toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
+
+                    if (getActivity() != null) {
+                        mParentActivity.goToProfileFragment();
+                    }
+
+                }
                 Toast.makeText(getActivity(), toastText + " was clicked!", Toast.LENGTH_SHORT).show();
             }
         });
