@@ -2,7 +2,7 @@ package com.github.alexvishneuski.vkbestclient.repository.database.dbmodel;
 
 public class UserDbModel {
 
-    private Integer mId;
+    private int mId;
     private String mFirstName;
     private String mLastName;
     private String mAvatarPath;
@@ -16,14 +16,14 @@ public class UserDbModel {
     public UserDbModel() {
     }
 
-    public UserDbModel(Integer pId, String pFirstName, String pLastName,String pAvatarPath) {
+    public UserDbModel(int pId, String pFirstName, String pLastName, String pAvatarPath) {
         mId = pId;
         mFirstName = pFirstName;
         mLastName = pFirstName;
         mAvatarPath = pAvatarPath;
     }
 
-    public Integer getId() {
+    public int getId() {
 
         return mId;
     }

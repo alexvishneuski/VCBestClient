@@ -35,6 +35,7 @@ public class DatabaseTest {
     @Before
     public void setUp() {
         mSqlConnector = new SqlConnector(RuntimeEnvironment.application);
+
     }
 
     @Ignore
@@ -70,7 +71,7 @@ public class DatabaseTest {
             //TODO read about conflicts
             long id = writeConnection.insert(UsersTableModel.TABLE_NAME, null, contentValues);
             Log.d(TAG, String.format("added user into Db %s with  id = %d, first name =%s, last name =%s, avatar path = %s: ", UsersTableModel.TABLE_NAME, id, user.getFirstName(), user.getLastName(), user.getAvatarPath()));
-            writeConnection.getPageSize();
+           // writeConnection.getPageSize();
 
         }
 
