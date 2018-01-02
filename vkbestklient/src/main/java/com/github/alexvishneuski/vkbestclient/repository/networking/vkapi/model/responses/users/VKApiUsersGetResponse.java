@@ -1,6 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users;
 
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiUser;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

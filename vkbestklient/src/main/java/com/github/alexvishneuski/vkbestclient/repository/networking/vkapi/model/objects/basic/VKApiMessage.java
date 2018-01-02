@@ -1,12 +1,12 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic;
 
 /*
 * model for VK API
 * object Message
 */
 
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjectsadd.VKApiGeo;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.mediacontentandattachments.VKApiMediaAttachment;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.additional.VKApiGeo;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.attachment.VKApiAttachment;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class VKApiMessage {
 
     // медиавложения сообщения (фотографии, ссылки и т.п.)
     @SerializedName("attachments")
-    private List<VKApiMediaAttachment> mAttachmentList;
+    private List<VKApiAttachment> mAttachmentList;
 
     // массив пересланных сообщений (если есть). Максимальное количество элементов — 100. Максимальная глубина вложенности для пересланных сообщений — 45, общее максимальное количество в цепочке с учетом вложенности — 500
     @SerializedName("fwd_messages")
@@ -156,12 +156,12 @@ public class VKApiMessage {
         mGeo = pGeo;
     }
 
-    public List<VKApiMediaAttachment> getAttachmentList() {
+    public List<VKApiAttachment> getAttachmentList() {
 
         return mAttachmentList;
     }
 
-    public void setAttachmentList(final List<VKApiMediaAttachment> pAttachmentList) {
+    public void setAttachmentList(final List<VKApiAttachment> pAttachmentList) {
         mAttachmentList = pAttachmentList;
     }
 

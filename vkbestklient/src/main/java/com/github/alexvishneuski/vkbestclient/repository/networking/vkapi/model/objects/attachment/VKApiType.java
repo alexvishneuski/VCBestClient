@@ -1,11 +1,11 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.mediacontentandattachments;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.attachment;
 
 /**
 * model for VK API
 * object Type of Attachment
 * https://vk.com/dev/objects/attachments_m
 */
-enum VKApiMediaAttachmentType {
+public enum VKApiType {
 
     // Фотография
     PHOTO,

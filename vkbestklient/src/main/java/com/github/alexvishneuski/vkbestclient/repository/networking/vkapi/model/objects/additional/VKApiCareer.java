@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjectsadd;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.additional;
 
 /**
  * model for VK API

@@ -1,7 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.interactor;
 
 import com.github.alexvishneuski.vkbestclient.interactor.model.UserInDialogs;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basicobjects.VKApiUser;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiUser;
 
 import java.util.List;
 
