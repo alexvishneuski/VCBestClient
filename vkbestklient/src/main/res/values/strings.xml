@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">VKLayouts</string>
 
-    <string name="dialogs_top_bar_title">Cообщения</string>
-    <string name="notifications_top_bar_title">Уведомления</string>
-    <string name="search_top_bar_hidden_title">Поиск</string>
-    <string name="news_top_bar_title">Новости</string>
-    <string name="profile_top_bar_title">Профиль</string>
+    <string name="dialogs_top_bar_title">Messages</string>
+    <string name="messagess_top_bar_title">Messages in history</string>
+    <string name="notifications_top_bar_title">Notifications</string>
+    <string name="search_top_bar_hidden_title">Search</string>
+    <string name="news_top_bar_title">News</string>
+    <string name="profile_top_bar_title">Prifile</string>
 
 
 

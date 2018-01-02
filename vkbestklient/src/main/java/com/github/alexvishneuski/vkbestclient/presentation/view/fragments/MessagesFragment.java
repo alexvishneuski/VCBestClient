@@ -45,9 +45,9 @@ public class MessagesFragment extends Fragment {
 
     private void initView(LayoutInflater inflater) {
 
-        int dialogsLayoutId = R.layout.fragment_recycler_view;
+        int messagesLayoutId = R.layout.fragment_recycler_view;
 
-        mView = inflater.inflate(dialogsLayoutId, null);
+        mView = inflater.inflate(messagesLayoutId, null);
     }
 
 }

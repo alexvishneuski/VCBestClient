@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
+import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarMessagesFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNewsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarProfileFragment;
@@ -196,8 +198,7 @@ public class SharedActivity extends AppCompatActivity {
         mToProfileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPairs = getPairsForProfileInitialisation();
-                replaceAllFragments(mPairs);
+                goToProfileFragment();
             }
         });
     }
@@ -268,24 +269,34 @@ public class SharedActivity extends AppCompatActivity {
     }
 
 
+
+
     /*are invoked from out fragments*/
+
 
     public void goToMessagesFragment() {
         Log.d(TAG, "goToMessagesFragment: ");
         mPairs = getPairsForMessagesInitialisation();
         replaceAllFragments(mPairs);
-        Toast.makeText(this, " Go to ToMessagesFragment", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, " Gone to ToMessagesFragment", Toast.LENGTH_SHORT).show();
     }
 
     private List<Pair<Integer, ? extends Fragment>> getPairsForMessagesInitialisation() {
 
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
-        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarDialogsFragment());
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarMessagesFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new MessagesFragment());
         pairs.add(pair1);
         pairs.add(pair2);
 
         return pairs;
     }
 
+    //TODO to make the same for  to profile transition
+    public void goToProfileFragment() {
+        Log.d(TAG, "goToProfileFragment: ");
+        mPairs = getPairsForProfileInitialisation();
+        replaceAllFragments(mPairs);
+        Toast.makeText(this, " Gone to ToProfileFragment", Toast.LENGTH_SHORT).show();
+    }
 }
