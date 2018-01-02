@@ -20,6 +20,7 @@ import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,6 @@ public class DialogsFragment extends Fragment {
     private LinearLayoutManager mLayoutManager;
 
     private RecyclerView.OnScrollListener mOnScrollListener;
-    private RecyclerView.OnScrollListener mToHistoryOnClickListener;
-    private RecyclerView.OnScrollListener mToProfileOnClickListener;
 
     int mVisibleItemCount;
     int mTotalItemCount;
@@ -58,12 +57,16 @@ public class DialogsFragment extends Fragment {
 
     private int mApiDialogsTotalCount;
 
+    private SharedActivity mParentActivity;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
 
         initView(inflater);
+
+        getLinkToParentActivity();
 
         createRecyclerView(mView);
         addDevider();
@@ -79,6 +82,13 @@ public class DialogsFragment extends Fragment {
         setOnScrollListener();
 
         return mView;
+    }
+
+    private void getLinkToParentActivity() {
+        if (getActivity() != null) {
+            mParentActivity = (SharedActivity) getActivity();
+
+        }
     }
 
 
@@ -168,6 +178,9 @@ public class DialogsFragment extends Fragment {
                 String toastText;
                 if (area == TouchArea.MESSAGE_AREA) {
                     toastText = mMessagesUI.get(position).getMessageBody();
+                    if (getActivity() != null) {
+                        mParentActivity.goToMessagesFragment();
+                    }
                 } else toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
                 Toast.makeText(getActivity(), toastText + " was clicked!", Toast.LENGTH_SHORT).show();
             }

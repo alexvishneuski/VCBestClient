@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsFragment;
@@ -267,6 +268,14 @@ public class SharedActivity extends AppCompatActivity {
     }
 
 
+    /*are invoked from out fragments*/
+
+    public void goToMessagesFragment() {
+        Log.d(TAG, "goToMessagesFragment: ");
+        mPairs = getPairsForMessagesInitialisation();
+        replaceAllFragments(mPairs);
+        Toast.makeText(this, " Go to ToMessagesFragment", Toast.LENGTH_SHORT).show();
+    }
 
     private List<Pair<Integer, ? extends Fragment>> getPairsForMessagesInitialisation() {
 
