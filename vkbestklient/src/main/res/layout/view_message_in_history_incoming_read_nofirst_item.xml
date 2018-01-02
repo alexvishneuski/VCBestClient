@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:ignore="RtlSymmetry">
+
+
+    <TextView
+        android:id="@+id/contact_user_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="16sp"
+        tools:ellipsize="end"
+        tools:singleLine="false"
+        tools:text="Александр Вишневский Владиславович Александр Вишневский Владиславович Александр Вишневский Владиславович Александр Вишневский Владиславович " />
+
+
+</LinearLayout>
+
+
+
