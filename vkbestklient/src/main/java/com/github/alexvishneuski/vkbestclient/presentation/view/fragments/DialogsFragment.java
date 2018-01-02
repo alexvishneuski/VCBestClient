@@ -24,6 +24,9 @@ import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.OnItemClickListener;
+import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.ViewArea;
+
 //TODO add getting users AsyncTask
 
 public class DialogsFragment extends Fragment {
@@ -69,6 +72,7 @@ public class DialogsFragment extends Fragment {
         setAdapterToView();
 
         loadDialogsTotalCount();
+
         loadMessagesFirstTime();
 
         addOnScrollListener();
@@ -152,12 +156,16 @@ public class DialogsFragment extends Fragment {
         Log.d(TAG, "createAdapter");
         mMessagesUI = new ArrayList<>();
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
-        mAdapter.setOnItemClickListener(new MessageInDialogListRecyclerAdapter.OnItemClickListener() {
+
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             //TODO replace with transition to messages or to contacts
-            public void onItemClick(View itemView, int position) {
-                String name = mMessagesUI.get(position).getContactUser().getUserFullName();
-                Toast.makeText(getActivity(), name + " was clicked!", Toast.LENGTH_SHORT).show();
+            public void onItemClick(View itemView, int position, int area) {
+                String toastText;
+                if (area == ViewArea.MESSAGE_AREA) {
+                    toastText = mMessagesUI.get(position).getMessageBody();
+                } else toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
+                Toast.makeText(getActivity(), toastText + " was clicked!", Toast.LENGTH_SHORT).show();
             }
         });
     }

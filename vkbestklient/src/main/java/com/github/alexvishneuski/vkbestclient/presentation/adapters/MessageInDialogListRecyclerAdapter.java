@@ -40,12 +40,22 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         //TODO Add new types: with attachments...
     }
 
+    //TO Handle click area on recyclerview item
+    @IntDef({
+            ViewArea.MESSAGE_AREA,
+            ViewArea.USER_AREA})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ViewArea {
+
+        int MESSAGE_AREA = 0;
+        int USER_AREA = 1;
+    }
+
     private List<MessageInDialogListViewModel> mMessageList;
 
     public MessageInDialogListRecyclerAdapter(final List<MessageInDialogListViewModel> pMessageList) {
         mMessageList = pMessageList;
     }
-
 
 
     /***** Creating OnItemClickListener *****/
@@ -55,9 +65,10 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
     public OnItemClickListener getListener() {
         return listener;
     }
+
     // Define the listener interface
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
+        void onItemClick(View itemView, int position, int pViewArea);
     }
 
     // Define the method that allows the parent activity or fragment to define the listener

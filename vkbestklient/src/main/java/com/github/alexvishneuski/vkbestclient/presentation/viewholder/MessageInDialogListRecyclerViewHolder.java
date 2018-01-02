@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 
+import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.*;
+
 //holder for for incoming and read messages
 public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHolder {
 
@@ -19,7 +21,7 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
     private TextView mMessageSendingDate;
     private TextView mMessageBody;
 
-    public MessageInDialogListRecyclerViewHolder(final View pView, MessageInDialogListRecyclerAdapter pAdapter) {
+    public MessageInDialogListRecyclerViewHolder(final View pView, final MessageInDialogListRecyclerAdapter pAdapter) {
         super(pView);
 
         mAdapter = pAdapter;
@@ -30,13 +32,28 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
         mMessageBody = pView.findViewById(R.id.mesage_body_text_view);
         mMessageSendingDate = pView.findViewById(R.id.message_sending_date_text_view);
 
-        pView.setOnClickListener(new View.OnClickListener() {
+        ImageView contactUserArea = mContactUserAvatarPath;
+        View messageArea = pView.findViewById(R.id.message_area);
+
+        contactUserArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mAdapter.getListener() != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        mAdapter.getListener().onItemClick(itemView, position);
+                        mAdapter.getListener().onItemClick(itemView, position, ViewArea.USER_AREA);
+                    }
+                }
+            }
+        });
+
+        messageArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAdapter.getListener() != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        mAdapter.getListener().onItemClick(itemView, position, ViewArea.MESSAGE_AREA);
                     }
                 }
             }
