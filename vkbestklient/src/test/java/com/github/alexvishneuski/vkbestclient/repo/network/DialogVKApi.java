@@ -89,9 +89,9 @@ public class DialogVKApi {
 
         InputStream mockedInputStream = Mocks.stream("VKApiMessagesGetDialogsResult.json");
 
-        doReturn(mockedInputStream),when(mHttpClient.request(null,null));
-        when(mHttpClient.request(Matchers.anyString(), mListener)).thenReturn(mockedInputStream);
-        //InputStream response = mHttpClient.request("http://myBackEnd/getInvoice?id=29", mListener);
+        doReturn(mockedInputStream),when(mHttpClient.requestGet(null,null));
+        when(mHttpClient.requestGet(Matchers.anyString(), mListener)).thenReturn(mockedInputStream);
+        //InputStream response = mHttpClient.requestGet("http://myBackEnd/getInvoice?id=29", mListener);
 
 
         mDialogs.addAll(mDialogProvider.getDialogs().getDialogs());

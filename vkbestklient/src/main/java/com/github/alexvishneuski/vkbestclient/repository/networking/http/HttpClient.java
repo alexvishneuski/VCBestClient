@@ -8,6 +8,8 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -18,8 +20,8 @@ public class HttpClient<T> implements IHttpClient<T> {
     private HttpURLConnection con;
 
     @Override
-    public T request(String pUrl, Class<T> pClazz) {
-        Log.d(TAG, "request() called with: pUrl = [" + pUrl + "], pClazz = [" + pClazz + "]");
+    public T requestGet(String pUrl, Class<T> pClazz) {
+        Log.d(TAG, "requestGet() called with: pUrl = [" + pUrl + "], pClazz = [" + pClazz + "]");
 
         InputStreamReader inputStreamReader;
         Object response = null;
@@ -46,8 +48,47 @@ public class HttpClient<T> implements IHttpClient<T> {
     }
 
     @Override
-    public void request(final String url, final ResponseListener listener) {
-        Log.d(TAG, "request() called with: url = [" + url + "], listener = [" + listener + "]");
+    public T requestPost(String pUrl, Class<T> pClazz, String pBody) {
+
+        final OutputStream outputStream;
+        OutputStreamWriter writer;
+
+        final InputStream inputStream;
+        InputStreamReader reader;
+        Object response = null;
+
+        try {
+            HttpURLConnection con = (HttpURLConnection) (new URL(pUrl)).openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+
+            outputStream = con.getOutputStream();
+            writer = new OutputStreamWriter(outputStream);
+            writer.write(pBody);
+            writer.flush();
+            writer.close();
+
+            inputStream = con.getInputStream();
+            reader = new InputStreamReader(inputStream);
+            response = new GsonBuilder()
+                    .setLenient()
+                    .create().fromJson(reader, pClazz);
+
+            con.disconnect();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        } finally {
+        if (con != null) {
+            con.disconnect();
+        }
+    }
+
+        return (T) response;
+    }
+
+    @Override
+    public void requestGet(final String url, final ResponseListener listener) {
+        Log.d(TAG, "requestGet() called with: url = [" + url + "], listener = [" + listener + "]");
 
         try {
             final InputStream is = openStream(url);

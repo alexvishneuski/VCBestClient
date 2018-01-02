@@ -31,7 +31,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
-                        new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
+                        new HttpClient().requestGet(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
             final String errorMessage = TAG + result.getError();
@@ -58,7 +58,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         @SuppressWarnings("unchecked") final VKApiMessagesGetDialogsResult result =
                 (VKApiMessagesGetDialogsResult)
-                        new HttpClient().request(url, VKApiMessagesGetDialogsResult.class);
+                        new HttpClient().requestGet(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
             final String errorMessage = TAG + result.getError();

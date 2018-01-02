@@ -31,7 +31,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
 
         @SuppressWarnings("unchecked") final VKApiUsersGetResult result =
                 (VKApiUsersGetResult)
-                        new HttpClient().request(url, VKApiUsersGetResult.class);
+                        new HttpClient().requestGet(url, VKApiUsersGetResult.class);
 
         if (result.getError() != null) {
             final String errorMessage = TAG + " in " + methodsTag + ": " + result.getError();

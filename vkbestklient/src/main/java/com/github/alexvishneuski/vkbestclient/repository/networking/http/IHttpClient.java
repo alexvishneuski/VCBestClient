@@ -2,7 +2,9 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.http;
 
 public interface IHttpClient<T> {
 
-    void request(String url, HttpClient.ResponseListener listener);
+    void requestGet(String pUrl, HttpClient.ResponseListener pListener);
 
-    T request(String url, Class<T> clazz);
+    T requestGet(String pUrl, Class<T> pClazz);
+
+    T requestPost(String pUrl, Class<T> pClazz, String pBody);
 }
