@@ -129,7 +129,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         //3 getting array user's Info  by ids
 
-        List<UserInDialogs> users = mUserInteractor.getDomainUsers(contactUserIds);
+        List<UserInDialogs> users = mUserInteractor.getDomainUsersBasicInfo(contactUserIds);
 
         SparseArray<UserInDialogs> usersInDialogs = new SparseArray<>();
 
