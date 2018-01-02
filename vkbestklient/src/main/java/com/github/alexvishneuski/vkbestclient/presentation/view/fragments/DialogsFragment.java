@@ -157,6 +157,10 @@ public class DialogsFragment extends Fragment {
         mMessagesUI = new ArrayList<>();
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
 
+        setOnclickListenerToAdapter();
+    }
+
+    private void setOnclickListenerToAdapter() {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             //TODO replace with transition to messages or to contacts

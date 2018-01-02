@@ -265,4 +265,18 @@ public class SharedActivity extends AppCompatActivity {
 
         return pairs;
     }
+
+
+
+    private List<Pair<Integer, ? extends Fragment>> getPairsForMessagesInitialisation() {
+
+        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
+        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarDialogsFragment());
+        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
+        pairs.add(pair1);
+        pairs.add(pair2);
+
+        return pairs;
+    }
+
 }
