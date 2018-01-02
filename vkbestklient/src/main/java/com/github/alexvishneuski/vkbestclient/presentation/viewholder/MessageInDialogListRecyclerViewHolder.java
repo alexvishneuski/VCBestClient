@@ -41,7 +41,7 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
                 if (mAdapter.getListener() != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        mAdapter.getListener().onItemClick(itemView, position, ViewArea.USER_AREA);
+                        mAdapter.getListener().onItemClick(itemView, position, TouchArea.USER_AREA);
                     }
                 }
             }
@@ -53,7 +53,7 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
                 if (mAdapter.getListener() != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        mAdapter.getListener().onItemClick(itemView, position, ViewArea.MESSAGE_AREA);
+                        mAdapter.getListener().onItemClick(itemView, position, TouchArea.MESSAGE_AREA);
                     }
                 }
             }

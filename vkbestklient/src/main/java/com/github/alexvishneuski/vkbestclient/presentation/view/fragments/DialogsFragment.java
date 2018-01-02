@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.OnItemClickListener;
-import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.ViewArea;
+import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.TouchArea;
 
 //TODO add getting users AsyncTask
 
@@ -162,7 +162,7 @@ public class DialogsFragment extends Fragment {
             //TODO replace with transition to messages or to contacts
             public void onItemClick(View itemView, int position, int area) {
                 String toastText;
-                if (area == ViewArea.MESSAGE_AREA) {
+                if (area == TouchArea.MESSAGE_AREA) {
                     toastText = mMessagesUI.get(position).getMessageBody();
                 } else toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
                 Toast.makeText(getActivity(), toastText + " was clicked!", Toast.LENGTH_SHORT).show();

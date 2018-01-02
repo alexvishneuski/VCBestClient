@@ -42,10 +42,10 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
     //TO Handle click area on recyclerview item
     @IntDef({
-            ViewArea.MESSAGE_AREA,
-            ViewArea.USER_AREA})
+            TouchArea.MESSAGE_AREA,
+            TouchArea.USER_AREA})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ViewArea {
+    public @interface TouchArea {
 
         int MESSAGE_AREA = 0;
         int USER_AREA = 1;
