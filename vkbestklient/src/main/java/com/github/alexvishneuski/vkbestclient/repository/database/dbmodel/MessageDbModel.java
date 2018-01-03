@@ -8,9 +8,9 @@ public class MessageDbModel {
     private int mMessageSendingDate;
     private String mMessageTitle;
     private String mMessageBody;
-    private boolean mIsMessageRead;
+    private int mIsMessageRead;
 
-    public MessageDbModel(int pAuthor_id, int pRecipient_id, int pMessageSendingDate, String pMessageTitle, String pMessageBody, boolean pIsMessageRead) {
+    public MessageDbModel(int pAuthor_id, int pRecipient_id, int pMessageSendingDate, String pMessageTitle, String pMessageBody, int pIsMessageRead) {
         mAuthor_id = pAuthor_id;
         mRecipient_id = pRecipient_id;
         mMessageSendingDate = pMessageSendingDate;
@@ -67,11 +67,11 @@ public class MessageDbModel {
         mMessageBody = pMessageBody;
     }
 
-    public boolean isMessageRead() {
+    public int isMessageRead() {
         return mIsMessageRead;
     }
 
-    public void setMessageRead(boolean pMessageRead) {
+    public void setMessageRead(int pMessageRead) {
         mIsMessageRead = pMessageRead;
     }
 }

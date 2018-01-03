@@ -8,6 +8,7 @@ import android.util.Log;
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
 import com.github.alexvishneuski.vkbestclient.repository.database.SqlConnector;
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
+import com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UsersTableModel;
 import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
 
@@ -18,6 +19,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -35,8 +39,44 @@ public class DatabaseTest {
     @Before
     public void setUp() {
         mSqlConnector = new SqlConnector(RuntimeEnvironment.application);
+    }
+
+    @Test
+    public void insertUserPreparedSql() {
+        Log.d(TAG, "insertUserPreparedSql: called");
+        List<UserDbModel> users = generateUsers(3);
+
+        SQLiteDatabase writableConnection = mSqlConnector.getWritableDatabase();
+        writableConnection.beginTransaction();
+
+        for (int i = 0; i < users.size(); i++) {
+            UserDbModel user = users.get(i);
+            writableConnection.execSQL(
+                    Tables.INSERT_USER,
+                    new Object[]{
+                            user.getId(), user.getFirstName(), user.getLastName(), user.getAvatarPath()});
+        }
+
+        writableConnection.setTransactionSuccessful();
+        writableConnection.endTransaction();
+    }
+
+
+    @Test
+    public void getUserPreparedSql() {
 
     }
+
+    @Test
+    public void updateUserPreparedSql() {
+
+    }
+
+    @Test
+    public void deleteUserPreparedSql() {
+
+    }
+
 
     @Ignore
     @Test
@@ -71,7 +111,7 @@ public class DatabaseTest {
             //TODO read about conflicts
             long id = writeConnection.insert(UsersTableModel.TABLE_NAME, null, contentValues);
             Log.d(TAG, String.format("added user into Db %s with  id = %d, first name =%s, last name =%s, avatar path = %s: ", UsersTableModel.TABLE_NAME, id, user.getFirstName(), user.getLastName(), user.getAvatarPath()));
-           // writeConnection.getPageSize();
+            // writeConnection.getPageSize();
 
         }
 
@@ -120,6 +160,19 @@ public class DatabaseTest {
         usersDbCursor.close();
     }
 */
+
+
+    private List<UserDbModel> generateUsers(int pI) {
+        List<UserDbModel> users = new ArrayList<>();
+        UserDbModel user;
+
+        for (int i = 0; i < pI; i++) {
+            user = new UserDbModel(i, "FirstName " + i, "LastName " + i, "AvatarPath " + i);
+            users.add(user);
+        }
+
+        return users;
+    }
 
     private UserDbModel[] prepareUsersForInsertIntoDb() {
         //TODO fill data
