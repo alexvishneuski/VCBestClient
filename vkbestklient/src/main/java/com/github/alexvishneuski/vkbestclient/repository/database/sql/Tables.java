@@ -6,6 +6,7 @@ import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.Use
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.CREATE_TABLE_IF_NOT_EXISTS;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.INSERT_INTO;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.PRIMARY_KEY;
+import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.SELECT_ALL_FROM;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.Separators.CLS_BRACKET;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.Separators.COMMA;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.Separators.OPN_BRACKET;
@@ -59,6 +60,9 @@ public class Tables {
                     UsersTableModel.AVATAR_PATH +
                     CLS_BRACKET +
                     " VALUES (?,?,?,?)";
+
+    public static final String READ_All_USERS =
+            SELECT_ALL_FROM + UsersTableModel.TABLE_NAME;
 
 
 }

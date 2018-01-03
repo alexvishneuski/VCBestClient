@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
 import com.github.alexvishneuski.vkbestclient.repository.database.SqlConnector;
@@ -12,6 +13,7 @@ import com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UsersTableModel;
 import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -36,36 +39,136 @@ public class DatabaseTest {
 
     private SqlConnector mSqlConnector;
 
+    private SQLiteDatabase mWritableConnection;
+    private SQLiteDatabase mReadableConnection;
+    private Cursor mCursor;
+
     @Before
     public void setUp() {
         mSqlConnector = new SqlConnector(RuntimeEnvironment.application);
+        mWritableConnection = mSqlConnector.getWritableDatabase();
+        mReadableConnection = mSqlConnector.getReadableDatabase();
+    }
+
+    @After
+    public void closeCursor() {
+        if (mCursor != null) {
+            mCursor.close();
+        }
     }
 
     @Test
-    public void insertUserPreparedSql() {
+    public void insertUsers() {
         Log.d(TAG, "insertUserPreparedSql: called");
-        List<UserDbModel> users = generateUsers(3);
 
-        SQLiteDatabase writableConnection = mSqlConnector.getWritableDatabase();
-        writableConnection.beginTransaction();
+        //inserting 2 users
+        List<UserDbModel> usersForInserting = generateUsers(2);
 
-        for (int i = 0; i < users.size(); i++) {
-            UserDbModel user = users.get(i);
-            writableConnection.execSQL(
+        mWritableConnection.beginTransaction();
+
+        for (int i = 0; i < usersForInserting.size(); i++) {
+            UserDbModel user = usersForInserting.get(i);
+            mWritableConnection.execSQL(
                     Tables.INSERT_USER,
                     new Object[]{
                             user.getId(), user.getFirstName(), user.getLastName(), user.getAvatarPath()});
         }
 
-        writableConnection.setTransactionSuccessful();
-        writableConnection.endTransaction();
+        mWritableConnection.setTransactionSuccessful();
+        mWritableConnection.endTransaction();
+
+        //getting 2 users
+        mReadableConnection.beginTransaction();
+
+        mCursor = mReadableConnection.query(UsersTableModel.TABLE_NAME,
+                null, null, null, null, null, null);
+        Log.d(TAG, "getUserPreparedSql: cursor returned " + mCursor.getCount() + " rows");
+
+        mReadableConnection.setTransactionSuccessful();
+        mReadableConnection.endTransaction();
+
+        //asserting
+        assertTrue("item's count for inserting into Db and after getting from Db must the same",
+                usersForInserting.size() == mCursor.getCount());
     }
 
-
+//TODO use COntentValues by inserting
     @Test
-    public void getUserPreparedSql() {
+    public void getUsers() {
+        Log.d(TAG, "getUserPreparedSql: called");
 
+        //inserting 3 users
+        List<UserDbModel> usersForInserting = generateUsers(3);
+
+        SparseArray<UserDbModel> usersBefore = new SparseArray<>();
+
+        for (UserDbModel user : usersForInserting
+                ) {
+            usersBefore.append(user.getId(), user);
+        }
+
+        mWritableConnection.beginTransaction();
+
+        for (int i = 0; i < usersForInserting.size(); i++) {
+            UserDbModel user = usersForInserting.get(i);
+            mWritableConnection.execSQL(
+                    Tables.INSERT_USER,
+                    new Object[]{
+                            user.getId(), user.getFirstName(), user.getLastName(), user.getAvatarPath()});
+        }
+
+        mWritableConnection.setTransactionSuccessful();
+        mWritableConnection.endTransaction();
+
+        //getting 3 users
+        List<UserDbModel> usersFromDb = new ArrayList<>();
+
+        mReadableConnection.beginTransaction();
+
+        mCursor = mReadableConnection.query(UsersTableModel.TABLE_NAME,
+                null, null, null, null, null, null);
+
+        if (mCursor.getCount() != 0) {
+
+            mCursor.moveToFirst();
+            do {
+
+                int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel.ID));
+                String firstName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.FIRST_NAME));
+                String lastName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.LAST_NAME));
+                String avatarPath = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.AVATAR_PATH));
+
+                UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
+                usersFromDb.add(userFromDb);
+            }
+            while (mCursor.moveToNext());
+            Log.d(TAG, "getUserPreparedSql: cursor returned " + usersFromDb.size() + " rows");
+
+        } else {
+            Log.d(TAG, "getUserPreparedSql: cursor returned 0 rows");
+        }
+
+        SparseArray<UserDbModel> usersAfter = new SparseArray<>();
+        for (UserDbModel user : usersFromDb
+                ) {
+            usersAfter.append(user.getId(), user);
+        }
+
+        mReadableConnection.setTransactionSuccessful();
+        mReadableConnection.endTransaction();
+
+        //asserting
+        assertTrue("item's count for inserting into Db and after getting from Db must be equals",
+                usersForInserting.size() == usersFromDb.size());
+
+        for (UserDbModel user : usersFromDb
+                ) {
+            int id = user.getId();
+            assertTrue("item before inserting must be equals to item after getting from Db",
+                    usersBefore.get(id).equals(usersAfter.get(id)));
+        }
     }
+
 
     @Test
     public void updateUserPreparedSql() {

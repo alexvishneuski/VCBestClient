@@ -25,6 +25,7 @@ public class Constants {
         String PRIMARY_KEY = " PRIMARY KEY AUTOINCREMENT NOT NULL";
         String CREATE_TABLE_IF_NOT_EXISTS = "CREATE TABLE IF NOT EXISTS ";
         String INSERT_INTO = "INSERT INTO ";
+        String SELECT_ALL_FROM = "SELECT * FROM ";
 
     }
 }

@@ -59,4 +59,28 @@ public class UserDbModel {
     public void setAvatarPath(String pAvatarPath) {
         mAvatarPath = pAvatarPath;
     }
+
+    @Override
+    public boolean equals(Object pO) {
+        if (this == pO) return true;
+        if (!(pO instanceof UserDbModel)) return false;
+
+        UserDbModel that = (UserDbModel) pO;
+
+        if (mId != that.mId) return false;
+        if (mFirstName != null ? !mFirstName.equals(that.mFirstName) : that.mFirstName != null)
+            return false;
+        if (mLastName != null ? !mLastName.equals(that.mLastName) : that.mLastName != null)
+            return false;
+        return mAvatarPath != null ? mAvatarPath.equals(that.mAvatarPath) : that.mAvatarPath == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mId;
+        result = 31 * result + (mFirstName != null ? mFirstName.hashCode() : 0);
+        result = 31 * result + (mLastName != null ? mLastName.hashCode() : 0);
+        result = 31 * result + (mAvatarPath != null ? mAvatarPath.hashCode() : 0);
+        return result;
+    }
 }
