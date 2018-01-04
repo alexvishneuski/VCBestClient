@@ -132,7 +132,7 @@ public class DatabaseTest {
             mCursor.moveToFirst();
             do {
 
-                int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel.ID));
+                int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel._ID));
                 String firstName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.FIRST_NAME));
                 String lastName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.LAST_NAME));
                 String avatarPath = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.AVATAR_PATH));
@@ -184,7 +184,7 @@ public class DatabaseTest {
         mWritableConnection.beginTransaction();
 
         ContentValues values = new ContentValues();
-        values.put(UsersTableModel.ID, parId);
+        values.put(UsersTableModel._ID, parId);
         values.put(UsersTableModel.FIRST_NAME, parFirstName);
         values.put(UsersTableModel.LAST_NAME, parLastName);
         values.put(UsersTableModel.AVATAR_PATH, parAvatar);
@@ -202,11 +202,11 @@ public class DatabaseTest {
         mCursor = mReadableConnection.query(
                 UsersTableModel.TABLE_NAME,
                 new String[]{
-                        UsersTableModel.ID,
+                        UsersTableModel._ID,
                         UsersTableModel.FIRST_NAME,
                         UsersTableModel.LAST_NAME,
                         UsersTableModel.AVATAR_PATH},
-                UsersTableModel.ID + "=? AND " +
+                UsersTableModel._ID + "=? AND " +
                         UsersTableModel.FIRST_NAME + "=? AND " +
                         UsersTableModel.LAST_NAME + "=? AND " +
                         UsersTableModel.AVATAR_PATH + "=? ",
@@ -218,7 +218,7 @@ public class DatabaseTest {
 
         mCursor.moveToFirst();
 
-        int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel.ID));
+        int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel._ID));
         String firstName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.FIRST_NAME));
         String lastName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.LAST_NAME));
         String avatarPath = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.AVATAR_PATH));

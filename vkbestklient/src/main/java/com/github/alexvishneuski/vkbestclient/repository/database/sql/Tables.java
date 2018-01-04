@@ -34,7 +34,7 @@ public class Tables {
     public static final String CREATE_USERS_TABLE
             = CREATE_TABLE_IF_NOT_EXISTS +
             UsersTableModel.TABLE_NAME + OPN_BRACKET +
-            UsersTableModel.ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
+            UsersTableModel._ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
             UsersTableModel.FIRST_NAME + TEXT_TYPE + COMMA +
             UsersTableModel.LAST_NAME + TEXT_TYPE + COMMA +
             UsersTableModel.AVATAR_PATH + TEXT_TYPE +
@@ -43,7 +43,7 @@ public class Tables {
     public static final String CREATE_MESSAGES_TABLE
             = CREATE_TABLE_IF_NOT_EXISTS +
             MessagesTableModel.TABLE_NAME + OPN_BRACKET +
-            MessagesTableModel.ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
+            MessagesTableModel._ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
             MessagesTableModel.AUTHOR_ID + INTEGER_TYPE + COMMA +
             MessagesTableModel.RECIPIENT_ID + INTEGER_TYPE + COMMA +
             MessagesTableModel.TITLE + TEXT_TYPE + COMMA +
@@ -54,7 +54,7 @@ public class Tables {
 
     public static final String INSERT_USER =
             INSERT_INTO + UsersTableModel.TABLE_NAME + OPN_BRACKET +
-                    UsersTableModel.ID + COMMA +
+                    UsersTableModel._ID + COMMA +
                     UsersTableModel.FIRST_NAME + COMMA +
                     UsersTableModel.LAST_NAME + COMMA +
                     UsersTableModel.AVATAR_PATH +
