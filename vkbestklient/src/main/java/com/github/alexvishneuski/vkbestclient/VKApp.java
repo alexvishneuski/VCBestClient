@@ -3,6 +3,7 @@ package com.github.alexvishneuski.vkbestclient;
 import android.app.Application;
 import android.widget.Toast;
 
+import com.github.alexvishneuski.vkbestclient.repository.database.operations.IDbOperations;
 import com.github.alexvishneuski.vkbestclient.util.ContextHolder;
 
 
