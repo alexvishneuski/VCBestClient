@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.database;
+package com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +8,7 @@ import android.util.Log;
 import static com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables.CREATE_MESSAGES_TABLE;
 import static com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables.CREATE_USERS_TABLE;
 
-public class SqlConnector extends SQLiteOpenHelper {
+public class SqlConnectorSimple extends SQLiteOpenHelper {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -16,7 +16,7 @@ public class SqlConnector extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    public SqlConnector(Context context) {
+    public SqlConnectorSimple(Context context) {
         //TODO read about SQLiteDatabase.CursorFactory
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
