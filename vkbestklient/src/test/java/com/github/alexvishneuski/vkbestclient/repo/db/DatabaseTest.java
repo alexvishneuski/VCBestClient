@@ -3,6 +3,7 @@ package com.github.alexvishneuski.vkbestclient.repo.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -36,7 +37,7 @@ public class DatabaseTest {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    private SqlConnectorSimple mSqlConnector;
+    private SQLiteOpenHelper mSqlConnector;
 
     private SQLiteDatabase mWritableConnection;
     private SQLiteDatabase mReadableConnection;

@@ -8,7 +8,7 @@ import android.util.Log;
 import static com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables.CREATE_MESSAGES_TABLE;
 import static com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables.CREATE_USERS_TABLE;
 
-public class SqlConnectorSimple extends SQLiteOpenHelper implements ISqlConnector {
+public class SqlConnectorSimple extends SQLiteOpenHelper {
 
     private final String TAG = this.getClass().getSimpleName();
 
