@@ -1,7 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.repository.database.sql;
 
-import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.MessagesTableModel;
-import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UsersTableModel;
+import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.MessageDb;
+import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
 
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.CREATE_TABLE_IF_NOT_EXISTS;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.INSERT_INTO;
@@ -33,36 +33,36 @@ public class Tables {
 
     public static final String CREATE_USERS_TABLE
             = CREATE_TABLE_IF_NOT_EXISTS +
-            UsersTableModel.TABLE_NAME + OPN_BRACKET +
-            UsersTableModel._ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
-            UsersTableModel.FIRST_NAME + TEXT_TYPE + COMMA +
-            UsersTableModel.LAST_NAME + TEXT_TYPE + COMMA +
-            UsersTableModel.AVATAR_PATH + TEXT_TYPE +
+            UserDb.TABLE_NAME + OPN_BRACKET +
+            UserDb._ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
+            UserDb.FIRST_NAME + TEXT_TYPE + COMMA +
+            UserDb.LAST_NAME + TEXT_TYPE + COMMA +
+            UserDb.AVATAR_PATH + TEXT_TYPE +
             CLS_BRACKET;
 
     public static final String CREATE_MESSAGES_TABLE
             = CREATE_TABLE_IF_NOT_EXISTS +
-            MessagesTableModel.TABLE_NAME + OPN_BRACKET +
-            MessagesTableModel._ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
-            MessagesTableModel.AUTHOR_ID + INTEGER_TYPE + COMMA +
-            MessagesTableModel.RECIPIENT_ID + INTEGER_TYPE + COMMA +
-            MessagesTableModel.TITLE + TEXT_TYPE + COMMA +
-            MessagesTableModel.BODY + TEXT_TYPE + COMMA +
-            MessagesTableModel.CREATED + INTEGER_TYPE + COMMA +
-            MessagesTableModel.IS_READ + INTEGER_TYPE +
+            MessageDb.TABLE_NAME + OPN_BRACKET +
+            MessageDb._ID + INTEGER_TYPE + PRIMARY_KEY + COMMA +
+            MessageDb.AUTHOR_ID + INTEGER_TYPE + COMMA +
+            MessageDb.RECIPIENT_ID + INTEGER_TYPE + COMMA +
+            MessageDb.TITLE + TEXT_TYPE + COMMA +
+            MessageDb.BODY + TEXT_TYPE + COMMA +
+            MessageDb.CREATED + INTEGER_TYPE + COMMA +
+            MessageDb.IS_READ + INTEGER_TYPE +
             CLS_BRACKET;
 
     public static final String INSERT_USER =
-            INSERT_INTO + UsersTableModel.TABLE_NAME + OPN_BRACKET +
-                    UsersTableModel._ID + COMMA +
-                    UsersTableModel.FIRST_NAME + COMMA +
-                    UsersTableModel.LAST_NAME + COMMA +
-                    UsersTableModel.AVATAR_PATH +
+            INSERT_INTO + UserDb.TABLE_NAME + OPN_BRACKET +
+                    UserDb._ID + COMMA +
+                    UserDb.FIRST_NAME + COMMA +
+                    UserDb.LAST_NAME + COMMA +
+                    UserDb.AVATAR_PATH +
                     CLS_BRACKET +
                     " VALUES (?,?,?,?)";
 
     public static final String READ_All_USERS =
-            SELECT_ALL_FROM + UsersTableModel.TABLE_NAME;
+            SELECT_ALL_FROM + UserDb.TABLE_NAME;
 
 
 }

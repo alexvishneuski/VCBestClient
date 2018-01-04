@@ -3,11 +3,12 @@ package com.github.alexvishneuski.vkbestclient.repository.database.tablemodel;
 import android.provider.BaseColumns;
 
 import com.github.alexvishneuski.vkbestclient.repository.database.orm.annotations.dbTable;
+import com.github.alexvishneuski.vkbestclient.repository.database.util.DbUtils;
 
-@dbTable("messages")
-public class MessagesTableModel implements BaseColumns {
+@dbTable("MessageDb")
+public class MessageDb implements BaseColumns {
 
-    public static final String TABLE_NAME = "messages";
+    public static final String TABLE_NAME = DbUtils.getTableName(MessageDb.class);
 
     //public static final String ID = "_id";
     public static final String AUTHOR_ID = "author_id";

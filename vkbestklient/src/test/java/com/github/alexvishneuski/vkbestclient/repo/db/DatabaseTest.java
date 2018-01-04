@@ -11,7 +11,7 @@ import com.github.alexvishneuski.vkbestclient.BuildConfig;
 import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.SqlConnectorSimple;
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
 import com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables;
-import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UsersTableModel;
+import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
 import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
 
 import org.junit.After;
@@ -80,7 +80,7 @@ public class DatabaseTest {
         //getting 2 users
         mReadableConnection.beginTransaction();
 
-        mCursor = mReadableConnection.query(UsersTableModel.TABLE_NAME,
+        mCursor = mReadableConnection.query(UserDb.TABLE_NAME,
                 null, null, null, null, null, null);
         Log.d(TAG, "insertUserList: cursor returned " + mCursor.getCount() + " rows");
 
@@ -124,7 +124,7 @@ public class DatabaseTest {
 
         mReadableConnection.beginTransaction();
 
-        mCursor = mReadableConnection.query(UsersTableModel.TABLE_NAME,
+        mCursor = mReadableConnection.query(UserDb.TABLE_NAME,
                 null, null, null, null, null, null);
 
         if (mCursor.getCount() != 0) {
@@ -132,10 +132,10 @@ public class DatabaseTest {
             mCursor.moveToFirst();
             do {
 
-                int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel._ID));
-                String firstName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.FIRST_NAME));
-                String lastName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.LAST_NAME));
-                String avatarPath = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.AVATAR_PATH));
+                int id = mCursor.getInt(mCursor.getColumnIndex(UserDb._ID));
+                String firstName = mCursor.getString(mCursor.getColumnIndex(UserDb.FIRST_NAME));
+                String lastName = mCursor.getString(mCursor.getColumnIndex(UserDb.LAST_NAME));
+                String avatarPath = mCursor.getString(mCursor.getColumnIndex(UserDb.AVATAR_PATH));
 
                 UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
                 usersFromDb.add(userFromDb);
@@ -184,14 +184,14 @@ public class DatabaseTest {
         mWritableConnection.beginTransaction();
 
         ContentValues values = new ContentValues();
-        values.put(UsersTableModel._ID, parId);
-        values.put(UsersTableModel.FIRST_NAME, parFirstName);
-        values.put(UsersTableModel.LAST_NAME, parLastName);
-        values.put(UsersTableModel.AVATAR_PATH, parAvatar);
+        values.put(UserDb._ID, parId);
+        values.put(UserDb.FIRST_NAME, parFirstName);
+        values.put(UserDb.LAST_NAME, parLastName);
+        values.put(UserDb.AVATAR_PATH, parAvatar);
 
         //getting id of inserted user
         int userForInsertId = (int) mWritableConnection.insert(
-                UsersTableModel.TABLE_NAME, null, values);
+                UserDb.TABLE_NAME, null, values);
 
         mWritableConnection.setTransactionSuccessful();
         mWritableConnection.endTransaction();
@@ -200,16 +200,16 @@ public class DatabaseTest {
         mReadableConnection.beginTransaction();
 
         mCursor = mReadableConnection.query(
-                UsersTableModel.TABLE_NAME,
+                UserDb.TABLE_NAME,
                 new String[]{
-                        UsersTableModel._ID,
-                        UsersTableModel.FIRST_NAME,
-                        UsersTableModel.LAST_NAME,
-                        UsersTableModel.AVATAR_PATH},
-                UsersTableModel._ID + "=? AND " +
-                        UsersTableModel.FIRST_NAME + "=? AND " +
-                        UsersTableModel.LAST_NAME + "=? AND " +
-                        UsersTableModel.AVATAR_PATH + "=? ",
+                        UserDb._ID,
+                        UserDb.FIRST_NAME,
+                        UserDb.LAST_NAME,
+                        UserDb.AVATAR_PATH},
+                UserDb._ID + "=? AND " +
+                        UserDb.FIRST_NAME + "=? AND " +
+                        UserDb.LAST_NAME + "=? AND " +
+                        UserDb.AVATAR_PATH + "=? ",
                 new String[]{parId, parFirstName, parLastName, parAvatar},
                 null, null, null
         );
@@ -218,10 +218,10 @@ public class DatabaseTest {
 
         mCursor.moveToFirst();
 
-        int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel._ID));
-        String firstName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.FIRST_NAME));
-        String lastName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.LAST_NAME));
-        String avatarPath = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.AVATAR_PATH));
+        int id = mCursor.getInt(mCursor.getColumnIndex(UserDb._ID));
+        String firstName = mCursor.getString(mCursor.getColumnIndex(UserDb.FIRST_NAME));
+        String lastName = mCursor.getString(mCursor.getColumnIndex(UserDb.LAST_NAME));
+        String avatarPath = mCursor.getString(mCursor.getColumnIndex(UserDb.AVATAR_PATH));
 
         UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
 
