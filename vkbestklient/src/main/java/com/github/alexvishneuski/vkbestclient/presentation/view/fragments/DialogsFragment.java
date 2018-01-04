@@ -179,12 +179,14 @@ public class DialogsFragment extends Fragment {
                 String toastText;
 
                 if (area == TouchArea.MESSAGE_AREA) {
+                    //TODO remove
                     toastText = mMessagesUI.get(position).getMessageBody();
 
                     if (getActivity() != null) {
                         mParentActivity.goToMessagesFragment();
                     }
                 } else {
+                    //TODO remove
                     toastText = mMessagesUI.get(position).getContactUser().getUserFullName();
 
                     if (getActivity() != null) {
@@ -192,6 +194,7 @@ public class DialogsFragment extends Fragment {
                     }
 
                 }
+                //TODO remove
                 Toast.makeText(getActivity(), toastText + " was clicked!", Toast.LENGTH_SHORT).show();
             }
         });

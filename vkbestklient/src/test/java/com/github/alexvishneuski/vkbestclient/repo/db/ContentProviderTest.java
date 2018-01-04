@@ -33,7 +33,7 @@ import static junit.framework.Assert.assertTrue;
         constants = BuildConfig.class,
         sdk = ConstantsUtil.AppConstants.SDK_VERSION
 )
-public class DatabaseTest {
+public class ContentProviderTest {
 
     public final String TAG = this.getClass().getSimpleName();
 

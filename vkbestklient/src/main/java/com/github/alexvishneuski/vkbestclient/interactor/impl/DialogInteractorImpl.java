@@ -185,7 +185,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         return dialogs;
     }
 
-    //TODO make getDialogsTotalCount() in Interactor
+    //TODO make getDialogsTotalCount() in Interactor after moving this method to repository
     @Override
     public int getDialogsTotalCount() {
 
