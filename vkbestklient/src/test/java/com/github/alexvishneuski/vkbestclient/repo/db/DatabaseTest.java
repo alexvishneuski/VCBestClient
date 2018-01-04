@@ -7,7 +7,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
-import com.github.alexvishneuski.vkbestclient.repository.database.SqlConnector;
+import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.SqlConnectorSimple;
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
 import com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UsersTableModel;
@@ -36,7 +36,7 @@ public class DatabaseTest {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    private SqlConnector mSqlConnector;
+    private SqlConnectorSimple mSqlConnector;
 
     private SQLiteDatabase mWritableConnection;
     private SQLiteDatabase mReadableConnection;
@@ -44,7 +44,7 @@ public class DatabaseTest {
 
     @Before
     public void setUp() {
-        mSqlConnector = new SqlConnector(RuntimeEnvironment.application);
+        mSqlConnector = new SqlConnectorSimple(RuntimeEnvironment.application);
         mWritableConnection = mSqlConnector.getWritableDatabase();
         mReadableConnection = mSqlConnector.getReadableDatabase();
     }
