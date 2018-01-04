@@ -32,6 +32,7 @@ public interface IDbOperations {
             return new DbOperations(new SqlConnectorSimple(ContextHolder.getContext()));
         }
 
+
         @SuppressLint("WrongConstant")
         public static IDbOperations getInstance() {
             return (IDbOperations) ContextHolder.getContext().getSystemService(SYSTEM_SERVICE_NAME);

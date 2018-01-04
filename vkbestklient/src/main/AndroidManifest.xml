@@ -21,5 +21,10 @@
         </activity>
         <activity android:name=".presentation.view.activities.SharedActivity" />
         <activity android:name=".presentation.view.activities.AuthActivity" />
+
+        <provider
+            android:name=".repository.database.provider.CustomContentProvider"
+            android:authorities=".repository.database.provider.CustomContentProvider" />
     </application>
+
 </manifest>
