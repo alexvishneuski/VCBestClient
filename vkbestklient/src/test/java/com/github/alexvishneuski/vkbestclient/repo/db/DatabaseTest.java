@@ -15,7 +15,6 @@ import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -58,8 +57,8 @@ public class DatabaseTest {
     }
 
     @Test
-    public void insertUsers() {
-        Log.d(TAG, "insertUserPreparedSql: called");
+    public void insertUserList() {
+        Log.d(TAG, "insertUserList called ");
 
         //inserting 2 users
         List<UserDbModel> usersForInserting = generateUsers(2);
@@ -82,7 +81,7 @@ public class DatabaseTest {
 
         mCursor = mReadableConnection.query(UsersTableModel.TABLE_NAME,
                 null, null, null, null, null, null);
-        Log.d(TAG, "getUserPreparedSql: cursor returned " + mCursor.getCount() + " rows");
+        Log.d(TAG, "insertUserList: cursor returned " + mCursor.getCount() + " rows");
 
         mReadableConnection.setTransactionSuccessful();
         mReadableConnection.endTransaction();
@@ -92,10 +91,9 @@ public class DatabaseTest {
                 usersForInserting.size() == mCursor.getCount());
     }
 
-//TODO use COntentValues by inserting
     @Test
-    public void getUsers() {
-        Log.d(TAG, "getUserPreparedSql: called");
+    public void getUserList() {
+        Log.d(TAG, "getUserList called ");
 
         //inserting 3 users
         List<UserDbModel> usersForInserting = generateUsers(3);
@@ -142,10 +140,10 @@ public class DatabaseTest {
                 usersFromDb.add(userFromDb);
             }
             while (mCursor.moveToNext());
-            Log.d(TAG, "getUserPreparedSql: cursor returned " + usersFromDb.size() + " rows");
+            Log.d(TAG, "getUserList: cursor returned " + usersFromDb.size() + " rows");
 
         } else {
-            Log.d(TAG, "getUserPreparedSql: cursor returned 0 rows");
+            Log.d(TAG, "getUserList: cursor returned 0 rows");
         }
 
         SparseArray<UserDbModel> usersAfter = new SparseArray<>();
@@ -169,100 +167,77 @@ public class DatabaseTest {
         }
     }
 
-
     @Test
-    public void updateUserPreparedSql() {
+    public void insertUser() {
+        Log.d(TAG, "insertUser called ");
 
+        //inserting one user
+        UserDbModel userForInsert = generateUsers(1).get(0);
+        Log.d(TAG, "insertUser: " + userForInsert.toString());
+
+        String parId = String.valueOf(userForInsert.getId());
+        String parFirstName = userForInsert.getFirstName();
+        String parLastName = userForInsert.getLastName();
+        String parAvatar = userForInsert.getAvatarPath();
+
+        mWritableConnection.beginTransaction();
+
+        ContentValues values = new ContentValues();
+        values.put(UsersTableModel.ID, parId);
+        values.put(UsersTableModel.FIRST_NAME, parFirstName);
+        values.put(UsersTableModel.LAST_NAME, parLastName);
+        values.put(UsersTableModel.AVATAR_PATH, parAvatar);
+
+        //getting id of inserted user
+        int userForInsertId = (int) mWritableConnection.insert(
+                UsersTableModel.TABLE_NAME, null, values);
+
+        mWritableConnection.setTransactionSuccessful();
+        mWritableConnection.endTransaction();
+
+        //getting inserted user with where
+        mReadableConnection.beginTransaction();
+
+        mCursor = mReadableConnection.query(
+                UsersTableModel.TABLE_NAME,
+                new String[]{
+                        UsersTableModel.ID,
+                        UsersTableModel.FIRST_NAME,
+                        UsersTableModel.LAST_NAME,
+                        UsersTableModel.AVATAR_PATH},
+                UsersTableModel.ID + "=? AND " +
+                        UsersTableModel.FIRST_NAME + "=? AND " +
+                        UsersTableModel.LAST_NAME + "=? AND " +
+                        UsersTableModel.AVATAR_PATH + "=? ",
+                new String[]{parId, parFirstName, parLastName, parAvatar},
+                null, null, null
+        );
+
+        Log.d(TAG, "insertUser: cursor returned " + mCursor.getCount() + " rows");
+
+        mCursor.moveToFirst();
+
+        int id = mCursor.getInt(mCursor.getColumnIndex(UsersTableModel.ID));
+        String firstName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.FIRST_NAME));
+        String lastName = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.LAST_NAME));
+        String avatarPath = mCursor.getString(mCursor.getColumnIndex(UsersTableModel.AVATAR_PATH));
+
+        UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
+
+        mReadableConnection.setTransactionSuccessful();
+        mReadableConnection.endTransaction();
+
+        //asserting
+        assertTrue("item's count for inserting into Db and after getting from Db must the same",
+                1 == mCursor.getCount());
+
+        assertEquals("user before inserting and after must be equals", userForInsert, userFromDb);
+
+        assertEquals("user's id before inserting and after must be equals", userForInsert.getId(), userFromDb.getId());
+        assertEquals("user's first name before inserting and after must be equals", userForInsert.getFirstName(), userFromDb.getFirstName());
+        assertEquals("user's last name before inserting and after must be equals", userForInsert.getLastName(), userFromDb.getLastName());
+        assertEquals("user's avatar before inserting and after must be equals", userForInsert.getAvatarPath(), userFromDb.getAvatarPath());
     }
-
-    @Test
-    public void deleteUserPreparedSql() {
-
-    }
-
-
-    @Ignore
-    @Test
-    public void putUserOverSql() {
-/*
-        SQLiteDatabase readableConnection = mSqlConnector.getReadableDatabase();
-        readableConnection.beginTransaction();
-        readableConnection.execSQL(Tables.INSERT_TEST_USER,
-                new Object[]{"alex", 124425345232l});
-        readableConnection.setTransactionSuccessful();
-        readableConnection.endTransaction();
-*/
-    }
-
-    @Test
-    public void putRegisteredUsersToDb() {
-        Log.d(TAG, "putRegisteredUsersToDb called");
-
-        UserDbModel[] userArray = prepareUsersForInsertIntoDb();
-        assertEquals(3, userArray.length);
-
-        SQLiteDatabase writeConnection = mSqlConnector.getWritableDatabase();
-        writeConnection.beginTransaction();
-
-        for (UserDbModel user : userArray) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(UsersTableModel.FIRST_NAME, user.getFirstName());
-            contentValues.put(UsersTableModel.LAST_NAME, user.getLastName());
-            contentValues.put(UsersTableModel.AVATAR_PATH, user.getAvatarPath());
-
-            //TODO read about nullColumnHack
-            //TODO read about conflicts
-            long id = writeConnection.insert(UsersTableModel.TABLE_NAME, null, contentValues);
-            Log.d(TAG, String.format("added user into Db %s with  id = %d, first name =%s, last name =%s, avatar path = %s: ", UsersTableModel.TABLE_NAME, id, user.getFirstName(), user.getLastName(), user.getAvatarPath()));
-            // writeConnection.getPageSize();
-
-        }
-
-        writeConnection.setTransactionSuccessful();
-        writeConnection.endTransaction();
-
-        SQLiteDatabase readableConnection = mSqlConnector.getReadableDatabase();
-       /* Cursor cursor = readableConnection.query(UserDbModel.TABLE,
-                new String[]{UserDbModel.ID, UserDbModel.NAME, UserDbModel.REGISTERED},
-                UserDbModel.NAME + "=? AND " + UserDbModel.REGISTERED + " NOT NULL",
-                new String[]{"Shelia Chang"}, null, null, null, null);
-
-        final List<RegisteredUser> registeredUsers = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String userId = cursor.getString(cursor.getColumnIndex(UserDbModel.ID));
-            String userName = cursor.getString(cursor.getColumnIndex(UserDbModel.NAME));
-            Long registered = cursor.getLong(cursor.getColumnIndex(UserDbModel.REGISTERED));
-            RegisteredUser registeredUser = new RegisteredUser(userName, userId, registered, null);
-            registeredUsers.add(registeredUser);
-        }
-
-        ///!!! close cursor
-        cursor.close();
-
-        assertEquals(registeredUsers.size(), 1);
-        assertEquals(registeredUsers.get(0).getUserName(), "Shelia Chang");*/
-
-        Cursor usersDbCursor = readableConnection.query(UsersTableModel.TABLE_NAME, null, null,
-                null, null, null, null, null);
-
-        assertEquals(3, usersDbCursor.getCount());
-
-        usersDbCursor.close();
-
-    }
-
-   /* @Test
-    public void getUsersFromDb() {
-        SQLiteDatabase readableConnection = mSqlConnector.getReadableDatabase();
-        Cursor usersDbCursor = readableConnection.query(UserDbModel.TABLE, null,
-                null,
-                null, null, null, null, null);
-
-        assertEquals(usersDbCursor.getCount(), 6);
-
-        usersDbCursor.close();
-    }
-*/
 
 
     private List<UserDbModel> generateUsers(int pI) {
@@ -282,17 +257,5 @@ public class DatabaseTest {
         return new UserDbModel[]{new UserDbModel("1", "2", "3"), new UserDbModel("1", "2", "3"), new UserDbModel("1", "2", "3")};
     }
 
-   /* private RegisteredUser[] readRegisteredUsers() {
-        InputStream mockedInputStream = Mocks.stream("generated.json");
-        Reader reader = new InputStreamReader(mockedInputStream);
 
-        return new Gson().fromJson(reader, RegisteredUser[].class);
-    }*/
-
-   /* private ListRegisteredUsers readRegisteredUsersList() {
-        InputStream mockedInputStream = Mocks.stream("generated.json");
-        Reader reader = new InputStreamReader(mockedInputStream);
-
-        return new Gson().fromJson(reader, ListRegisteredUsers.class);
-    }*/
 }
