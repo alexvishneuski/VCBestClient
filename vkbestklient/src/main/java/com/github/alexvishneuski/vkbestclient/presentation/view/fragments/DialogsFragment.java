@@ -91,7 +91,6 @@ public class DialogsFragment extends Fragment {
         }
     }
 
-
     private void addOnScrollListener() {
         mOnScrollListener = new RecyclerView.OnScrollListener()
 

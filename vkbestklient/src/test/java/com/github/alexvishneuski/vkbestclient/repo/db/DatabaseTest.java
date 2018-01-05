@@ -35,9 +35,7 @@ import static junit.framework.Assert.assertTrue;
 )
 public class DatabaseTest {
 
-    public final String TAG = this.getClass().getSimpleName();
-
-    private SQLiteOpenHelper mSqlConnector;
+    private final String TAG = this.getClass().getSimpleName();
 
     private SQLiteDatabase mWritableConnection;
     private SQLiteDatabase mReadableConnection;
@@ -45,9 +43,9 @@ public class DatabaseTest {
 
     @Before
     public void setUp() {
-        mSqlConnector = new SqlConnectorSimple(RuntimeEnvironment.application);
-        mWritableConnection = mSqlConnector.getWritableDatabase();
-        mReadableConnection = mSqlConnector.getReadableDatabase();
+        SQLiteOpenHelper sqlConnector = new SqlConnectorSimple(RuntimeEnvironment.application);
+        mWritableConnection = sqlConnector.getWritableDatabase();
+        mReadableConnection = sqlConnector.getReadableDatabase();
     }
 
     @After

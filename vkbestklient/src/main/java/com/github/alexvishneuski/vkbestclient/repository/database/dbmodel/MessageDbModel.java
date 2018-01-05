@@ -3,16 +3,16 @@ package com.github.alexvishneuski.vkbestclient.repository.database.dbmodel;
 public class MessageDbModel {
 
     private int mId;
-    private int mAuthor_id;
-    private int mRecipient_id;
+    private int mAuthorId;
+    private int mRecipientId;
     private int mMessageSendingDate;
     private String mMessageTitle;
     private String mMessageBody;
     private int mIsMessageRead;
 
-    public MessageDbModel(int pAuthor_id, int pRecipient_id, int pMessageSendingDate, String pMessageTitle, String pMessageBody, int pIsMessageRead) {
-        mAuthor_id = pAuthor_id;
-        mRecipient_id = pRecipient_id;
+    public MessageDbModel(int pAuthorId, int pRecipientId, int pMessageSendingDate, String pMessageTitle, String pMessageBody, int pIsMessageRead) {
+        mAuthorId = pAuthorId;
+        mRecipientId = pRecipientId;
         mMessageSendingDate = pMessageSendingDate;
         mMessageTitle = pMessageTitle;
         mMessageBody = pMessageBody;
@@ -28,19 +28,19 @@ public class MessageDbModel {
     }
 
     public int getAuthor_id() {
-        return mAuthor_id;
+        return mAuthorId;
     }
 
     public void setAuthor_id(int pAuthor_id) {
-        mAuthor_id = pAuthor_id;
+        mAuthorId = pAuthor_id;
     }
 
     public int getRecipient_id() {
-        return mRecipient_id;
+        return mRecipientId;
     }
 
     public void setRecipient_id(int pRecipient_id) {
-        mRecipient_id = pRecipient_id;
+        mRecipientId = pRecipient_id;
     }
 
     public int getMessageSendingDate() {
