@@ -8,9 +8,9 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
-import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.SqlConnectorSimple;
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
 import com.github.alexvishneuski.vkbestclient.repository.database.sql.Tables;
+import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.SqlConnectorSimple;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
 import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
 
@@ -35,9 +35,7 @@ import static junit.framework.Assert.assertTrue;
 )
 public class DatabaseTest {
 
-    public final String TAG = this.getClass().getSimpleName();
-
-    private SQLiteOpenHelper mSqlConnector;
+    private final String TAG = this.getClass().getSimpleName();
 
     private SQLiteDatabase mWritableConnection;
     private SQLiteDatabase mReadableConnection;
@@ -45,9 +43,9 @@ public class DatabaseTest {
 
     @Before
     public void setUp() {
-        mSqlConnector = new SqlConnectorSimple(RuntimeEnvironment.application);
-        mWritableConnection = mSqlConnector.getWritableDatabase();
-        mReadableConnection = mSqlConnector.getReadableDatabase();
+        SQLiteOpenHelper sqlConnector = new SqlConnectorSimple(RuntimeEnvironment.application);
+        mWritableConnection = sqlConnector.getWritableDatabase();
+        mReadableConnection = sqlConnector.getReadableDatabase();
     }
 
     @After
@@ -252,11 +250,4 @@ public class DatabaseTest {
 
         return users;
     }
-
-    private UserDbModel[] prepareUsersForInsertIntoDb() {
-        //TODO fill data
-        return new UserDbModel[]{new UserDbModel("1", "2", "3"), new UserDbModel("1", "2", "3"), new UserDbModel("1", "2", "3")};
-    }
-
-
 }

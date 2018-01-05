@@ -1,5 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.interactor.impl;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -8,6 +10,12 @@ import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.interactor.model.UserInDialogs;
+import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
+import com.github.alexvishneuski.vkbestclient.repository.database.operations.IDbOperations;
+import com.github.alexvishneuski.vkbestclient.repository.database.operations.impl.DbOperations;
+import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.SqlConnectorSimple;
+import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
+import com.github.alexvishneuski.vkbestclient.repository.database.util.DbUtils;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiMessage;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
@@ -15,9 +23,13 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.networ
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
+import com.github.alexvishneuski.vkbestclient.util.ContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 public class DialogInteractorImpl implements IDialogInteractor {
 
@@ -80,6 +92,8 @@ public class DialogInteractorImpl implements IDialogInteractor {
         //save msg into DB;
         //return or go to DB
         List<MessageInDialogs> msg = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
+
+        insertUser();
 
         return msg;
     }
@@ -158,7 +172,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
     /*==========================================================================================*/
 
 
-    //TODO remove methods are bottom to repository
+    //TODO remove methods are bottom to vk api repository
      /*Result as Repository VK API - sort of RequestBuilders*/
     /*==========================================================================================*/
 
@@ -185,7 +199,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         return dialogs;
     }
 
-    //TODO make getDialogsTotalCount() in Interactor
+    //TODO make getDialogsTotalCount() in Interactor after moving this method to vk api  repository
     @Override
     public int getDialogsTotalCount() {
 
@@ -198,5 +212,96 @@ public class DialogInteractorImpl implements IDialogInteractor {
                 .build();
 
         return mDialogVKApiNetworkingImpl.getDialogsTotalCount(dialogsUri);
+    }
+
+
+    /*For testing only*/
+    private void insertUser() {
+        Log.d(TAG, "insertUser called ");
+
+        int COUNT = 10;
+
+        Log.d(TAG, "insertUser called ");
+
+        //inserting one user
+        UserDbModel userForInsert = generateUsers(COUNT).get(0);
+        Log.d(TAG, "insertUser: " + userForInsert.toString());
+
+        String parId = String.valueOf(userForInsert.getId());
+        String parFirstName = userForInsert.getFirstName();
+        String parLastName = userForInsert.getLastName();
+        String parAvatar = userForInsert.getAvatarPath();
+
+        ContentValues values = new ContentValues();
+        values.put(UserDb._ID, parId);
+        values.put(UserDb.FIRST_NAME, parFirstName);
+        values.put(UserDb.LAST_NAME, parLastName);
+        values.put(UserDb.AVATAR_PATH, parAvatar);
+
+        //ContentResolver resolver = ContextHolder.getContext().getContentResolver();
+        IDbOperations dbOperations = new DbOperations(new SqlConnectorSimple(ContextHolder.getContext()));
+
+        //Log.d(TAG, "insertUser: " + (resolver!=null));
+
+        Class userClazz = UserDb.class;
+
+
+        //if exists user with same _id
+
+        Cursor preCursor = dbOperations.query(
+                DbUtils.getTableName(userClazz), new String[]{UserDb._ID},
+                UserDb._ID + "=?", new String[]{parId}, null);
+
+        if (preCursor.getCount() == 0) {
+            //make insert
+            dbOperations.insert(DbUtils.getTableName(userClazz), values);
+            Log.d(TAG, "================inserting===================");
+        } else
+            //make update
+            dbOperations.update(DbUtils.getTableName(userClazz), values, null, null);
+        Log.d(TAG, "================updating===================");
+
+        //read user
+
+        Cursor mCursor = dbOperations.query(DbUtils.getTableName(UserDb.class), null, null, null, null);
+
+        assert mCursor != null;
+        // Assert.assertEquals(1, mCursor.getCount());
+
+        mCursor.moveToFirst();
+
+        int id = mCursor.getInt(mCursor.getColumnIndex(UserDb._ID));
+        String firstName = mCursor.getString(mCursor.getColumnIndex(UserDb.FIRST_NAME));
+        String lastName = mCursor.getString(mCursor.getColumnIndex(UserDb.LAST_NAME));
+        String avatarPath = mCursor.getString(mCursor.getColumnIndex(UserDb.AVATAR_PATH));
+
+        UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
+
+
+        //asserting
+        assertTrue("item's count for inserting into Db and after getting from Db must the same",
+                COUNT == mCursor.getCount());
+
+        assertEquals("user before inserting and after must be equals", userForInsert, userFromDb);
+
+        assertEquals("user's id before inserting and after must be equals", userForInsert.getId(), userFromDb.getId());
+        assertEquals("user's first name before inserting and after must be equals", userForInsert.getFirstName(), userFromDb.getFirstName());
+        assertEquals("user's last name before inserting and after must be equals", userForInsert.getLastName(), userFromDb.getLastName());
+        assertEquals("user's avatar before inserting and after must be equals", userForInsert.getAvatarPath(), userFromDb.getAvatarPath());
+
+        mCursor.close();
+    }
+
+
+    private List<UserDbModel> generateUsers(int pI) {
+        List<UserDbModel> users = new ArrayList<>();
+        UserDbModel user;
+
+        for (int i = 0; i < pI; i++) {
+            user = new UserDbModel(i, "FirstName " + i, "LastName " + i, "AvatarPath " + i);
+            users.add(user);
+        }
+
+        return users;
     }
 }
