@@ -92,12 +92,10 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
     @Override
     public void update(MessageDbModel entity) {
-
     }
 
     @Override
     public void delete(Integer id) {
-
     }
 
     @Override

@@ -96,26 +96,40 @@ public class DialogInteractorImpl implements IDialogInteractor {
         //7. return
 
         //5. msg = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
-        List<MessageInDialogs> msg = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
-
-        //TODO extract to converter
-        List<MessageDbModel> messagesDb =
-
-        //convert frpm MessageInDialogs to MessageDbModel
-
-        for (MessageInDialogs msgItem : msg
-                ) {
-            if (mIMessageRepoDb.ifInDbExist(msgItem.getId())){
-                mIMessageRepoDb.update(msgItem)
-            }else
-            mIMessageRepoDb.ifInDbExist(msgItem.getId()) ? mIMessageRepoDb.update(msgItem) : mIMessageRepoDb.insert(msgItem);
-        }
+        List<MessageInDialogs> messagesInteractor = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
 
         //6. save msg into DB;
 
-        insertUser();
+        //TODO extract to converter
+        //6.1 convert frpm MessageInDialogs to MessageDbModel
+        List<MessageDbModel> messagesDb = new ArrayList<>();
+        MessageDbModel messageDb = new MessageDbModel();
 
-        return msg;
+        for (MessageInDialogs msg : messagesInteractor
+                ) {
+            messageDb.setId(msg.getId());
+            messageDb.setAuthor_id(msg.getMessageDirection().equals(MessageDirection.OUTGOING) ? msg.getCurrentUser().getUserId() : msg.getContactUser().getUserId());
+            messageDb.setRecipient_id(msg.getMessageDirection().equals(MessageDirection.INCOMING) ? msg.getCurrentUser().getUserId() : msg.getContactUser().getUserId());
+            messageDb.setMessageTitle(msg.getMessageTitle());
+            messageDb.setMessageBody(msg.getMessageBody());
+            messageDb.setMessageSendingDate(msg.getMessageSendingDate());
+            messageDb.setMessageRead(msg.isMessageRead() ? 1 : 0);
+
+            messagesDb.add(messageDb);
+        }
+
+        //================convert frpm MessageInDialogs to MessageDbModel
+
+
+        for (MessageDbModel msgItem : messagesDb
+                ) {
+            if (mIMessageRepoDb.ifInDbExist(msgItem.getId())) {
+                mIMessageRepoDb.update(msgItem);
+            } else
+                mIMessageRepoDb.insert(msgItem);
+        }
+
+        return messagesInteractor;
     }
 
 

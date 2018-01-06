@@ -10,6 +10,9 @@ public class MessageDbModel {
     private String mMessageBody;
     private int mIsMessageRead;
 
+    public MessageDbModel() {
+    }
+
     public MessageDbModel(int pAuthorId, int pRecipientId, int pMessageSendingDate, String pMessageTitle, String pMessageBody, int pIsMessageRead) {
         mAuthorId = pAuthorId;
         mRecipientId = pRecipientId;
