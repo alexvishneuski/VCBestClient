@@ -84,6 +84,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     @Override
     public List<MessageInDialogs> getMessagesInDialogListFromRepo(int pCount, int pOffset) {
+        Log.d(TAG, "getMessagesInDialogListFromRepo() called with: pCount = [" + pCount + "], pOffset = [" + pOffset + "]");
 
         //0. compare count items on server and local
 
@@ -103,10 +104,12 @@ public class DialogInteractorImpl implements IDialogInteractor {
         //TODO extract to converter
         //6.1 convert frpm MessageInDialogs to MessageDbModel
         List<MessageDbModel> messagesDb = new ArrayList<>();
-        MessageDbModel messageDb = new MessageDbModel();
+        MessageDbModel messageDb;
 
         for (MessageInDialogs msg : messagesInteractor
                 ) {
+            System.out.println(msg);
+            messageDb = new MessageDbModel();
             messageDb.setId(msg.getId());
             messageDb.setAuthor_id(msg.getMessageDirection().equals(MessageDirection.OUTGOING) ? msg.getCurrentUser().getUserId() : msg.getContactUser().getUserId());
             messageDb.setRecipient_id(msg.getMessageDirection().equals(MessageDirection.INCOMING) ? msg.getCurrentUser().getUserId() : msg.getContactUser().getUserId());
@@ -123,11 +126,17 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         for (MessageDbModel msgItem : messagesDb
                 ) {
-            if (mIMessageRepoDb.ifInDbExist(msgItem.getId())) {
+            int id = msgItem.getId();
+            if (mIMessageRepoDb.ifInDbExist(id)) {
+                Log.d(TAG, "getMessagesInDialogListFromRepo(): msg exists already -> updating into DB with id [" + id + "]");
                 mIMessageRepoDb.update(msgItem);
-            } else
+            } else {
+                Log.d(TAG, "getMessagesInDialogListFromRepo(): msg doesn't exist -> inserting into DB with id [" + id + "]");
                 mIMessageRepoDb.insert(msgItem);
+            }
         }
+
+
 
         return messagesInteractor;
     }
