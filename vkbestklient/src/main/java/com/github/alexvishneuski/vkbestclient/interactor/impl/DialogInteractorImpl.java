@@ -7,7 +7,6 @@ import android.util.SparseArray;
 
 import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
-import com.github.alexvishneuski.vkbestclient.interactor.model.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.interactor.model.UserInDialogs;
 import com.github.alexvishneuski.vkbestclient.interactor.utils.MessageConverter;
@@ -107,7 +106,8 @@ public class DialogInteractorImpl implements IDialogInteractor {
         //6.2 convert frpm MessageInDialogs to MessageDbModel
         for (MessageInDialogs msg : messagesInteractor
                 ) {
-            messagesDb.add(MessageConverter.convertMsgFromDomainToDb(msg));
+            MessageDbModel msgDb = MessageConverter.convertMsgFromDomainToDb(msg);
+            messagesDb.add(msgDb);
         }
 
         //6.3 saving or updating
@@ -143,28 +143,12 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         for (VKApiDialog dialog : dialogs
                 ) {
-
             VKApiMessage message = dialog.getMessage();
 
-            //todo extract to converter
-            MessageInDialogs domainMessage = new MessageInDialogs();
-
-            domainMessage.setCurrentUser(currentUser);
-
-            contactUser = new UserInDialogs();
-            contactUser.setUserId(message.getContactUserId());
-            domainMessage.setContactUser(contactUser);
-
-            domainMessage.setId(message.getId());
-            domainMessage.setMessageDirection((message.getDirection() == 0) ? MessageDirection.INCOMING : MessageDirection.OUTGOING);
-            domainMessage.setMessageSendingDate(message.getSendingDate());
-            domainMessage.setMessageTitle(message.getTitle());
-            domainMessage.setMessageBody(message.getBody());
-            domainMessage.setMessageRead((message.getReadStatus() == 0) ? false : true);
-
+            MessageInDialogs domainMessage = MessageConverter.convertMsgFromVKApiToDomain(message, currentUser);
             domainMessages.add(domainMessage);
 
-            //2. extract contactuser Ids
+            //2. extracting contactuser Ids
             contactUserIds.add(message.getContactUserId());
         }
 
@@ -173,7 +157,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         List<UserInDialogs> users = mUserInteractor.getDomainUsersBasicInfo(contactUserIds);
 
-        //3.5 use sparse Array for more efficient inserting users to message
+        //3.5 using sparse Array for more efficient inserting users to message
         SparseArray<UserInDialogs> usersInDialogs = new SparseArray<>();
 
         for (UserInDialogs user : users
