@@ -13,6 +13,8 @@ import com.github.alexvishneuski.vkbestclient.repository.database.operations.IDb
 
 public class DbOperations implements IDbOperations {
 
+    private final String TAG = this.getClass().getSimpleName();
+
     private final SQLiteOpenHelper mHelper;
 
     public DbOperations(final SQLiteOpenHelper pHelper) {
