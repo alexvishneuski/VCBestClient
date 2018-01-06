@@ -10,6 +10,7 @@ import com.github.alexvishneuski.vkbestclient.interactor.IUserInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageDirection;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.interactor.model.UserInDialogs;
+import com.github.alexvishneuski.vkbestclient.interactor.utils.MessageConverter;
 import com.github.alexvishneuski.vkbestclient.repository.database.IMessageRepoDb;
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.MessageDbModel;
 import com.github.alexvishneuski.vkbestclient.repository.database.dbmodel.UserDbModel;
@@ -101,29 +102,15 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         //6. save msg into DB;
 
-        //TODO extract to converter
-        //6.1 convert frpm MessageInDialogs to MessageDbModel
+        //6.1 preparing container
         List<MessageDbModel> messagesDb = new ArrayList<>();
-        MessageDbModel messageDb;
-
+        //6.2 convert frpm MessageInDialogs to MessageDbModel
         for (MessageInDialogs msg : messagesInteractor
                 ) {
-            System.out.println(msg);
-            messageDb = new MessageDbModel();
-            messageDb.setId(msg.getId());
-            messageDb.setAuthor_id(msg.getMessageDirection().equals(MessageDirection.OUTGOING) ? msg.getCurrentUser().getUserId() : msg.getContactUser().getUserId());
-            messageDb.setRecipient_id(msg.getMessageDirection().equals(MessageDirection.INCOMING) ? msg.getCurrentUser().getUserId() : msg.getContactUser().getUserId());
-            messageDb.setMessageTitle(msg.getMessageTitle());
-            messageDb.setMessageBody(msg.getMessageBody());
-            messageDb.setMessageSendingDate(msg.getMessageSendingDate());
-            messageDb.setMessageRead(msg.isMessageRead() ? 1 : 0);
-
-            messagesDb.add(messageDb);
+            messagesDb.add(MessageConverter.convertMsgFromDomainToDb(msg));
         }
 
-        //================convert frpm MessageInDialogs to MessageDbModel
-
-
+        //6.3 saving or updating
         for (MessageDbModel msgItem : messagesDb
                 ) {
             int id = msgItem.getId();
@@ -135,8 +122,6 @@ public class DialogInteractorImpl implements IDialogInteractor {
                 mIMessageRepoDb.insert(msgItem);
             }
         }
-
-
 
         return messagesInteractor;
     }
