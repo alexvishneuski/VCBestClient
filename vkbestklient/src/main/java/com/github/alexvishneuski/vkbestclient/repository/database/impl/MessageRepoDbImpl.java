@@ -122,7 +122,11 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer pId) {
+        Log.d(TAG, "delete() called with: pId = [" + pId + "]");
+
+        String id = String.valueOf(pId);
+        mOperations.delete(mTable, MessageDb._ID + "=?", new String[]{id});
     }
 
     @Override
