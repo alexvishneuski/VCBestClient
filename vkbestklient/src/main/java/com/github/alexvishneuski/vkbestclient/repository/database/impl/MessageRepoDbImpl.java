@@ -2,6 +2,7 @@ package com.github.alexvishneuski.vkbestclient.repository.database.impl;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.github.alexvishneuski.vkbestclient.repository.database.IMessageRepoDb;
@@ -34,25 +35,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
     @Override
     public Integer insert(MessageDbModel pMsg) {
         Log.d(TAG, "insert() called with: pMsg = [" + pMsg + "]");
-        //getting msg fields
-        String id = String.valueOf(pMsg.getId());
-        String authId = String.valueOf(pMsg.getAuthor_id());
-        String recipId = String.valueOf(pMsg.getRecipient_id());
-        String title = String.valueOf(pMsg.getMessageTitle());
-        String body = String.valueOf(pMsg.getMessageBody());
-        String date = String.valueOf(pMsg.getMessageSendingDate());
-        String isRead = String.valueOf(pMsg.isMessageRead());
-
-        //build ContentValues
-        ContentValues values = new ContentValues();
-        values.put(MessageDb._ID, id);
-        values.put(MessageDb.AUTHOR_ID, authId);
-        values.put(MessageDb.RECIPIENT_ID, recipId);
-        values.put(MessageDb.TITLE, title);
-        values.put(MessageDb.BODY, body);
-        values.put(MessageDb.CREATED, date);
-        values.put(MessageDb.IS_READ, isRead);
-
+        ContentValues values = getContentValues(pMsg);
         int inserted = mOperations.insert(DbUtils.getTableName(mClazz), values);
 
         //TODO delete after testing
@@ -66,9 +49,17 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         return inserted;
     }
 
+
     @Override
-    public Integer bulkIsert(List<MessageDbModel> entities) {
-        return null;
+    public Integer bulkIsert(List<MessageDbModel> pMsgs) {
+        ContentValues[] valuesArray = new ContentValues[pMsgs.size()];
+
+        for (int i = 0; i < pMsgs.size(); i++) {
+            valuesArray[i] = getContentValues(pMsgs.get(i));
+        }
+
+        int insertedCount = mOperations.bulkInsert(DbUtils.getTableName(mClazz), valuesArray);
+        return insertedCount;
     }
 
     @Override
@@ -132,5 +123,29 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
         Log.d(TAG, "ifInDbExist: " + ifExist);
         return ifExist;
+    }
+
+    @NonNull
+    private ContentValues getContentValues(MessageDbModel pMsg) {
+        //getting msg fields
+        String id = String.valueOf(pMsg.getId());
+        String authId = String.valueOf(pMsg.getAuthor_id());
+        String recipId = String.valueOf(pMsg.getRecipient_id());
+        String title = String.valueOf(pMsg.getMessageTitle());
+        String body = String.valueOf(pMsg.getMessageBody());
+        String date = String.valueOf(pMsg.getMessageSendingDate());
+        String isRead = String.valueOf(pMsg.isMessageRead());
+
+        //build ContentValues
+        ContentValues values = new ContentValues();
+        values.put(MessageDb._ID, id);
+        values.put(MessageDb.AUTHOR_ID, authId);
+        values.put(MessageDb.RECIPIENT_ID, recipId);
+        values.put(MessageDb.TITLE, title);
+        values.put(MessageDb.BODY, body);
+        values.put(MessageDb.CREATED, date);
+        values.put(MessageDb.IS_READ, isRead);
+
+        return values;
     }
 }
