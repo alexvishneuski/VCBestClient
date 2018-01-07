@@ -13,7 +13,8 @@ public class MessageDbModel {
     public MessageDbModel() {
     }
 
-    public MessageDbModel(int pAuthorId, int pRecipientId, int pMessageSendingDate, String pMessageTitle, String pMessageBody, int pIsMessageRead) {
+    public MessageDbModel(int pId, int pAuthorId, int pRecipientId, int pMessageSendingDate, String pMessageTitle, String pMessageBody, int pIsMessageRead) {
+        mId = pId;
         mAuthorId = pAuthorId;
         mRecipientId = pRecipientId;
         mMessageSendingDate = pMessageSendingDate;
@@ -76,5 +77,34 @@ public class MessageDbModel {
 
     public void setMessageRead(int pMessageRead) {
         mIsMessageRead = pMessageRead;
+    }
+
+    @Override
+    public boolean equals(Object pO) {
+        if (this == pO) return true;
+        if (!(pO instanceof MessageDbModel)) return false;
+
+        MessageDbModel that = (MessageDbModel) pO;
+
+        if (mId != that.mId) return false;
+        if (mAuthorId != that.mAuthorId) return false;
+        if (mRecipientId != that.mRecipientId) return false;
+        if (mMessageSendingDate != that.mMessageSendingDate) return false;
+        if (mIsMessageRead != that.mIsMessageRead) return false;
+        if (mMessageTitle != null ? !mMessageTitle.equals(that.mMessageTitle) : that.mMessageTitle != null)
+            return false;
+        return mMessageBody != null ? mMessageBody.equals(that.mMessageBody) : that.mMessageBody == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mId;
+        result = 31 * result + mAuthorId;
+        result = 31 * result + mRecipientId;
+        result = 31 * result + mMessageSendingDate;
+        result = 31 * result + (mMessageTitle != null ? mMessageTitle.hashCode() : 0);
+        result = 31 * result + (mMessageBody != null ? mMessageBody.hashCode() : 0);
+        result = 31 * result + mIsMessageRead;
+        return result;
     }
 }

@@ -23,6 +23,14 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
     private Class mClazz = MessageDb.class;
 
+    public MessageRepoDbImpl() {
+    }
+
+    public MessageRepoDbImpl(IDbOperations pOperations, Class pClazz) {
+        mOperations = pOperations;
+        mClazz = pClazz;
+    }
+
     @Override
     public Integer insert(MessageDbModel pMsg) {
         Log.d(TAG, "insert() called with: pMsg = [" + pMsg + "]");
@@ -45,7 +53,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         values.put(MessageDb.CREATED, date);
         values.put(MessageDb.IS_READ, isRead);
 
-        mOperations.insert(DbUtils.getTableName(mClazz), values);
+        int inserted = mOperations.insert(DbUtils.getTableName(mClazz), values);
 
         //TODO delete after testing
         Cursor cursor = mOperations.query(
@@ -55,7 +63,17 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         cursor.close();
         //==========================
 
-        return pMsg.getId();
+        return inserted;
+    }
+
+    @Override
+    public Integer bulkIsert(List<MessageDbModel> entities) {
+        return null;
+    }
+
+    @Override
+    public MessageDbModel get(Integer id) {
+        return null;
     }
 
     @Override
@@ -99,11 +117,6 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
     @Override
     public void delete(Integer id) {
-    }
-
-    @Override
-    public MessageDbModel get(Integer id) {
-        return null;
     }
 
     @Override

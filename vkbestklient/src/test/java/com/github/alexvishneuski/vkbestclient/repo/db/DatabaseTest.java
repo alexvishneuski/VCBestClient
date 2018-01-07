@@ -239,11 +239,11 @@ public class DatabaseTest {
     }
 
 
-    private List<UserDbModel> generateUsers(int pI) {
+    private List<UserDbModel> generateUsers(int pCount) {
         List<UserDbModel> users = new ArrayList<>();
         UserDbModel user;
 
-        for (int i = 0; i < pI; i++) {
+        for (int i = 0; i < pCount; i++) {
             user = new UserDbModel(i, "FirstName " + i, "LastName " + i, "AvatarPath " + i);
             users.add(user);
         }

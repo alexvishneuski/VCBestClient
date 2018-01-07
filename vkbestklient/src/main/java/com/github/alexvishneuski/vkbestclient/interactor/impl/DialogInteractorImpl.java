@@ -41,33 +41,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     private IMessageRepoDb mIMessageRepoDb = new MessageRepoDbImpl();
 
-    /*
-    Message Domain  (VKAPI/DB-> Interactor)
-    ================
-   + private int mId;
-    +private int mCurrentUserId;
-    +private int mContactUserId;
-    +private MessageDirection mMessageDirection;
-    +private int mMessageSendingDate;
-    +private String mMessageTitle;
-    +private String mMessageBody;
-    +private boolean mIsMessageRead;
-
-    Message DB (Interactor -> DB)
-    ================
-    private int mId;
-    private int mAuthor_id;
-    private int mRecipient_id;
-    private int mMessageSendingDate;
-    private String mMessageTitle;
-    private String mMessageBody;
-    private boolean mIsMessageRead;
-
-    * */
-
-
-
-    /*Result as own Interactor API*/
+       /*Result as own Interactor API*/
     /*==========================================================================================*/
 
     /*steps:
@@ -100,7 +74,6 @@ public class DialogInteractorImpl implements IDialogInteractor {
         List<MessageInDialogs> messagesInteractor = this.getMessagesInDialogListFromVKApi(pCount, pOffset);
 
         //6. save msg into DB;
-
         //6.1 preparing container
         List<MessageDbModel> messagesDb = new ArrayList<>();
         //6.2 convert frpm MessageInDialogs to MessageDbModel
@@ -152,9 +125,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
             contactUserIds.add(message.getContactUserId());
         }
 
-
         //3 getting array user's Info  by ids
-
         List<UserInDialogs> users = mUserInteractor.getDomainUsersBasicInfo(contactUserIds);
 
         //3.5 using sparse Array for more efficient inserting users to message
@@ -166,7 +137,6 @@ public class DialogInteractorImpl implements IDialogInteractor {
         }
 
         //4 mapping userInfo and dialog list into array messageInDialog (List)
-
         for (MessageInDialogs message : domainMessages
                 ) {
             message.setContactUser(usersInDialogs.get(message.getContactUser().getUserId()));

@@ -2,9 +2,13 @@ package com.github.alexvishneuski.vkbestclient.repository.database;
 
 import java.util.List;
 
-public interface GenericDao<T, PK>{
+public interface GenericDao<T, PK> {
 
     PK insert(T entity);
+
+    PK bulkIsert(List<T> entities);
+
+    T get(PK id);
 
     List<T> getAll();
 
@@ -12,8 +16,5 @@ public interface GenericDao<T, PK>{
 
     void delete(PK id);
 
-    T get(PK id);
-
     boolean ifInDbExist(PK id);
-
 }
