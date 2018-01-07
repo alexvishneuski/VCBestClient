@@ -21,8 +21,8 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
     private final String TAG = this.getClass().getSimpleName();
 
     private IDbOperations mOperations = new DbOperations(new SqlConnectorSimple(ContextHolder.getContext()));
-
     private Class mClazz = MessageDb.class;
+    private String mTable = getTable(mClazz);
 
     public MessageRepoDbImpl() {
     }
@@ -36,11 +36,10 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
     public Integer insert(MessageDbModel pMsg) {
         Log.d(TAG, "insert() called with: pMsg = [" + pMsg + "]");
         ContentValues values = getContentValues(pMsg);
-        int inserted = mOperations.insert(DbUtils.getTableName(mClazz), values);
+        int inserted = mOperations.insert(mTable, values);
 
         //TODO delete after testing
-        Cursor cursor = mOperations.query(
-                DbUtils.getTableName(mClazz), new String[]{MessageDb._ID},
+        Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
                 null, null, null);
         System.out.println(cursor.getCount());
         cursor.close();
@@ -49,22 +48,32 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         return inserted;
     }
 
-
     @Override
     public Integer bulkIsert(List<MessageDbModel> pMsgs) {
+        Log.d(TAG, "bulkIsert() called with: pMsgs = [" + pMsgs + "]");
         ContentValues[] valuesArray = new ContentValues[pMsgs.size()];
 
         for (int i = 0; i < pMsgs.size(); i++) {
             valuesArray[i] = getContentValues(pMsgs.get(i));
         }
 
-        int insertedCount = mOperations.bulkInsert(DbUtils.getTableName(mClazz), valuesArray);
+        int insertedCount = mOperations.bulkInsert(mTable, valuesArray);
         return insertedCount;
     }
 
     @Override
-    public MessageDbModel get(Integer id) {
-        return null;
+    public MessageDbModel get(Integer pId) {
+        Log.d(TAG, "get() called with: id = [" + pId + "]");
+
+        Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
+                null, null, null);
+
+
+        cursor.moveToFirst();
+        MessageDbModel msgFromDb = getMessageDbModelFromCursor(cursor);
+        cursor.close();
+
+        return msgFromDb;
     }
 
     @Override
@@ -97,13 +106,13 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
         //TODO delete after testing
         Cursor cursor = mOperations.query(
-                DbUtils.getTableName(mClazz), new String[]{MessageDb._ID},
+                mTable, new String[]{MessageDb._ID},
                 null, null, null);
         System.out.println(cursor.getCount());
         cursor.close();
         //==========================
 
-        mOperations.update(DbUtils.getTableName(mClazz), values, null, null);
+        mOperations.update(mTable, values, null, null);
     }
 
     @Override
@@ -115,14 +124,19 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         Log.d(TAG, "ifInDbExist() called with: pId = [" + pId + "]");
 
         String id = String.valueOf(pId);
-        Cursor cursor = mOperations.query(
-                DbUtils.getTableName(mClazz), new String[]{MessageDb._ID},
+        Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
                 MessageDb._ID + "=?", new String[]{id}, null);
         boolean ifExist = cursor.getCount() != 0;
         cursor.close();
 
         Log.d(TAG, "ifInDbExist: " + ifExist);
         return ifExist;
+    }
+
+    @NonNull
+    private String getTable(Class pClazz) {
+
+        return DbUtils.getTableName(pClazz);
     }
 
     @NonNull
@@ -147,5 +161,19 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         values.put(MessageDb.IS_READ, isRead);
 
         return values;
+    }
+
+    @NonNull
+    private MessageDbModel getMessageDbModelFromCursor(Cursor pCursor) {
+
+        int id = pCursor.getInt(pCursor.getColumnIndex(MessageDb._ID));
+        int authId = pCursor.getInt(pCursor.getColumnIndex(MessageDb.AUTHOR_ID));
+        int recipId = pCursor.getInt(pCursor.getColumnIndex(MessageDb.RECIPIENT_ID));
+        String title = pCursor.getString(pCursor.getColumnIndex(MessageDb.TITLE));
+        String body = pCursor.getString(pCursor.getColumnIndex(MessageDb.BODY));
+        int date = pCursor.getInt(pCursor.getColumnIndex(MessageDb.CREATED));
+        int isRead = pCursor.getInt(pCursor.getColumnIndex(MessageDb.IS_READ));
+
+        return new MessageDbModel(id, authId, recipId, date, title, body, isRead);
     }
 }
