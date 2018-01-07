@@ -2,6 +2,7 @@ package com.github.alexvishneuski.vkbestclient.repo.db;
 
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.github.alexvishneuski.vkbestclient.BuildConfig;
 import com.github.alexvishneuski.vkbestclient.repository.database.IMessageRepoDb;
@@ -40,8 +41,12 @@ public class MessageRepoDbTest {
     private SQLiteOpenHelper mSqlConnector;
     private IDbOperations mOperations;
 
-    private MessageDbModel msgForInserting;
-    private MessageDbModel msgFromDb;
+    private MessageDbModel mMsgForInserting;
+    private MessageDbModel mMsgForInsertingNew;
+    private List<MessageDbModel> mMsgsForInserting;
+    private MessageDbModel mMsgFromDb;
+    private MessageDbModel mMsgFromDbNew;
+    private List<MessageDbModel> mMsgsFromDb;
 
     @Before
     public void setUp() {
@@ -56,45 +61,101 @@ public class MessageRepoDbTest {
     }
 
     @Test
-    public void insertMessage() {
-        Log.d(TAG, "insertMessage() called");
+    public void insertMessageTest() {
+        Log.d(TAG, "insertMessageTest() called");
 
-        msgForInserting = generateMessage(1).get(0);
-        int forInsertingId = msgForInserting.getId();
+        mMsgForInserting = generateMessage(1).get(0);
+        int forInsertingId = mMsgForInserting.getId();
 
-        int insertedId = mMessageRepoDb.insert(msgForInserting);
+        int insertedId = mMessageRepoDb.insert(mMsgForInserting);
         Assert.assertEquals("message's id before inserting and after must be equals", forInsertingId, insertedId);
     }
 
+    public Integer bulkIsert(List<MessageDbModel> entities) {
+        return null;
+    }
+
     @Test
-    public void getMessage() {
-        Log.d(TAG, "getMessage() called");
+    public void getMessageTest() {
+        Log.d(TAG, "getMessageTest() called");
 
-        msgForInserting = generateMessage(1).get(0);
-        int forInsertingId = msgForInserting.getId();
+        mMsgForInserting = generateMessage(1).get(0);
+        int forInsertingId = mMsgForInserting.getId();
 
-        int insertedId = mMessageRepoDb.insert(msgForInserting);
+        int insertedId = mMessageRepoDb.insert(mMsgForInserting);
         Assert.assertEquals("message's id before inserting and after must be equals", forInsertingId, insertedId);
 
-        msgFromDb = mMessageRepoDb.get(forInsertingId);
-        Assert.assertEquals("messages for inserting and from db must be equals", msgForInserting, msgFromDb);
+        mMsgFromDb = mMessageRepoDb.get(forInsertingId);
+        Assert.assertEquals("messages for inserting and from db must be equals", mMsgForInserting, mMsgFromDb);
     }
 
 
     @Test
-    public void getAllMessages() {
+    public void getAllMessagesTest() {
+        Log.d(TAG, "getAllMessagesTest() called");
+
+        int msgForInsertingCount = 5;
+
+        mMsgsForInserting = generateMessage(msgForInsertingCount);
+        int insertedCount = mMessageRepoDb.bulkIsert(mMsgsForInserting);
+        Assert.assertEquals("message's count before inserting and after must be equals", msgForInsertingCount, insertedCount);
+
+        mMsgsFromDb = mMessageRepoDb.getAll();
+
+        SparseArray<MessageDbModel> msgsArray = new SparseArray<>();
+
+        for (MessageDbModel msg : mMsgsFromDb
+                ) {
+            msgsArray.append(msg.getId(), msg);
+        }
+
+        for (MessageDbModel msg : mMsgsForInserting
+                ) {
+            Assert.assertEquals("messages for inserting and from db must be equals", msg, msgsArray.get(msg.getId()));
+        }
     }
 
     @Test
-    public void updateMessage() {
+    public void updateMessageTest() {
+        Log.d(TAG, "updateMessageTest() called");
+        //creating msg
+        mMsgForInserting = generateMessage(1).get(0);
+        int forInsertingId = mMsgForInserting.getId();
+        //inserting msg
+        int insertedId = mMessageRepoDb.insert(mMsgForInserting);
+        //getting inserted msg
+        mMsgFromDb = mMessageRepoDb.get(forInsertingId);
+        //creating new msg equals old
+        mMsgForInsertingNew = mMsgForInserting;
+        //changing new msg
+        mMsgForInsertingNew.setMessageBody(mMsgForInsertingNew.getMessageBody() + " updated");
+        //updating old message (new instead old )
+        mMessageRepoDb.update(mMsgForInsertingNew);
+        int insertedIdNew = mMessageRepoDb.get(mMsgForInsertingNew.getId()).getId();
+        Assert.assertEquals("message's id before updating and after must be equals", insertedId, insertedIdNew);
+        mMsgFromDbNew = mMessageRepoDb.get(forInsertingId);
+        Assert.assertNotEquals("messages for inserting and from db must be equals", mMsgFromDb, mMsgFromDbNew);
     }
 
     @Test
-    public void deleteMessage() {
+    public void deleteMessageTest() {
+        Log.d(TAG, "deleteMessageTest() called");
+
+        mMsgForInserting = generateMessage(1).get(0);
+        int insertedId = mMessageRepoDb.insert(mMsgForInserting);
+        mMessageRepoDb.delete(insertedId);
+        boolean isExist = mMessageRepoDb.ifInDbExist(insertedId);
+        Assert.assertTrue("message must not exist", !isExist);
     }
 
     @Test
-    public void ifMessageInDbExist() {
+    public void ifMessageInDbExistTest() {
+        Log.d(TAG, "ifMessageInDbExistTest() called");
+
+        mMsgForInserting = generateMessage(1).get(0);
+        int insertedId = mMessageRepoDb.insert(mMsgForInserting);
+        boolean isExist = mMessageRepoDb.ifInDbExist(insertedId);
+        Assert.assertTrue("message must exist", isExist);
     }
 
     private List<MessageDbModel> generateMessage(int pCount) {
