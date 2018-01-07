@@ -39,12 +39,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         ContentValues values = getContentValues(pMsg);
         int inserted = mOperations.insert(mTable, values);
 
-        //TODO delete after testing
-        Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
-                null, null, null, null);
-        System.out.println(cursor.getCount());
-        cursor.close();
-        //==========================
+        Log.d(TAG, "insert() returned: pMsg id = [" + inserted + "]");
 
         return inserted;
     }
@@ -59,6 +54,9 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         }
 
         int insertedCount = mOperations.bulkInsert(mTable, valuesArray);
+
+        Log.d(TAG, "bulkIsert() executed: inserted pMsgs count = [" + insertedCount + "]");
+
         return insertedCount;
     }
 
@@ -154,34 +152,12 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
     public void update(MessageDbModel pMsg) {
         Log.d(TAG, "update() called with: pMsg = [" + pMsg + "]");
 
-        //getting msg fields
-
-        String authId = String.valueOf(pMsg.getAuthor_id());
-        String recipId = String.valueOf(pMsg.getRecipient_id());
-        String title = String.valueOf(pMsg.getMessageTitle());
-        String body = String.valueOf(pMsg.getMessageBody());
-        String date = String.valueOf(pMsg.getMessageSendingDate());
-        String isRead = String.valueOf(pMsg.isMessageRead());
-
         //build ContentValues
-        ContentValues values = new ContentValues();
-
-        values.put(MessageDb.AUTHOR_ID, authId);
-        values.put(MessageDb.RECIPIENT_ID, recipId);
-        values.put(MessageDb.TITLE, title);
-        values.put(MessageDb.BODY, body);
-        values.put(MessageDb.CREATED, date);
-        values.put(MessageDb.IS_READ, isRead);
-
-        //TODO delete after testing
-        Cursor cursor = mOperations.query(
-                mTable, new String[]{MessageDb._ID},
-                null, null, null, null);
-        System.out.println(cursor.getCount());
-        cursor.close();
-        //==========================
+        ContentValues values = getContentValues(pMsg);
+        values.remove(MessageDb._ID);
 
         mOperations.update(mTable, values, null, null);
+        Log.d(TAG, "update() executed: for pMsg id = [" + pMsg + "]");
     }
 
     @Override
