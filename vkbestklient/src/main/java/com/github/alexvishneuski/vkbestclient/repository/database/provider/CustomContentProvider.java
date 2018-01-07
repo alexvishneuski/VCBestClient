@@ -30,7 +30,7 @@ public class CustomContentProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
-        return mDatabase.query(uri.getLastPathSegment(), projection, selection, selectionArgs, sortOrder);
+        return mDatabase.query(uri.getLastPathSegment(), projection, selection, selectionArgs, sortOrder, null);
     }
 
     @Nullable

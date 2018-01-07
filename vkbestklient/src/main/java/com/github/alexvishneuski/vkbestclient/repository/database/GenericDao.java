@@ -4,17 +4,21 @@ import java.util.List;
 
 public interface GenericDao<T, PK> {
 
-    PK insert(T entity);
+    PK insert(T pEntity);
 
-    PK bulkIsert(List<T> entities);
+    PK bulkIsert(List<T> pEntities);
 
-    T get(PK id);
+    T get(PK pId);
 
     List<T> getAll();
 
-    void update(T entity);
+    List<T> getLimitedPartWithOffset(PK pOffset, PK pLimit);
 
-    void delete(PK id);
+    void update(T pEntity);
 
-    boolean ifInDbExist(PK id);
+    void delete(PK pId);
+
+    boolean ifInDbExist(PK pId);
+
+
 }

@@ -41,7 +41,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
         //TODO delete after testing
         Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
-                null, null, null);
+                null, null, null, null);
         System.out.println(cursor.getCount());
         cursor.close();
         //==========================
@@ -74,6 +74,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
                 mTable, columnsArray,
                 MessageDb._ID + "=?",
                 new String[]{id},
+                null,
                 null);
 
         cursor.moveToFirst();
@@ -96,7 +97,42 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
                 mTable, columnsArray,
                 null,
                 null,
+                null,
                 null);
+
+        if (cursor.getCount() != 0) {
+
+            cursor.moveToFirst();
+            do {
+                msgs.add(getMessageDbModelFromCursor(cursor));
+            }
+            while (cursor.moveToNext());
+            Log.d(TAG, "getAll(): cursor returned " + msgs.size() + " rows");
+
+        } else {
+            Log.d(TAG, "getAll(): cursor returned 0 rows");
+        }
+
+        return msgs;
+    }
+
+    @Override
+    public List<MessageDbModel> getLimitedPartWithOffset(Integer pOffset, Integer pLimit) {
+        Log.d(TAG, "getLimitedPartWithOffset() called with: pLimit = [" + pLimit + "], pOffset = [" + pOffset + "]");
+
+        List<MessageDbModel> msgs = new ArrayList<>();
+
+        String[] columnsArray = new String[]{
+                MessageDb._ID, MessageDb.AUTHOR_ID, MessageDb.RECIPIENT_ID, MessageDb.TITLE,
+                MessageDb.BODY, MessageDb.CREATED, MessageDb.IS_READ};
+        String offsetAndLimit = String.format("%s,%s", pOffset, pLimit);
+
+        Cursor cursor = mOperations.query(
+                mTable, columnsArray,
+                null,
+                null,
+                null,
+                offsetAndLimit);
 
         if (cursor.getCount() != 0) {
 
@@ -140,7 +176,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
         //TODO delete after testing
         Cursor cursor = mOperations.query(
                 mTable, new String[]{MessageDb._ID},
-                null, null, null);
+                null, null, null, null);
         System.out.println(cursor.getCount());
         cursor.close();
         //==========================
@@ -162,7 +198,7 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
         String id = String.valueOf(pId);
         Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
-                MessageDb._ID + "=?", new String[]{id}, null);
+                MessageDb._ID + "=?", new String[]{id}, null, null);
         boolean ifExist = cursor.getCount() != 0;
         cursor.close();
 

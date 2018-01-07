@@ -242,7 +242,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         Cursor preCursor = dbOperations.query(
                 DbUtils.getTableName(userClazz), new String[]{UserDb._ID},
-                UserDb._ID + "=?", new String[]{parId}, null);
+                UserDb._ID + "=?", new String[]{parId}, null, null);
 
         if (preCursor.getCount() == 0) {
             //make insert
@@ -255,7 +255,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
         //read user
 
-        Cursor mCursor = dbOperations.query(DbUtils.getTableName(UserDb.class), null, null, null, null);
+        Cursor mCursor = dbOperations.query(DbUtils.getTableName(UserDb.class), null, null, null, null, null);
 
         assert mCursor != null;
         // Assert.assertEquals(1, mCursor.getCount());

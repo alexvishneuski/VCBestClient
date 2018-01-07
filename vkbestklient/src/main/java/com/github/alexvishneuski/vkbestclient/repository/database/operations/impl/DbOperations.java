@@ -67,10 +67,10 @@ public class DbOperations implements IDbOperations {
 
     @Override
     public Cursor query(String table, @Nullable String[] projection, @Nullable String selection,
-                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder, @Nullable String limit) {
 
         return mHelper.getReadableDatabase().query(table, projection, selection, selectionArgs,
-                null, null, sortOrder);
+                null, null, sortOrder, limit);
     }
 
     @Override

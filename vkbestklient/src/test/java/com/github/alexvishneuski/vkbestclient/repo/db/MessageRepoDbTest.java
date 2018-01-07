@@ -37,23 +37,18 @@ public class MessageRepoDbTest {
     private final String TAG = this.getClass().getSimpleName();
 
     private IMessageRepoDb mMessageRepoDb;
-    private Class mClazz;
-    private SQLiteOpenHelper mSqlConnector;
-    private IDbOperations mOperations;
 
     private MessageDbModel mMsgForInserting;
-    private MessageDbModel mMsgForInsertingNew;
     private List<MessageDbModel> mMsgsForInserting;
     private MessageDbModel mMsgFromDb;
-    private MessageDbModel mMsgFromDbNew;
     private List<MessageDbModel> mMsgsFromDb;
 
     @Before
     public void setUp() {
-        mClazz = MessageDb.class;
-        mSqlConnector = new SqlConnectorSimpleTest(RuntimeEnvironment.application);
-        mOperations = new DbOperations(mSqlConnector);
-        mMessageRepoDb = Mockito.spy(new MessageRepoDbImpl(mOperations, mClazz));
+        Class clazz = MessageDb.class;
+        SQLiteOpenHelper sqlConnector = new SqlConnectorSimpleTest(RuntimeEnvironment.application);
+        IDbOperations operations = new DbOperations(sqlConnector);
+        mMessageRepoDb = Mockito.spy(new MessageRepoDbImpl(operations, clazz));
     }
 
     @After
@@ -138,6 +133,36 @@ public class MessageRepoDbTest {
     }
 
     @Test
+    public void getLimitedMessagesCountWithOffsetTest() {
+        Log.d(TAG, "getAllMessagesTest() called");
+
+        int msgForInsertingCount = 5;
+        int offset = 2;
+        int limit = 1;
+
+        mMsgsForInserting = generateMessage(msgForInsertingCount);
+        int insertedCount = mMessageRepoDb.bulkIsert(mMsgsForInserting);
+        Assert.assertEquals("message's count before inserting and after must be equals", msgForInsertingCount, insertedCount);
+
+        mMsgsFromDb = mMessageRepoDb.getLimitedPartWithOffset(offset, limit);
+
+        SparseArray<MessageDbModel> msgsArray = new SparseArray<>();
+
+        for (MessageDbModel msg : mMsgsForInserting
+                ) {
+            msgsArray.append(msg.getId(), msg);
+        }
+
+        Assert.assertEquals("message's count from query must be equals limit", limit, mMsgsFromDb.size());
+        Assert.assertEquals("messages from query they must meet the offset's requirements", offset, mMsgsFromDb.get(0).getId());
+
+        for (MessageDbModel msg : mMsgsFromDb
+                ) {
+            Assert.assertEquals("messages for inserting and from db must be equals", msg, msgsArray.get(msg.getId()));
+        }
+    }
+
+    @Test
     public void updateMessageTest() {
         Log.d(TAG, "updateMessageTest() called");
         //creating msg
@@ -148,15 +173,15 @@ public class MessageRepoDbTest {
         //getting inserted msg
         mMsgFromDb = mMessageRepoDb.get(forInsertingId);
         //creating new msg equals old
-        mMsgForInsertingNew = mMsgForInserting;
+        MessageDbModel msgForInsertingNew = mMsgForInserting;
         //changing new msg
-        mMsgForInsertingNew.setMessageBody(mMsgForInsertingNew.getMessageBody() + " updated");
+        msgForInsertingNew.setMessageBody(msgForInsertingNew.getMessageBody() + " updated");
         //updating old message (new instead old )
-        mMessageRepoDb.update(mMsgForInsertingNew);
-        int insertedIdNew = mMessageRepoDb.get(mMsgForInsertingNew.getId()).getId();
+        mMessageRepoDb.update(msgForInsertingNew);
+        int insertedIdNew = mMessageRepoDb.get(msgForInsertingNew.getId()).getId();
         Assert.assertEquals("message's id before updating and after must be equals", insertedId, insertedIdNew);
-        mMsgFromDbNew = mMessageRepoDb.get(forInsertingId);
-        Assert.assertNotEquals("messages for inserting and from db must be equals", mMsgFromDb, mMsgFromDbNew);
+        MessageDbModel msgFromDbNew = mMessageRepoDb.get(forInsertingId);
+        Assert.assertNotEquals("messages for inserting and from db must be equals", mMsgFromDb, msgFromDbNew);
     }
 
     @Test
