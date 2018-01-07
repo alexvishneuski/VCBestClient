@@ -157,9 +157,10 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
         //build ContentValues
         ContentValues values = getContentValues(pMsg);
+        final String tId = (String) values.get(MessageDb._ID);
         values.remove(MessageDb._ID);
 
-        mOperations.update(mTable, values, null, null);
+        mOperations.update(mTable, values, MessageDb._ID + "=?", new String[]{tId});
         Log.d(TAG, "update() executed: for pMsg id = [" + pMsg + "]");
     }
 

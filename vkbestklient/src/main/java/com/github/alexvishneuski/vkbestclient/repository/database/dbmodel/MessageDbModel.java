@@ -107,4 +107,13 @@ public class MessageDbModel {
         result = 31 * result + mIsMessageRead;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "MessageDbModel{" +
+                "mId=" + mId +
+                ", mAuthorId=" + mAuthorId +
+                ", mRecipientId=" + mRecipientId +
+                '}';
+    }
 }
