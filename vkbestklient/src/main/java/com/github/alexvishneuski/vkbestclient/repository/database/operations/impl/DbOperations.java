@@ -13,6 +13,8 @@ import com.github.alexvishneuski.vkbestclient.repository.database.operations.IDb
 
 public class DbOperations implements IDbOperations {
 
+    private final String TAG = this.getClass().getSimpleName();
+
     private final SQLiteOpenHelper mHelper;
 
     public DbOperations(final SQLiteOpenHelper pHelper) {
@@ -65,10 +67,10 @@ public class DbOperations implements IDbOperations {
 
     @Override
     public Cursor query(String table, @Nullable String[] projection, @Nullable String selection,
-                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder, @Nullable String limit) {
 
         return mHelper.getReadableDatabase().query(table, projection, selection, selectionArgs,
-                null, null, sortOrder);
+                null, null, sortOrder, limit);
     }
 
     @Override

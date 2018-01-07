@@ -18,7 +18,7 @@ public interface IDbOperations {
 
     Cursor query(
             String table, @Nullable final String[] projection, @Nullable final String selection,
-            @Nullable final String[] selectionArgs, @Nullable final String sortOrder);
+            @Nullable final String[] selectionArgs, @Nullable final String sortOrder, @Nullable final String limit);
 
     int delete(String table, @Nullable final String selection, @Nullable final String[] selectionArgs);
 
