@@ -71,8 +71,30 @@ public class MessageRepoDbTest {
         Assert.assertEquals("message's id before inserting and after must be equals", forInsertingId, insertedId);
     }
 
-    public Integer bulkIsert(List<MessageDbModel> entities) {
-        return null;
+    @Test
+    public void bulkIsertTest() {
+        Log.d(TAG, "bulkIsertTest() called");
+
+        int msgForInsertingCount = 5;
+
+        mMsgsForInserting = generateMessage(msgForInsertingCount);
+        int insertedCount = mMessageRepoDb.bulkIsert(mMsgsForInserting);
+        Assert.assertEquals("message's count before inserting and after must be equals", msgForInsertingCount, insertedCount);
+
+        mMsgsFromDb = mMessageRepoDb.getAll();
+
+        SparseArray<MessageDbModel> msgsArray = new SparseArray<>();
+
+        for (MessageDbModel msg : mMsgsFromDb
+                ) {
+            msgsArray.append(msg.getId(), msg);
+        }
+
+        for (MessageDbModel msg : mMsgsForInserting
+                ) {
+            Assert.assertEquals("messages for inserting and from db must be equals", msg, msgsArray.get(msg.getId()));
+        }
+
     }
 
     @Test
