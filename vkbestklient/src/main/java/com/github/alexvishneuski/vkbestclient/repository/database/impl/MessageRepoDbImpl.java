@@ -14,6 +14,7 @@ import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.Mes
 import com.github.alexvishneuski.vkbestclient.repository.database.util.DbUtils;
 import com.github.alexvishneuski.vkbestclient.util.ContextHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageRepoDbImpl implements IMessageRepoDb {
@@ -84,7 +85,33 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
     @Override
     public List<MessageDbModel> getAll() {
-        return null;
+        Log.d(TAG, "getAll() called");
+
+        List<MessageDbModel> msgs = new ArrayList<>();
+
+        String[] columnsArray = new String[]{
+                MessageDb._ID, MessageDb.AUTHOR_ID, MessageDb.RECIPIENT_ID, MessageDb.TITLE,
+                MessageDb.BODY, MessageDb.CREATED, MessageDb.IS_READ};
+        Cursor cursor = mOperations.query(
+                mTable, columnsArray,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() != 0) {
+
+            cursor.moveToFirst();
+            do {
+                msgs.add(getMessageDbModelFromCursor(cursor));
+            }
+            while (cursor.moveToNext());
+            Log.d(TAG, "getAll(): cursor returned " + msgs.size() + " rows");
+
+        } else {
+            Log.d(TAG, "getAll(): cursor returned 0 rows");
+        }
+
+        return msgs;
     }
 
     @Override
