@@ -108,6 +108,7 @@ public class MessageRepoDbTest {
         Assert.assertEquals("message's id before inserting and after must be equals", forInsertingId, insertedId);
 
         mMsgFromDb = mMessageRepoDb.get(forInsertingId);
+        boolean i = mMsgForInserting.equals(mMsgFromDb);
         Assert.assertEquals("messages for inserting and from db must be equals", mMsgForInserting, mMsgFromDb);
     }
 

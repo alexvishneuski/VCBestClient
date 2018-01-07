@@ -65,9 +65,15 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
     public MessageDbModel get(Integer pId) {
         Log.d(TAG, "get() called with: id = [" + pId + "]");
 
-        Cursor cursor = mOperations.query(mTable, new String[]{MessageDb._ID},
-                null, null, null);
-
+        String id = String.valueOf(pId);
+        String[] columnsArray = new String[]{
+                MessageDb._ID, MessageDb.AUTHOR_ID, MessageDb.RECIPIENT_ID, MessageDb.TITLE,
+                MessageDb.BODY, MessageDb.CREATED, MessageDb.IS_READ};
+        Cursor cursor = mOperations.query(
+                mTable, columnsArray,
+                MessageDb._ID + "=?",
+                new String[]{id},
+                null);
 
         cursor.moveToFirst();
         MessageDbModel msgFromDb = getMessageDbModelFromCursor(cursor);
