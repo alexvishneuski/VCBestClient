@@ -1,9 +1,15 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.http;
 
+import android.support.annotation.UiThread;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.errors.VKApiError;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.VKApiErrorResponse;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,20 +29,36 @@ public class HttpClient<T> implements IHttpClient<T> {
     public T requestGet(String pUrl, Class<T> pClazz) {
         Log.d(TAG, "requestGet() called with: pUrl = [" + pUrl + "], pClazz = [" + pClazz + "]");
 
-        InputStreamReader inputStreamReader;
+        final InputStreamReader inputStreamReader;
         Object response = null;
         final InputStream inputStream;
 
         try {
             inputStream = openStream(pUrl);
             inputStreamReader = new InputStreamReader(inputStream);
-            response = new GsonBuilder()
-                    .setLenient()
-                    .create().fromJson(inputStreamReader, pClazz);
+            try {
+                response = new GsonBuilder()
+                        .setLenient()
+                        .create().fromJson(inputStreamReader, pClazz);
+            } catch (JsonSyntaxException pE) {
+                pE.printStackTrace();
+                VKApiError error = new GsonBuilder()
+                        .setLenient()
+                        .create().fromJson(inputStreamReader, VKApiError.class);
+                Log.e(TAG, "requestGet: ", new VKApiException(error.toString()));
+            } catch (JsonIOException pE) {
+                pE.printStackTrace();
+                VKApiErrorResponse error = new GsonBuilder()
+                        .setLenient()
+                        .create().fromJson(inputStreamReader, VKApiErrorResponse.class);
+                Log.e(TAG, "requestGet: ", new VKApiException(error.toString()));
+            }
             con.disconnect();
         } catch (IOException pE) {
             pE.printStackTrace();
             //TODO add sort of RepoVKApiHttpException()
+
+
         } finally {
             if (con != null) {
                 con.disconnect();
