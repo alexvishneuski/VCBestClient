@@ -32,7 +32,7 @@ public class Converter {
                             convertTimeForUi(message.getMessageSendingDate()),
 
                             message.getMessageBody(),
-                            (MessageDirection.INCOMING == message.getMessageDirection() ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING),
+                            MessageDirection.INCOMING == message.getMessageDirection() ? MessageDirectionViewModel.INCOMING : MessageDirectionViewModel.OUTGOING,
                             message.isMessageRead()
                     ));
         }
@@ -51,7 +51,7 @@ public class Converter {
         boolean isSameDay = now.get(Calendar.YEAR) == msgTime.get(Calendar.YEAR) &&
                 now.get(Calendar.DAY_OF_YEAR) == msgTime.get(Calendar.DAY_OF_YEAR);
 
-        System.out.println(now.get(Calendar.YEAR) + " and " + msgTime.get(Calendar.YEAR));
+      //  System.out.println(now.get(Calendar.YEAR) + " and " + msgTime.get(Calendar.YEAR));
 
         boolean isYesterday = now.get(Calendar.YEAR) == yesterday.get(Calendar.YEAR) &&
                 (now.get(Calendar.DAY_OF_YEAR)) == yesterday.get(Calendar.DAY_OF_YEAR);
