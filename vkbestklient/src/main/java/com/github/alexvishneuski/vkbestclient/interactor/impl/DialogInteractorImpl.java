@@ -112,7 +112,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         List<Integer> contactUserIds = new ArrayList<>();
 
         // 1. getting dialoglist - VK API
-        List<VKApiDialog> dialogs = this.getDialogs(pCount, pOffset);
+        List<VKApiDialog> dialogs = this.getDialogs(pOffset, pCount);
 
         for (VKApiDialog dialog : dialogs
                 ) {
@@ -169,7 +169,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
     /*==========================================================================================*/
 
 
-    private List<VKApiDialog> getDialogs(int pCount, int pOffset) {
+    private List<VKApiDialog> getDialogs(int pOffset, int pCount) {
         Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
 
