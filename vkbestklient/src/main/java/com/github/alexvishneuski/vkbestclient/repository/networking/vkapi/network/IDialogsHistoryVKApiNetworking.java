@@ -6,7 +6,7 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.reques
 
 import java.util.List;
 
-public interface IMessagesHistoryVKApiNetworking {
+public interface IDialogsHistoryVKApiNetworking {
 
     List<VKApiMessage> get(VKApiUri pUri);
 

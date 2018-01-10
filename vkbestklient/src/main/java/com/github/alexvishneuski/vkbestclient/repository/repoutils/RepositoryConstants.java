@@ -73,15 +73,27 @@ public class RepositoryConstants {
     public static final String VK_SCOPE_EMAIL = "email";
     public static final String VK_SCOPE_MARKET = "market";
 
+    public interface VkMethodMessagesCommon {
+        String OFFSET_KEY = "offset";
+        String COUNT_KEY = "count";
+        String START_MESSAGE_ID_KEY = "start_message_id";
+    }
+
+    public interface VkMethodMessagesGetHistory {
+
+        String METHOD_NAME = "messages.getHistory";
+
+        //parameters keys for "messages.getHistory"
+        String USER_ID_KEY = "user_id";
+        String DESTINATION_ID_KEY = "peer_id";
+        String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
+    }
 
     public interface VkMethodMessagesGetDialogs {
 
         String METHOD_NAME = "messages.getDialogs";
 
         //parameters keys for "messages.getDialogs"
-        String OFFSET_KEY = "offset";
-        String COUNT_KEY = "count";
-        String START_MESSAGE_ID_KEY = "start_message_id";
         String PREVIEW_LENGTH_KEY = "preview_length";
         String UNREAD_KEY = "unread";
         String IMPORTANT_KEY = "important";

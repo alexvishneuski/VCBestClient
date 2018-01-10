@@ -12,6 +12,7 @@ public class VKApiMessagesGetDialogsResult {
     @SerializedName("response")
     private VKApiMessagesGetDialogsResponse mResponse;
 
+    //TODO change to errors object
     @SerializedName("error")
     private String mError;
 

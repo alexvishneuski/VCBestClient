@@ -13,7 +13,6 @@ public class VKApiMessagesGetHistoryParams implements Parameters {
     private String mStartMessageId;
     private String mInChronologicalOrder;
 
-
     private VKApiMessagesGetHistoryParams() {
     }
 
