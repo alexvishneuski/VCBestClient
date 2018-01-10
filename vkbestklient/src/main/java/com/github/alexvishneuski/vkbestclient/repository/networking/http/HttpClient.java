@@ -36,29 +36,15 @@ public class HttpClient<T> implements IHttpClient<T> {
         try {
             inputStream = openStream(pUrl);
             inputStreamReader = new InputStreamReader(inputStream);
-            try {
+
                 response = new GsonBuilder()
                         .setLenient()
                         .create().fromJson(inputStreamReader, pClazz);
-            } catch (JsonSyntaxException pE) {
-                pE.printStackTrace();
-                VKApiError error = new GsonBuilder()
-                        .setLenient()
-                        .create().fromJson(inputStreamReader, VKApiError.class);
-                Log.e(TAG, "requestGet: ", new VKApiException(error.toString()));
-            } catch (JsonIOException pE) {
-                pE.printStackTrace();
-                VKApiErrorResponse error = new GsonBuilder()
-                        .setLenient()
-                        .create().fromJson(inputStreamReader, VKApiErrorResponse.class);
-                Log.e(TAG, "requestGet: ", new VKApiException(error.toString()));
-            }
+
             con.disconnect();
         } catch (IOException pE) {
             pE.printStackTrace();
             //TODO add sort of RepoVKApiHttpException()
-
-
         } finally {
             if (con != null) {
                 con.disconnect();
