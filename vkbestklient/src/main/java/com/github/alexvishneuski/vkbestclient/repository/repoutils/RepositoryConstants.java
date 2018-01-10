@@ -86,7 +86,8 @@ public class RepositoryConstants {
         //parameters keys for "messages.getHistory"
         String USER_ID_KEY = "user_id";
         String DESTINATION_ID_KEY = "peer_id";
-        String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
+                String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
+
     }
 
     public interface VkMethodMessagesGetDialogs {
