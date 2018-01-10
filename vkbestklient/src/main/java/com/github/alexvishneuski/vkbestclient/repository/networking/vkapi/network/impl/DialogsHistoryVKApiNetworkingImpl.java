@@ -65,7 +65,7 @@ public class DialogsHistoryVKApiNetworkingImpl implements IDialogsHistoryVKApiNe
         }
 
         int msgCount = result.getResponse().getMessagesCount();
-        Log.d(TAG, "getDialogsTotalCount returned " + msgCount + " dialogs");
+        Log.d(TAG, "getTotalCount returned " + msgCount + " dialogs");
 
         return msgCount;
     }
