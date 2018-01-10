@@ -154,7 +154,6 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
-
     private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
         mLoadTask = new LoadDialogsAT();
