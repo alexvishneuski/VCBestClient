@@ -8,4 +8,5 @@ public interface IDialogsHistoryNet extends IGenericDaoNet<VKApiMessage, Integer
 
     List<VKApiMessage> getByUserId(Integer pOffset, Integer pLimit, Integer pUserId);
 
+    Integer getMessagesCount(Integer pUserId);
 }

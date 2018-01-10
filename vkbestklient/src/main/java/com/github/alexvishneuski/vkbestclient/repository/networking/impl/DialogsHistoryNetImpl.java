@@ -22,32 +22,12 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
 
     @Override
     public List<VKApiMessage> get(Integer pOffset, Integer pLimit) {
-        Log.d(TAG, "get() called with: mOffset = [" + pOffset + "], mLimit = [" + pLimit + "]");
-
-        List<VKApiMessage> messagesHistory = new ArrayList<>();
-
-        String msgOffset = String.valueOf(pOffset);
-        String msgCount = String.valueOf(pLimit);
-
-        VKApiMessagesGetHistoryParams msgsParams = VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).build();
-        VKApiUri msgsUri = VKApiUri.getBuilder()
-                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
-                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
-                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
-                .setParameters(msgsParams)
-                .build();
-
-        messagesHistory.addAll(mMessagesHistoryVKApiNetworkingImpl.get(msgsUri));
-
-        Log.d(TAG, "get returns messages in history");
-
-        return messagesHistory;
+        throw new UnsupportedOperationException("this method does not make sense: always is needed the dialog with one interlocutor");
     }
 
     @Override
     public Integer getTotalCount() {
-
-        return null;
+        throw new UnsupportedOperationException("this method does not make sense: always is needed the messages count by one dialog");
     }
 
     @Override
@@ -60,11 +40,12 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
         String msgCount = String.valueOf(pLimit);
         String userId = String.valueOf(pUserId);
 
-        VKApiMessagesGetHistoryParams msgsParams = VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).setUserId(userId).build();
+        VKApiMessagesGetHistoryParams msgsParams =
+                VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).setUserId(userId).build();
         VKApiUri msgsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
-                .setMethod(RepositoryConstants.VkMethodMessagesGetDialogs.METHOD_NAME)
+                .setMethod(RepositoryConstants.VkMethodMessagesGetHistory.METHOD_NAME)
                 .setParameters(msgsParams)
                 .build();
 
@@ -73,5 +54,27 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
         Log.d(TAG, "get returns messages in history");
 
         return messagesHistory;
+    }
+
+    @Override
+    public Integer getMessagesCount(Integer pUserId) {
+
+        String limit = "1";
+        String userId = String.valueOf(pUserId);
+
+        VKApiMessagesGetHistoryParams msgsParams =
+                VKApiMessagesGetHistoryParams.getBuilder().setUserId(userId).setCount(limit).build();
+        VKApiUri msgsUri = VKApiUri.getBuilder()
+                .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
+                .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
+                .setMethod(RepositoryConstants.VkMethodMessagesGetHistory.METHOD_NAME)
+                .setParameters(msgsParams)
+                .build();
+
+        int count = mMessagesHistoryVKApiNetworkingImpl.getTotalCount(msgsUri);
+
+        Log.d(TAG, "getMessagesCount: returned [" + count + "] messages " +
+                "in dialog history with user with id [" + pUserId + "]");
+        return count;
     }
 }
