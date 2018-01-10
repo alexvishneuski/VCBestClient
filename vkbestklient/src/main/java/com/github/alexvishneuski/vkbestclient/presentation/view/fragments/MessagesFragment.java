@@ -39,6 +39,7 @@ public class MessagesFragment extends Fragment {
         initView(inflater);
 
 
+
         return mView;
     }
 

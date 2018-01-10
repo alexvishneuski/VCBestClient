@@ -166,11 +166,11 @@ public class DialogsFragment extends Fragment {
         mMessagesUI = new ArrayList<>();
         mAdapter = new MessageInDialogListRecyclerAdapter(mMessagesUI);
 
-        setOnclickListenerToAdapter();
+        setOnClickListenerToAdapter();
     }
 
     //TODO to remove toasts
-    private void setOnclickListenerToAdapter() {
+    private void setOnClickListenerToAdapter() {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             //TODO replace with transition to messages or to contacts
