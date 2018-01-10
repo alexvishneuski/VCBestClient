@@ -78,12 +78,30 @@ public class HttpClient<T> implements IHttpClient<T> {
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
-        if (con != null) {
-            con.disconnect();
+            if (con != null) {
+                con.disconnect();
+            }
         }
-    }
 
         return (T) response;
+    }
+
+    @Override
+    public InputStream requestGet(String pUrl) {
+        InputStream inputStream = null;
+
+        try {
+            inputStream = openStream(pUrl);
+            con.disconnect();
+        } catch (IOException pE) {
+            pE.printStackTrace();
+            //TODO add sort of HTTP Exception()
+        } finally {
+            if (con != null) {
+                con.disconnect();
+            }
+        }
+        return inputStream;
     }
 
     @Override

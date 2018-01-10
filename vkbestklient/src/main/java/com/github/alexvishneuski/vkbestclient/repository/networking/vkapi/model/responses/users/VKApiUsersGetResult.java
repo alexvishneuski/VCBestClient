@@ -18,6 +18,7 @@ public class VKApiUsersGetResult {
     @SerializedName("response")
     private List<VKApiUser> mUsers;
 
+    //TODO change to errors object
     @SerializedName("error")
     private String mError;
 

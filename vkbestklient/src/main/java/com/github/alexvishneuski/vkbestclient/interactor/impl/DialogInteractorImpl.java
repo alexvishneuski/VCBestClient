@@ -19,6 +19,8 @@ import com.github.alexvishneuski.vkbestclient.repository.database.operations.imp
 import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.SqlConnectorSimple;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
 import com.github.alexvishneuski.vkbestclient.repository.database.util.DbUtils;
+import com.github.alexvishneuski.vkbestclient.repository.networking.IDialogsHistoryNet;
+import com.github.alexvishneuski.vkbestclient.repository.networking.impl.DialogsHistoryNetImpl;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiDialog;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiMessage;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.IDialogVKApiNetworking;
@@ -96,6 +98,11 @@ public class DialogInteractorImpl implements IDialogInteractor {
             }
         }
 
+        //TODO Delete after testig
+        System.out.println("=================start getDialogsHistory with Vika");
+        System.out.println("count = "+getDialogHistoryTest());
+        System.out.println("=================finish getDialogsHistory with Vika");
+
         return messagesInteractor;
     }
 
@@ -112,7 +119,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         List<Integer> contactUserIds = new ArrayList<>();
 
         // 1. getting dialoglist - VK API
-        List<VKApiDialog> dialogs = this.getDialogs(pCount, pOffset);
+        List<VKApiDialog> dialogs = this.getDialogs(pOffset, pCount);
 
         for (VKApiDialog dialog : dialogs
                 ) {
@@ -169,7 +176,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
     /*==========================================================================================*/
 
 
-    private List<VKApiDialog> getDialogs(int pCount, int pOffset) {
+    private List<VKApiDialog> getDialogs(int pOffset, int pCount) {
         Log.d(TAG, "getDialogs called ");
         List<VKApiDialog> dialogs = new ArrayList<>();
 
@@ -287,5 +294,10 @@ public class DialogInteractorImpl implements IDialogInteractor {
         }
 
         return users;
+    }
+
+    private int getDialogHistoryTest() {
+        IDialogsHistoryNet h = new DialogsHistoryNetImpl();
+        return h.getMessagesCount(21327318);
     }
 }

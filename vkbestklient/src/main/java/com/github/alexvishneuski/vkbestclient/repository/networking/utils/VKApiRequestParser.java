@@ -4,6 +4,7 @@ import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.reques
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiAuthParams;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetDialogsParams;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiGetUsersParams;
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiMessagesGetHistoryParams;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.requestparams.VKApiUri;
 import com.github.alexvishneuski.vkbestclient.repository.repoutils.RepositoryConstants;
 
@@ -56,6 +57,11 @@ public class VKApiRequestParser {
                 && (params instanceof VKApiGetUsersParams)) {
             //parsing message.getDialogs params
             uriBuilder.append(parseParams((VKApiGetUsersParams) params));
+        } else if (isServiceMethod
+                //if users.get params
+                && (params instanceof VKApiMessagesGetHistoryParams)) {
+            //parsing message.getDialogs params
+            uriBuilder.append(parseParams((VKApiMessagesGetHistoryParams) params));
         }
         //continue another common required auth params
         uriBuilder
@@ -75,13 +81,13 @@ public class VKApiRequestParser {
         return resultUri;
     }
 
-    //one-level-nested method
+    //first-level-nested method
     private static StringBuilder parseParams(VKApiAuthParams pParams) {
 
-        return null;
+        throw new UnsupportedOperationException("VKApiRequestParser parseParams(VKApiAuthParams pParams) is not supported yet");
     }
 
-    //one-level-nested method for parsing parameters related to VK API method message.getDialogs
+    //first-level-nested method for parsing parameters related to VK API method message.getDialogs
     private static StringBuilder parseParams(VKApiGetDialogsParams pParams) {
 
         StringBuilder paramsBuilder = new StringBuilder();
@@ -92,15 +98,15 @@ public class VKApiRequestParser {
 
         //parsing message.getDialogs params
         if (pParams.getOffset() != null) {
-            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetDialogs.OFFSET_KEY);
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesCommon.OFFSET_KEY);
             paramsValues.add(pParams.getOffset());
         }
         if (pParams.getCount() != null) {
-            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetDialogs.COUNT_KEY);
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesCommon.COUNT_KEY);
             paramsValues.add(pParams.getCount());
         }
         if (pParams.getStartMessageId() != null) {
-            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetDialogs.START_MESSAGE_ID_KEY);
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesCommon.START_MESSAGE_ID_KEY);
             paramsValues.add(pParams.getStartMessageId());
         }
         if (pParams.getPreviewLength() != null) {
@@ -125,7 +131,46 @@ public class VKApiRequestParser {
         return paramsBuilder;
     }
 
-    //one-level-nested method for parsing parameters related to VK API method users.get
+    //first-level-nested method
+    private static StringBuilder parseParams(VKApiMessagesGetHistoryParams pParams) {
+        StringBuilder paramsBuilder = new StringBuilder();
+
+        //HashMap is not used because the order is impportant
+        List<String> paramsKeys = new ArrayList<>();
+        List<String> paramsValues = new ArrayList<>();
+
+        //parsing message.getDialogs params
+        if (pParams.getOffset() != null) {
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesCommon.OFFSET_KEY);
+            paramsValues.add(pParams.getOffset());
+        }
+        if (pParams.getCount() != null) {
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesCommon.COUNT_KEY);
+            paramsValues.add(pParams.getCount());
+        }
+        if (pParams.getStartMessageId() != null) {
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesCommon.START_MESSAGE_ID_KEY);
+            paramsValues.add(pParams.getStartMessageId());
+        }
+        if (pParams.getDestinationId() != null) {
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetHistory.DESTINATION_ID_KEY);
+            paramsValues.add(pParams.getDestinationId());
+        }
+        if (pParams.getUserId() != null) {
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetHistory.USER_ID_KEY);
+            paramsValues.add(pParams.getUserId());
+        }
+        if (pParams.getInChronologicalOrder() != null) {
+            paramsKeys.add(RepositoryConstants.VkMethodMessagesGetHistory.IN_CHRONOLOGICAL_ORDER_KEY);
+            paramsValues.add(pParams.getInChronologicalOrder());
+        }
+
+        paramsBuilder.append(concatWithEqualAndAmpersand(paramsKeys, paramsValues));
+
+        return paramsBuilder;
+    }
+
+    //first-level-nested method for parsing parameters related to VK API method users.get
     private static StringBuilder parseParams(VKApiGetUsersParams pParams) {
 
         StringBuilder paramsBuilder = new StringBuilder();
@@ -153,7 +198,7 @@ public class VKApiRequestParser {
         return paramsBuilder;
     }
 
-    //two-level-nested method converts stringArray to string sequence separated coma
+    //second-level-nested method converts stringArray to string sequence separated coma
     private static String convertToString(String[] pUserIds) {
         StringBuilder stringSequence = new StringBuilder();
 
@@ -169,7 +214,7 @@ public class VKApiRequestParser {
         return stringSequence.toString();
     }
 
-    //two-level-nested method
+    //second-level-nested method
     private static StringBuilder concatWithEqualAndAmpersand(List<String> pParamsKeys, List<String> pParamsValues) {
         StringBuilder concatBuilder = new StringBuilder();
 

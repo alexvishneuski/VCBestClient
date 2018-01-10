@@ -1,4 +1,4 @@
-package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages;
+package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.dialogshistory;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,24 +7,24 @@ import com.google.gson.annotations.SerializedName;
 * method: messages.getDialogs
 * url: https://vk.com/dev/messages.getDialogs
 */
-public class VKApiMessagesGetDialogsResult {
+public class VKApiMessagesGetHistoryResult {
 
     @SerializedName("response")
-    private VKApiMessagesGetDialogsResponse mResponse;
+    private VKApiMessagesGetHistoryResponse mResponse;
 
     //TODO change to errors object
     @SerializedName("error")
     private String mError;
 
-    public VKApiMessagesGetDialogsResult() {
+    public VKApiMessagesGetHistoryResult() {
     }
 
-    public VKApiMessagesGetDialogsResponse getResponse() {
+    public VKApiMessagesGetHistoryResponse getResponse() {
 
         return mResponse;
     }
 
-    public void setResponse(VKApiMessagesGetDialogsResponse pResponse) {
+    public void setResponse(VKApiMessagesGetHistoryResponse pResponse) {
         mResponse = pResponse;
     }
 
