@@ -79,7 +79,8 @@ public class DialogsHistoryVKApiNetworkingImpl implements IDialogsHistoryVKApiNe
         final InputStream iStream =
                 new HttpClient().requestGet(url);
 
-        @SuppressWarnings("unchecked") GsonParser<VKApiMessagesGetHistoryResult> parser = new GsonParser(iStream);
+        @SuppressWarnings("unchecked") GsonParser<VKApiMessagesGetHistoryResult> parser =
+                new GsonParser(iStream);
 
         VKApiMessagesGetHistoryResult result =
                 parser.parse(VKApiMessagesGetHistoryResult.class);
