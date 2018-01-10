@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.users;
 
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.errors.VKApiError;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.objects.basic.VKApiUser;
 import com.google.gson.annotations.SerializedName;
 
@@ -20,7 +21,7 @@ public class VKApiUsersGetResult {
 
     //TODO change to errors object
     @SerializedName("error")
-    private String mError;
+    private VKApiError mError;
 
     public VKApiUsersGetResult() {
     }
@@ -43,12 +44,11 @@ public class VKApiUsersGetResult {
         mUsers = pUsers;
     }
 
-    public String getError() {
-
+    public VKApiError getError() {
         return mError;
     }
 
-    public void setError(String pError) {
+    public void setError(VKApiError pError) {
         mError = pError;
     }
 
@@ -56,7 +56,7 @@ public class VKApiUsersGetResult {
     public String toString() {
         return "VKApiUsersGetResult{" +
                 "mUsers=" + mUsers +
-                ", mError='" + mError + '\'' +
+                ", mError=" + mError +
                 '}';
     }
 }

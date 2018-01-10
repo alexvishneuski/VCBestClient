@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.messages;
 
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.errors.VKApiError;
 import com.google.gson.annotations.SerializedName;
 
 /*
@@ -14,7 +15,7 @@ public class VKApiMessagesGetDialogsResult {
 
     //TODO change to errors object
     @SerializedName("error")
-    private String mError;
+    private VKApiError mError;
 
     public VKApiMessagesGetDialogsResult() {
     }
@@ -28,12 +29,12 @@ public class VKApiMessagesGetDialogsResult {
         mResponse = pResponse;
     }
 
-    public String getError() {
-
+    public VKApiError getError() {
         return mError;
     }
 
-    public void setError(String pError) {
+    public void setError(VKApiError pError) {
         mError = pError;
     }
+
 }

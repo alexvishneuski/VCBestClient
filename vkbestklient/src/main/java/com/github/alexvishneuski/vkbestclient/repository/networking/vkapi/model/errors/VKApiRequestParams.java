@@ -25,6 +25,14 @@ public class VKApiRequestParams {
     public void setValue(String pValue) {
         mValue = pValue;
     }
+
+    @Override
+    public String toString() {
+        return "VKApiRequestParams{" +
+                "mKey='" + mKey + '\'' +
+                ", mValue='" + mValue + '\'' +
+                '}';
+    }
 }
 
 
