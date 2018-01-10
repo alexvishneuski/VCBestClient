@@ -38,7 +38,21 @@ public class MessagesFragment extends Fragment {
 
         initView(inflater);
 
+        //getLinkToParentActivity();
 
+        createRecyclerView(mView);
+
+        setLayoutManagerToRecyclerView();
+
+        createAdapter();
+
+        setAdapterToView();
+
+        loadMessagesTotalCount();
+
+        loadMessagesFirstTime();
+
+        addOnScrollListener();
 
         return mView;
     }
