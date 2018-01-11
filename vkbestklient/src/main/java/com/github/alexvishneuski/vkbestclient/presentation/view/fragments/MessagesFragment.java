@@ -1,6 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,9 @@ import com.github.alexvishneuski.vkbestclient.interactor.impl.MessageInHistoryIn
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.DialogsHistoryRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,8 @@ public class MessagesFragment extends Fragment {
     int mFirstVisibleItemPosition;
     private boolean mIsLoading = true;
 
+    private SharedActivity mParentActivity;
+
     private IMessageInHistoryInteractor mMessageInHistoryInteractor = new MessageInHistoryInteractorImpl();
 
     @Nullable
@@ -53,7 +58,7 @@ public class MessagesFragment extends Fragment {
 
         initView(inflater);
 
-        //getLinkToParentActivity();
+        getLinkToParentActivity();
 
         createRecyclerView(mView);
 
@@ -74,6 +79,12 @@ public class MessagesFragment extends Fragment {
         return mView;
     }
 
+    private void getLinkToParentActivity() {
+        if (getActivity() != null) {
+            mParentActivity = (SharedActivity) getActivity();
+
+        }
+    }
 
     private void initView(LayoutInflater inflater) {
 
@@ -108,7 +119,7 @@ public class MessagesFragment extends Fragment {
     }
 
     private void loadMessagesInHistoryTotalCount() {
-        LoadMessagesInHistoryCountAT loadCountTask = new LoadMessagesInHistoryCountAT();
+        LoadMessagesCountAT loadCountTask = new LoadMessagesCountAT();
         loadCountTask.execute();
     }
 
@@ -119,20 +130,25 @@ public class MessagesFragment extends Fragment {
     private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
         mLoadTask = new LoadMessagesAT();
-        mLoadTask.execute(LOAD_MESSAGES_COUNT, 0);
+        mLoadTask.execute(0, LOAD_MESSAGES_COUNT);
     }
 
-    public class LoadMessagesInHistoryCountAT extends AsyncTask<Void, Void, Integer> {
+    public class LoadMessagesCountAT extends AsyncTask<Void, Void, Integer> {
 
-        private static final String ASYNC_TASK_TAG = "LoadDialogsCountAT";
+        private static final String ASYNC_TASK_TAG = "LoadMessagesCountAT";
+
+        String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+        Intent intent = mParentActivity.getIntent();
+        int contactUserId = intent.getExtras().getInt(key);
 
         @Override
         protected Integer doInBackground(Void... pVoids) {
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
-            int dialogsCount = mMessageInHistoryInteractor.getDialogsTotalCount();
-            Log.d(ASYNC_TASK_TAG, "doInBackground returned " + dialogsCount + " dialogs");
+            Log.d(TAG, "doInBackground: invoked getMessagesInHistoryTotalCount() for contactUser with id = " + contactUserId);
+            int messagesCount = mMessageInHistoryInteractor.getMessagesInHistoryTotalCount(contactUserId);
+            Log.d(ASYNC_TASK_TAG, "doInBackground returned " + messagesCount + " dialogs");
 
-            return dialogsCount;
+            return messagesCount;
         }
 
         @Override
@@ -155,19 +171,19 @@ public class MessagesFragment extends Fragment {
 
     public class LoadMessagesAT extends AsyncTask<Integer, Void, List<MessageInDialogs>> {
 
-        private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
+        private static final String ASYNC_TASK_TAG = "LoadMessagesAT";
 
         /**
-         * @param pArgs [0] - count, [1] - offset
+         * @param pArgs [0]  - offset, [1] - count=limit
          */
         @Override
         protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
             Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
 
-            int count = pArgs[0];
-            int offset = pArgs[1];
+            int offset = pArgs[0];
+            int count = pArgs[1];
 
-            List<MessageInDialogs> msgs = mMessageInHistoryInteractor.getMessagesInHistoryFromRepo(count, offset);
+            List<MessageInDialogs> msgs = mMessageInHistoryInteractor.getMessagesInHistoryFromRepo(offset, count);
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 

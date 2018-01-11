@@ -57,10 +57,10 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
     }
 
     @Override
-    public Integer getMessagesCount(Integer pUserId) {
+    public Integer getMessagesCount(Integer pContactUserId) {
 
         String limit = "1";
-        String userId = String.valueOf(pUserId);
+        String userId = String.valueOf(pContactUserId);
 
         VKApiMessagesGetHistoryParams msgsParams =
                 VKApiMessagesGetHistoryParams.getBuilder().setUserId(userId).setCount(limit).build();
@@ -74,7 +74,7 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
         int count = mMessagesHistoryVKApiNetworkingImpl.getTotalCount(msgsUri);
 
         Log.d(TAG, "getMessagesCount: returned [" + count + "] messages " +
-                "in dialog history with user with id [" + pUserId + "]");
+                "in dialog history with user with id [" + pContactUserId + "]");
         return count;
     }
 }

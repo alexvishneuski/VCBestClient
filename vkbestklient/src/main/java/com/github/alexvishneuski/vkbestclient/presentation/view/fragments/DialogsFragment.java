@@ -1,6 +1,7 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorIm
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity;
 
@@ -170,11 +172,23 @@ public class DialogsFragment extends Fragment {
 
     //TODO to remove toasts
     private void setOnClickListenerToAdapter() {
+        Log.d(TAG, "setOnClickListenerToAdapter() called");
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             //TODO replace with transition to messages or to contacts
             public void onItemClick(View itemView, int position, int area) {
+                Log.d(TAG, "onItemClick() called with: itemView = [" + itemView + "], position = [" + position + "], area = [" + area + "]");
                 String toastText;
+
+                //contactUserId posting
+                if (getActivity() != null) {
+                    Intent intent = new Intent();
+                    mParentActivity.setIntent(intent);
+                    final String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+                    final int value = mMessagesUI.get(position).getContactUser().getUserId();
+                    intent.putExtra(key, value);
+                    Log.d(TAG, "onItemClick() sended intent: key = " + key + ", value = " + value);
+                }
 
                 if (area == TouchArea.MESSAGE_AREA) {
                     //TODO remove

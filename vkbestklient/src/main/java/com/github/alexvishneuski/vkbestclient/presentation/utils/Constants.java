@@ -8,4 +8,10 @@ public class Constants {
         String PATTERN_YESTERDAY = "yesterday";
         String PATTERN_dd_MM_yy = "dd:MM:yy";
     }
+
+    public interface IntentConstants {
+
+        //SharedActivity
+        String CONTACT_USER_FOR_DIALOG_HISTORY_ID = "CONTACT_USER_FOR_DIALOG_HISTORY_ID";
+    }
 }
