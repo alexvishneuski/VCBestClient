@@ -19,6 +19,13 @@
     <color name="colorTextBlack">#000</color>
     <color name="colorTextGrey">#727272</color>
 
+    <!-- Messages in history colors -->
+    <color name="colorMessageOutgoingBlue">#FFB1CCEA</color>
+    <color name="colorMessageIncomingLightGray">#fafafa</color>
+    <color name="colorMessageBackgroundLightBlue">#FFD3E7FD</color>
+    <color name="colorMessageSelected">#FF8CBAEA</color>
+    <color name="colorMessageBorderGrey">#9e9e9e</color>
+
     <!-- Divider color -->
     <color name="colorMessageDividerGrey">#9e9e9e</color>
 

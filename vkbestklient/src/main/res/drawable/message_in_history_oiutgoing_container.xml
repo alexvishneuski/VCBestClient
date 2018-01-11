@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/colorMessageOutgoingBlue" />
+            <stroke android:width="@dimen/messages_in_history_border" android:color="@color/colorMessageBorderGrey" />
+            <corners android:radius="@dimen/messages_in_history_background_corner" />
+        </shape>
+
+    </item>
+
+</selector>

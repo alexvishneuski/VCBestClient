@@ -22,12 +22,13 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<MessageI
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface MessageType {
-
+        //TODO Add ddate type
         int OUTGOING_READ_NOATTACHMENT = 0;
         int OUTGOING_UNREAD_NOATTACHMENT = 1;
         int INCOMING_NOATTACHMENT = 2;
 
         //TODO Add new types: with attachments...
+
     }
 
     public final String TAG = this.getClass().getSimpleName();
