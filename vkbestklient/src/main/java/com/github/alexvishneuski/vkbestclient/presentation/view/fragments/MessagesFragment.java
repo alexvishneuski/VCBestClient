@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.alexvishneuski.vkbestclient.R;
-import com.github.alexvishneuski.vkbestclient.interactor.IDialogInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.IMessageInHistoryInteractor;
-import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.MessageInHistoryInteractorImpl;
+import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.DialogsHistoryRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,8 @@ import java.util.List;
 public class MessagesFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
+
+    public final int LOAD_MESSAGES_COUNT = 20;
 
     private View mView;
 
@@ -35,6 +37,12 @@ public class MessagesFragment extends Fragment {
     private DialogsHistoryRecyclerAdapter mAdapter;
 
     private int mMessagesInHistoryTotalCount;
+    private LoadMessagesAT mLoadTask;
+
+    int mVisibleItemCount;
+    int mTotalItemCount;
+    int mFirstVisibleItemPosition;
+    private boolean mIsLoading = true;
 
     private IMessageInHistoryInteractor mMessageInHistoryInteractor = new MessageInHistoryInteractorImpl();
 
@@ -59,7 +67,9 @@ public class MessagesFragment extends Fragment {
 
         loadMessagesFirstTime();
 
-        addOnScrollListener();
+        //TODO ADD listeners
+        //addOnScrollListener();
+        //setOnScrollListener();
 
         return mView;
     }
@@ -106,6 +116,12 @@ public class MessagesFragment extends Fragment {
         mMessagesInHistoryTotalCount = pCount;
     }
 
+    private void loadMessagesFirstTime() {
+        Log.d(TAG, "loadMessagesFirstTime called");
+        mLoadTask = new LoadMessagesAT();
+        mLoadTask.execute(LOAD_MESSAGES_COUNT, 0);
+    }
+
     public class LoadMessagesInHistoryCountAT extends AsyncTask<Void, Void, Integer> {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsCountAT";
@@ -123,6 +139,50 @@ public class MessagesFragment extends Fragment {
         protected void onPostExecute(Integer pCount) {
             super.onPostExecute(pCount);
             onCountLoaded(pCount);
+        }
+    }
+
+    public void onLoaded(List<MessageInDialogs> pMessages) {
+        //record this value before making any changes to the existing list
+        int itemCount = mAdapter.getItemCount();
+        //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
+        mMessagesUI.addAll(Converter.convertMessagesFromDomainToUIModel(pMessages));
+        //notify adapter
+        mAdapter.notifyItemRangeInserted(itemCount, pMessages.size());
+        //mAdapter.notifyDataSetChanged();
+        mIsLoading = false;
+    }
+
+    public class LoadMessagesAT extends AsyncTask<Integer, Void, List<MessageInDialogs>> {
+
+        private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
+
+        /**
+         * @param pArgs [0] - count, [1] - offset
+         */
+        @Override
+        protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
+            Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
+
+            int count = pArgs[0];
+            int offset = pArgs[1];
+
+            List<MessageInDialogs> msgs = mMessageInHistoryInteractor.getMessagesInHistoryFromRepo(count, offset);
+
+            Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
+
+            for (MessageInDialogs mes : msgs
+                    ) {
+                System.out.println("!!!===============!!! " + mes.getContactUser());
+
+            }
+            return msgs;
+        }
+
+        @Override
+        protected void onPostExecute(List<MessageInDialogs> pMessages) {
+            super.onPostExecute(pMessages);
+            onLoaded(pMessages);
         }
     }
 }
