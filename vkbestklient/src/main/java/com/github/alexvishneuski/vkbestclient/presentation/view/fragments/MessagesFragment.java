@@ -28,7 +28,7 @@ public class MessagesFragment extends Fragment {
     private LinearLayoutManager mLayoutManager;
 
     private List<MessageInDialogListViewModel> mMessagesUI;
-    private MessageInDialogListRecyclerAdapter mAdapter;
+    private DialogsHistoryRecyclerAdapter mAdapter;
 
     @Nullable
     @Override
