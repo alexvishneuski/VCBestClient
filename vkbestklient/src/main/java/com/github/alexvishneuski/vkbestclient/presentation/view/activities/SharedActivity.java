@@ -176,6 +176,9 @@ public class SharedActivity extends AppCompatActivity {
                 if (!mCurrentTopBarFragment.getClass().equals(TopBarNotificationsFragment.class)) {
                     mPairs = getPairsForNotificationInitialisation();
                     replaceAllFragments(mPairs);
+
+                    //mToDialogsImageButton.setEnabled(true);
+                    //mToDialogsImageButton.setSelected(true);
                 }
             }
         });

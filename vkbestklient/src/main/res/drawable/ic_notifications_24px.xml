@@ -2,7 +2,7 @@
     android:width="24dp"
     android:height="24dp"
     android:tintMode="multiply"
-    android:tint="@color/navigate_btn_tint"
+    android:tint="@color/selector_navigation_btn_tint"
     android:viewportHeight="24.0"
     android:viewportWidth="24.0">
     <path
