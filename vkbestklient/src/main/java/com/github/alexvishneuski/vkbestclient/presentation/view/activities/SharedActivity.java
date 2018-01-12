@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -24,13 +25,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* TODO:
-* 1. make ListView layout_height: mach_parent () by hide topbar panel
-* 2. make TextView message_body layout_width : mach_parent by default of own image
-* 3. extract asynctasc, +adapter in separate classes
+* 3. extract asynctasc in separate classes
 * 4. arrive round avatars
 */
 
 public class SharedActivity extends AppCompatActivity {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -55,21 +58,16 @@ public class SharedActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        /*creating messages view*/
-        //setContentView(R.layout.activity_shared);
         setContentView(R.layout.activity_shared);
 
         initFragments();
 
         initNavigationBarButtons();
-
     }
 
-
-    /*find top bar container end show there top bar fragment*/
     private void initFragments() {
         Log.d(TAG, "initFragments");
-/*from*/
+
         mTopBarFrameContainer = R.id.top_bar_frame_container;
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
 
