@@ -51,15 +51,17 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
 
         messagesHistory.addAll(mMessagesHistoryVKApiNetworkingImpl.get(msgsUri));
 
-        Log.d(TAG, "get returns messages in history");
+        Log.d(TAG, "get returns ["+messagesHistory.size()+"] messages in dialogs history");
 
         return messagesHistory;
     }
 
     @Override
     public Integer getMessagesCount(Integer pContactUserId) {
+        Log.d(TAG, "getMessagesCount() called with: pContactUserId = [" + pContactUserId + "]");
 
-        String limit = "1";
+        String limitAsString = "1";
+        String limit = String.valueOf(limitAsString);
         String userId = String.valueOf(pContactUserId);
 
         VKApiMessagesGetHistoryParams msgsParams =

@@ -8,6 +8,6 @@ public interface IMessageInHistoryInteractor {
 
     int getMessagesInHistoryTotalCount(int pContactUserId);
 
-    List<MessageInDialogs> getMessagesInHistoryFromRepo(int pCount, int pOffset);
+    List<MessageInDialogs> getMessagesInHistoryFromRepo(int pOffset, int pLimit, int pContactUserId);
 
 }

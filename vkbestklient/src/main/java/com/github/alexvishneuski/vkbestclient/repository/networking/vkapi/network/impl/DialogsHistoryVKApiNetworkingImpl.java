@@ -42,8 +42,8 @@ public class DialogsHistoryVKApiNetworkingImpl implements IDialogsHistoryVKApiNe
         List<VKApiMessage> msgs = new ArrayList<>();
         msgs.addAll(result.getResponse().getMessages());
 
-        int dialogCount = result.getResponse().getMessagesCount();
-        Log.d(TAG, "getDialogs returned " + dialogCount + " messages");
+        int msgCount = result.getResponse().getMessagesCount();
+        Log.d(TAG, "getDialogs returned " + msgCount + " messages");
 
         return msgs;
     }

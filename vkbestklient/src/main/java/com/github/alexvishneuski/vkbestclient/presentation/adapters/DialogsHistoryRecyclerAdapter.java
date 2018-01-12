@@ -93,13 +93,13 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<DialogsH
 
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
         //TODO make date convertion corresponding date format in fragment
-        pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
+      //  pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mMessages.size();
     }
 
     @Override
@@ -119,7 +119,7 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<DialogsH
      * @return MessageType depends direction, read status, attachments etc.
      */
     private int getMessageType(@NonNull MessageInDialogListViewModel pMessage) {
-        //TODO add another types(date, first)
+        //TODO add another types(date, first) with correcsp logic
         if (pMessage.getMessageDirection() == (MessageDirectionViewModel.OUTGOING) && pMessage.getMessageRead()) {
 
             return MessageType.OUTGOING_NOATTACHMENT_READ;

@@ -40,6 +40,9 @@ public class MessagesFragment extends Fragment {
     private DialogsHistoryRecyclerAdapter mAdapter;
 
     private int mMessagesInHistoryTotalCount;
+
+    private int mContactUserId;
+
     private LoadMessagesAT mLoadTask;
 
     int mVisibleItemCount;
@@ -68,6 +71,8 @@ public class MessagesFragment extends Fragment {
 
         setAdapterToView();
 
+        getContactUserId();
+
         loadMessagesInHistoryTotalCount();
 
         loadMessagesFirstTime();
@@ -77,6 +82,15 @@ public class MessagesFragment extends Fragment {
         //setOnScrollListener();
 
         return mView;
+    }
+
+    private void getContactUserId() {
+
+        String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+        Intent intent = mParentActivity.getIntent();
+        int contactUserId = intent.getExtras().getInt(key);
+
+        mContactUserId = contactUserId;
     }
 
     private void getLinkToParentActivity() {
@@ -120,7 +134,7 @@ public class MessagesFragment extends Fragment {
 
     private void loadMessagesInHistoryTotalCount() {
         LoadMessagesCountAT loadCountTask = new LoadMessagesCountAT();
-        loadCountTask.execute();
+        loadCountTask.execute(mContactUserId);
     }
 
     private void onCountLoaded(Integer pCount) {
@@ -130,22 +144,21 @@ public class MessagesFragment extends Fragment {
     private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
         mLoadTask = new LoadMessagesAT();
-        mLoadTask.execute(0, LOAD_MESSAGES_COUNT);
+        mLoadTask.execute(0, LOAD_MESSAGES_COUNT, mContactUserId);
     }
 
-    public class LoadMessagesCountAT extends AsyncTask<Void, Void, Integer> {
+    public class LoadMessagesCountAT extends AsyncTask<Integer, Void, Integer> {
 
         private static final String ASYNC_TASK_TAG = "LoadMessagesCountAT";
 
-        String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
-        Intent intent = mParentActivity.getIntent();
-        int contactUserId = intent.getExtras().getInt(key);
-
         @Override
-        protected Integer doInBackground(Void... pVoids) {
+        protected Integer doInBackground(Integer... pArgs) {
+
+            int userId = pArgs[0];
+
             Log.d(ASYNC_TASK_TAG, "doInBackground: called");
-            Log.d(TAG, "doInBackground: invoked getMessagesInHistoryTotalCount() for contactUser with id = " + contactUserId);
-            int messagesCount = mMessageInHistoryInteractor.getMessagesInHistoryTotalCount(contactUserId);
+            Log.d(TAG, "doInBackground: invoked getMessagesInHistoryTotalCount() for contactUser with id = " + userId);
+            int messagesCount = mMessageInHistoryInteractor.getMessagesInHistoryTotalCount(userId);
             Log.d(ASYNC_TASK_TAG, "doInBackground returned " + messagesCount + " dialogs");
 
             return messagesCount;
@@ -159,6 +172,7 @@ public class MessagesFragment extends Fragment {
     }
 
     public void onLoaded(List<MessageInDialogs> pMessages) {
+        Log.d(TAG, "onLoaded() called with: pMessages = [" + pMessages + "]");
         //record this value before making any changes to the existing list
         int itemCount = mAdapter.getItemCount();
         //do not reinitialize an existing reference, instead  need to  act directly on the existing reference
@@ -181,15 +195,16 @@ public class MessagesFragment extends Fragment {
             Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
 
             int offset = pArgs[0];
-            int count = pArgs[1];
+            int limit = pArgs[1];
+            int userId = pArgs[2];
 
-            List<MessageInDialogs> msgs = mMessageInHistoryInteractor.getMessagesInHistoryFromRepo(offset, count);
+            List<MessageInDialogs> msgs = mMessageInHistoryInteractor.getMessagesInHistoryFromRepo(offset, limit, userId);
 
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
             for (MessageInDialogs mes : msgs
                     ) {
-                System.out.println("!!!===============!!! " + mes.getContactUser());
+                System.out.println("!!!===============!!! " + mes);
 
             }
             return msgs;
