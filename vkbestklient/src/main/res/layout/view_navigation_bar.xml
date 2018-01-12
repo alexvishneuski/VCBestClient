@@ -8,7 +8,7 @@
     <ImageButton
         android:id="@+id/news_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_news_grey_24dp"
+        android:src="@drawable/ic_news_24px"
         tools:ignore="ContentDescription" />
 
 
