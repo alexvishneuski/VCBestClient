@@ -27,6 +27,7 @@ public class UserInteractorImpl implements IUserInteractor {
     @Override
     public List<UserInDialogs> getDomainUsersBasicInfo(List<Integer> pInt) {
 
+        //adding  parameters to request: fields. can be expanded with adding another fields
         List<String> fields = new ArrayList<>();
         fields.add(RepositoryConstants.VkMethodUsersGet
                 .FIELD_PHOTO_50);
@@ -38,7 +39,7 @@ public class UserInteractorImpl implements IUserInteractor {
 
 
     @Override
-    public List<UserInDialogs> getDomainUsersFullInfo(List<Integer> pInt) {
+    public List<UserInDialogs> getUsersFullInfo(List<Integer> pInt) {
 
         List<String> fields = new ArrayList<>();
         prepareFieldsForRequest(fields);
@@ -64,9 +65,16 @@ public class UserInteractorImpl implements IUserInteractor {
 
 
     @Override
-    public UserInDialogs getCurrentUserDomain() {
+    public UserInDialogs getCurrentUser() {
 
-        return convertFromRepoToInteractor(this.getCurrentUser());
+        VKApiUser userVkApi = this.getCurrentUserFromVkApi();
+        Integer id = userVkApi.getId();
+        List<Integer> ids = new ArrayList<>();
+        ids.add(id);
+
+        UserInDialogs user = getDomainUsersBasicInfo(ids).get(0);
+
+        return user;
     }
 
 
@@ -162,7 +170,7 @@ public class UserInteractorImpl implements IUserInteractor {
         return users;
     }
 
-    private VKApiUser getCurrentUser() {
+    private VKApiUser getCurrentUserFromVkApi() {
         Log.d(TAG, "getCurrentUser: called");
 
         VKApiUser currentUser = this.getUsers().get(0);

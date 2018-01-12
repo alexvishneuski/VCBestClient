@@ -30,7 +30,7 @@ public class MessageConverter {
         return dbMsg;
     }
 
-    //COWORKING VKAPI AREAAREA
+    //COWORKING VKAPI AREA
 
     public static MessageInDialogs convertMsgFromVKApiToDomain(VKApiMessage pMsg, UserInDialogs pCurrentUser) {
         Log.d(TAG, "convertMsgFromVKApiToDomain() called with: pMsg = [" + pMsg + "], pCurrentUser = [" + pCurrentUser + "]");
