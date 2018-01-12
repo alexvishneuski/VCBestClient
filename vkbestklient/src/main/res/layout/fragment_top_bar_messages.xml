@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="@string/messagess_top_bar_title"
+        android:text="@string/messages_top_bar_title"
         android:textColor="@color/colorTopBarWhite"
         android:textScaleX="1"
         android:textSize="20sp"
