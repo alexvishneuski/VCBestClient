@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_panel_height"
@@ -33,7 +34,7 @@
         android:layout_toStartOf="@+id/search_image_button"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_add_white_24px"
+        app:srcCompat="@drawable/ic_add_white_24px"
         tools:ignore="ContentDescription" />
 
     <ImageButton
@@ -45,6 +46,6 @@
         android:layout_alignParentTop="true"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_search_white_24px"
+        app:srcCompat="@drawable/ic_search_white_24px"
         tools:ignore="ContentDescription" />
 </RelativeLayout>

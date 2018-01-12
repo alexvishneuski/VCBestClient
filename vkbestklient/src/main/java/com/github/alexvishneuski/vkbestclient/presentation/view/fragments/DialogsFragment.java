@@ -71,7 +71,7 @@ public class DialogsFragment extends Fragment {
         getLinkToParentActivity();
 
         createRecyclerView(mView);
-        addDevider();
+     //   addDevider();
         setLayoutManagerToRecyclerView();
         createAdapter();
         setAdapterToView();
