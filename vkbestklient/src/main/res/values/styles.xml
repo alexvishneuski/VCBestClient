@@ -25,4 +25,22 @@
         <item name="android:scaleType">center</item>
 
     </style>
+
+    <style name="style_message_in_history_background">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:baselineAligned">false</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/messages_in_history_item_right_left_padding</item>
+        <item name="android:paddingStart">@dimen/messages_in_history_item_right_left_padding</item>
+        <item name="android:paddingRight">@dimen/messages_in_history_item_right_left_padding</item>
+        <item name="android:paddingEnd">@dimen/messages_in_history_item_right_left_padding</item>
+        <item name="android:paddingTop">@dimen/messages_in_history_item_top_bottom_padding</item>
+        <item name="android:paddingBottom">@dimen/messages_in_history_item_top_bottom_padding</item>
+        <item name="android:background">@color/colorMessageBackgroundLightBlue</item>
+    </style>
+
+
+
+
 </resources>
