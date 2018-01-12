@@ -116,6 +116,12 @@ public class MessagesFragment extends Fragment {
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+        //make reverse of messages order
+        mLayoutManager.setReverseLayout(true);
+        //move head at the end of array
+        mLayoutManager.setStackFromEnd(false);
+
         mRecyclerView.setLayoutManager(mLayoutManager);
     }
 

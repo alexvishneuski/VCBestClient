@@ -41,7 +41,7 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
         String userId = String.valueOf(pUserId);
 
         VKApiMessagesGetHistoryParams msgsParams =
-                VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).setUserId(userId).build();
+                VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).setUserId(userId).setInChronologicalOrder(RepositoryConstants.VkMethodMessagesGetHistory.IN_CHRONOLOGICAL_ORDER_VALUE_REVERSE).build();
         VKApiUri msgsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
