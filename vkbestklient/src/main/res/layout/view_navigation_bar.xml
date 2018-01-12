@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_bar_panel_height"
     android:background="@color/colorNavigationBarBackgroundLightGrey">
@@ -7,30 +8,33 @@
     <ImageButton
         android:id="@+id/news_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_news_grey_24dp" />
+        android:src="@drawable/ic_news_grey_24dp"
+        tools:ignore="ContentDescription" />
 
 
     <ImageButton
         android:id="@+id/search_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_search_grey_24dp" />
+        android:src="@drawable/ic_search_24px"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/messages_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_messages_24px" />
+        android:src="@drawable/ic_messages_24px"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/notifications_image_button"
         style="@style/NivagationBarButton"
         android:src="@drawable/ic_notifications_24px"
-
-        />
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/profile_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_menu_grey_24dp" />
+        android:src="@drawable/ic_menu_grey_24dp"
+        tools:ignore="ContentDescription" />
 
     <!--news, search+, messages+, notifications, profile-menu-->
 
