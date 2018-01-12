@@ -3,7 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">#fff</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlue">#5181b8</color>
+    <color name="colorGrey">#bdbdbd</color>
 
     <!-- TopBar panel colors -->
     <color name="colorTopBarBackgroundBlue">#5181b8</color>

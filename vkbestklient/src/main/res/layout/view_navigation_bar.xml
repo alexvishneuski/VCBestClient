@@ -8,7 +8,7 @@
     <ImageButton
         android:id="@+id/news_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_news_24px"
+        android:src="@drawable/ic_navigation_news_24px"
         tools:ignore="ContentDescription" />
 
     <ImageButton
@@ -20,19 +20,19 @@
     <ImageButton
         android:id="@+id/messages_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_messages_24px"
+        android:src="@drawable/ic_navigation_messages_24px"
         tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/notifications_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_notifications_24px"
+        android:src="@drawable/ic_navigation_notifications_24px"
         tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/profile_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_menu_24px"
+        android:src="@drawable/ic_navigation_profile_24px"
         tools:ignore="ContentDescription" />
 
 </LinearLayout>

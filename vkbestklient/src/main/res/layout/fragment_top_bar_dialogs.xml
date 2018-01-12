@@ -22,10 +22,7 @@
         android:typeface="normal"
         tools:ignore="RelativeOverlap" />
 
-
-    <!--TODO what is the best: image button or imageview?-->
-
-    <ImageView
+    <ImageButton
         android:id="@+id/add_image_view"
         android:layout_width="@dimen/top_bar_panel_height"
         android:layout_height="match_parent"
@@ -33,7 +30,7 @@
         android:layout_toStartOf="@+id/search_image_button"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_add_white_24dp"
+        android:src="@drawable/ic_add_white_24px"
         tools:ignore="ContentDescription" />
 
     <ImageButton
@@ -45,6 +42,6 @@
         android:layout_alignParentTop="true"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_search_24px"
+        android:src="@drawable/ic_search_white_24px"
         tools:ignore="ContentDescription" />
 </RelativeLayout>
