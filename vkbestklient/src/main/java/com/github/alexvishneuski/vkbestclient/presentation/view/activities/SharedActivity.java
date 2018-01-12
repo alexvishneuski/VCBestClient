@@ -44,6 +44,8 @@ public class SharedActivity extends AppCompatActivity {
     private View mToNewsImageButton;
     private View mToSearchImageButton;
 
+    private Fragment mCurrentTopBarFragment;
+    private Fragment mCurrentRecyclerFragment;
 
     private List<Pair<Integer, ? extends Fragment>> mPairs;
 
@@ -84,7 +86,7 @@ public class SharedActivity extends AppCompatActivity {
 
     /*show all necessary fragments on this activity*/
     public void replaceAllFragments(List<Pair<Integer, ? extends Fragment>> pPairList) {
-        Log.d(TAG, "replaceAllFragments");
+        Log.d(TAG, "replaceAllFragments() called with: pPairList = [" + pPairList + "]");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         for (Pair<Integer, ? extends Fragment> pair : pPairList
@@ -96,11 +98,14 @@ public class SharedActivity extends AppCompatActivity {
 
         transaction.addToBackStack(null);
         transaction.commit();
+
+        //setting link to current fragments
+        setLinksToCurrentFragments();
     }
 
     /*show any fragment on this activity*/
     public void replaceFragment(int frameContainer, Fragment fragment) {
-        Log.d(TAG, "replaceFragment");
+        Log.d(TAG, "replaceFragment() called with: frameContainer = [" + frameContainer + "], fragment = [" + fragment + "]");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(frameContainer, fragment);
         transaction.addToBackStack(null);
@@ -152,21 +157,26 @@ public class SharedActivity extends AppCompatActivity {
         mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO if now I'm on this fragment, must nothing to do
-                mPairs = getPairsForDialogsInitialisation();
-                replaceAllFragments(mPairs);
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarDialogsFragment.class)) {
+                    //TODO if now I'm on this fragment, must nothing to do
+                    mPairs = getPairsForDialogsInitialisation();
+                    replaceAllFragments(mPairs);
+
+                }
             }
         });
     }
 
-    //todo change 2. par to notificationFragment
+    //todo change 2. part to notificationFragment
     private void setToNotificationsListener() {
         Log.d(TAG, "setToNotificationsListener called");
         mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(mTopBarFrameContainer, new TopBarNotificationsFragment());
-                replaceFragment(mRecyclerViewFrameContainer, new DialogsFragment());
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarNotificationsFragment.class)) {
+                    mPairs = getPairsForNotificationInitialisation();
+                    replaceAllFragments(mPairs);
+                }
             }
         });
     }
@@ -176,8 +186,10 @@ public class SharedActivity extends AppCompatActivity {
         mToNewsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPairs = getPairsForNewsInitialisation();
-                replaceAllFragments(mPairs);
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarNewsFragment.class)) {
+                    mPairs = getPairsForNewsInitialisation();
+                    replaceAllFragments(mPairs);
+                }
             }
         });
     }
@@ -187,8 +199,10 @@ public class SharedActivity extends AppCompatActivity {
         mToSearchImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPairs = getPairsForSearchInitialisation();
-                replaceAllFragments(mPairs);
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarSearchFragment.class)) {
+                    mPairs = getPairsForSearchInitialisation();
+                    replaceAllFragments(mPairs);
+                }
             }
         });
     }
@@ -198,7 +212,10 @@ public class SharedActivity extends AppCompatActivity {
         mToProfileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToProfileFragment();
+                //if is called from this activity - skipped
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarProfileFragment.class)) {
+                    goToProfileFragment();
+                }
             }
         });
     }
@@ -209,6 +226,7 @@ public class SharedActivity extends AppCompatActivity {
         mPairs = getPairsForDialogsInitialisation();
         replaceAllFragments(mPairs);
     }
+
 
     @NonNull
     private List<Pair<Integer, ? extends Fragment>> getPairsForDialogsInitialisation() {
@@ -268,9 +286,15 @@ public class SharedActivity extends AppCompatActivity {
         return pairs;
     }
 
-
-
-
+    private void setLinksToCurrentFragments() {
+        Log.d(TAG, "setLinksToCurrentFragments() called ");
+        mCurrentTopBarFragment = mPairs.get(0).second;
+        mCurrentRecyclerFragment = mPairs.get(1).second;
+        Log.d(TAG, "setLinksToCurrentFragments(): mCurrentTopBarFragment: "
+                + mCurrentTopBarFragment.getClass().getSimpleName()
+                + " mCurrentRecyclerFragment "
+                + mCurrentRecyclerFragment.getClass().getSimpleName());
+    }
     /*are invoked from out fragments*/
 
 
@@ -292,6 +316,7 @@ public class SharedActivity extends AppCompatActivity {
         return pairs;
     }
 
+    //can be called from another activity/fragment -> than is invoked
     //TODO to make the same for  to profile transition
     public void goToProfileFragment() {
         Log.d(TAG, "goToProfileFragment: ");
@@ -299,4 +324,6 @@ public class SharedActivity extends AppCompatActivity {
         replaceAllFragments(mPairs);
         Toast.makeText(this, " Gone to ToProfileFragment", Toast.LENGTH_SHORT).show();
     }
+
+
 }
