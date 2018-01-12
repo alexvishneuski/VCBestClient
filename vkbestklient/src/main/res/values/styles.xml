@@ -26,7 +26,7 @@
 
     </style>
 
-    <style name="style_message_in_history_background">
+    <style name="MessageInHistoryBackgroundLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:baselineAligned">false</item>
@@ -40,7 +40,35 @@
         <item name="android:background">@color/colorMessageBackgroundLightBlue</item>
     </style>
 
+    <style name="MessageInHistoryTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:padding">@dimen/messages_in_history_text_padding</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+        <item name="android:textSize">@dimen/messages_in_history_text_size</item>
+    </style>
 
+    <style name="MessageInHistorySideContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">@dimen/messages_in_history_layout_more_weight</item>
+    </style>
+
+    <style name="MessageInHistorySideContainer.WithUnreadSign">
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="MessageInHistoryMsgsBodyContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">@dimen/messages_in_history_layout_less_weight</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MessageInHistoryMsgsBodyContainer.Outgoing">
+        <item name="android:gravity">end</item>
+    </style>
 
 
 </resources>
