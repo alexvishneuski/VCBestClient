@@ -18,7 +18,7 @@
     <ImageButton
         android:id="@+id/messages_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_msg_blue_24dp" />
+        android:src="@drawable/ic_messages_24px" />
 
     <ImageButton
         android:id="@+id/notifications_image_button"
