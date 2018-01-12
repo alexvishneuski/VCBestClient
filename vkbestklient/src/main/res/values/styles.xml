@@ -17,13 +17,13 @@
 
     </style>
 
+    <!-- Message In History -->
     <style name="MessageInHistoryBackground">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:scaleType">center</item>
-
     </style>
 
     <style name="MessageInHistoryBackgroundLayout">
@@ -69,6 +69,5 @@
     <style name="MessageInHistoryMsgsBodyContainer.Outgoing">
         <item name="android:gravity">end</item>
     </style>
-
 
 </resources>

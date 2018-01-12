@@ -4,7 +4,6 @@
     style="@style/MessageInHistoryBackgroundLayout"
     tools:ignore="RtlSymmetry">
 
-
     <TextView
         android:id="@+id/message_in_history_date_text_view"
         android:layout_width="match_parent"
@@ -14,6 +13,5 @@
         android:textSize="@dimen/messages_in_history_text_size"
         tools:singleLine="false"
         tools:text="Lorem Ipsum date" />
-
 
 </LinearLayout>

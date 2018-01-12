@@ -23,7 +23,9 @@
     <ImageButton
         android:id="@+id/notifications_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_notifications_grey_24px" />
+        android:src="@drawable/ic_notifications_24px"
+
+        />
 
     <ImageButton
         android:id="@+id/profile_image_button"
