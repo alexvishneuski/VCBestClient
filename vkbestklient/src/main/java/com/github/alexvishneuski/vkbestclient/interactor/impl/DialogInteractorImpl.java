@@ -41,7 +41,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
 
     private IDialogVKApiNetworking mDialogVKApiNetworkingImpl = new DialogVKApiNetworkingImpl();
 
-    private IMessageRepoDb mIMessageRepoDb = new MessageRepoDbImpl();
+    private IMessageRepoDb mMessageRepoDb = new MessageRepoDbImpl();
 
        /*Result as own Interactor API*/
     /*==========================================================================================*/
@@ -89,12 +89,12 @@ public class DialogInteractorImpl implements IDialogInteractor {
         for (MessageDbModel msgItem : messagesDb
                 ) {
             int id = msgItem.getId();
-            if (mIMessageRepoDb.ifInDbExist(id)) {
+            if (mMessageRepoDb.ifInDbExist(id)) {
                 Log.d(TAG, "getMessagesInDialogListFromRepo(): msg exists already -> updating into DB with id [" + id + "]");
-                mIMessageRepoDb.update(msgItem);
+                mMessageRepoDb.update(msgItem);
             } else {
                 Log.d(TAG, "getMessagesInDialogListFromRepo(): msg doesn't exist -> inserting into DB with id [" + id + "]");
-                mIMessageRepoDb.insert(msgItem);
+                mMessageRepoDb.insert(msgItem);
             }
         }
 
@@ -113,7 +113,7 @@ public class DialogInteractorImpl implements IDialogInteractor {
         List<MessageInDialogs> domainMessages = new ArrayList<>();
 
         //TODO make sort of currrentUserHolder
-        UserInDialogs currentUser = mUserInteractor.getCurrentUserDomain();
+        UserInDialogs currentUser = mUserInteractor.getCurrentUser();
         UserInDialogs contactUser;
 
         List<Integer> contactUserIds = new ArrayList<>();
