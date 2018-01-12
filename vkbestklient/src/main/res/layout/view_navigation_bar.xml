@@ -33,7 +33,7 @@
     <ImageButton
         android:id="@+id/profile_image_button"
         style="@style/NivagationBarButton"
-        android:src="@drawable/ic_menu_grey_24dp"
+        android:src="@drawable/ic_menu_24px"
         tools:ignore="ContentDescription" />
 
     <!--news, search+, messages+, notifications, profile-menu-->
