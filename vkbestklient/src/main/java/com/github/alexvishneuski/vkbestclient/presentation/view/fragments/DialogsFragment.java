@@ -3,6 +3,7 @@ package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -71,7 +72,9 @@ public class DialogsFragment extends Fragment {
         getLinkToParentActivity();
 
         createRecyclerView(mView);
+
         addDevider();
+
         setLayoutManagerToRecyclerView();
         createAdapter();
         setAdapterToView();
@@ -132,9 +135,12 @@ public class DialogsFragment extends Fragment {
     }
 
     private void addDevider() {
-        RecyclerView.ItemDecoration itemDecoration = new
-                DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(itemDecoration);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            RecyclerView.ItemDecoration itemDecoration = new
+                    DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
+            mRecyclerView.addItemDecoration(itemDecoration);
+        }
     }
 
     private void initView(LayoutInflater inflater) {
