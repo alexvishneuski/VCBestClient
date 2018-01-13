@@ -1,6 +1,5 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.network.impl;
 
-import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
@@ -36,8 +35,7 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
 
         if (result.getError() != null) {
 
-            final String errorMessage = TAG + result.getError();
-            System.out.println("!!!!!!!!!!!===========errorMessage");
+            final String errorMessage = TAG + " VKApi Error: code [" + result.getError().getErrorCode() + "], message [" + result.getError().getErrorMessage() + "]";
             //TODO add return toast on UI
             throw new VKApiException(errorMessage);
         }
