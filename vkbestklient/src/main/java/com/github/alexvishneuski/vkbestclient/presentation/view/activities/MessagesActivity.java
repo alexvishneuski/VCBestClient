@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.interactor.IMessageInHistoryInteractor;
@@ -20,7 +18,6 @@ import com.github.alexvishneuski.vkbestclient.presentation.adapters.DialogsHisto
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +32,8 @@ public class MessagesActivity extends AppCompatActivity {
 
     public final int LOAD_MESSAGES_COUNT = 20;
 
-    private View mView;
+    private int mRecyclerViewContainer;
+    //  private View mView;
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -46,8 +44,6 @@ public class MessagesActivity extends AppCompatActivity {
     private int mMessagesInHistoryTotalCount;
 
     private int mContactUserId;
-
-    private MessagesFragment.LoadMessagesAT mLoadTask;
 
     int mVisibleItemCount;
     int mTotalItemCount;
@@ -64,25 +60,16 @@ public class MessagesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_messages);
 
-        //initFragments();
+        //initViews();
 
-        //initNavigationBarButtons();
-
-       // getLinkToParentActivity();
-
-        createRecyclerView(mView);
-
+        createRecyclerView();
         setLayoutManagerToRecyclerView();
-
         createAdapter();
-
         setAdapterToView();
 
         getContactUserId();
-
-        //loadMessagesInHistoryTotalCount();
-
-        //loadMessagesFirstTime();
+        loadMessagesInHistoryTotalCount();
+        loadMessagesFirstTime();
 
         //TODO ADD listeners
         //addOnScrollListener();
@@ -90,44 +77,26 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+
     private void getContactUserId() {
-
         String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
-        Intent intent = mParentActivity.getIntent();
-        int contactUserId = intent.getExtras().getInt(key);
-
-        mContactUserId = contactUserId;
+        Intent intent = getIntent();
+        mContactUserId = intent.getExtras().getInt(key);
     }
 
-   /* private void getLinkToParentActivity() {
-        if (getActivity() != null) {
-            mParentActivity = (SharedActivity) getActivity();
-
-        }
-    }*/
-
-    private void initView(LayoutInflater inflater) {
-
-        int messagesLayoutId = R.layout.fragment_recycler_view;
-
-        mView = inflater.inflate(messagesLayoutId, null);
-    }
-
-    private void createRecyclerView(View pView) {
+    private void createRecyclerView() {
         Log.d(TAG, "createRecyclerView");
-        mRecyclerView = pView.findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.dialogs_history_recycler_view);
         mRecyclerView.setHasFixedSize(false);
     }
 
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
         //make reverse of messages order
         mLayoutManager.setReverseLayout(true);
         //move head at the end of array
         mLayoutManager.setStackFromEnd(false);
-
         mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
@@ -144,20 +113,20 @@ public class MessagesActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-   /* private void loadMessagesInHistoryTotalCount() {
-        MessagesFragment.LoadMessagesCountAT loadCountTask = new MessagesFragment.LoadMessagesCountAT();
+    private void loadMessagesInHistoryTotalCount() {
+        LoadMessagesCountAT loadCountTask = new LoadMessagesCountAT();
         loadCountTask.execute(mContactUserId);
-    }*/
+    }
 
     private void onCountLoaded(Integer pCount) {
         mMessagesInHistoryTotalCount = pCount;
     }
 
-   /* private void loadMessagesFirstTime() {
+    private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
-        mLoadTask = new MessagesFragment.LoadMessagesAT();
-        mLoadTask.execute(0, LOAD_MESSAGES_COUNT, mContactUserId);
-    }*/
+        LoadMessagesAT loadTask = new LoadMessagesAT();
+        loadTask.execute(0, LOAD_MESSAGES_COUNT, mContactUserId);
+    }
 
     public class LoadMessagesCountAT extends AsyncTask<Integer, Void, Integer> {
 
@@ -211,14 +180,8 @@ public class MessagesActivity extends AppCompatActivity {
             int userId = pArgs[2];
 
             List<MessageInDialogs> msgs = mMessageInHistoryInteractor.getMessagesInHistoryFromRepo(offset, limit, userId);
-
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
-            for (MessageInDialogs mes : msgs
-                    ) {
-                System.out.println("!!!===============!!! " + mes);
-
-            }
             return msgs;
         }
 
@@ -228,5 +191,4 @@ public class MessagesActivity extends AppCompatActivity {
             onLoaded(pMessages);
         }
     }
-
 }

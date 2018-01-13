@@ -23,6 +23,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDia
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.MessagesActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity;
 
 import java.util.ArrayList;
@@ -68,19 +69,15 @@ public class DialogsFragment extends Fragment {
         Log.d(TAG, "onCreateView called");
 
         initView(inflater);
-
         getLinkToParentActivity();
 
         createRecyclerView(mView);
-
         addDevider();
-
         setLayoutManagerToRecyclerView();
         createAdapter();
         setAdapterToView();
 
         loadDialogsTotalCount();
-
         loadMessagesFirstTime();
 
         addOnScrollListener();
@@ -186,10 +183,10 @@ public class DialogsFragment extends Fragment {
                 Log.d(TAG, "onItemClick() called with: itemView = [" + itemView + "], position = [" + position + "], area = [" + area + "]");
                 String toastText;
 
+                Intent intent = new Intent(mParentActivity, MessagesActivity.class);
+
                 //contactUserId posting
                 if (getActivity() != null) {
-                    Intent intent = new Intent();
-                    mParentActivity.setIntent(intent);
                     final String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
                     final int value = mMessagesUI.get(position).getContactUser().getUserId();
                     intent.putExtra(key, value);
@@ -201,7 +198,7 @@ public class DialogsFragment extends Fragment {
                     toastText = mMessagesUI.get(position).getMessageBody();
 
                     if (getActivity() != null) {
-                        mParentActivity.goToMessagesFragment();
+                        startActivity(intent);
                     }
                 } else {
                     //TODO remove
@@ -259,14 +256,8 @@ public class DialogsFragment extends Fragment {
             int offset = pArgs[1];
 
             List<MessageInDialogs> msgs = mDialogInteractor.getMessagesInDialogListFromRepo(count, offset);
-
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
-            for (MessageInDialogs mes : msgs
-                    ) {
-                System.out.println("!!!===============!!! " + mes.getContactUser());
-
-            }
             return msgs;
         }
 
@@ -296,6 +287,4 @@ public class DialogsFragment extends Fragment {
             onCountLoaded(pCount);
         }
     }
-
-
 }

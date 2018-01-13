@@ -38,7 +38,6 @@ public class SharedActivity extends AppCompatActivity {
     public final String TAG = this.getClass().getSimpleName();
 
     private int mTopBarFrameContainer;
-
     private int mRecyclerViewFrameContainer;
 
     private View mToProfileImageButton;

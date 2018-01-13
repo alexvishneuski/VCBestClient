@@ -92,7 +92,7 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/dialogs_history_container_recycler_view"
+        android:id="@+id/dialogs_history_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/creating_messages_bar_relative_layout"
