@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="presentation.view.activities.MessagesActivity">
+
+    <RelativeLayout
+        android:id="@+id/top_bar_messages_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorTopBarBackgroundBlue"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/messages_item_padding"
+        android:paddingEnd="@dimen/messages_item_padding"
+        android:paddingRight="@dimen/messages_item_padding"
+        android:paddingTop="@dimen/messages_item_padding"
+        tools:ignore="RtlSymmetry">
+
+        <ImageButton
+            android:id="@+id/to_dialog_fragment_image_buttom"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            app:srcCompat="@drawable/ic_add_white_24px"
+            tools:ignore="ContentDescription" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contact_user_avatar_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/to_dialog_fragment_image_buttom"
+            android:layout_toRightOf="@+id/to_dialog_fragment_image_buttom"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <LinearLayout
+            android:id="@+id/message_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/contact_user_avatar_image_view"
+            android:layout_toLeftOf="@+id/message_menu_image_buttom"
+            android:layout_toRightOf="@+id/contact_user_avatar_image_view"
+            android:layout_toStartOf="@+id/message_menu_image_buttom"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/contact_user_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_weight="4"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                tools:ellipsize="end"
+                tools:singleLine="true"
+                tools:text="@string/lorem_stub" />
+
+
+            <TextView
+                android:id="@+id/mesage_body_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+
+                android:layout_gravity="bottom"
+                android:layout_weight="4"
+                android:ellipsize="end"
+                android:lineSpacingExtra="-1dp"
+                android:maxLines="2"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                tools:text="@string/lorem_stub" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/message_menu_image_buttom"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            app:srcCompat="@drawable/ic_add_white_24px"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/dialogs_history_container_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/creating_messages_bar_relative_layout"
+        android:layout_below="@+id/top_bar_messages_relative_layout"
+        android:divider="@drawable/divider"
+        android:orientation="vertical"
+        android:showDividers="middle" />
+
+    <RelativeLayout
+        android:id="@+id/creating_messages_bar_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_panel_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorTopBarBackgroundBlue">
+
+        <TextView
+            android:id="@+id/messages_top_bar_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/messages_top_bar_title"
+            android:textColor="@color/colorTopBarWhite"
+            android:textScaleX="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@+id/add_image_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/search_image_button"
+            android:layout_toStartOf="@+id/search_image_button"
+            android:background="@null"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_add_white_24px"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/search_image_button"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@null"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_search_white_24px"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+</RelativeLayout>

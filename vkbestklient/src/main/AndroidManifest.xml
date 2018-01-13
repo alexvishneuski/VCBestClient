@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".presentation.view.activities.SharedActivity" />
         <activity android:name=".presentation.view.activities.AuthActivity" />
+        <activity android:name=".presentation.view.activities.MessagesActivity" />
 
         <provider
             android:name=".repository.database.provider.CustomContentProvider"
