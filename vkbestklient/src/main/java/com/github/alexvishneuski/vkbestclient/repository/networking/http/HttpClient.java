@@ -1,15 +1,10 @@
 package com.github.alexvishneuski.vkbestclient.repository.networking.http;
 
-import android.support.annotation.UiThread;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.exception.VKApiException;
 import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.errors.VKApiError;
-import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.responses.VKApiErrorResponse;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,14 +32,20 @@ public class HttpClient<T> implements IHttpClient<T> {
             inputStream = openStream(pUrl);
             inputStreamReader = new InputStreamReader(inputStream);
 
-                response = new GsonBuilder()
-                        .setLenient()
-                        .create().fromJson(inputStreamReader, pClazz);
+            response = new GsonBuilder()
+                    .setLenient()
+                    .create().fromJson(inputStreamReader, pClazz);
+
+            if (response.getClass().getDeclaredField(VKApiError.class.getSimpleName()) != null) {
+                //get error info
+            }
 
             con.disconnect();
         } catch (IOException pE) {
             pE.printStackTrace();
             //TODO add sort of RepoVKApiHttpException()
+        } catch (NoSuchFieldException pE) {
+            pE.printStackTrace();
         } finally {
             if (con != null) {
                 con.disconnect();
