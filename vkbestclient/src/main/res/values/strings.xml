@@ -20,4 +20,8 @@
     <string name="attach_voice">TODO: to record and attach voice</string>
     <string name="send_message">TODO: to send message</string>
 
+    <!--check version activity-->
+    <string name="update_app_version_now">Update app\'s version now!</string>
+    <string name="update_app_version_later">Update app\'s version later!</string>
+
 </resources>

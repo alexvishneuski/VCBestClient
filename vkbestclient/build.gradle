@@ -14,9 +14,26 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "APP_VERSION_URL", "\"http://10.0.2.3:8080\""
+        }
         release {
+            buildConfigField "String", "APP_VERSION_URL", "\"https://version-checker-1508930507551.appspot.com\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "store"
+
+    productFlavors {
+        GooglePlay {
+            flavorDimensions "store"
+            buildConfigField "String", "SHARE_URL", "\"http://myappforgooglestore.com\""
+        }
+        Amazon {
+            flavorDimensions "store"
+            buildConfigField "String", "SHARE_URL", "\"http://myappforamazon.com\""
         }
     }
 }
