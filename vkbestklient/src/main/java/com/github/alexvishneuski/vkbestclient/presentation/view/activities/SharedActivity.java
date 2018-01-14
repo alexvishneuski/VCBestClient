@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsFragment;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarMessagesFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNewsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarProfileFragment;
@@ -298,7 +296,7 @@ public class SharedActivity extends AppCompatActivity {
     /*are invoked from out fragments*/
 
 
-    public void goToMessagesFragment() {
+   /* public void goToMessagesFragment() {
         Log.d(TAG, "goToMessagesFragment: ");
         mPairs = getPairsForMessagesInitialisation();
         replaceAllFragments(mPairs);
@@ -314,7 +312,7 @@ public class SharedActivity extends AppCompatActivity {
         pairs.add(pair2);
 
         return pairs;
-    }
+    }*/
 
     //can be called from another activity/fragment -> than is invoked
     //TODO to make the same for  to profile transition

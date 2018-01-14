@@ -25,6 +25,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.view.activities.Share
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class MessagesFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
