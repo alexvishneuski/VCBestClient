@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.alexvishneuski.vkbestclient.R;
@@ -40,6 +43,11 @@ public class MessagesActivity extends AppCompatActivity {
     //  private View mView;
 
     private TextView mContactUserNameTextView;
+    private EditText mMessageInputEditText;
+    private View mRecyclerArea;
+    private View mAttachVoiceImageButton;
+    private View mSendMessageButton;
+
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -55,6 +63,8 @@ public class MessagesActivity extends AppCompatActivity {
     int mTotalItemCount;
     int mFirstVisibleItemPosition;
     private boolean mIsLoading = true;
+
+    private boolean mIsFocusable = false;
 
     private SharedActivity mParentActivity;
 
@@ -85,12 +95,38 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void initViews() {
 
-        mContactUserNameTextView = findViewById(R.id.contact_user_name_text_view);
+        mAttachVoiceImageButton = findViewById(R.id.history_attach_voice_image_view);
 
+        mContactUserNameTextView = findViewById(R.id.history_contact_user_name_text_view);
         mContactUserNameTextView.setText("Name Name Name Name Name Name Name Name Name Name ");
-
         startAnimation(mContactUserNameTextView);
 
+        mMessageInputEditText = findViewById(R.id.history_messages_input_text_view);
+
+        mMessageInputEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*mMessageInputEditText.requestFocus();*/
+                mIsFocusable = true;
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.RESULT_HIDDEN);
+
+
+            }
+        });
+/*
+        mRecyclerArea = findViewById(R.id.history_area_recycler_view);
+        mRecyclerArea.setClickable(true);
+        mRecyclerArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("!!!!!!!!!!!!!!=====RV AREA============!!!!!!!!!!!!!!!!!!!");
+                mIsFocusable = false;
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mRecyclerArea.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        });*/
     }
 
     private void startAnimation(View pView) {
@@ -108,7 +144,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void createRecyclerView() {
         Log.d(TAG, "createRecyclerView");
-        mRecyclerView = findViewById(R.id.dialogs_history_recycler_view);
+        mRecyclerView = findViewById(R.id.history_recycler_view);
         mRecyclerView.setHasFixedSize(false);
     }
 
