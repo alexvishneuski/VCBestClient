@@ -28,7 +28,7 @@ public class RepositoryConstants {
         String VK_METHOD_BASE_PATH = "api.vk.com/method";
 
         String ACCESS_TOKEN_KEY = "access_token";
-        String ACCESS_TOKEN = "1de31258ac1f0934cc1b3679c5a78ed0979242c4f090c2ecd9336e14c76f940b05f38d7df3fa01913a0a7";
+        String ACCESS_TOKEN = "";
 
         String VERSION_KEY = "v";
         String VERSION = "5.69";
