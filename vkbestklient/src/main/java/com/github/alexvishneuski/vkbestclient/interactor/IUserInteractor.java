@@ -13,10 +13,10 @@ public interface IUserInteractor {
      */
     List<UserInDialogs> getDomainUsersBasicInfo(List<Integer> pUserIds);
 
-    //TODO to use in User about activity
-    List<UserInDialogs> getDomainUsersFullInfo(List<Integer> pUserIds);
+    //TODO to use  in User profile fragment
+    List<UserInDialogs> getUsersFullInfo(List<Integer> pUserIds);
 
-    UserInDialogs getCurrentUserDomain();
+    UserInDialogs getCurrentUser();
 
     /**
      * @return current VKApiUser

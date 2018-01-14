@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -12,9 +13,7 @@ import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.DialogsFragment;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.MessagesFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarDialogsFragment;
-import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarMessagesFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNewsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarNotificationsFragment;
 import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBarProfileFragment;
@@ -24,18 +23,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* TODO:
-* 1. make ListView layout_height: mach_parent () by hide topbar panel
-* 2. make TextView message_body layout_width : mach_parent by default of own image
-* 3. extract asynctasc, +adapter in separate classes
+* 3. extract asynctasc in separate classes
 * 4. arrive round avatars
 */
 
 public class SharedActivity extends AppCompatActivity {
 
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
     public final String TAG = this.getClass().getSimpleName();
 
     private int mTopBarFrameContainer;
-
     private int mRecyclerViewFrameContainer;
 
     private View mToProfileImageButton;
@@ -44,6 +44,8 @@ public class SharedActivity extends AppCompatActivity {
     private View mToNewsImageButton;
     private View mToSearchImageButton;
 
+    private Fragment mCurrentTopBarFragment;
+    private Fragment mCurrentRecyclerFragment;
 
     private List<Pair<Integer, ? extends Fragment>> mPairs;
 
@@ -53,21 +55,16 @@ public class SharedActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        /*creating messages view*/
-        //setContentView(R.layout.activity_shared);
         setContentView(R.layout.activity_shared);
 
         initFragments();
 
         initNavigationBarButtons();
-
     }
 
-
-    /*find top bar container end show there top bar fragment*/
     private void initFragments() {
         Log.d(TAG, "initFragments");
-/*from*/
+
         mTopBarFrameContainer = R.id.top_bar_frame_container;
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
 
@@ -84,7 +81,7 @@ public class SharedActivity extends AppCompatActivity {
 
     /*show all necessary fragments on this activity*/
     public void replaceAllFragments(List<Pair<Integer, ? extends Fragment>> pPairList) {
-        Log.d(TAG, "replaceAllFragments");
+        Log.d(TAG, "replaceAllFragments() called with: pPairList = [" + pPairList + "]");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         for (Pair<Integer, ? extends Fragment> pair : pPairList
@@ -96,11 +93,14 @@ public class SharedActivity extends AppCompatActivity {
 
         transaction.addToBackStack(null);
         transaction.commit();
+
+        //setting link to current fragments
+        setLinksToCurrentFragments();
     }
 
     /*show any fragment on this activity*/
     public void replaceFragment(int frameContainer, Fragment fragment) {
-        Log.d(TAG, "replaceFragment");
+        Log.d(TAG, "replaceFragment() called with: frameContainer = [" + frameContainer + "], fragment = [" + fragment + "]");
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(frameContainer, fragment);
         transaction.addToBackStack(null);
@@ -152,21 +152,29 @@ public class SharedActivity extends AppCompatActivity {
         mToDialogsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO if now I'm on this fragment, must nothing to do
-                mPairs = getPairsForDialogsInitialisation();
-                replaceAllFragments(mPairs);
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarDialogsFragment.class)) {
+                    //TODO if now I'm on this fragment, must nothing to do
+                    mPairs = getPairsForDialogsInitialisation();
+                    replaceAllFragments(mPairs);
+
+                }
             }
         });
     }
 
-    //todo change 2. par to notificationFragment
+    //todo change 2. part to notificationFragment
     private void setToNotificationsListener() {
         Log.d(TAG, "setToNotificationsListener called");
         mToNotificationsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(mTopBarFrameContainer, new TopBarNotificationsFragment());
-                replaceFragment(mRecyclerViewFrameContainer, new DialogsFragment());
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarNotificationsFragment.class)) {
+                    mPairs = getPairsForNotificationInitialisation();
+                    replaceAllFragments(mPairs);
+
+                    //mToDialogsImageButton.setEnabled(true);
+                    //mToDialogsImageButton.setSelected(true);
+                }
             }
         });
     }
@@ -176,8 +184,10 @@ public class SharedActivity extends AppCompatActivity {
         mToNewsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPairs = getPairsForNewsInitialisation();
-                replaceAllFragments(mPairs);
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarNewsFragment.class)) {
+                    mPairs = getPairsForNewsInitialisation();
+                    replaceAllFragments(mPairs);
+                }
             }
         });
     }
@@ -187,8 +197,10 @@ public class SharedActivity extends AppCompatActivity {
         mToSearchImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPairs = getPairsForSearchInitialisation();
-                replaceAllFragments(mPairs);
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarSearchFragment.class)) {
+                    mPairs = getPairsForSearchInitialisation();
+                    replaceAllFragments(mPairs);
+                }
             }
         });
     }
@@ -198,7 +210,10 @@ public class SharedActivity extends AppCompatActivity {
         mToProfileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToProfileFragment();
+                //if is called from this activity - skipped
+                if (!mCurrentTopBarFragment.getClass().equals(TopBarProfileFragment.class)) {
+                    goToProfileFragment();
+                }
             }
         });
     }
@@ -209,6 +224,7 @@ public class SharedActivity extends AppCompatActivity {
         mPairs = getPairsForDialogsInitialisation();
         replaceAllFragments(mPairs);
     }
+
 
     @NonNull
     private List<Pair<Integer, ? extends Fragment>> getPairsForDialogsInitialisation() {
@@ -268,13 +284,19 @@ public class SharedActivity extends AppCompatActivity {
         return pairs;
     }
 
-
-
-
+    private void setLinksToCurrentFragments() {
+        Log.d(TAG, "setLinksToCurrentFragments() called ");
+        mCurrentTopBarFragment = mPairs.get(0).second;
+        mCurrentRecyclerFragment = mPairs.get(1).second;
+        Log.d(TAG, "setLinksToCurrentFragments(): mCurrentTopBarFragment: "
+                + mCurrentTopBarFragment.getClass().getSimpleName()
+                + " mCurrentRecyclerFragment "
+                + mCurrentRecyclerFragment.getClass().getSimpleName());
+    }
     /*are invoked from out fragments*/
 
 
-    public void goToMessagesFragment() {
+   /* public void goToMessagesFragment() {
         Log.d(TAG, "goToMessagesFragment: ");
         mPairs = getPairsForMessagesInitialisation();
         replaceAllFragments(mPairs);
@@ -290,8 +312,9 @@ public class SharedActivity extends AppCompatActivity {
         pairs.add(pair2);
 
         return pairs;
-    }
+    }*/
 
+    //can be called from another activity/fragment -> than is invoked
     //TODO to make the same for  to profile transition
     public void goToProfileFragment() {
         Log.d(TAG, "goToProfileFragment: ");
@@ -299,4 +322,6 @@ public class SharedActivity extends AppCompatActivity {
         replaceAllFragments(mPairs);
         Toast.makeText(this, " Gone to ToProfileFragment", Toast.LENGTH_SHORT).show();
     }
+
+
 }
