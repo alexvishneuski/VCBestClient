@@ -117,11 +117,9 @@
             android:layout_height="@dimen/top_bar_panel_height"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-
             android:background="?selectableItemBackground"
             android:scaleType="center"
-
-            app:srcCompat="@drawable/ic_attach_file_24px"
+            app:srcCompat="@drawable/ic_attach_file_rotate_45_24px"
             tools:ignore="ContentDescription" />
 
         <EditText
@@ -135,13 +133,13 @@
             android:layout_toLeftOf="@+id/attach_emoji_image_view"
             android:layout_toRightOf="@+id/attach_file_image_view"
             android:layout_toStartOf="@+id/attach_emoji_image_view"
+            android:focusable="false"
             android:text="@string/messages_top_bar_title"
             android:textColor="@color/colorGrey"
             android:textSize="16sp"
             android:textStyle="normal"
             android:typeface="normal"
-            tools:ignore="RelativeOverlap"
-            android:focusable="false"/>
+            tools:ignore="RelativeOverlap" />
 
         <ImageButton
             android:id="@+id/attach_emoji_image_view"
