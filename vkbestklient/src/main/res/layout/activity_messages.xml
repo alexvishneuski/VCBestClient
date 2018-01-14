@@ -41,7 +41,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/contact_user_avatar_image_view"
+                android:id="@+id/histiry_contact_user_avatar_image_view"
                 android:layout_width="56dp"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_launcher_round" />
@@ -99,7 +99,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/history_bottom_bar_relative_layout"
-        android:layout_below="@+id/history_top_bar_relative_layout">
+        android:layout_below="@+id/history_top_bar_relative_layout"
+        android:background="@color/colorMessageBackgroundLightBlue">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/history_recycler_view"
@@ -140,13 +141,13 @@
             android:layout_toLeftOf="@+id/history_attach_emoji_image_view"
             android:layout_toRightOf="@+id/history_attach_file_image_view"
             android:layout_toStartOf="@+id/history_attach_emoji_image_view"
-
             android:text="@string/messages_top_bar_title"
             android:textColor="@color/colorGrey"
             android:textSize="16sp"
             android:textStyle="normal"
             android:typeface="normal"
-            tools:ignore="RelativeOverlap" />
+            tools:ignore="RelativeOverlap"
+            android:inputType="text" />
 
         <ImageButton
             android:id="@+id/history_attach_emoji_image_view"

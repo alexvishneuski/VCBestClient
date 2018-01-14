@@ -15,9 +15,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.alexvishneuski.vkbestclient.R;
+import com.github.alexvishneuski.vkbestclient.imageloader.NOrda;
 import com.github.alexvishneuski.vkbestclient.interactor.IMessageInHistoryInteractor;
 import com.github.alexvishneuski.vkbestclient.interactor.impl.MessageInHistoryInteractorImpl;
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
@@ -42,7 +44,6 @@ public class MessagesActivity extends AppCompatActivity {
     private int mRecyclerViewContainer;
     //  private View mView;
 
-    private TextView mContactUserNameTextView;
     private EditText mMessageInputEditText;
     private View mRecyclerArea;
     private View mAttachVoiceImageButton;
@@ -58,6 +59,14 @@ public class MessagesActivity extends AppCompatActivity {
     private int mMessagesInHistoryTotalCount;
 
     private int mContactUserId;
+    private String mContactUserAvatarPath;
+    private String mContactUserName;
+    private String mContactUserAdditional;
+
+    private ImageView mContactUserAvatarImageView;
+    private TextView mContactUserNameTextView;
+    private TextView mContactUserAdditionalTextView;
+
 
     int mVisibleItemCount;
     int mTotalItemCount;
@@ -72,10 +81,13 @@ public class MessagesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_messages);
 
+        findViews();
+        getContactUserInfo();
         initViews();
 
         createRecyclerView();
@@ -83,7 +95,7 @@ public class MessagesActivity extends AppCompatActivity {
         createAdapter();
         setAdapterToView();
 
-        getContactUserId();
+
         loadMessagesInHistoryTotalCount();
         loadMessagesFirstTime();
 
@@ -93,16 +105,23 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+    private void findViews() {
+        mContactUserAvatarImageView = findViewById(R.id.histiry_contact_user_avatar_image_view);
+        mContactUserAdditionalTextView = findViewById(R.id.history_contact_user_addition_info_text_view);
+        mAttachVoiceImageButton = findViewById(R.id.history_attach_voice_image_view);
+        mContactUserNameTextView = findViewById(R.id.history_contact_user_name_text_view);
+    }
+
     private void initViews() {
 
-        mAttachVoiceImageButton = findViewById(R.id.history_attach_voice_image_view);
+        NOrda.INSTANCE.load(mContactUserAvatarPath).into(mContactUserAvatarImageView);
 
-        mContactUserNameTextView = findViewById(R.id.history_contact_user_name_text_view);
-        mContactUserNameTextView.setText("Name Name Name Name Name Name Name Name Name Name ");
+        mContactUserNameTextView.setText(mContactUserName);
         startAnimation(mContactUserNameTextView);
 
-        mMessageInputEditText = findViewById(R.id.history_messages_input_text_view);
+        mContactUserAdditionalTextView.setText(mContactUserAdditional);
 
+        mMessageInputEditText = findViewById(R.id.history_messages_input_text_view);
         mMessageInputEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,8 +130,6 @@ public class MessagesActivity extends AppCompatActivity {
                 mIsFocusable = true;
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.RESULT_HIDDEN);
-
-
             }
         });
 /*
@@ -127,6 +144,7 @@ public class MessagesActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(mRecyclerArea.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });*/
+
     }
 
     private void startAnimation(View pView) {
@@ -135,11 +153,21 @@ public class MessagesActivity extends AppCompatActivity {
         pView.startAnimation(animation);
     }
 
+    private void getContactUserInfo() {
+        Log.d(TAG, "getContactUserInfo() called");
 
-    private void getContactUserId() {
-        String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+        String idKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+        String avatarPathKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_AVATAR;
+        String nameKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_NAME;
+        String additionalKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ADDITIONAL_INFO;
+
         Intent intent = getIntent();
-        mContactUserId = intent.getExtras().getInt(key);
+
+        mContactUserId = intent.getExtras().getInt(idKey);
+        mContactUserAvatarPath = intent.getExtras().getString(avatarPathKey);
+        mContactUserName = intent.getExtras().getString(nameKey);
+        mContactUserAdditional = intent.getExtras().getString(additionalKey);
+        System.out.println("recived data: "+mContactUserId+" "+mContactUserAvatarPath+" "+mContactUserName+" "+mContactUserAdditional);
     }
 
     private void createRecyclerView() {

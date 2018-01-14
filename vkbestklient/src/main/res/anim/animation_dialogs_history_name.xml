@@ -3,7 +3,7 @@
         android:duration="20000"
         android:fromXDelta="-100%p"
         android:fromYDelta="0%"
-        android:toXDelta="100%"
+        android:toXDelta="200%"
         android:toYDelta="0%"
         android:repeatCount="infinite"/>
 

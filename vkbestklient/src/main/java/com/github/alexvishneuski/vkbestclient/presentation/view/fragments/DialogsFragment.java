@@ -187,10 +187,19 @@ public class DialogsFragment extends Fragment {
 
                 //contactUserId posting
                 if (getActivity() != null) {
-                    final String key = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
-                    final int value = mMessagesUI.get(position).getContactUser().getUserId();
-                    intent.putExtra(key, value);
-                    Log.d(TAG, "onItemClick() sended intent: key = " + key + ", value = " + value);
+                    final String idKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+                    final int idValue = mMessagesUI.get(position).getContactUser().getUserId();
+                    final String avatarKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_AVATAR;
+                    final String avatarValue = mMessagesUI.get(position).getContactUser().getUserAvatarPath();
+                    final String nameKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_NAME;
+                    final String nameValue = mMessagesUI.get(position).getContactUser().getUserFullName();
+                    final String additionalKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ADDITIONAL_INFO;
+                    //TODO replace with corresp. data
+                    final String additionalValue = mMessagesUI.get(position).getContactUser().getUserAvatarPath();
+                    intent.putExtra(idKey, idValue);
+                    intent.putExtra(avatarKey, avatarValue);
+                    intent.putExtra(nameKey, nameValue);
+                    intent.putExtra(additionalKey, additionalValue);
                 }
 
                 if (area == TouchArea.MESSAGE_AREA) {
