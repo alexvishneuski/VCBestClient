@@ -9,6 +9,10 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.interactor.IMessageInHistoryInteractor;
@@ -35,6 +39,8 @@ public class MessagesActivity extends AppCompatActivity {
     private int mRecyclerViewContainer;
     //  private View mView;
 
+    private TextView mContactUserNameTextView;
+
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
@@ -60,7 +66,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_messages);
 
-        //initViews();
+        initViews();
 
         createRecyclerView();
         setLayoutManagerToRecyclerView();
@@ -75,6 +81,22 @@ public class MessagesActivity extends AppCompatActivity {
         //addOnScrollListener();
         //setOnScrollListener();
 
+    }
+
+    private void initViews() {
+
+        mContactUserNameTextView = findViewById(R.id.contact_user_name_text_view);
+
+        mContactUserNameTextView.setText("Name Name Name Name Name Name Name Name Name Name ");
+
+        startAnimation(mContactUserNameTextView);
+
+    }
+
+    private void startAnimation(View pView) {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.animation_dialogs_history_name);
+        pView.startAnimation(animation);
     }
 
 
