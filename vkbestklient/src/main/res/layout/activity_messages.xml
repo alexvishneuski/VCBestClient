@@ -14,69 +14,72 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorTopBarBackgroundBlue"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/messages_item_padding"
-        android:paddingEnd="@dimen/messages_item_padding"
+        android:paddingBottom="4dp"
+        android:paddingEnd="4dp"
         android:paddingRight="@dimen/messages_item_padding"
-        android:paddingTop="@dimen/messages_item_padding"
+        android:paddingTop="4dp"
         tools:ignore="RtlSymmetry">
 
         <ImageButton
             android:id="@+id/to_dialog_fragment_image_buttom"
-            android:layout_width="wrap_content"
+            android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="@null"
-            app:srcCompat="@drawable/ic_add_white_24px"
+            android:background="?selectableItemBackground"
+            app:srcCompat="@drawable/ic_arrow_back_24px"
             tools:ignore="ContentDescription" />
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/contact_user_avatar_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/to_dialog_fragment_image_buttom"
-            android:layout_toRightOf="@+id/to_dialog_fragment_image_buttom"
-            android:src="@mipmap/ic_launcher_round" />
-
         <LinearLayout
-            android:id="@+id/message_area"
+            android:id="@+id/contact_user_profile_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/contact_user_avatar_image_view"
+            android:layout_toEndOf="@+id/to_dialog_fragment_image_buttom"
             android:layout_toLeftOf="@+id/message_menu_image_buttom"
-            android:layout_toRightOf="@+id/contact_user_avatar_image_view"
+            android:layout_toRightOf="@+id/to_dialog_fragment_image_buttom"
             android:layout_toStartOf="@+id/message_menu_image_buttom"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/contact_user_avatar_image_view"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <LinearLayout
+                android:id="@+id/message_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/contact_user_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_weight="4"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    tools:ellipsize="end"
+                    tools:singleLine="true"
+                    tools:text="@string/lorem_stub" />
 
 
-            <TextView
-                android:id="@+id/contact_user_name_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_weight="4"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/colorWhite"
-                android:textSize="14sp"
-                tools:ellipsize="end"
-                tools:singleLine="true"
-                tools:text="@string/lorem_stub" />
+                <TextView
+                    android:id="@+id/mesage_body_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="4"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="-1dp"
+                    android:maxLines="2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
 
-
-            <TextView
-                android:id="@+id/mesage_body_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-
-                android:layout_gravity="bottom"
-                android:layout_weight="4"
-                android:ellipsize="end"
-                android:lineSpacingExtra="-1dp"
-                android:maxLines="2"
-                android:textColor="@color/colorWhite"
-                android:textSize="14sp"
-                tools:text="@string/lorem_stub" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -86,8 +89,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@null"
-            app:srcCompat="@drawable/ic_add_white_24px"
+            android:background="?selectableItemBackground"
+            app:srcCompat="@drawable/ic_more_vert_24px"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 
@@ -104,48 +107,62 @@
     <RelativeLayout
         android:id="@+id/creating_messages_bar_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_bar_panel_height"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorTopBarBackgroundBlue">
+        android:background="@color/colorWhite">
 
-        <TextView
+        <ImageButton
+            android:id="@+id/attach_file_image_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="@dimen/top_bar_panel_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+
+            android:background="?selectableItemBackground"
+            android:scaleType="center"
+
+            app:srcCompat="@drawable/ic_attach_file_24px"
+            tools:ignore="ContentDescription" />
+
+        <EditText
             android:id="@+id/messages_top_bar_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@+id/attach_file_image_view"
+            android:layout_toLeftOf="@+id/attach_emoji_image_view"
+            android:layout_toRightOf="@+id/attach_file_image_view"
+            android:layout_toStartOf="@+id/attach_emoji_image_view"
             android:text="@string/messages_top_bar_title"
-            android:textColor="@color/colorTopBarWhite"
-            android:textScaleX="1"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textColor="@color/colorGrey"
+            android:textSize="16sp"
+            android:textStyle="normal"
             android:typeface="normal"
-            tools:ignore="RelativeOverlap" />
+            tools:ignore="RelativeOverlap"
+            android:focusable="false"/>
 
-        <ImageView
-            android:id="@+id/add_image_view"
+        <ImageButton
+            android:id="@+id/attach_emoji_image_view"
             android:layout_width="@dimen/top_bar_panel_height"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/search_image_button"
-            android:layout_toStartOf="@+id/search_image_button"
-            android:background="@null"
+            android:layout_height="@dimen/top_bar_panel_height"
+            android:layout_toLeftOf="@+id/attach_voice_image_view"
+            android:layout_toStartOf="@+id/attach_voice_image_view"
+            android:background="?selectableItemBackground"
             android:scaleType="center"
-            app:srcCompat="@drawable/ic_add_white_24px"
+            app:srcCompat="@drawable/ic_smile_24px"
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/search_image_button"
+            android:id="@+id/attach_voice_image_view"
             android:layout_width="@dimen/top_bar_panel_height"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/top_bar_panel_height"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@null"
+            android:background="?selectableItemBackground"
             android:scaleType="center"
-            app:srcCompat="@drawable/ic_search_white_24px"
+            app:srcCompat="@drawable/ic_mic_24px"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 
