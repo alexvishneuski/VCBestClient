@@ -53,6 +53,13 @@ public class MessagesActivity extends AppCompatActivity {
     private View mMenuButton;
     private TextView mContactUserNameTextView;
     private TextView mContactUserAdditionalTextView;
+    private View mContactUserProfileAreaView;
+
+    /*data for top panel*/
+    private int mContactUserId;
+    private String mContactUserAvatarPath;
+    private String mContactUserName;
+    private String mContactUserAdditional;
 
     /*bottom panel*/
     private View mAttachFileButton;
@@ -62,12 +69,6 @@ public class MessagesActivity extends AppCompatActivity {
 
     private boolean mIsFocusable = false;
     private boolean mIsSendingEnabled = false;
-
-    /*data for top panel*/
-    private int mContactUserId;
-    private String mContactUserAvatarPath;
-    private String mContactUserName;
-    private String mContactUserAdditional;
 
     /*recycler*/
     private View mRecyclerArea;
@@ -122,6 +123,7 @@ public class MessagesActivity extends AppCompatActivity {
         mContactUserNameTextView = findViewById(R.id.history_contact_user_name_text_view);
         mContactUserAdditionalTextView = findViewById(R.id.history_contact_user_addition_info_text_view);
         mMenuButton = findViewById(R.id.history_menu_buttom);
+        mContactUserProfileAreaView = findViewById(R.id.history_contact_user_profile_area);
 
         /*bottom panel*/
         mAttachFileButton = findViewById(R.id.history_attach_file_button);
@@ -152,6 +154,14 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String msg = getString(R.string.show_menu);
+                Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mContactUserProfileAreaView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = getString(R.string.go_to_profile);
                 Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
