@@ -16,6 +16,10 @@ public interface IDialogInteractor {
 
     List<MessageInDialogs> getMessagesInDialogListFromDB(int pCount, int pOffset);
 
+    int insertMessageIntoDB(MessageInDialogs pMessage);
+
+    int bulkInsertMessageIntoDB(List<MessageInDialogs> pMessages);
+
     int getDialogsTotalCount();
 }
 

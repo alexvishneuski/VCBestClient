@@ -3,6 +3,7 @@ package com.github.alexvishneuski.vkbestclient.repository.networking.http;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import com.github.alexvishneuski.vkbestclient.repository.networking.vkapi.model.errors.VKApiError;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -23,20 +24,28 @@ public class HttpClient<T> implements IHttpClient<T> {
     public T requestGet(String pUrl, Class<T> pClazz) {
         Log.d(TAG, "requestGet() called with: pUrl = [" + pUrl + "], pClazz = [" + pClazz + "]");
 
-        InputStreamReader inputStreamReader;
+        final InputStreamReader inputStreamReader;
         Object response = null;
         final InputStream inputStream;
 
         try {
             inputStream = openStream(pUrl);
             inputStreamReader = new InputStreamReader(inputStream);
+
             response = new GsonBuilder()
                     .setLenient()
                     .create().fromJson(inputStreamReader, pClazz);
+
+            if (response.getClass().getDeclaredField(VKApiError.class.getSimpleName()) != null) {
+                //get error info
+            }
+
             con.disconnect();
         } catch (IOException pE) {
             pE.printStackTrace();
             //TODO add sort of RepoVKApiHttpException()
+        } catch (NoSuchFieldException pE) {
+            pE.printStackTrace();
         } finally {
             if (con != null) {
                 con.disconnect();
@@ -78,12 +87,30 @@ public class HttpClient<T> implements IHttpClient<T> {
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
-        if (con != null) {
-            con.disconnect();
+            if (con != null) {
+                con.disconnect();
+            }
         }
-    }
 
         return (T) response;
+    }
+
+    @Override
+    public InputStream requestGet(String pUrl) {
+        InputStream inputStream = null;
+
+        try {
+            inputStream = openStream(pUrl);
+            con.disconnect();
+        } catch (IOException pE) {
+            pE.printStackTrace();
+            //TODO add sort of HTTP Exception()
+        } finally {
+            if (con != null) {
+                con.disconnect();
+            }
+        }
+        return inputStream;
     }
 
     @Override

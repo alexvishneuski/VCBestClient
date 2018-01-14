@@ -10,4 +10,22 @@
     <dimen name="messages_item_padding">12dp</dimen>
 
 
+    <!--messages i nhistory-->
+    <dimen name="messages_in_history_item_right_left_padding">16dp</dimen>
+    <dimen name="messages_in_history_item_top_bottom_padding">8dp</dimen>
+    <dimen name="messages_in_history_text_padding">16dp</dimen>
+    <dimen name="messages_in_history_text_size">16sp</dimen>
+    <dimen name="messages_in_history_background_corner">4dp</dimen>
+    <dimen name="messages_in_history_background_null_corner">0dp</dimen>
+    <dimen name="messages_in_history_border">1dp</dimen>
+
+    <dimen name="messages_in_history_layout_less_weight">1</dimen>
+    <dimen name="messages_in_history_layout_more_weight">4</dimen>
+
+    <!--icons-->
+    <dimen name="icons_dimensions_in_dp">24dp</dimen>
+    <dimen name="icons_dimensions_8dp">8dp</dimen>
+    <dimen name="icons_dimensions">24.0</dimen>
+
+
 </resources>

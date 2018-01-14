@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_panel_height"
     android:background="@color/colorTopBarBackgroundBlue">
@@ -13,12 +15,13 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="@string/messagess_top_bar_title"
+        android:text="@string/messages_top_bar_title"
         android:textColor="@color/colorTopBarWhite"
         android:textScaleX="1"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:typeface="normal" />
+        android:typeface="normal"
+        tools:ignore="RelativeOverlap" />
 
 
     <!--TODO what is the best: image button or imageview?-->
@@ -28,9 +31,11 @@
         android:layout_width="@dimen/top_bar_panel_height"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@+id/search_image_button"
+        android:layout_toStartOf="@+id/search_image_button"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_add_white_24dp" />
+        app:srcCompat="@drawable/ic_add_white_24px"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/search_image_button"
@@ -41,5 +46,6 @@
         android:layout_alignParentTop="true"
         android:background="@null"
         android:scaleType="center"
-        android:src="@drawable/ic_search_white_24dp" />
+        app:srcCompat="@drawable/ic_search_white_24px"
+        tools:ignore="ContentDescription" />
 </RelativeLayout>

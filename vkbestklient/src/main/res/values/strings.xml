@@ -2,58 +2,22 @@
     <string name="app_name">VKLayouts</string>
 
     <string name="dialogs_top_bar_title">Messages</string>
-    <string name="messagess_top_bar_title">Messages in history</string>
+    <string name="messages_top_bar_title">Messages in history</string>
     <string name="notifications_top_bar_title">Notifications</string>
     <string name="search_top_bar_hidden_title">Search</string>
     <string name="news_top_bar_title">News</string>
-    <string name="profile_top_bar_title">Prifile</string>
+    <string name="profile_top_bar_title">Profile</string>
 
+    <string name="lorem_stub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
 
+    <!--messages activity-->
+    <string name="go_to_dialogs">TODO: go to dialogs</string>
+    <string name="show_menu">TODO: to show menu</string>
+    <string name="go_to_profile">TODO: go to profile</string>
 
-    <!--for list_view-->
-    <string-array name="contact_user_full_names">
-        <item>Johnny Depp</item>
-        <item>Al Pacino</item>
-        <item>Robert De Niro</item>
-        <item>Kevin Spacey</item>
-        <item>Denzel Washington</item>
-        <item>Russell Crowe</item>
-        <item>Brad Pitt</item>
-        <item>Angelina Jolie</item>
-        <item>Leonardo DiCaprio</item>
-        <item>Tom Cruise</item>
-        <item>John Travolta</item>
-        <item>Arnold Schwarzenegger</item>
-    </string-array>
-    <string name="recipient_name">Aliaksandr Vishneuski</string>
-    <string-array name="sending_dates">
-        <item>сегодня</item>
-        <item>15 ноя</item>
-        <item>14 ноя</item>
-        <item>12 ноя</item>
-        <item>11 ноя</item>
-        <item>10 ноя</item>
-        <item>9 ноя</item>
-        <item>8 ноя</item>
-        <item>7 ноя</item>
-        <item>6 ноя</item>
-        <item>5 ноя</item>
-        <item>4 ноя</item>
-    </string-array>
-    <string-array name="message_bodies">
-        <item>Hello, Alex, are you coming to my party today? </item>
-        <item>Oh, my God, I completely forgot, sorry, of course, I’ll be there!</item>
-        <item>Please, take a few bottles of Cola and some snacks: crisps, for example.</item>
-        <item>Ok, I’ll bring what I can. When can I come?</item>
-        <item>We begin to gather at seven o’clock. Waiting for you!</item>
-        <item>Me too. What are you doing today?</item>
-        <item>Well, I’m thinking what to do.</item>
-        <item>What about going to the new car exhibition?</item>
-        <item>Hello, on what occasion is the party?</item>
-        <item>And who else is invited?</item>
-        <item>Оh, it ‘ll be fun! What shall I bring with me?</item>
-        <item>No doubt!</item>
-    </string-array>
-
+    <string name="attach_file">TODO: to attach file</string>
+    <string name="attach_emoji">TODO: to attach emoji</string>
+    <string name="attach_voice">TODO: to record and attach voice</string>
+    <string name="send_message">TODO: to send message</string>
 
 </resources>

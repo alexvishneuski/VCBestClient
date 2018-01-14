@@ -34,8 +34,9 @@ public class DialogVKApiNetworkingImpl implements IDialogVKApiNetworking {
                         new HttpClient().requestGet(url, VKApiMessagesGetDialogsResult.class);
 
         if (result.getError() != null) {
-            final String errorMessage = TAG + result.getError();
-            //TODO refactor to: throw new VKApiException, change return to VKApiDialog object
+
+            final String errorMessage = TAG + " VKApi Error: code [" + result.getError().getErrorCode() + "], message [" + result.getError().getErrorMessage() + "]";
+            //TODO add return toast on UI
             throw new VKApiException(errorMessage);
         }
 

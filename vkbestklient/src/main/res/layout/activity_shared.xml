@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/bg_navigation_bar_shadow_dark" />
+                android:background="@drawable/shadow_dark" />
         </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>

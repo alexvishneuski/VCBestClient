@@ -28,7 +28,7 @@ public class RepositoryConstants {
         String VK_METHOD_BASE_PATH = "api.vk.com/method";
 
         String ACCESS_TOKEN_KEY = "access_token";
-        String ACCESS_TOKEN = "";
+        String ACCESS_TOKEN = "6a923beb42462def78e0d01abd201b39c9ba7d50cbbbcb7affcbdc57c35726e4af57db9192f8c24a49e35";
 
         String VERSION_KEY = "v";
         String VERSION = "5.69";
@@ -73,15 +73,30 @@ public class RepositoryConstants {
     public static final String VK_SCOPE_EMAIL = "email";
     public static final String VK_SCOPE_MARKET = "market";
 
+    public interface VkMethodMessagesCommon {
+        String OFFSET_KEY = "offset";
+        String COUNT_KEY = "count";
+        String START_MESSAGE_ID_KEY = "start_message_id";
+    }
+
+    public interface VkMethodMessagesGetHistory {
+
+        String METHOD_NAME = "messages.getHistory";
+
+        //parameters keys for "messages.getHistory"
+        String USER_ID_KEY = "user_id";
+        String DESTINATION_ID_KEY = "peer_id";
+                String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
+
+        String IN_CHRONOLOGICAL_ORDER_VALUE_REVERSE = "0";
+
+    }
 
     public interface VkMethodMessagesGetDialogs {
 
         String METHOD_NAME = "messages.getDialogs";
 
         //parameters keys for "messages.getDialogs"
-        String OFFSET_KEY = "offset";
-        String COUNT_KEY = "count";
-        String START_MESSAGE_ID_KEY = "start_message_id";
         String PREVIEW_LENGTH_KEY = "preview_length";
         String UNREAD_KEY = "unread";
         String IMPORTANT_KEY = "important";
