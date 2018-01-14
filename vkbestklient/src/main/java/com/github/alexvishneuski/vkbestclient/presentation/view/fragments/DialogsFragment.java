@@ -1,7 +1,9 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,7 +21,9 @@ import com.github.alexvishneuski.vkbestclient.interactor.impl.DialogInteractorIm
 import com.github.alexvishneuski.vkbestclient.interactor.model.MessageInDialogs;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
+import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
+import com.github.alexvishneuski.vkbestclient.presentation.view.activities.MessagesActivity;
 import com.github.alexvishneuski.vkbestclient.presentation.view.activities.SharedActivity;
 
 import java.util.ArrayList;
@@ -65,7 +69,6 @@ public class DialogsFragment extends Fragment {
         Log.d(TAG, "onCreateView called");
 
         initView(inflater);
-
         getLinkToParentActivity();
 
         createRecyclerView(mView);
@@ -75,7 +78,6 @@ public class DialogsFragment extends Fragment {
         setAdapterToView();
 
         loadDialogsTotalCount();
-
         loadMessagesFirstTime();
 
         addOnScrollListener();
@@ -130,9 +132,12 @@ public class DialogsFragment extends Fragment {
     }
 
     private void addDevider() {
-        RecyclerView.ItemDecoration itemDecoration = new
-                DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(itemDecoration);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            RecyclerView.ItemDecoration itemDecoration = new
+                    DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
+            mRecyclerView.addItemDecoration(itemDecoration);
+        }
     }
 
     private void initView(LayoutInflater inflater) {
@@ -154,7 +159,6 @@ public class DialogsFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
-
     private void loadMessagesFirstTime() {
         Log.d(TAG, "loadMessagesFirstTime called");
         mLoadTask = new LoadDialogsAT();
@@ -171,18 +175,39 @@ public class DialogsFragment extends Fragment {
 
     //TODO to remove toasts
     private void setOnClickListenerToAdapter() {
+        Log.d(TAG, "setOnClickListenerToAdapter() called");
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             //TODO replace with transition to messages or to contacts
             public void onItemClick(View itemView, int position, int area) {
+                Log.d(TAG, "onItemClick() called with: itemView = [" + itemView + "], position = [" + position + "], area = [" + area + "]");
                 String toastText;
+
+                Intent intent = new Intent(mParentActivity, MessagesActivity.class);
+
+                //contactUserId posting
+                if (getActivity() != null) {
+                    final String idKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ID;
+                    final int idValue = mMessagesUI.get(position).getContactUser().getUserId();
+                    final String avatarKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_AVATAR;
+                    final String avatarValue = mMessagesUI.get(position).getContactUser().getUserAvatarPath();
+                    final String nameKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_NAME;
+                    final String nameValue = mMessagesUI.get(position).getContactUser().getUserFullName();
+                    final String additionalKey = Constants.IntentConstants.CONTACT_USER_FOR_DIALOG_HISTORY_ADDITIONAL_INFO;
+                    //TODO replace with corresp. data
+                    final String additionalValue = mMessagesUI.get(position).getContactUser().getUserAvatarPath();
+                    intent.putExtra(idKey, idValue);
+                    intent.putExtra(avatarKey, avatarValue);
+                    intent.putExtra(nameKey, nameValue);
+                    intent.putExtra(additionalKey, additionalValue);
+                }
 
                 if (area == TouchArea.MESSAGE_AREA) {
                     //TODO remove
                     toastText = mMessagesUI.get(position).getMessageBody();
 
                     if (getActivity() != null) {
-                        mParentActivity.goToMessagesFragment();
+                        startActivity(intent);
                     }
                 } else {
                     //TODO remove
@@ -240,14 +265,8 @@ public class DialogsFragment extends Fragment {
             int offset = pArgs[1];
 
             List<MessageInDialogs> msgs = mDialogInteractor.getMessagesInDialogListFromRepo(count, offset);
-
             Log.d(ASYNC_TASK_TAG, "doInBackground: returned " + msgs.size() + " messages");
 
-            for (MessageInDialogs mes : msgs
-                    ) {
-                System.out.println("!!!===============!!! " + mes.getContactUser());
-
-            }
             return msgs;
         }
 

@@ -18,8 +18,10 @@ import java.util.Locale;
 
 public class Converter {
 
+    public static final String TAG = "Converter";
+
     public static List<MessageInDialogListViewModel> convertMessagesFromDomainToUIModel(List<MessageInDialogs> mMessages) {
-        Log.d("DialogsFragment", "convertMessagesFromDomainToUIModel: called");
+        Log.d(TAG, "convertMessagesFromDomainToUIModel() called with: mMessages = [" + mMessages + "]");
         List<MessageInDialogListViewModel> messagesUI = new ArrayList<>();
 
         for (MessageInDialogs message : mMessages

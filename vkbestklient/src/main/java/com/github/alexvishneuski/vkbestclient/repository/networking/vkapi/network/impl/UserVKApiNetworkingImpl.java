@@ -34,7 +34,7 @@ public class UserVKApiNetworkingImpl implements IUserVKApiNetworking {
                         new HttpClient().requestGet(url, VKApiUsersGetResult.class);
 
         if (result.getError() != null) {
-            final String errorMessage = TAG + " in " + methodsTag + ": " + result.getError();
+            final String errorMessage = TAG + " in " + methodsTag + " VKApi Error: code [" + result.getError().getErrorCode() + "], message [" + result.getError().getErrorCode() + "]";
             throw new VKApiException(errorMessage);
         }
 

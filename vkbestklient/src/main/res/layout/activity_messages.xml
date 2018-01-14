@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="presentation.view.activities.MessagesActivity">
+
+    <RelativeLayout
+        android:id="@+id/history_top_bar_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorTopBarBackgroundBlue"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingEnd="4dp"
+        android:paddingRight="@dimen/messages_item_padding"
+        android:paddingTop="4dp"
+        tools:ignore="RtlSymmetry">
+
+        <ImageButton
+            android:id="@+id/history_to_dialog_fragment_image_buttom"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="?selectableItemBackground"
+            app:srcCompat="@drawable/ic_arrow_back_24px"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/contact_user_profile_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/history_to_dialog_fragment_image_buttom"
+            android:layout_toLeftOf="@+id/history_menu_image_buttom"
+            android:layout_toRightOf="@+id/history_to_dialog_fragment_image_buttom"
+            android:layout_toStartOf="@+id/history_menu_image_buttom"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/histiry_contact_user_avatar_image_view"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <LinearLayout
+                android:id="@+id/message_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/history_contact_user_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_weight="4"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    tools:ellipsize="end"
+                    tools:singleLine="true"
+                    tools:text="@string/lorem_stub" />
+
+
+                <TextView
+                    android:id="@+id/history_contact_user_addition_info_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="4"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="-1dp"
+                    android:maxLines="2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/history_menu_image_buttom"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="?selectableItemBackground"
+            app:srcCompat="@drawable/ic_more_vert_24px"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/history_area_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/history_bottom_bar_relative_layout"
+        android:layout_below="@+id/history_top_bar_relative_layout"
+        android:background="@color/colorMessageBackgroundLightBlue">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/history_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider"
+            android:orientation="vertical"
+            android:showDividers="middle" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/history_bottom_bar_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite">
+
+        <ImageButton
+            android:id="@+id/history_attach_file_image_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="@dimen/top_bar_panel_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="?selectableItemBackground"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_attach_file_rotate_45_24px"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/history_messages_input_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@+id/history_attach_file_image_view"
+            android:layout_toLeftOf="@+id/history_attach_emoji_image_view"
+            android:layout_toRightOf="@+id/history_attach_file_image_view"
+            android:layout_toStartOf="@+id/history_attach_emoji_image_view"
+            android:text="@string/messages_top_bar_title"
+            android:textColor="@color/colorGrey"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:typeface="normal"
+            tools:ignore="RelativeOverlap"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/history_attach_emoji_image_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="@dimen/top_bar_panel_height"
+            android:layout_toLeftOf="@+id/history_attach_voice_image_view"
+            android:layout_toStartOf="@+id/history_attach_voice_image_view"
+            android:background="?selectableItemBackground"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_smile_24px"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/history_attach_voice_image_view"
+            android:layout_width="@dimen/top_bar_panel_height"
+            android:layout_height="@dimen/top_bar_panel_height"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="?selectableItemBackground"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_mic_24px"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+</RelativeLayout>

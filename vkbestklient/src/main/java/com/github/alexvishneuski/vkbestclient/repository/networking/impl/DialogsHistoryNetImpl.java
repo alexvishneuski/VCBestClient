@@ -41,7 +41,7 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
         String userId = String.valueOf(pUserId);
 
         VKApiMessagesGetHistoryParams msgsParams =
-                VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).setUserId(userId).build();
+                VKApiMessagesGetHistoryParams.getBuilder().setCount(msgCount).setOffset(msgOffset).setUserId(userId).setInChronologicalOrder(RepositoryConstants.VkMethodMessagesGetHistory.IN_CHRONOLOGICAL_ORDER_VALUE_REVERSE).build();
         VKApiUri msgsUri = VKApiUri.getBuilder()
                 .setProtocol(RepositoryConstants.CommonUrlParts.PROTOCOL)
                 .setBasePath(RepositoryConstants.CommonUrlParts.VK_METHOD_BASE_PATH)
@@ -51,16 +51,18 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
 
         messagesHistory.addAll(mMessagesHistoryVKApiNetworkingImpl.get(msgsUri));
 
-        Log.d(TAG, "get returns messages in history");
+        Log.d(TAG, "get returns ["+messagesHistory.size()+"] messages in dialogs history");
 
         return messagesHistory;
     }
 
     @Override
-    public Integer getMessagesCount(Integer pUserId) {
+    public Integer getMessagesCount(Integer pContactUserId) {
+        Log.d(TAG, "getMessagesCount() called with: pContactUserId = [" + pContactUserId + "]");
 
-        String limit = "1";
-        String userId = String.valueOf(pUserId);
+        String limitAsString = "1";
+        String limit = String.valueOf(limitAsString);
+        String userId = String.valueOf(pContactUserId);
 
         VKApiMessagesGetHistoryParams msgsParams =
                 VKApiMessagesGetHistoryParams.getBuilder().setUserId(userId).setCount(limit).build();
@@ -74,7 +76,7 @@ public class DialogsHistoryNetImpl implements IDialogsHistoryNet {
         int count = mMessagesHistoryVKApiNetworkingImpl.getTotalCount(msgsUri);
 
         Log.d(TAG, "getMessagesCount: returned [" + count + "] messages " +
-                "in dialog history with user with id [" + pUserId + "]");
+                "in dialog history with user with id [" + pContactUserId + "]");
         return count;
     }
 }

@@ -23,6 +23,8 @@ import java.util.List;
 
 public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<MessageInDialogListRecyclerViewHolder> {
 
+    public final String TAG = this.getClass().getSimpleName();
+
     //TODO Handle view types (interface...)
 
     @IntDef({
