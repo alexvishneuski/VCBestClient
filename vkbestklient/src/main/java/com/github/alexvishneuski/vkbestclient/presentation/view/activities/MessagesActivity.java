@@ -15,8 +15,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.imageloader.NOrda;
@@ -27,6 +29,7 @@ import com.github.alexvishneuski.vkbestclient.presentation.adapters.DialogsHisto
 import com.github.alexvishneuski.vkbestclient.presentation.uimodel.MessageInDialogListViewModel;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Constants;
 import com.github.alexvishneuski.vkbestclient.presentation.utils.Converter;
+import com.github.alexvishneuski.vkbestclient.util.ContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,39 +47,46 @@ public class MessagesActivity extends AppCompatActivity {
     private int mRecyclerViewContainer;
     //  private View mView;
 
-    private EditText mMessageInputEditText;
-    private View mRecyclerArea;
-    private View mAttachVoiceImageButton;
-    private View mSendMessageButton;
+    /*top panel*/
+    private View mToDialogsButton;
+    private View mContactUserAvatarImageView;
+    private View mMenuButton;
+    private TextView mContactUserNameTextView;
+    private TextView mContactUserAdditionalTextView;
 
+    /*bottom panel*/
+    private View mAttachFileButton;
+    private View mAttachEmojiButton;
+    private ImageButton mAttachVoiceOrSendButton;
+    private EditText mInputMessageEditText;
 
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
+    private boolean mIsFocusable = false;
+    private boolean mIsSendingEnabled = false;
 
-    private List<MessageInDialogListViewModel> mMessagesUI;
-    private DialogsHistoryRecyclerAdapter mAdapter;
-
-    private int mMessagesInHistoryTotalCount;
-
+    /*data for top panel*/
     private int mContactUserId;
     private String mContactUserAvatarPath;
     private String mContactUserName;
     private String mContactUserAdditional;
 
-    private ImageView mContactUserAvatarImageView;
-    private TextView mContactUserNameTextView;
-    private TextView mContactUserAdditionalTextView;
+    /*recycler*/
+    private View mRecyclerArea;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManager;
+    private List<MessageInDialogListViewModel> mMessagesUI;
+    private DialogsHistoryRecyclerAdapter mAdapter;
 
+    /*recycler's events handling*/
+    private int mMessagesInHistoryTotalCount;
 
     int mVisibleItemCount;
     int mTotalItemCount;
     int mFirstVisibleItemPosition;
     private boolean mIsLoading = true;
 
-    private boolean mIsFocusable = false;
-
     private SharedActivity mParentActivity;
 
+    /*interactors*/
     private IMessageInHistoryInteractor mMessageInHistoryInteractor = new MessageInHistoryInteractorImpl();
 
     @Override
@@ -106,45 +116,88 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        mContactUserAvatarImageView = findViewById(R.id.histiry_contact_user_avatar_image_view);
-        mContactUserAdditionalTextView = findViewById(R.id.history_contact_user_addition_info_text_view);
-        mAttachVoiceImageButton = findViewById(R.id.history_attach_voice_image_view);
+        /*top panel*/
+        mToDialogsButton = findViewById(R.id.history_to_dialogs_buttom);
+        mContactUserAvatarImageView = findViewById(R.id.history_contact_user_avatar_image_view);
         mContactUserNameTextView = findViewById(R.id.history_contact_user_name_text_view);
+        mContactUserAdditionalTextView = findViewById(R.id.history_contact_user_addition_info_text_view);
+        mMenuButton = findViewById(R.id.history_menu_buttom);
+
+        /*bottom panel*/
+        mAttachFileButton = findViewById(R.id.history_attach_file_button);
+        mAttachVoiceOrSendButton = findViewById(R.id.history_attach_voice_button);
+        mInputMessageEditText = findViewById(R.id.history_messages_input_text_view);
+        mAttachEmojiButton = findViewById(R.id.history_attach_emoji_button);
+        /*recycler*/
     }
 
     private void initViews() {
-
-        NOrda.INSTANCE.load(mContactUserAvatarPath).into(mContactUserAvatarImageView);
+        /*top panel*/
+        NOrda.INSTANCE.load(mContactUserAvatarPath).into((ImageView) mContactUserAvatarImageView);
 
         mContactUserNameTextView.setText(mContactUserName);
         startAnimation(mContactUserNameTextView);
 
         mContactUserAdditionalTextView.setText(mContactUserAdditional);
 
-        mMessageInputEditText = findViewById(R.id.history_messages_input_text_view);
-        mMessageInputEditText.setOnClickListener(new View.OnClickListener() {
+        mToDialogsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*mMessageInputEditText.requestFocus();*/
-                mIsFocusable = true;
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.RESULT_HIDDEN);
+                String msg = getString(R.string.go_to_dialogs);
+                Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
-/*
-        mRecyclerArea = findViewById(R.id.history_area_recycler_view);
-        mRecyclerArea.setClickable(true);
-        mRecyclerArea.setOnClickListener(new View.OnClickListener() {
+
+        mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("!!!!!!!!!!!!!!=====RV AREA============!!!!!!!!!!!!!!!!!!!");
-                mIsFocusable = false;
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mRecyclerArea.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                String msg = getString(R.string.show_menu);
+                Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
+        /*bottom panel*/
+        mAttachVoiceOrSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIsSendingEnabled) {
+                    String msg = getString(R.string.send_message);
+                    Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
+                } else {
+                    String msg = getString(R.string.attach_voice);
+                    Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mInputMessageEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAttachVoiceOrSendButton.setImageResource(R.drawable.ic_send_24px);
+                mIsSendingEnabled = true;
+                mIsFocusable = true;
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.RESULT_HIDDEN);
+                }
+            }
+        });
+
+        mAttachFileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = getString(R.string.attach_file);
+                Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mAttachEmojiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = getString(R.string.attach_emoji);
+                Toast.makeText(ContextHolder.getContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void startAnimation(View pView) {
@@ -163,11 +216,14 @@ public class MessagesActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        mContactUserId = intent.getExtras().getInt(idKey);
-        mContactUserAvatarPath = intent.getExtras().getString(avatarPathKey);
-        mContactUserName = intent.getExtras().getString(nameKey);
-        mContactUserAdditional = intent.getExtras().getString(additionalKey);
-        System.out.println("recived data: "+mContactUserId+" "+mContactUserAvatarPath+" "+mContactUserName+" "+mContactUserAdditional);
+        if (intent.getExtras() != null) {
+            mContactUserId = intent.getExtras().getInt(idKey);
+            mContactUserAvatarPath = intent.getExtras().getString(avatarPathKey);
+            mContactUserName = intent.getExtras().getString(nameKey);
+            mContactUserAdditional = intent.getExtras().getString(additionalKey);
+        }
+
+        System.out.println("recived data: " + mContactUserId + " " + mContactUserAvatarPath + " " + mContactUserName + " " + mContactUserAdditional);
     }
 
     private void createRecyclerView() {
@@ -259,7 +315,7 @@ public class MessagesActivity extends AppCompatActivity {
          */
         @Override
         protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
-            Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
+            Log.d(ASYNC_TASK_TAG, "doInBackground() called");
 
             int offset = pArgs[0];
             int limit = pArgs[1];

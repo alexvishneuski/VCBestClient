@@ -10,5 +10,13 @@
 
     <string name="lorem_stub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
 
+    <!--messages activity-->
+    <string name="go_to_dialogs">TODO: to show menu</string>
+    <string name="show_menu">TODO: to show menu</string>
+
+    <string name="attach_file">TODO: to attach file</string>
+    <string name="attach_emoji">TODO: to attach emoji</string>
+    <string name="attach_voice">TODO: to record and attach voice</string>
+    <string name="send_message">TODO: to send message</string>
 
 </resources>

@@ -21,7 +21,7 @@
         tools:ignore="RtlSymmetry">
 
         <ImageButton
-            android:id="@+id/history_to_dialog_fragment_image_buttom"
+            android:id="@+id/history_to_dialogs_buttom"
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
@@ -34,14 +34,14 @@
             android:id="@+id/contact_user_profile_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/history_to_dialog_fragment_image_buttom"
-            android:layout_toLeftOf="@+id/history_menu_image_buttom"
-            android:layout_toRightOf="@+id/history_to_dialog_fragment_image_buttom"
-            android:layout_toStartOf="@+id/history_menu_image_buttom"
+            android:layout_toEndOf="@+id/history_to_dialogs_buttom"
+            android:layout_toLeftOf="@+id/history_menu_buttom"
+            android:layout_toRightOf="@+id/history_to_dialogs_buttom"
+            android:layout_toStartOf="@+id/history_menu_buttom"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/histiry_contact_user_avatar_image_view"
+                android:id="@+id/history_contact_user_avatar_image_view"
                 android:layout_width="56dp"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_launcher_round" />
@@ -84,7 +84,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/history_menu_image_buttom"
+            android:id="@+id/history_menu_buttom"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -120,7 +120,7 @@
         android:background="@color/colorWhite">
 
         <ImageButton
-            android:id="@+id/history_attach_file_image_view"
+            android:id="@+id/history_attach_file_button"
             android:layout_width="@dimen/top_bar_panel_height"
             android:layout_height="@dimen/top_bar_panel_height"
             android:layout_alignParentLeft="true"
@@ -137,31 +137,31 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
-            android:layout_toEndOf="@+id/history_attach_file_image_view"
-            android:layout_toLeftOf="@+id/history_attach_emoji_image_view"
-            android:layout_toRightOf="@+id/history_attach_file_image_view"
-            android:layout_toStartOf="@+id/history_attach_emoji_image_view"
+            android:layout_toEndOf="@+id/history_attach_file_button"
+            android:layout_toLeftOf="@+id/history_attach_emoji_button"
+            android:layout_toRightOf="@+id/history_attach_file_button"
+            android:layout_toStartOf="@+id/history_attach_emoji_button"
+            android:inputType="text"
             android:text="@string/messages_top_bar_title"
             android:textColor="@color/colorGrey"
             android:textSize="16sp"
             android:textStyle="normal"
             android:typeface="normal"
-            tools:ignore="RelativeOverlap"
-            android:inputType="text" />
+            tools:ignore="RelativeOverlap" />
 
         <ImageButton
-            android:id="@+id/history_attach_emoji_image_view"
+            android:id="@+id/history_attach_emoji_button"
             android:layout_width="@dimen/top_bar_panel_height"
             android:layout_height="@dimen/top_bar_panel_height"
-            android:layout_toLeftOf="@+id/history_attach_voice_image_view"
-            android:layout_toStartOf="@+id/history_attach_voice_image_view"
+            android:layout_toLeftOf="@+id/history_attach_voice_button"
+            android:layout_toStartOf="@+id/history_attach_voice_button"
             android:background="?selectableItemBackground"
             android:scaleType="center"
             app:srcCompat="@drawable/ic_smile_24px"
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/history_attach_voice_image_view"
+            android:id="@+id/history_attach_voice_button"
             android:layout_width="@dimen/top_bar_panel_height"
             android:layout_height="@dimen/top_bar_panel_height"
             android:layout_alignParentEnd="true"
