@@ -88,6 +88,8 @@ public class RepositoryConstants {
         String DESTINATION_ID_KEY = "peer_id";
                 String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
 
+        String IN_CHRONOLOGICAL_ORDER_VALUE_REVERSE = "0";
+
     }
 
     public interface VkMethodMessagesGetDialogs {
