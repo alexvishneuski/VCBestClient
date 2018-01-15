@@ -22,8 +22,8 @@ android {
     }
     buildTypes {
         debug {
-            /*buildConfigField "String", "APP_VERSION_URL", "\"http://10.0.2.3:8080\""*/
-            buildConfigField "String", "APP_VERSION_URL", "\"https://version-checker-1508930507551.appspot.com\""
+            buildConfigField "String", "APP_VERSION_URL", "\"http://10.0.2.3:8080\""
+            /*buildConfigField "String", "APP_VERSION_URL", "\"https://version-checker-1508930507551.appspot.com\""*/
 
         }
         release {
