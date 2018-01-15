@@ -13,7 +13,10 @@ import com.google.gson.GsonBuilder;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+//todo to difine to corresponding package, add usual HTTP
 public class AppVersionChecker {
+
+
     public final String VERSION_URL = BuildConfig.APP_VERSION_URL;
 
     private Context mContext;

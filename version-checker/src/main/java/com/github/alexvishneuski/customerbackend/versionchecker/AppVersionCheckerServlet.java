@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//TODO make separate json doc with versionNumber, access throuth interface
+//TODO read text file in Servlet (with app version)
 public class AppVersionCheckerServlet extends HttpServlet {
 
-    //TODO make separate json doc with versionNumber, access throuth interface
+
     private Integer appVersionId = 1;
 
     @Override

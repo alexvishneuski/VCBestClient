@@ -13,6 +13,10 @@ import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.asynctasks.AppVersionChecker;
 import com.github.alexvishneuski.vkbestclient.presentation.asynctasks.PseudoDownloadAT;
 
+//TODO 1. add dialog instesd buttons
+//TODO 2. add handling pseudo version's downloading: progress bar, go to next activity only after full version fake downloading and fake upgrating
+//TODO 3. add handling free/VIP version (for free user shouldn't obligatorely download new version)
+
 public class CheckVersionActivity extends AppCompatActivity {
 
     public static final String APP_SOURCE = BuildConfig.SHARE_URL;
