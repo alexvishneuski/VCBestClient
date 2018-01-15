@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/update_appversion_now_button"
+        android:id="@+id/update_app_now_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/update_app_version_now" />
 
     <Button
-        android:id="@+id/update_appversion_later_button"
+        android:id="@+id/update_app_later_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/update_app_version_later" />

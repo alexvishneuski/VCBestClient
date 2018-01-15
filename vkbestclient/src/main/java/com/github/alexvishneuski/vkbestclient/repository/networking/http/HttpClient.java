@@ -131,6 +131,22 @@ public class HttpClient<T> implements IHttpClient<T> {
         }
     }
 
+    public void getCurrentAppVersion(String pUrl, ResponseListener pListener) {
+        try {
+            InputStream is;
+            con = (HttpURLConnection) (new URL(pUrl)).openConnection();
+            is = con.getInputStream();
+            pListener.onResponse(is);
+            con.disconnect();
+        } catch (final Throwable t) {
+            //       pListener.onError(t);
+        } finally {
+            if (con != null) {
+                con.disconnect();
+            }
+        }
+    }
+
     @VisibleForTesting
     private InputStream openStream(final String url) throws IOException {
         Log.d(TAG, "openStream");
