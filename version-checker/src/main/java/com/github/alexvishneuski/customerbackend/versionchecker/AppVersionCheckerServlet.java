@@ -15,10 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//TODO make separate json doc with versionNumber, access throuth interface
-//TODO read text file in Servlet (with app version)
 public class AppVersionCheckerServlet extends HttpServlet {
-
 
     private Integer appVersionId = 1;
 
@@ -31,25 +28,16 @@ public class AppVersionCheckerServlet extends HttpServlet {
 
         version.setId(appVersionId);
 
-        //TODO what is faster?
-
-        //1
         new Gson().toJson(version, pResponse.getWriter());
-
-        //2
-//        final String versionAsString = new Gson().toJson(version);
-//        pResponse.getWriter().print(versionAsString);
     }
-
 
     @Override
     public void doPost(HttpServletRequest pRequest, HttpServletResponse pResponse)
             throws IOException {
-        Integer id = Integer.valueOf(pRequest.getParameter("version"));
         pResponse.setContentType("application/json");
         final AppVersion version = new AppVersion();
         version.setId(appVersionId);
-        new Gson().toJson(version, pResponse.getWriter());
 
+        new Gson().toJson(version, pResponse.getWriter());
     }
 }

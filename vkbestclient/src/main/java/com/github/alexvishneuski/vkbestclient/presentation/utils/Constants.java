@@ -10,7 +10,6 @@ public class Constants {
     }
 
     public interface IntentConstants {
-
         //SharedActivity
         String CONTACT_USER_FOR_DIALOG_HISTORY_ID = "CONTACT_USER_FOR_DIALOG_HISTORY_ID";
         String CONTACT_USER_FOR_DIALOG_HISTORY_AVATAR = "CONTACT_USER_FOR_DIALOG_HISTORY_AVATAR";

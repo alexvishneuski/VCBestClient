@@ -4,6 +4,4 @@ package com.github.alexvishneuski.vkbestclient.presentation.uimodel;
 public enum MessageDirectionViewModel {
 
     OUTGOING, INCOMING
-
-
 }

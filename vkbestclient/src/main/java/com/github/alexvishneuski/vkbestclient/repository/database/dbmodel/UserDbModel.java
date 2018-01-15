@@ -7,16 +7,7 @@ public class UserDbModel {
     private String mLastName;
     private String mAvatarPath;
 
-    public UserDbModel(String pFirstName, String pLastName, String pAvatarPath) {
-        mFirstName = pFirstName;
-        mLastName = pLastName;
-        mAvatarPath = pAvatarPath;
-    }
-
-    public UserDbModel() {
-    }
-
-    public UserDbModel(int pId, String pFirstName, String pLastName, String pAvatarPath) {
+    public UserDbModel(int pId, String pFirstName, String pAvatarPath) {
         mId = pId;
         mFirstName = pFirstName;
         mLastName = pFirstName;
@@ -37,27 +28,14 @@ public class UserDbModel {
         return mFirstName;
     }
 
-    public void setFirstName(String pFirstName) {
-
-        mFirstName = pFirstName;
-    }
-
     public String getLastName() {
 
         return mLastName;
     }
 
-    public void setLastName(String pLastName) {
-        mLastName = pLastName;
-    }
-
     public String getAvatarPath() {
 
         return mAvatarPath;
-    }
-
-    public void setAvatarPath(String pAvatarPath) {
-        mAvatarPath = pAvatarPath;
     }
 
     @Override
@@ -67,12 +45,7 @@ public class UserDbModel {
 
         UserDbModel that = (UserDbModel) pO;
 
-        if (mId != that.mId) return false;
-        if (mFirstName != null ? !mFirstName.equals(that.mFirstName) : that.mFirstName != null)
-            return false;
-        if (mLastName != null ? !mLastName.equals(that.mLastName) : that.mLastName != null)
-            return false;
-        return mAvatarPath != null ? mAvatarPath.equals(that.mAvatarPath) : that.mAvatarPath == null;
+        return mId == that.mId && (mFirstName != null ? mFirstName.equals(that.mFirstName) : that.mFirstName == null) && (mLastName != null ? mLastName.equals(that.mLastName) : that.mLastName == null) && (mAvatarPath != null ? mAvatarPath.equals(that.mAvatarPath) : that.mAvatarPath == null);
     }
 
     @Override

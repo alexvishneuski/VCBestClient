@@ -21,9 +21,6 @@ public class MessageRepoDbImpl implements IMessageRepoDb {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    //TODO if it's good idea?
-    private static final String ID = MessageDb._ID;
-
     private IDbOperations mOperations = new DbOperations(new SqlConnectorSimple(ContextHolder.getContext()));
     private Class mClazz = MessageDb.class;
     private String mTable = getTable(mClazz);

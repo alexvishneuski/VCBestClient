@@ -72,9 +72,7 @@ public class UserInteractorImpl implements IUserInteractor {
         List<Integer> ids = new ArrayList<>();
         ids.add(id);
 
-        UserInDialogs user = getDomainUsersBasicInfo(ids).get(0);
-
-        return user;
+        return getDomainUsersBasicInfo(ids).get(0);
     }
 
 

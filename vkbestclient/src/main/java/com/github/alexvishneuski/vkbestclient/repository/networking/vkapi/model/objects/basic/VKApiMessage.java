@@ -13,15 +13,12 @@ import java.util.List;
 
 public class VKApiMessage {
 
-    // идентификатор сообщения (не возвращается для пересланных сообщений)
     @SerializedName("id")
     private Integer mId;
 
-    // идентификатор пользователя, в диалоге с которым находится сообщение
     @SerializedName("user_id")
     private Integer mContactUserId;
 
-    // идентификатор автора сообщения положительное число
     @SerializedName("from_id")
     private Integer mAuthorId;
 
@@ -29,47 +26,36 @@ public class VKApiMessage {
     @SerializedName("date")
     private Integer mSendingDate;
 
-    // статус сообщения (0 — не прочитано, 1 — прочитано, не возвращается для пересланных сообщений)
     @SerializedName("read_state")
     private Integer mReadStatus;
 
-    // тип сообщения (0 — полученное, 1 — отправленное, не возвращается для пересланных сообщений)
     @SerializedName("out")
     private Integer mDirection;
 
-    // заголовок сообщения или беседы
     @SerializedName("title")
     private String mTitle;
 
-    // текст сообщения
     @SerializedName("body")
     private String mBody;
 
-    // информация о местоположении
     @SerializedName("geo")
     private VKApiGeo mGeo;
 
-    // медиавложения сообщения (фотографии, ссылки и т.п.)
     @SerializedName("attachments")
     private List<VKApiAttachment> mAttachmentList;
 
-    // массив пересланных сообщений (если есть). Максимальное количество элементов — 100. Максимальная глубина вложенности для пересланных сообщений — 45, общее максимальное количество в цепочке с учетом вложенности — 500
     @SerializedName("fwd_messages")
     private List<VKApiMessage> mRedirectedMessageList;
 
-    // содержатся ли в сообщении emoji-смайлы [0,1]
     @SerializedName("emoji")
     private Integer mHasEmoji;
 
-    // является ли сообщение важным [0,1]
     @SerializedName("important")
     private Integer mIsImportant;
 
-    // удалено ли сообщение [0,1]
     @SerializedName("deleted")
     private Integer mIsDeleted;
 
-    // идентификатор, используемый при отправке сообщения. Возвращается только для исходящих сообщений
     @SerializedName("random_id")
     private Integer mRandomId;
 

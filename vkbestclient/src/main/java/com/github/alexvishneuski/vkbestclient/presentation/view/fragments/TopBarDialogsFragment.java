@@ -21,8 +21,6 @@ public class TopBarDialogsFragment extends Fragment {
 
         int topBarLayoutId = R.layout.fragment_top_bar_dialogs;
 
-        View view = inflater.inflate(topBarLayoutId, null);
-
-        return view;
+        return inflater.inflate(topBarLayoutId, null);
     }
 }

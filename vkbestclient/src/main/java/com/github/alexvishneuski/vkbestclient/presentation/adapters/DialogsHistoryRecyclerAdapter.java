@@ -37,9 +37,6 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<DialogsH
         int INCOMING_NOATTACHMENT_FIRST = 5;
         int INCOMING_NOATTACHMENT = 6;
         int DATE = 7;
-
-        //TODO Add new types: with attachments...
-
     }
 
     public final String TAG = this.getClass().getSimpleName();
@@ -84,7 +81,7 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<DialogsH
 
         final View view = LayoutInflater.from(pParent.getContext()).inflate(viewId, pParent, false);
 
-        return new DialogsHistoryRecyclerViewHolder(view, this);
+        return new DialogsHistoryRecyclerViewHolder(view);
     }
 
     @Override
@@ -92,9 +89,6 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<DialogsH
         final MessageInDialogListViewModel messageModel = mMessages.get(pPosition);
 
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
-        //TODO make date convertion corresponding date format in fragment
-      //  pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
-
     }
 
     @Override
@@ -114,12 +108,8 @@ public class DialogsHistoryRecyclerAdapter extends RecyclerView.Adapter<DialogsH
         return 0;
     }
 
-    /**
-     * @param pMessage
-     * @return MessageType depends direction, read status, attachments etc.
-     */
     private int getMessageType(@NonNull MessageInDialogListViewModel pMessage) {
-        //TODO add another types(date, first) with correcsp logic
+
         if (pMessage.getMessageDirection() == (MessageDirectionViewModel.OUTGOING) && pMessage.getMessageRead()) {
 
             return MessageType.OUTGOING_NOATTACHMENT_READ;

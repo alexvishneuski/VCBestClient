@@ -9,8 +9,6 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -46,46 +44,6 @@ public class HttpClient<T> implements IHttpClient<T> {
             //TODO add sort of RepoVKApiHttpException()
         } catch (NoSuchFieldException pE) {
             pE.printStackTrace();
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
-
-        //noinspection unchecked
-        return (T) response;
-    }
-
-    @Override
-    public T requestPost(String pUrl, Class<T> pClazz, String pBody) {
-
-        final OutputStream outputStream;
-        OutputStreamWriter writer;
-
-        final InputStream inputStream;
-        InputStreamReader reader;
-        Object response = null;
-
-        try {
-            HttpURLConnection con = (HttpURLConnection) (new URL(pUrl)).openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/json");
-
-            outputStream = con.getOutputStream();
-            writer = new OutputStreamWriter(outputStream);
-            writer.write(pBody);
-            writer.flush();
-            writer.close();
-
-            inputStream = con.getInputStream();
-            reader = new InputStreamReader(inputStream);
-            response = new GsonBuilder()
-                    .setLenient()
-                    .create().fromJson(reader, pClazz);
-
-            con.disconnect();
-        } catch (Throwable t) {
-            t.printStackTrace();
         } finally {
             if (con != null) {
                 con.disconnect();

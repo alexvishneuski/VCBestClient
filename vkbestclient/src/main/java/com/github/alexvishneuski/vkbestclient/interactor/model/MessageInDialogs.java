@@ -14,17 +14,6 @@ public class MessageInDialogs {
     public MessageInDialogs() {
     }
 
-    public MessageInDialogs(int pId, UserInDialogs pCurrentUser, UserInDialogs pContactUser, MessageDirection pMessageDirection, int pMessageSendingDate, String pMessageTitle, String pMessageBody, boolean pIsMessageRead) {
-        mId = pId;
-        mCurrentUser = pCurrentUser;
-        mContactUser = pContactUser;
-        mMessageDirection = pMessageDirection;
-        mMessageSendingDate = pMessageSendingDate;
-        mMessageTitle = pMessageTitle;
-        mMessageBody = pMessageBody;
-        mIsMessageRead = pIsMessageRead;
-    }
-
     public int getId() {
         return mId;
     }

@@ -13,11 +13,7 @@ import com.google.gson.GsonBuilder;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-//todo to difine to corresponding package, add usual HTTP
 public class AppVersionChecker {
-
-
-    public final String VERSION_URL = BuildConfig.APP_VERSION_URL;
 
     private Context mContext;
 
@@ -36,20 +32,17 @@ public class AppVersionChecker {
     }
 
     private Integer getAppVersionFromServer() {
-
-        //getting url
+        String VERSION_URL = BuildConfig.APP_VERSION_URL;
         final String url = new DomainApi(VERSION_URL).getLastAppVersionPath();
         MyResponseListener listener = new MyResponseListener();
 
-         new HttpClient().getCurrentAppVersion(url, listener);
+        new HttpClient().getCurrentAppVersion(url, listener);
 
         if (listener.getThrowable() != null) {
-            //TODO implement error handling on UI
             throw new UnsupportedOperationException(listener.getThrowable());
         }
         return listener.getVersion().getId();
     }
-
 
     private Integer getAppVersionOnDevice() {
         PackageManager pm = mContext.getPackageManager();
@@ -84,7 +77,7 @@ public class AppVersionChecker {
             }
         }
 
-        public Throwable getThrowable() {
+        Throwable getThrowable() {
             return mThrowable;
         }
 

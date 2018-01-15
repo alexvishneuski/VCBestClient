@@ -1,9 +1,11 @@
 package com.github.alexvishneuski.vkbestclient;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 
+@SuppressLint("Registered")
 public class StethoApp extends Application {
 
     @Override

@@ -58,7 +58,6 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:26.1.0'
     compile 'com.android.support:animated-vector-drawable:26.1.0'
     compile project(':image-loader')
-    compile project(':datamodel')
     compile project(':domain')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

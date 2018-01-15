@@ -9,12 +9,6 @@ public class UserInDialogs {
     public UserInDialogs() {
     }
 
-    public UserInDialogs(int pUserId, String pUserFullName, String pUserAvatarPath) {
-        mUserId = pUserId;
-        mUserFullName = pUserFullName;
-        mUserAvatarPath = pUserAvatarPath;
-    }
-
     public int getUserId() {
         return mUserId;
     }

@@ -1,30 +1,29 @@
 package com.github.alexvishneuski.vkbestclient.presentation.asynctasks;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Pair;
 import android.widget.Toast;
 
-import com.github.alexvishneuski.vkbestclient.presentation.view.activities.CheckVersionActivity;
-
 import java.util.concurrent.TimeUnit;
 
 public class PseudoDownloadAT extends AsyncTask<Pair<Context, String>, Integer, Void> {
 
-    private CheckVersionActivity mActivity;
-
+    @SuppressLint("StaticFieldLeak")
     private Context mContext;
     private String mSource;
 
+    @SafeVarargs
     @Override
-    protected Void doInBackground(Pair<Context, String>... pParams) {
+    protected final Void doInBackground(Pair<Context, String>... pParams) {
         mContext = pParams[0].first;
         mSource = pParams[0].second;
         try {
 
             for (int i = 0; i <= 100; i += 20) {
 
-                downloadFile(i);
+                downloadFile();
 
                 publishProgress(i);
             }
@@ -36,6 +35,7 @@ public class PseudoDownloadAT extends AsyncTask<Pair<Context, String>, Integer, 
         return null;
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onProgressUpdate(Integer... vValues) {
         super.onProgressUpdate(vValues);
@@ -49,7 +49,7 @@ public class PseudoDownloadAT extends AsyncTask<Pair<Context, String>, Integer, 
     }
 
 
-    private void downloadFile(int i) throws InterruptedException {
+    private void downloadFile() throws InterruptedException {
         TimeUnit.MILLISECONDS.sleep(100);
     }
 }

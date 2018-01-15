@@ -9,32 +9,20 @@ import com.google.gson.annotations.SerializedName;
 */
 public class VKApiDialog {
 
-    //unread — количество непрочитанных сообщений
-    //(если все сообщения прочитаны, поле не возвращается
+
     @SerializedName("unread")
     private Integer mUnreadCount;
 
-    //Если был передан параметр start_message_id, будет также возвращено поле real_offset –
-    // итоговое смещение данного подмножества диалогов
-    // (оно может быть отрицательным, если был указан отрицательный offset).
-    //not works this rule ('count' by 'start_message_id' specifying returns all dialog's count):
-    //Если был передан параметр start_message_id, будет найдена позиция диалога в списке,
-    // идентификатор последнего сообщения которого равен start_message_id
-    // (или ближайший к нему более ранний). Начиная с этой позиции будет возвращено count диалогов.
-    // Смещение offset в этом случае будет отсчитываться от этой позиции
-    // (оно может быть отрицательным).
     @SerializedName("real_offset")
     private Integer mRealOffset;
 
-    //message — объект, описывающий личное сообщение;
+
     @SerializedName("message")
     private VKApiMessage mMessage;
 
-    //in_read — идентификатор последнего сообщения,прочитанного текущим пользователем;
     @SerializedName("in_read")
     private Integer mLastReadMessageByCurrentUserId;
 
-    //out_read — идентификатор последнего сообщения,прочитанного собеседником.
     @SerializedName("out_read")
     private Integer mLastReadMessageByContactUserId;
 
