@@ -55,9 +55,4 @@ public class MessageInHistoryInteractorImpl implements IMessageInHistoryInteract
 
         return msgs;
     }
-
-    public List<MessageInDialogs> getMessagesInHistoryFromDb(int pOffset, int pLimit, int pContactUserId) {
-
-        throw new UnsupportedOperationException("getMessagesInHistoryFromDb is not implemented yet");
-    }
 }

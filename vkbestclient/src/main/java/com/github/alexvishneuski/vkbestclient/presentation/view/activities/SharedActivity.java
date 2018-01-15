@@ -22,11 +22,6 @@ import com.github.alexvishneuski.vkbestclient.presentation.view.fragments.TopBar
 import java.util.ArrayList;
 import java.util.List;
 
-/* TODO:
-* 3. extract asynctasc in separate classes
-* 4. arrive round avatars
-*/
-
 public class SharedActivity extends AppCompatActivity {
 
     static {
@@ -45,7 +40,6 @@ public class SharedActivity extends AppCompatActivity {
     private View mToSearchImageButton;
 
     private Fragment mCurrentTopBarFragment;
-    private Fragment mCurrentRecyclerFragment;
 
     private List<Pair<Integer, ? extends Fragment>> mPairs;
 
@@ -69,13 +63,6 @@ public class SharedActivity extends AppCompatActivity {
         mRecyclerViewFrameContainer = R.id.container_recycler_view;
 
         initEntryPointFragments();
-
-
-        /*to*/
-
-        /* initTopBarFragment();
-
-        initRecyclerViewFragment();*/
     }
 
 
@@ -97,35 +84,6 @@ public class SharedActivity extends AppCompatActivity {
         //setting link to current fragments
         setLinksToCurrentFragments();
     }
-
-    /*show any fragment on this activity*/
-    public void replaceFragment(int frameContainer, Fragment fragment) {
-        Log.d(TAG, "replaceFragment() called with: frameContainer = [" + frameContainer + "], fragment = [" + fragment + "]");
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(frameContainer, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    /*
-    //TODO resolve, what is the entry point?
-    *//*find top bar container and show top bar fragment
-    * for first time - dialogsfragment*//*
-    private void initTopBarFragment() {
-        Log.d(TAG, "initTopBarFragment");
-        mTopBarFrameContainer = R.id.top_bar_frame_container;
-        replaceFragment(mTopBarFrameContainer, new TopBarDialogsFragment());
-    }
-
-
-    private void initRecyclerViewFragment() {
-        Log.d(TAG, "initRecyclerViewFragment");
-        mRecyclerViewFrameContainer = R.id.container_recycler_view;
-        replaceFragment(mRecyclerViewFrameContainer, new DialogsFragment());
-    }
-
-    */
-
 
     private void initNavigationBarButtons() {
         Log.d(TAG, "initNavigationBarButtons called ");
@@ -218,8 +176,6 @@ public class SharedActivity extends AppCompatActivity {
         });
     }
 
-    //TODO must be next logic: if doesn't exist saved state - default view (profile, dialogs.)
-    //TODO (continue) If it exists - to this view and prefer to this point in view
     private void initEntryPointFragments() {
         mPairs = getPairsForDialogsInitialisation();
         replaceAllFragments(mPairs);
@@ -243,7 +199,6 @@ public class SharedActivity extends AppCompatActivity {
 
         List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
         Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarNotificationsFragment());
-        //todo change 2. par to notificationFragment
         Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new DialogsFragment());
         pairs.add(pair1);
         pairs.add(pair2);
@@ -287,35 +242,13 @@ public class SharedActivity extends AppCompatActivity {
     private void setLinksToCurrentFragments() {
         Log.d(TAG, "setLinksToCurrentFragments() called ");
         mCurrentTopBarFragment = mPairs.get(0).second;
-        mCurrentRecyclerFragment = mPairs.get(1).second;
+        Fragment currentRecyclerFragment = mPairs.get(1).second;
         Log.d(TAG, "setLinksToCurrentFragments(): mCurrentTopBarFragment: "
                 + mCurrentTopBarFragment.getClass().getSimpleName()
                 + " mCurrentRecyclerFragment "
-                + mCurrentRecyclerFragment.getClass().getSimpleName());
-    }
-    /*are invoked from out fragments*/
-
-
-   /* public void goToMessagesFragment() {
-        Log.d(TAG, "goToMessagesFragment: ");
-        mPairs = getPairsForMessagesInitialisation();
-        replaceAllFragments(mPairs);
-        Toast.makeText(this, " Gone to ToMessagesFragment", Toast.LENGTH_SHORT).show();
+                + currentRecyclerFragment.getClass().getSimpleName());
     }
 
-    private List<Pair<Integer, ? extends Fragment>> getPairsForMessagesInitialisation() {
-
-        List<Pair<Integer, ? extends Fragment>> pairs = new ArrayList<>();
-        Pair<Integer, ? extends Fragment> pair1 = new Pair<>(mTopBarFrameContainer, new TopBarMessagesFragment());
-        Pair<Integer, ? extends Fragment> pair2 = new Pair<>(mRecyclerViewFrameContainer, new MessagesFragment());
-        pairs.add(pair1);
-        pairs.add(pair2);
-
-        return pairs;
-    }*/
-
-    //can be called from another activity/fragment -> than is invoked
-    //TODO to make the same for  to profile transition
     public void goToProfileFragment() {
         Log.d(TAG, "goToProfileFragment: ");
         mPairs = getPairsForProfileInitialisation();

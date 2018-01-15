@@ -13,8 +13,6 @@ import com.github.alexvishneuski.vkbestclient.repository.database.operations.IDb
 
 public class CustomContentProvider extends ContentProvider {
 
-    private final String TAG = this.getClass().getSimpleName();
-
     public static final String PROVIDER_URI = "content://com.github.alexvishneuski.vkbestclient.repository.database.provider.CustomContentProvider";
 
     private IDbOperations mDatabase;

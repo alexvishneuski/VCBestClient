@@ -3,12 +3,10 @@ package com.github.alexvishneuski.vkbestclient.repository.database.sql;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.MessageDb;
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
 
-import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.AUTOINCREMENT;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.CREATE_TABLE_IF_NOT_EXISTS;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.INSERT_INTO;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.NOT_NULL;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.PRIMARY_KEY;
-import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.SELECT_ALL_FROM;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.RegEx.UNIQUE;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.Separators.CLS_BRACKET;
 import static com.github.alexvishneuski.vkbestclient.repository.database.util.Constants.Separators.COMMA;
@@ -37,7 +35,7 @@ public class Tables {
     public static final String CREATE_USERS_TABLE
             = CREATE_TABLE_IF_NOT_EXISTS +
             UserDb.TABLE_NAME + OPN_BRACKET +
-            UserDb._ID + INTEGER_TYPE + PRIMARY_KEY + UNIQUE+ NOT_NULL + COMMA +
+            UserDb._ID + INTEGER_TYPE + PRIMARY_KEY + UNIQUE + NOT_NULL + COMMA +
             UserDb.FIRST_NAME + TEXT_TYPE + COMMA +
             UserDb.LAST_NAME + TEXT_TYPE + COMMA +
             UserDb.AVATAR_PATH + TEXT_TYPE +
@@ -46,7 +44,7 @@ public class Tables {
     public static final String CREATE_MESSAGES_TABLE
             = CREATE_TABLE_IF_NOT_EXISTS +
             MessageDb.TABLE_NAME + OPN_BRACKET +
-            MessageDb._ID + INTEGER_TYPE + PRIMARY_KEY + UNIQUE+ NOT_NULL + COMMA +
+            MessageDb._ID + INTEGER_TYPE + PRIMARY_KEY + UNIQUE + NOT_NULL + COMMA +
             MessageDb.AUTHOR_ID + INTEGER_TYPE + COMMA +
             MessageDb.RECIPIENT_ID + INTEGER_TYPE + COMMA +
             MessageDb.TITLE + TEXT_TYPE + COMMA +
@@ -63,9 +61,6 @@ public class Tables {
                     UserDb.AVATAR_PATH +
                     CLS_BRACKET +
                     " VALUES (?,?,?,?)";
-
-    public static final String READ_All_USERS =
-            SELECT_ALL_FROM + UserDb.TABLE_NAME;
 
 
 }

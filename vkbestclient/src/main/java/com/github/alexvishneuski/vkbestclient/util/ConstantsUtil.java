@@ -5,9 +5,7 @@ public class ConstantsUtil {
     public interface AppConstants{
 
         int SDK_VERSION = 21;
-
     }
-
 }
 
 

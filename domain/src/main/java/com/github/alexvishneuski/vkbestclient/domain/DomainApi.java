@@ -15,6 +15,4 @@ public class DomainApi {
     public String getLastAppVersionPath() {
         return mBasePath+"version";
     }
-
-
 }

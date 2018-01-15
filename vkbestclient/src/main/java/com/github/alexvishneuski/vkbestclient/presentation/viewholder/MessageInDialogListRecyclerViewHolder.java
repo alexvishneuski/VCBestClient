@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter;
 
-import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.*;
+import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.TouchArea;
 
 //holder for for incoming and read messages
 public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -65,17 +65,9 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
         return mContactUserFullName;
     }
 
-    public void setContactUserFullName(TextView pContactUserFullName) {
-        mContactUserFullName = pContactUserFullName;
-    }
-
     public ImageView getCurrentUserAvatarPath() {
 
         return mCurrentUserAvatarPath;
-    }
-
-    public void setCurrentUserAvatarPath(ImageView pCurrentUserAvatarPath) {
-        mCurrentUserAvatarPath = pCurrentUserAvatarPath;
     }
 
     public ImageView getContactUserAvatarPath() {
@@ -83,25 +75,13 @@ public class MessageInDialogListRecyclerViewHolder extends RecyclerView.ViewHold
         return mContactUserAvatarPath;
     }
 
-    public void setContactUserAvatarPath(ImageView pContactUserAvatarPath) {
-        mContactUserAvatarPath = pContactUserAvatarPath;
-    }
-
     public TextView getMessageSendingDate() {
 
         return mMessageSendingDate;
     }
 
-    public void setMessageSendingDate(TextView pMessageSendingDate) {
-        mMessageSendingDate = pMessageSendingDate;
-    }
-
     public TextView getMessageBody() {
 
         return mMessageBody;
-    }
-
-    public void setMessageBody(TextView pMessageBody) {
-        mMessageBody = pMessageBody;
     }
 }

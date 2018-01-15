@@ -135,7 +135,7 @@ public class DatabaseTest {
                 String lastName = mCursor.getString(mCursor.getColumnIndex(UserDb.LAST_NAME));
                 String avatarPath = mCursor.getString(mCursor.getColumnIndex(UserDb.AVATAR_PATH));
 
-                UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
+                UserDbModel userFromDb = new UserDbModel(id, firstName, avatarPath);
                 usersFromDb.add(userFromDb);
             }
             while (mCursor.moveToNext());
@@ -221,7 +221,7 @@ public class DatabaseTest {
         String lastName = mCursor.getString(mCursor.getColumnIndex(UserDb.LAST_NAME));
         String avatarPath = mCursor.getString(mCursor.getColumnIndex(UserDb.AVATAR_PATH));
 
-        UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
+        UserDbModel userFromDb = new UserDbModel(id, firstName, avatarPath);
 
         mReadableConnection.setTransactionSuccessful();
         mReadableConnection.endTransaction();
@@ -244,7 +244,7 @@ public class DatabaseTest {
         UserDbModel user;
 
         for (int i = 0; i < pCount; i++) {
-            user = new UserDbModel(i, "FirstName " + i, "LastName " + i, "AvatarPath " + i);
+            user = new UserDbModel(i, "FirstName " + i, "AvatarPath " + i);
             users.add(user);
         }
 

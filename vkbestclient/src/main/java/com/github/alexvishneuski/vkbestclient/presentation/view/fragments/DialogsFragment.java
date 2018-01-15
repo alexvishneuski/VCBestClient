@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -31,8 +32,6 @@ import java.util.List;
 
 import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.OnItemClickListener;
 import static com.github.alexvishneuski.vkbestclient.presentation.adapters.MessageInDialogListRecyclerAdapter.TouchArea;
-
-//TODO add getting users AsyncTask
 
 public class DialogsFragment extends Fragment {
 
@@ -128,6 +127,7 @@ public class DialogsFragment extends Fragment {
     }
 
     private void setOnScrollListener() {
+        //noinspection deprecation
         mRecyclerView.setOnScrollListener(mOnScrollListener);
     }
 
@@ -249,7 +249,7 @@ public class DialogsFragment extends Fragment {
         mApiDialogsTotalCount = pCount;
     }
 
-    //TODO to deliverance from static maybe using Threads?
+    @SuppressLint("StaticFieldLeak")
     public class LoadDialogsAT extends AsyncTask<Integer, Void, List<MessageInDialogs>> {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsAT";
@@ -259,7 +259,7 @@ public class DialogsFragment extends Fragment {
          */
         @Override
         protected List<MessageInDialogs> doInBackground(Integer... pArgs) {
-            Log.d(ASYNC_TASK_TAG, "doInBackground() called with: pArgs = [" + pArgs + "]");
+            Log.d(ASYNC_TASK_TAG, "doInBackground() called");
 
             int count = pArgs[0];
             int offset = pArgs[1];
@@ -277,6 +277,7 @@ public class DialogsFragment extends Fragment {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class LoadDialogsCountAT extends AsyncTask<Void, Void, Integer> {
 
         private static final String ASYNC_TASK_TAG = "LoadDialogsCountAT";

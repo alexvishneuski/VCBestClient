@@ -1,1 +1,1 @@
-include ':vkbestclient', ':datamodel', ':image-loader', ':demo', ':version-checker', ':domain'
+include ':vkbestclient', ':image-loader', ':version-checker', ':domain'

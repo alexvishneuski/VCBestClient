@@ -22,8 +22,6 @@ public class TopBarNewsFragment extends Fragment {
 
         int topBarLayoutId = R.layout.fragment_top_bar_news;
 
-        View view = inflater.inflate(topBarLayoutId, null);
-
-        return view;
+        return inflater.inflate(topBarLayoutId, null);
     }
 }

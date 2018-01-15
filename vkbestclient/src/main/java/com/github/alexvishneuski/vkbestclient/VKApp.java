@@ -1,13 +1,10 @@
 package com.github.alexvishneuski.vkbestclient;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.widget.Toast;
 
 import com.github.alexvishneuski.vkbestclient.repository.database.operations.IDbOperations;
 import com.github.alexvishneuski.vkbestclient.util.ContextHolder;
-
-
 
 public class VKApp extends Application {
 

@@ -16,7 +16,6 @@ import com.github.alexvishneuski.vkbestclient.repository.database.sqlconnector.S
 import com.github.alexvishneuski.vkbestclient.repository.database.tablemodel.UserDb;
 import com.github.alexvishneuski.vkbestclient.repository.database.util.DbUtils;
 import com.github.alexvishneuski.vkbestclient.util.ConstantsUtil;
-import com.github.alexvishneuski.vkbestclient.util.ContextHolder;
 
 import org.junit.After;
 import org.junit.Before;
@@ -112,7 +111,7 @@ public class ContentProviderTest {
         String lastName = mCursor.getString(mCursor.getColumnIndex(UserDb.LAST_NAME));
         String avatarPath = mCursor.getString(mCursor.getColumnIndex(UserDb.AVATAR_PATH));
 
-        UserDbModel userFromDb = new UserDbModel(id, firstName, lastName, avatarPath);
+        UserDbModel userFromDb = new UserDbModel(id, firstName, avatarPath);
 
 
         //asserting
@@ -133,7 +132,7 @@ public class ContentProviderTest {
         UserDbModel user;
 
         for (int i = 0; i < pI; i++) {
-            user = new UserDbModel(i, "FirstName " + i, "LastName " + i, "AvatarPath " + i);
+            user = new UserDbModel(i, "FirstName " + i, "AvatarPath " + i);
             users.add(user);
         }
 

@@ -9,11 +9,6 @@ public class UserInDialogListViewModel {
     public UserInDialogListViewModel() {
     }
 
-    public UserInDialogListViewModel(String pUserFullName, String pUserAvatarPath) {
-        mUserFullName = pUserFullName;
-        mUserAvatarPath = pUserAvatarPath;
-    }
-
     public int getUserId() {
 
         return mUserId;

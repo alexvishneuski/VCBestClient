@@ -13,14 +13,9 @@ import com.github.alexvishneuski.vkbestclient.R;
 import com.github.alexvishneuski.vkbestclient.presentation.asynctasks.AppVersionChecker;
 import com.github.alexvishneuski.vkbestclient.presentation.asynctasks.PseudoDownloadAT;
 
-//TODO 1. add dialog instesd buttons
-//TODO 2. add handling pseudo version's downloading: progress bar, go to next activity only after full version fake downloading and fake upgrating
-//TODO 3. add handling free/VIP version (for free user shouldn't obligatorely download new version)
-
 public class CheckVersionActivity extends AppCompatActivity {
 
     public static final String APP_SOURCE = BuildConfig.SHARE_URL;
-    private View mUpdateAppNowButton;
     private View mUpdateAppLaterButton;
     private boolean isVersionOk = false;
     private AppVersionChecker mChecker;
@@ -36,13 +31,13 @@ public class CheckVersionActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mUpdateAppNowButton = findViewById(R.id.update_app_now_button);
+        View updateAppNowButton = findViewById(R.id.update_app_now_button);
         mUpdateAppLaterButton = findViewById(R.id.update_app_later_button);
 
         startVersionChecking();
 
         //pseudo download
-        mUpdateAppNowButton.setOnClickListener(new View.OnClickListener() {
+        updateAppNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -83,7 +78,7 @@ public class CheckVersionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Toast.makeText(CheckVersionActivity.this, (isVersionOk == true) ? getString(R.string.app_version_ok) : getString(R.string.you_need_update), Toast.LENGTH_SHORT).show();
+        Toast.makeText(CheckVersionActivity.this, (isVersionOk) ? getString(R.string.app_version_ok) : getString(R.string.you_need_update), Toast.LENGTH_SHORT).show();
 
 
         //if client version is lower -> update later button inaktiv

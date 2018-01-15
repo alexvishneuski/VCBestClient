@@ -1,5 +1,6 @@
 package com.github.alexvishneuski.vkbestclient.presentation.view.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -44,9 +45,6 @@ public class MessagesActivity extends AppCompatActivity {
 
     public final int LOAD_MESSAGES_COUNT = 20;
 
-    private int mRecyclerViewContainer;
-    //  private View mView;
-
     /*top panel*/
     private View mToDialogsButton;
     private View mContactUserAvatarImageView;
@@ -67,28 +65,17 @@ public class MessagesActivity extends AppCompatActivity {
     private ImageButton mAttachVoiceOrSendButton;
     private EditText mInputMessageEditText;
 
-    private boolean mIsFocusable = false;
     private boolean mIsSendingEnabled = false;
 
-    /*recycler*/
-    private View mRecyclerArea;
     private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
     private List<MessageInDialogListViewModel> mMessagesUI;
     private DialogsHistoryRecyclerAdapter mAdapter;
 
-    /*recycler's events handling*/
-    private int mMessagesInHistoryTotalCount;
-
-    int mVisibleItemCount;
-    int mTotalItemCount;
-    int mFirstVisibleItemPosition;
-    private boolean mIsLoading = true;
-
-    private SharedActivity mParentActivity;
-
     /*interactors*/
     private IMessageInHistoryInteractor mMessageInHistoryInteractor = new MessageInHistoryInteractorImpl();
+
+    public MessagesActivity() {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,11 +96,6 @@ public class MessagesActivity extends AppCompatActivity {
 
         loadMessagesInHistoryTotalCount();
         loadMessagesFirstTime();
-
-        //TODO ADD listeners
-        //addOnScrollListener();
-        //setOnScrollListener();
-
     }
 
     private void findViews() {
@@ -185,7 +167,6 @@ public class MessagesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mAttachVoiceOrSendButton.setImageResource(R.drawable.ic_send_24px);
                 mIsSendingEnabled = true;
-                mIsFocusable = true;
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (imm != null) {
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.RESULT_HIDDEN);
@@ -244,12 +225,12 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void setLayoutManagerToRecyclerView() {
         Log.d(TAG, "setLayoutManagerToRecyclerView called");
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         //make reverse of messages order
-        mLayoutManager.setReverseLayout(true);
+        layoutManager.setReverseLayout(true);
         //move head at the end of array
-        mLayoutManager.setStackFromEnd(false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        layoutManager.setStackFromEnd(false);
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     private void createAdapter() {
@@ -270,8 +251,7 @@ public class MessagesActivity extends AppCompatActivity {
         loadCountTask.execute(mContactUserId);
     }
 
-    private void onCountLoaded(Integer pCount) {
-        mMessagesInHistoryTotalCount = pCount;
+    private void onCountLoaded() {
     }
 
     private void loadMessagesFirstTime() {
@@ -280,6 +260,7 @@ public class MessagesActivity extends AppCompatActivity {
         loadTask.execute(0, LOAD_MESSAGES_COUNT, mContactUserId);
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class LoadMessagesCountAT extends AsyncTask<Integer, Void, Integer> {
 
         private static final String ASYNC_TASK_TAG = "LoadMessagesCountAT";
@@ -300,7 +281,7 @@ public class MessagesActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer pCount) {
             super.onPostExecute(pCount);
-            onCountLoaded(pCount);
+            onCountLoaded();
         }
     }
 
@@ -313,9 +294,9 @@ public class MessagesActivity extends AppCompatActivity {
         //notify adapter
         mAdapter.notifyItemRangeInserted(itemCount, pMessages.size());
         //mAdapter.notifyDataSetChanged();
-        mIsLoading = false;
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class LoadMessagesAT extends AsyncTask<Integer, Void, List<MessageInDialogs>> {
 
         private static final String ASYNC_TASK_TAG = "LoadMessagesAT";

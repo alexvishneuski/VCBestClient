@@ -10,8 +10,6 @@ public interface IHttpClient<T> {
     //What method is more prefered:  this
     T requestGet(String pUrl, Class<T> pClazz);
 
-    T requestPost(String pUrl, Class<T> pClazz, String pBody);
-
     //What method is more prefered:  or this with extracting parser in implementation
     InputStream requestGet(String pUrl);
 }

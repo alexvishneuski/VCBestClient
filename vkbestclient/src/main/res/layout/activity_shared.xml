@@ -18,14 +18,6 @@
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-            <!--
-            container for
-            @layout/fragment_top_bar_dialogs
-            @layout/fragment_top_bar_notifications
-            news
-            search
-            prifile
-            -->
             <FrameLayout
                 android:id="@+id/top_bar_frame_container"
                 android:layout_width="wrap_content"

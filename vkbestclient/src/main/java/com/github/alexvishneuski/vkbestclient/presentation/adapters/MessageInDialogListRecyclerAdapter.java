@@ -21,8 +21,6 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
 
     public final String TAG = this.getClass().getSimpleName();
 
-    //TODO Handle view types (interface...)
-
     @IntDef({
             MessageType.OUTGOING_READ_NOATTACHMENT,
             MessageType.INCOMING_READ_NOATTACHMENT,
@@ -38,7 +36,6 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         //TODO Add new types: with attachments...
     }
 
-    //TO Handle click area on recyclerview item
     @IntDef({
             TouchArea.MESSAGE_AREA,
             TouchArea.USER_AREA})
@@ -102,7 +99,6 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         return new MessageInDialogListRecyclerViewHolder(view, this);
     }
 
-    //TODO to resolve create a few separate viewHolder for every view?
     @Override
     public void onBindViewHolder(MessageInDialogListRecyclerViewHolder pHolder, int pPosition) {
 
@@ -113,7 +109,6 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         pHolder.getMessageBody().setText(messageModel.getMessageBody());
         pHolder.getMessageSendingDate().setText(messageModel.getMessageSendingDate());
 
-        //TODO add imageloader
         NOrda.INSTANCE.load(messageModel.getContactUser().getUserAvatarPath()).into(pHolder.getContactUserAvatarPath());
         NOrda.INSTANCE.load(messageModel.getCurrentUser().getUserAvatarPath()).into(pHolder.getCurrentUserAvatarPath());
     }
@@ -136,12 +131,6 @@ public class MessageInDialogListRecyclerAdapter extends RecyclerView.Adapter<Mes
         return 0;
     }
 
-
-    //TODO add unread & attachment types according logic
-
-    /**
-     * @return MessageType depends direction, read status, attachments etc.
-     */
     private int getMessageType(@NonNull MessageInDialogListViewModel pMessage) {
 
         if (pMessage.getMessageDirection() == (MessageDirectionViewModel.OUTGOING) && pMessage.getMessageRead()) {
