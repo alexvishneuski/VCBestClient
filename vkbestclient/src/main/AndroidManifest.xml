@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.github.alexvishneuski.vkbestclient">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".VKApp"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".presentation.view.activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".presentation.view.activities.SharedActivity" />
+        <activity android:name=".presentation.view.activities.VkAuthActivity" />
+        <activity android:name=".presentation.view.activities.MessagesActivity" />
+        <activity android:name=".presentation.view.activities.CheckVersionActivity" />
+
+        <provider
+            android:name=".repository.database.provider.CustomContentProvider"
+            android:authorities="com.github.alexvishneuski.vkbestclient.repository.database.provider.CustomContentProvider"
+            android:exported="false" />
+    </application>
+
+</manifest>
