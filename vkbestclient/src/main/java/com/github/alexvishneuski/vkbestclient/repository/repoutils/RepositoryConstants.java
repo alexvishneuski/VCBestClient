@@ -2,13 +2,8 @@ package com.github.alexvishneuski.vkbestclient.repository.repoutils;
 
 public class RepositoryConstants {
 
-    public interface RepositoryTest {
-        String TEST_MESSAGE = "I'm com.github.alexvishneuski.vkbestclient.repository's test";
-    }
-
     //common signs
     public interface Sign {
-
         String EQUAL = "=";
         String COLON = ":";
         String SLASH = "/";
@@ -19,17 +14,14 @@ public class RepositoryConstants {
         String COMMA = ",";
     }
 
-
     public interface CommonUrlParts {
         //common url parts
         String PROTOCOL = "https";
 
         String VK_AUTH_BASE_PATH = "oauth.vk.com/authorize";
         String VK_METHOD_BASE_PATH = "api.vk.com/method";
-
         String ACCESS_TOKEN_KEY = "access_token";
         String ACCESS_TOKEN = "";
-
         String VERSION_KEY = "v";
         String VERSION = "5.69";
     }
@@ -86,10 +78,8 @@ public class RepositoryConstants {
         //parameters keys for "messages.getHistory"
         String USER_ID_KEY = "user_id";
         String DESTINATION_ID_KEY = "peer_id";
-                String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
-
+        String IN_CHRONOLOGICAL_ORDER_KEY = "rev";
         String IN_CHRONOLOGICAL_ORDER_VALUE_REVERSE = "0";
-
     }
 
     public interface VkMethodMessagesGetDialogs {
