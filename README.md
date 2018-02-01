@@ -1,6 +1,17 @@
 # VKLayouts
 Mastering  layouts makeup
 
+App screens
+
+<p align="center">
+  <img src="vkbestclient\src\main\res\assets\dialogs.jpg" width="350"/>
+  <img src="vkbestclient\src\main\res\assets\dialogs-selector.jpg" width="350"/>
+  <img src="vkbestclient\src\main\res\assets\dialogs-history.jpg" width="350"/>
+  <img src="vkbestclient\src\main\res\assets\dialogs-history-2.jpg" width="350"/>
+  <img src="vkbestclient\src\main\res\assets\dialogs-coordinator.jpg" width="350"/>
+</p>
+
+
 common authorisation schema
 -> App version checking -> VKAuth -> App
 
@@ -39,7 +50,3 @@ VKAuth schema
  2. ifOnline checker
 
 
-<p align="center">
-  <img src="vkbestclient\src\main\res\assets\dialogs.jpg" width="350"/>
-
-</p>
