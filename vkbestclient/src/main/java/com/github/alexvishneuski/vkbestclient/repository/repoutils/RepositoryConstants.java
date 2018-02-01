@@ -12,6 +12,7 @@ public class RepositoryConstants {
         String AMPERSAND = "&";
         String QUESTION = "?";
         String COMMA = ",";
+        String OCTOTHORP = "#";
     }
 
     public interface CommonUrlParts {
