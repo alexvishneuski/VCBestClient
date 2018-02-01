@@ -28,6 +28,7 @@ common authorisation schema
  (starts service
  that expects access to the Internet
  for one-time VKAuth)     -> App
+
 ======================================
 
 VKAuth schema
@@ -43,6 +44,7 @@ VKAuth schema
 2.3 refreshing tokenholder
 
 3. if an error occurred because the token is invalid -> 2.
+
 ========================================
 
  util modules:
